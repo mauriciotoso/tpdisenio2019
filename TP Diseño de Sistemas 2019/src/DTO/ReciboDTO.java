@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.List;
+
 public class ReciboDTO {
 	
 	private float importe;
@@ -9,9 +11,10 @@ public class ReciboDTO {
 	private String operador;
 	private int mesAbonado;
 	private String anioAbonado;
+	private List<CuotaDTO> cuotas;
 	
 	public ReciboDTO(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			int mesAbonado, String anioAbonado) {
+			int mesAbonado, String anioAbonado, List<CuotaDTO> cuotas) {
 		super();
 		this.importe = importe;
 		this.vuelto = vuelto;
@@ -20,6 +23,7 @@ public class ReciboDTO {
 		this.operador = operador;
 		this.mesAbonado = mesAbonado;
 		this.anioAbonado = anioAbonado;
+		this.cuotas = cuotas;
 	}
 
 	public float getImporte() {
@@ -77,6 +81,15 @@ public class ReciboDTO {
 	public void setAnioAbonado(String anioAbonado) {
 		this.anioAbonado = anioAbonado;
 	}
+
+	public List<CuotaDTO> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(List<CuotaDTO> cuotas) {
+		this.cuotas = cuotas;
+	}
+	
 	
 
 }

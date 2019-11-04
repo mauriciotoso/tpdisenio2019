@@ -1,6 +1,7 @@
 package DTO;
 
 import java.util.Date;
+import java.util.List;
 
 import Entidades.Anio;
 
@@ -23,10 +24,19 @@ public class PolizaDTO {
 	private String formaPago;
 	private float valorPorcentualCobertura;
 	private int anioModelo;
+	private MedidasSeguridadDTO medidasSeguridad;
+	private List<CuotaDTO> cuotas;
+	private List<HijoDTO> hijos;
+	private ClienteDTO cliente;
+	private ValorPorcentualDTO valoresPorcentualesDTO;
 	
+	
+
 	public PolizaDTO(String nroPoliza, String domicioRiesgo, String marca, String modelo, Anio anio, String motor,
 			String chasis, String patente, String kmAnio, int nroSiniestros, String tipoCobertura, String tipoPoliza,
-			Date fechaInicio, Date fechaFin, String formaPago, float valorPorcentualCobertura, int anioModelo) {
+			Date fechaInicio, Date fechaFin, String formaPago, float valorPorcentualCobertura, int anioModelo,
+			MedidasSeguridadDTO medidasSeguridad, List<CuotaDTO> cuotas, List<HijoDTO> hijos, ClienteDTO cliente,
+			ValorPorcentualDTO valoresPorcentualesDTO) {
 		super();
 		this.nroPoliza = nroPoliza;
 		this.domicioRiesgo = domicioRiesgo;
@@ -45,6 +55,11 @@ public class PolizaDTO {
 		this.formaPago = formaPago;
 		this.valorPorcentualCobertura = valorPorcentualCobertura;
 		this.anioModelo = anioModelo;
+		this.medidasSeguridad = medidasSeguridad;
+		this.cuotas = cuotas;
+		this.hijos = hijos;
+		this.cliente = cliente;
+		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
 	}
 
 	public String getNroPoliza() {
@@ -181,6 +196,46 @@ public class PolizaDTO {
 
 	public void setAnioModelo(int anioModelo) {
 		this.anioModelo = anioModelo;
+	}
+
+	public MedidasSeguridadDTO getMedidasSeguridad() {
+		return medidasSeguridad;
+	}
+
+	public void setMedidasSeguridad(MedidasSeguridadDTO medidasSeguridad) {
+		this.medidasSeguridad = medidasSeguridad;
+	}
+
+	public List<CuotaDTO> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(List<CuotaDTO> cuotas) {
+		this.cuotas = cuotas;
+	}
+
+	public List<HijoDTO> getHijos() {
+		return hijos;
+	}
+
+	public void setHijos(List<HijoDTO> hijos) {
+		this.hijos = hijos;
+	}
+
+	public ClienteDTO getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+	}
+
+	public ValorPorcentualDTO getValoresPorcentualesDTO() {
+		return valoresPorcentualesDTO;
+	}
+
+	public void setValoresPorcentualesDTO(ValorPorcentualDTO valoresPorcentualesDTO) {
+		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
 	}
 	
 	

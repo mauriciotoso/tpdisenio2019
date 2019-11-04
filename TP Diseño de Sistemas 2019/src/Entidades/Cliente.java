@@ -1,12 +1,9 @@
 package Entidades;
 
 import java.util.Date;
+import java.util.List;
 
-import Enumerados.CondicionIVA;
-import Enumerados.EstadoCivil;
-import Enumerados.EstadoCliente;
-import Enumerados.Sexo;
-import Enumerados.TipoDocumento;
+import Enumerados.*;
 
 public class Cliente {
 	
@@ -25,11 +22,13 @@ public class Cliente {
 	private String anioRegistro;
 	private EstadoCliente etadoCliente;
 	private int nroSiniestros;
+	private Direccion direccion;
+	private List<Poliza> polizas;
 	
 	public Cliente(String nroCliente, Date fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
 			String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIVA, String correoElectronico,
 			EstadoCivil estadoCivil, String profesion, String anioRegistro, EstadoCliente etadoCliente,
-			int nroSiniestros) {
+			int nroSiniestros, Direccion direccion, List<Poliza> polizas) {
 		super();
 		this.nroCliente = nroCliente;
 		this.fechaNacimiento = fechaNacimiento;
@@ -46,6 +45,8 @@ public class Cliente {
 		this.anioRegistro = anioRegistro;
 		this.etadoCliente = etadoCliente;
 		this.nroSiniestros = nroSiniestros;
+		this.direccion = direccion;
+		this.polizas = polizas;
 	}
 
 	public String getNroCliente() {
@@ -166,6 +167,22 @@ public class Cliente {
 
 	public void setNroSiniestros(int nroSiniestros) {
 		this.nroSiniestros = nroSiniestros;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+	public List<Poliza> getPolizas() {
+		return polizas;
+	}
+
+	public void setPolizas(List<Poliza> polizas) {
+		this.polizas = polizas;
 	}
 	
 	

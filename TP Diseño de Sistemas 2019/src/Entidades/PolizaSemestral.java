@@ -1,27 +1,24 @@
 package Entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import Enumerados.EstadoPoliza;
 
 public class PolizaSemestral extends Poliza{
 
-	private Date ultimoDiaPago;
-	private float bonificacion;
+	private float bonificacion; 
+	
+	
 	public PolizaSemestral(String nroPoliza, Date vigenciaDesde, Date vigenciaHasta, String domicilioRiesgo,
 			EstadoPoliza estadoPoliza, float prima, float montoTotal, float descuentoUnidad, String patente,
-			String motor, String chasis, int kmAnio, int anio, float premio, Date ultimoDiaPago, float bonificacion) {
+			String motor, String chasis, int kmAnio, int anio, float premio, List<Cuota> cuotas, Anio anioModelo,
+			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
+			SolicitudPoliza solicitudPoliza, ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente cliente) {
 		super(nroPoliza, vigenciaDesde, vigenciaHasta, domicilioRiesgo, estadoPoliza, prima, montoTotal, descuentoUnidad,
-				patente, motor, chasis, kmAnio, anio, premio);
-		this.setUltimoDiaPago(ultimoDiaPago);
-		this.setBonificacion(bonificacion);
-	}
-	
-	public Date getUltimoDiaPago() {
-		return ultimoDiaPago;
-	}
-	public void setUltimoDiaPago(Date ultimoDiaPago) {
-		this.ultimoDiaPago = ultimoDiaPago;
+				patente, motor, chasis, kmAnio, anio, premio, cuotas, anioModelo, medidasSeguridad, hijos, tipoCobertura,
+				solicitudPoliza, valoresPorcentualesPoliza, cliente);
+		// TODO Auto-generated constructor stub
 	}
 	public float getBonificacion() {
 		return bonificacion;

@@ -6,13 +6,15 @@ import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
 
 public class HijoDeclarado {
-
+	
+	private int idHijoDeclarado;
 	private Date fechaNacimiento;
 	private Sexo sexo;
 	private EstadoCivil etadoCivil;
-	
-	public HijoDeclarado(Date fechaNacimiento, Sexo sexo, EstadoCivil etadoCivil) {
+
+	public HijoDeclarado(int idHijoDeclarado, Date fechaNacimiento, Sexo sexo, EstadoCivil etadoCivil) {
 		super();
+		this.idHijoDeclarado = idHijoDeclarado;
 		this.fechaNacimiento = fechaNacimiento;
 		this.sexo = sexo;
 		this.etadoCivil = etadoCivil;
@@ -40,6 +42,14 @@ public class HijoDeclarado {
 
 	public void setEtadoCivil(EstadoCivil etadoCivil) {
 		this.etadoCivil = etadoCivil;
+	}
+
+	public int getIdHijoDeclarado() {
+		return idHijoDeclarado;
+	}
+
+	public void setIdHijoDeclarado(int idHijoDeclarado) {
+		this.idHijoDeclarado = idHijoDeclarado;
 	}
 	
 	

@@ -2,13 +2,17 @@ package Entidades;
 
 public class Localidad {
 	
+	private int idLocalidad;
 	private String nombre;
 	private float valorPorcentualLocalidad;
-	
-	public Localidad(String nombre, float valorPorcentualLocalidad) {
-		super();//AASD
+	private Provincia provincia;
+
+	public Localidad(int idLocalidad, String nombre, float valorPorcentualLocalidad, Provincia provincia) {
+		super();
+		this.idLocalidad = idLocalidad;
 		this.nombre = nombre;
 		this.valorPorcentualLocalidad = valorPorcentualLocalidad;
+		this.provincia = provincia;
 	}
 
 	public String getNombre() {
@@ -25,6 +29,22 @@ public class Localidad {
 
 	public void setValorPorcentualLocalidad(float valorPorcentualLocalidad) {
 		this.valorPorcentualLocalidad = valorPorcentualLocalidad;
+	}
+
+	public int getIdLocalidad() {
+		return idLocalidad;
+	}
+
+	public void setIdLocalidad(int idLocalidad) {
+		this.idLocalidad = idLocalidad;
+	}
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 	
 	

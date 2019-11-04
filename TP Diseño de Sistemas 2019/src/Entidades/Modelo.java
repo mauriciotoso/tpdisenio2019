@@ -1,16 +1,16 @@
 package Entidades;
 
-import java.util.ArrayList;
-
 public class Modelo {
-
-	private String nombre;
-	private ArrayList<Integer> posiblesAnios;
 	
-	public Modelo(String nombre, ArrayList<Integer> posiblesAnios) {
+	private int idModelo;
+	private String nombre;
+	private Marca marca;
+
+	public Modelo(int idModelo, String nombre, Marca marca) {
 		super();
+		this.idModelo = idModelo;
 		this.nombre = nombre;
-		this.posiblesAnios = posiblesAnios;
+		this.marca = marca;
 	}
 
 	public String getNombre() {
@@ -21,13 +21,20 @@ public class Modelo {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Integer> getPosiblesAnios() {
-		return posiblesAnios;
+	public int getIdModelo() {
+		return idModelo;
 	}
 
-	public void setPosiblesAnios(ArrayList<Integer> posiblesAnios) {
-		this.posiblesAnios = posiblesAnios;
+	public void setIdModelo(int idModelo) {
+		this.idModelo = idModelo;
 	}
-	
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
 	
 }

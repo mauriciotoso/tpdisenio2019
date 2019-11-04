@@ -2,25 +2,38 @@ package Entidades;
 
 public class TipoCobertura {
 	
+	private int idTipoCobertura;
 	private String nombre;
-	private float valorPorcentualCobertura;
-	public TipoCobertura(String nombre, float valorPorcentualCobertura) {
+	private String descripcion;
+	
+	public TipoCobertura(int idTipoCobertura, String nombre, String descripcion) {
 		super();
+		this.idTipoCobertura = idTipoCobertura;
 		this.nombre = nombre;
-		this.valorPorcentualCobertura = valorPorcentualCobertura;
+		this.descripcion = descripcion;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public float getValorPorcentualCobertura() {
-		return valorPorcentualCobertura;
+	public int getIdTipoCobertura() {
+		return idTipoCobertura;
 	}
-	public void setValorPorcentualCobertura(float valorPorcentualCobertura) {
-		this.valorPorcentualCobertura = valorPorcentualCobertura;
+	public void setIdTipoCobertura(int idTipoCobertura) {
+		this.idTipoCobertura = idTipoCobertura;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
 	
 	
 }

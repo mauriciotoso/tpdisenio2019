@@ -2,20 +2,20 @@ package Entidades;
 
 public class MedidasSeguridad {
 
+	private int idMedidasSeguridad;
 	private boolean garage;
 	private boolean alarma;
 	private boolean rastreoVehicular;
 	private boolean tuercaAntirrobo;
-	private float valorPorcentualSeguridad;
 	
-	public MedidasSeguridad(boolean garage, boolean alarma, boolean rastreoVehicular, boolean tuercaAntirrobo,
-			float valorPorcentualSeguridad) {
+	public MedidasSeguridad(int idMedidasSeguridad, boolean garage, boolean alarma, boolean rastreoVehicular,
+			boolean tuercaAntirrobo) {
 		super();
+		this.idMedidasSeguridad = idMedidasSeguridad;
 		this.garage = garage;
 		this.alarma = alarma;
 		this.rastreoVehicular = rastreoVehicular;
 		this.tuercaAntirrobo = tuercaAntirrobo;
-		this.valorPorcentualSeguridad = valorPorcentualSeguridad;
 	}
 
 	public boolean isGarage() {
@@ -50,13 +50,12 @@ public class MedidasSeguridad {
 		this.tuercaAntirrobo = tuercaAntirrobo;
 	}
 
-	public float getValorPorcentualSeguridad() {
-		return valorPorcentualSeguridad;
+	public int getIdMedidasSeguridad() {
+		return idMedidasSeguridad;
 	}
 
-	public void setValorPorcentualSeguridad(float valorPorcentualSeguridad) {
-		this.valorPorcentualSeguridad = valorPorcentualSeguridad;
+	public void setIdMedidasSeguridad(int idMedidasSeguridad) {
+		this.idMedidasSeguridad = idMedidasSeguridad;
 	}
-	
 	
 }

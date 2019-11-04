@@ -1,6 +1,12 @@
 package App;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name="usuario")
 public class Usuario {
+	
+	@Id
 	private String usuario;
 	private String nombre;
 	private String apellido;

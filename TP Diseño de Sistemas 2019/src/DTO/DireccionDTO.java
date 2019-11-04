@@ -6,14 +6,21 @@ public class DireccionDTO {
 	private String piso;
 	private String departamento;
 	private String codigoPostal;
+	private String localidad;
+	private String provincia;
+	private String pais;
 	
-	public DireccionDTO(String calle, String numero, String piso, String departamento, String codigoPostal) {
+	public DireccionDTO(String calle, String numero, String piso, String departamento, String codigoPostal,
+			String localidad, String provincia, String pais) {
 		super();
 		this.calle = calle;
 		this.numero = numero;
 		this.piso = piso;
 		this.departamento = departamento;
 		this.codigoPostal = codigoPostal;
+		this.localidad = localidad;
+		this.provincia = provincia;
+		this.pais = pais;
 	}
 
 	public String getCalle() {
@@ -55,7 +62,30 @@ public class DireccionDTO {
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-	
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
 	
 
 }

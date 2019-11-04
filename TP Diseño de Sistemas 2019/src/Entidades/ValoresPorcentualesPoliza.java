@@ -2,6 +2,7 @@ package Entidades;
 
 public class ValoresPorcentualesPoliza {
 
+	private float idValoresPorcentualesPoliza;
 	private float valorPorcentualKmAnio;
 	private float valorPorcentualGarage;
 	private float valorPorcentualAlarma;
@@ -12,13 +13,20 @@ public class ValoresPorcentualesPoliza {
 	private float valorPorcentualDosSiniestro;
 	private float valorPorcentualTresSiniestro;
 	private float valorPorcentualHijo;
+	private float valorPorcentualModelo;
+	private float valorPorcentualLocalidad;
+	private float valorPorcentualTipoCobertura;
+	private float valorPorcentualMedidasSeguridad;
 	private float derechoEmision;
 	
-	public ValoresPorcentualesPoliza(float valorPorcentualKmAnio, float valorPorcentualGarage,
-			float valorPorcentualAlarma, float valorPorcentualRastreoVeicular, float valorPorcentualTuercasAntirrobo,
-			float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro, float valorPorcentualDosSiniestro,
-			float valorPorcentualTresSiniestro, float valorPorcentualHijo, float derechoEmision) {
+	public ValoresPorcentualesPoliza(float idValoresPorcentualesPoliza, float valorPorcentualKmAnio,
+			float valorPorcentualGarage, float valorPorcentualAlarma, float valorPorcentualRastreoVeicular,
+			float valorPorcentualTuercasAntirrobo, float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro,
+			float valorPorcentualDosSiniestro, float valorPorcentualTresSiniestro, float valorPorcentualHijo,
+			float valorPorcentualModelo, float valorPorcentualLocalidad, float valorPorcentualTipoCobertura,
+			float valorPorcentualMedidasSeguridad, float derechoEmision) {
 		super();
+		this.idValoresPorcentualesPoliza = idValoresPorcentualesPoliza;
 		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
 		this.valorPorcentualGarage = valorPorcentualGarage;
 		this.valorPorcentualAlarma = valorPorcentualAlarma;
@@ -29,6 +37,10 @@ public class ValoresPorcentualesPoliza {
 		this.valorPorcentualDosSiniestro = valorPorcentualDosSiniestro;
 		this.valorPorcentualTresSiniestro = valorPorcentualTresSiniestro;
 		this.valorPorcentualHijo = valorPorcentualHijo;
+		this.valorPorcentualModelo = valorPorcentualModelo;
+		this.valorPorcentualLocalidad = valorPorcentualLocalidad;
+		this.valorPorcentualTipoCobertura = valorPorcentualTipoCobertura;
+		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
 		this.derechoEmision = derechoEmision;
 	}
 
@@ -119,6 +131,45 @@ public class ValoresPorcentualesPoliza {
 	public void setDerechoEmision(float derechoEmision) {
 		this.derechoEmision = derechoEmision;
 	}
-	
+
+	public float getIdValoresPorcentualesPoliza() {
+		return idValoresPorcentualesPoliza;
+	}
+
+	public void setIdValoresPorcentualesPoliza(float idValoresPorcentualesPoliza) {
+		this.idValoresPorcentualesPoliza = idValoresPorcentualesPoliza;
+	}
+
+	public float getValorPorcentualModelo() {
+		return valorPorcentualModelo;
+	}
+
+	public void setValorPorcentualModelo(float valorPorcentualModelo) {
+		this.valorPorcentualModelo = valorPorcentualModelo;
+	}
+
+	public float getValorPorcentualLocalidad() {
+		return valorPorcentualLocalidad;
+	}
+
+	public void setValorPorcentualLocalidad(float valorPorcentualLocalidad) {
+		this.valorPorcentualLocalidad = valorPorcentualLocalidad;
+	}
+
+	public float getValorPorcentualTipoCobertura() {
+		return valorPorcentualTipoCobertura;
+	}
+
+	public void setValorPorcentualTipoCobertura(float valorPorcentualTipoCobertura) {
+		this.valorPorcentualTipoCobertura = valorPorcentualTipoCobertura;
+	}
+
+	public float getValorPorcentualMedidasSeguridad() {
+		return valorPorcentualMedidasSeguridad;
+	}
+
+	public void setValorPorcentualMedidasSeguridad(float valorPorcentualMedidasSeguridad) {
+		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
+	}
 	
 }

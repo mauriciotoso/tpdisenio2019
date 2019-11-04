@@ -1,7 +1,10 @@
 package Entidades;
 
+import App.Usuario;
+
 public class ValoresPorcentualesActuales {
 	
+	private int idValoresPorcentualesActuales;
 	private float valorPorcentualKmAnio;
 	private float valorPorcentualGarage;
 	private float valorPorcentualAlarma;
@@ -13,12 +16,15 @@ public class ValoresPorcentualesActuales {
 	private float valorPorcentualTresSiniestro;
 	private float valorPorcentualHijo;
 	private float derechoEmision;
+	private Usuario usuario;
 	
-	public ValoresPorcentualesActuales(float valorPorcentualKmAnio, float valorPorcentualGarage,
-			float valorPorcentualAlarma, float valorPorcentualRastreoVeicular, float valorPorcentualTuercasAntirrobo,
-			float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro, float valorPorcentualDosSiniestro,
-			float valorPorcentualTresSiniestro, float valorPorcentualHijo, float derechoEmision) {
+	public ValoresPorcentualesActuales(int idValoresPorcentualesActuales, float valorPorcentualKmAnio,
+			float valorPorcentualGarage, float valorPorcentualAlarma, float valorPorcentualRastreoVeicular,
+			float valorPorcentualTuercasAntirrobo, float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro,
+			float valorPorcentualDosSiniestro, float valorPorcentualTresSiniestro, float valorPorcentualHijo,
+			float derechoEmision, Usuario usuario) {
 		super();
+		this.idValoresPorcentualesActuales = idValoresPorcentualesActuales;
 		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
 		this.valorPorcentualGarage = valorPorcentualGarage;
 		this.valorPorcentualAlarma = valorPorcentualAlarma;
@@ -30,6 +36,7 @@ public class ValoresPorcentualesActuales {
 		this.valorPorcentualTresSiniestro = valorPorcentualTresSiniestro;
 		this.valorPorcentualHijo = valorPorcentualHijo;
 		this.derechoEmision = derechoEmision;
+		this.usuario = usuario;
 	}
 
 	public float getValorPorcentualKmAnio() {
@@ -119,7 +126,20 @@ public class ValoresPorcentualesActuales {
 	public void setDerechoEmision(float derechoEmision) {
 		this.derechoEmision = derechoEmision;
 	}
-	
-	
-	
+
+	public int getIdValoresPorcentualesActuales() {
+		return idValoresPorcentualesActuales;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setIdValoresPorcentualesActuales(int idValoresPorcentualesActuales) {
+		this.idValoresPorcentualesActuales = idValoresPorcentualesActuales;
+	}
+}

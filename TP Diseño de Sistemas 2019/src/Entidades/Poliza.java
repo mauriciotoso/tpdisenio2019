@@ -1,6 +1,7 @@
 package Entidades;
 
 import java.util.Date;
+import java.util.List;
 
 import Enumerados.EstadoPoliza;
 
@@ -20,10 +21,21 @@ public abstract class Poliza{
 	private int kmAnio;
 	private int anio;
 	private float premio;
+	private List<Cuota> cuotas;
+	private Anio anioModelo;
+	private MedidasSeguridad medidasSeguridad;
+	private List<HijoDeclarado> hijos;
+	private TipoCobertura tipoCobertura;
+	private SolicitudPoliza solicitudPoliza;
+	private ValoresPorcentualesPoliza valoresPorcentualesPoliza;
+	private Cliente cliente;
 	
+
 	public Poliza(String nroPoliza, Date vigenciaDesde, Date vigenciaHasta, String domicilioRiesgo,
 			EstadoPoliza estadoPoliza, float prima, float montoTotal, float descuentoUnidad, String patente,
-			String motor, String chasis, int kmAnio, int anio, float premio) {
+			String motor, String chasis, int kmAnio, int anio, float premio, List<Cuota> cuotas, Anio anioModelo,
+			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
+			SolicitudPoliza solicitudPoliza, ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente cliente) {
 		super();
 		this.nroPoliza = nroPoliza;
 		this.vigenciaDesde = vigenciaDesde;
@@ -39,6 +51,14 @@ public abstract class Poliza{
 		this.kmAnio = kmAnio;
 		this.anio = anio;
 		this.premio = premio;
+		this.cuotas = cuotas;
+		this.anioModelo = anioModelo;
+		this.medidasSeguridad = medidasSeguridad;
+		this.hijos = hijos;
+		this.tipoCobertura = tipoCobertura;
+		this.solicitudPoliza = solicitudPoliza;
+		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
+		this.cliente = cliente;
 	}
 
 	public String getNroPoliza() {
@@ -152,5 +172,70 @@ public abstract class Poliza{
 	public void setPremio(float premio) {
 		this.premio = premio;
 	}
+
+	public List<Cuota> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(List<Cuota> cuotas) {
+		this.cuotas = cuotas;
+	}
+
+	public Anio getAnioModelo() {
+		return anioModelo;
+	}
+
+	public void setAnioModelo(Anio anioModelo) {
+		this.anioModelo = anioModelo;
+	}
+
+	public MedidasSeguridad getMedidasSeguridad() {
+		return medidasSeguridad;
+	}
+
+	public void setMedidasSeguridad(MedidasSeguridad medidasSeguridad) {
+		this.medidasSeguridad = medidasSeguridad;
+	}
+
+	public List<HijoDeclarado> getHijos() {
+		return hijos;
+	}
+
+	public void setHijos(List<HijoDeclarado> hijos) {
+		this.hijos = hijos;
+	}
+
+	public TipoCobertura getTipoCobertura() {
+		return tipoCobertura;
+	}
+
+	public void setTipoCobertura(TipoCobertura tipoCobertura) {
+		this.tipoCobertura = tipoCobertura;
+	}
+
+	public SolicitudPoliza getSolicitudPoliza() {
+		return solicitudPoliza;
+	}
+
+	public void setSolicitudPoliza(SolicitudPoliza solicitudPoliza) {
+		this.solicitudPoliza = solicitudPoliza;
+	}
+
+	public ValoresPorcentualesPoliza getValoresPorcentualesPoliza() {
+		return valoresPorcentualesPoliza;
+	}
+
+	public void setValoresPorcentualesPoliza(ValoresPorcentualesPoliza valoresPorcentualesPoliza) {
+		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 	
 }

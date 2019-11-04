@@ -1,20 +1,25 @@
 package Entidades;
 
 public class Direccion {
-
+	
+	private int idDireccion;
 	private String calle;
 	private String numero;
 	private String piso;
 	private String departamento;
 	private String codigoPostal;
-	
-	public Direccion(String calle, String numero, String piso, String departamento, String codigoPostal) {
+	private Localidad localidad;
+
+	public Direccion(int idDireccion, String calle, String numero, String piso, String departamento,
+			String codigoPostal, Localidad localidad) {
 		super();
+		this.idDireccion = idDireccion;
 		this.calle = calle;
 		this.numero = numero;
 		this.piso = piso;
 		this.departamento = departamento;
 		this.codigoPostal = codigoPostal;
+		this.localidad = localidad;
 	}
 
 	public String getCalle() {
@@ -56,6 +61,23 @@ public class Direccion {
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
+
+	public int getIdDireccion() {
+		return idDireccion;
+	}
+
+	public void setIdDireccion(int idDireccion) {
+		this.idDireccion = idDireccion;
+	}
+
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+	
 	
 	
 }

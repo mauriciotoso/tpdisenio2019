@@ -1,11 +1,11 @@
 package DTO;
 
 public class MedidasSeguridadDTO {
+	
 	private boolean alarma;
 	private boolean garage;
 	private boolean rastreoVehicular;
 	private boolean tuercasAntirrobo;
-	private boolean valorPorcentualSeuridad;
 	
 	public MedidasSeguridadDTO(boolean alarma, boolean garage, boolean rastreoVehicular, boolean tuercasAntirrobo,
 			boolean valorPorcentualSeuridad) {
@@ -14,7 +14,6 @@ public class MedidasSeguridadDTO {
 		this.garage = garage;
 		this.rastreoVehicular = rastreoVehicular;
 		this.tuercasAntirrobo = tuercasAntirrobo;
-		this.valorPorcentualSeuridad = valorPorcentualSeuridad;
 	}
 
 	public boolean isAlarma() {
@@ -49,12 +48,4 @@ public class MedidasSeguridadDTO {
 		this.tuercasAntirrobo = tuercasAntirrobo;
 	}
 
-	public boolean isValorPorcentualSeuridad() {
-		return valorPorcentualSeuridad;
-	}
-
-	public void setValorPorcentualSeuridad(boolean valorPorcentualSeuridad) {
-		this.valorPorcentualSeuridad = valorPorcentualSeuridad;
-	}
-	
 }

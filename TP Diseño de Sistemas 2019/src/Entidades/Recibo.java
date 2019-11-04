@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.util.List;
+
 public class Recibo {
 	
 	private float importe;
@@ -9,9 +11,10 @@ public class Recibo {
 	private String operador;
 	private String mesAbonado;
 	private String anioAbonado;
+	private List<Cuota> cuotas;
 	
 	public Recibo(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			String mesAbonado, String anioAbonado) {
+			String mesAbonado, String anioAbonado, List<Cuota> cuotas) {
 		super();
 		this.importe = importe;
 		this.vuelto = vuelto;
@@ -20,6 +23,7 @@ public class Recibo {
 		this.operador = operador;
 		this.mesAbonado = mesAbonado;
 		this.anioAbonado = anioAbonado;
+		this.cuotas = cuotas;
 	}
 
 	public float getImporte() {
@@ -76,6 +80,14 @@ public class Recibo {
 
 	public void setAnioAbonado(String anioAbonado) {
 		this.anioAbonado = anioAbonado;
+	}
+
+	public List<Cuota> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(List<Cuota> cuotas) {
+		this.cuotas = cuotas;
 	}
 	
 	

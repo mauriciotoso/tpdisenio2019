@@ -1,7 +1,11 @@
 package DTO;
 
 import java.util.Date;
+import java.util.List;
+
+import Entidades.Poliza;
 import Enumerados.*;
+
 
 public class ClienteDTO {
 	
@@ -20,12 +24,13 @@ public class ClienteDTO {
 	private int anioRegistro;
 	private EstadoCliente estadoCliente;
 	private int nroSiniestros;
-	
+	private DireccionDTO direccionDTO;
+	private List<Poliza> polizas;
 	
 	public ClienteDTO(String nroCliente, Date fechaNacimiento, String nombre, String apellido,
 			TipoDocumento tipoDocumento, String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIva,
 			String correoElectronico, EstadoCivil estadoCivil, String profesion, int anioRegistro,
-			EstadoCliente estadoCliente, int nroSiniestros) {
+			EstadoCliente estadoCliente, int nroSiniestros, DireccionDTO direccionDTO, List<Poliza> polizas) {
 		super();
 		this.nroCliente = nroCliente;
 		this.fechaNacimiento = fechaNacimiento;
@@ -42,8 +47,9 @@ public class ClienteDTO {
 		this.anioRegistro = anioRegistro;
 		this.estadoCliente = estadoCliente;
 		this.nroSiniestros = nroSiniestros;
+		this.direccionDTO = direccionDTO;
+		this.polizas = polizas;
 	}
-
 
 	public String getNroCliente() {
 		return nroCliente;
@@ -194,5 +200,22 @@ public class ClienteDTO {
 		this.nroSiniestros = nroSiniestros;
 	}
 
+	public DireccionDTO getDireccionDTO() {
+		return direccionDTO;
+	}
+
+	public void setDireccionDTO(DireccionDTO direccionDTO) {
+		this.direccionDTO = direccionDTO;
+	}
+
+	public List<Poliza> getPolizas() {
+		return polizas;
+	}
+
+	public void setPolizas(List<Poliza> polizas) {
+		this.polizas = polizas;
+	}
+	
+	
 	
 }

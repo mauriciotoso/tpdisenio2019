@@ -3,14 +3,16 @@ package Entidades;
 import java.util.Date;
 
 public class Cuota {
-
+	
+	private int idCuota;
 	private int nroCuenta;
 	private Date ultimoDiaPago;
 	private float importeCuota;
 	private boolean estePago;
-	
-	public Cuota(int nroCuenta, Date ultimoDiaPago, float importeCuota, boolean estePago) {
+
+	public Cuota(int idCuota, int nroCuenta, Date ultimoDiaPago, float importeCuota, boolean estePago) {
 		super();
+		this.idCuota = idCuota;
 		this.nroCuenta = nroCuenta;
 		this.ultimoDiaPago = ultimoDiaPago;
 		this.importeCuota = importeCuota;
@@ -48,6 +50,13 @@ public class Cuota {
 	public void setEstePago(boolean estePago) {
 		this.estePago = estePago;
 	}
-	
+
+	public int getIdCuota() {
+		return idCuota;
+	}
+
+	public void setIdCuota(int idCuota) {
+		this.idCuota = idCuota;
+	}
 	
 }

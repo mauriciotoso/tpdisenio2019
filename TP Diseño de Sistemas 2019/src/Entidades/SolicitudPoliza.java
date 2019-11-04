@@ -1,9 +1,11 @@
 package Entidades;
 
 import java.util.Date;
+import java.util.List;
 
 public class SolicitudPoliza {
-
+	
+	private int idSolicituPoliza;
 	private int anio;
 	private String patente;
 	private String motor;
@@ -12,10 +14,16 @@ public class SolicitudPoliza {
 	private int nroSiniestros;
 	private Date vigenciaDesde;
 	private Date vigenciaHasta;
+	private MedidasSeguridad medidasSeguridad;
+	private List<HijoDeclarado> hijos;
+	private TipoCobertura tipoCobertura;
+	private Poliza poliza;
 	
-	public SolicitudPoliza(int anio, String patente, String motor, String chasis, int kmAnio, int nroSiniestros,
-			Date vigenciaDesde, Date vigenciaHasta) {
+	public SolicitudPoliza(int idSolicituPoliza, int anio, String patente, String motor, String chasis, int kmAnio,
+			int nroSiniestros, Date vigenciaDesde, Date vigenciaHasta, MedidasSeguridad medidasSeguridad,
+			List<HijoDeclarado> hijos, TipoCobertura tipoCobertura, Poliza poliza) {
 		super();
+		this.idSolicituPoliza = idSolicituPoliza;
 		this.anio = anio;
 		this.patente = patente;
 		this.motor = motor;
@@ -24,6 +32,10 @@ public class SolicitudPoliza {
 		this.nroSiniestros = nroSiniestros;
 		this.vigenciaDesde = vigenciaDesde;
 		this.vigenciaHasta = vigenciaHasta;
+		this.medidasSeguridad = medidasSeguridad;
+		this.hijos = hijos;
+		this.tipoCobertura = tipoCobertura;
+		this.poliza = poliza;
 	}
 
 	public int getAnio() {
@@ -89,8 +101,45 @@ public class SolicitudPoliza {
 	public void setVigenciaHasta(Date vigenciaHasta) {
 		this.vigenciaHasta = vigenciaHasta;
 	}
-	
-	
-	
+
+	public int getIdSolicituPoliza() {
+		return idSolicituPoliza;
+	}
+
+	public void setIdSolicituPoliza(int idSolicituPoliza) {
+		this.idSolicituPoliza = idSolicituPoliza;
+	}
+
+	public MedidasSeguridad getMedidasSeguridad() {
+		return medidasSeguridad;
+	}
+
+	public void setMedidasSeguridad(MedidasSeguridad medidasSeguridad) {
+		this.medidasSeguridad = medidasSeguridad;
+	}
+
+	public List<HijoDeclarado> getHijos() {
+		return hijos;
+	}
+
+	public void setHijos(List<HijoDeclarado> hijos) {
+		this.hijos = hijos;
+	}
+
+	public TipoCobertura getTipoCobertura() {
+		return tipoCobertura;
+	}
+
+	public void setTipoCobertura(TipoCobertura tipoCobertura) {
+		this.tipoCobertura = tipoCobertura;
+	}
+
+	public Poliza getPoliza() {
+		return poliza;
+	}
+
+	public void setPoliza(Poliza poliza) {
+		this.poliza = poliza;
+	}
 	
 }
