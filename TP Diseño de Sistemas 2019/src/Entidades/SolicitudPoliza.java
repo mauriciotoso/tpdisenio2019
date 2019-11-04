@@ -2,9 +2,12 @@ package Entidades;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
 public class SolicitudPoliza {
 	
+	@Id
 	private int idSolicituPoliza;
 	private int anio;
 	private String patente;

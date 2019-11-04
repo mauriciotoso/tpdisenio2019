@@ -1,7 +1,10 @@
 package Entidades;
+import javax.persistence.*;
 
+@Entity
 public class TipoCobertura {
 	
+	@Id
 	private int idTipoCobertura;
 	private String nombre;
 	private String descripcion;

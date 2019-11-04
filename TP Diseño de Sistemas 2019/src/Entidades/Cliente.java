@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import Enumerados.*;
+import javax.persistence.*;
 
+@Entity
 public class Cliente {
 	
+	@Id
 	private String nroCliente;
 	private Date fechaNacimiento;
 	private String nombre;

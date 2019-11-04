@@ -1,7 +1,11 @@
 package Entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class Anio {
 	
+	@Id
 	private int idAnio;
 	private int anio;
 	private float valorPorcentualModelo;

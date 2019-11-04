@@ -4,9 +4,12 @@ import java.util.Date;
 
 import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
+import javax.persistence.*;
 
+@Entity
 public class HijoDeclarado {
 	
+	@Id
 	private int idHijoDeclarado;
 	private Date fechaNacimiento;
 	private Sexo sexo;

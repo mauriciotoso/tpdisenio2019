@@ -5,8 +5,11 @@ import java.util.List;
 
 import Enumerados.EstadoPoliza;
 
-public abstract class Poliza{
+import javax.persistence.*;
 
+public abstract class Poliza{
+	
+	@Id
 	private String nroPoliza;
 	private Date vigenciaDesde;
 	private Date vigenciaHasta;

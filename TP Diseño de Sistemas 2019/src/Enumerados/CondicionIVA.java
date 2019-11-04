@@ -1,7 +1,10 @@
 package Enumerados;
+import javax.persistence.*;
 
+@Entity
 public class CondicionIVA {
 	
+	@Id
 	private int idCondicionIVA;
 	private String condicionIVA;
 	

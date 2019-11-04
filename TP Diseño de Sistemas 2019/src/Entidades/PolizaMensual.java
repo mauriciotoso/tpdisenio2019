@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import Enumerados.EstadoPoliza;
+import javax.persistence.*;
 
+@Entity
 public class PolizaMensual extends Poliza{
 
 	public PolizaMensual(String nroPoliza, Date vigenciaDesde, Date vigenciaHasta, String domicilioRiesgo,

@@ -1,7 +1,10 @@
 package Entidades;
+import javax.persistence.*;
 
+@Entity
 public class Provincia {
-
+	
+	@Id
 	private int idProvincia;
 	private String nombre;
 	private Pais pais;

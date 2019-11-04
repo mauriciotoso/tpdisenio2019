@@ -1,7 +1,10 @@
 package Enumerados;
+import javax.persistence.*;
 
+@Entity
 public class EstadoPoliza {
 	
+	@Id
 	private int idEstadoPoliza;
 	private String estadoPoliza;
 	

@@ -30,8 +30,28 @@
 <property name="hbm2dll.auto">create</property>
 
 <!-- Name the annotated entity class -->
-<mapping class="prueba.UserDetails"/>
-<mapping class="prueba.Student"/>
+<mapping class="App.Usuario"/>
+<mapping class="Entidades.Anio"/>
+<mapping class="Entidades.Cliente"/>
+<mapping class="Entidades.Cuota"/>
+<mapping class="Entidades.Direccion"/>
+<mapping class="Entidades.HijoDeclarado"/>
+<mapping class="Entidades.Localidad"/>
+<mapping class="Entidades.Marca"/>
+<mapping class="Entidades.MedidasSeguridad"/>
+<mapping class="Entidades.Modelo"/>
+<mapping class="Entidades.Pais"/>
+<mapping class="Entidades.PolizaMensual"/>
+<mapping class="Entidades.PolizaSemestral"/>
+<mapping class="Entidades.Provincia"/>
+<mapping class="Entidades.Recibo"/>
+<mapping class="Entidades.SolicitudPoliza"/>
+<mapping class="Entidades.TipoCobertura"/>
+<mapping class="Entidades.ValoresPorcentualesActuales"/>
+<mapping class="Entidades.ValoresPorcentualesPoliza"/>
+<mapping class="Enumerados.CondicionIVA"/>
+<mapping class="Enumerados.EstadoPoliza"/>
+<mapping class="Enumerados.EstadoCliente"/>
 
 </session-factory>
 

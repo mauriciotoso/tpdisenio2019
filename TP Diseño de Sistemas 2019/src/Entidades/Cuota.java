@@ -2,8 +2,12 @@ package Entidades;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
 public class Cuota {
 	
+	@Id
 	private int idCuota;
 	private int nroCuenta;
 	private Date ultimoDiaPago;

@@ -1,9 +1,12 @@
 package Entidades;
 
 import App.Usuario;
+import javax.persistence.*;
 
+@Entity
 public class ValoresPorcentualesActuales {
 	
+	@Id
 	private int idValoresPorcentualesActuales;
 	private float valorPorcentualKmAnio;
 	private float valorPorcentualGarage;

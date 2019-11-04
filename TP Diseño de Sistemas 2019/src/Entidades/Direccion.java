@@ -1,7 +1,11 @@
 package Entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class Direccion {
 	
+	@Id
 	private int idDireccion;
 	private String calle;
 	private String numero;

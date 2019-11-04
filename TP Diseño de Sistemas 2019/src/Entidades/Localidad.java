@@ -1,7 +1,11 @@
 package Entidades;
+import javax.persistence.*;
+
+@Entity
 
 public class Localidad {
 	
+	@Id
 	private int idLocalidad;
 	private String nombre;
 	private float valorPorcentualLocalidad;

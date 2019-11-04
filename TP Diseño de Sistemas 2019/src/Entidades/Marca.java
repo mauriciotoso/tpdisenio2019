@@ -1,7 +1,11 @@
 package Entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class Marca {
 	
+	@Id
 	private int idMarca;
 	private String marca;
 	

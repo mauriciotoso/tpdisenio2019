@@ -5,6 +5,9 @@ import java.util.List;
 
 import Enumerados.EstadoPoliza;
 
+import javax.persistence.*;
+
+@Entity
 public class PolizaSemestral extends Poliza{
 
 	private float bonificacion; 

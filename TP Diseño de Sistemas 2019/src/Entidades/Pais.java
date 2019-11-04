@@ -1,7 +1,11 @@
 package Entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class Pais {
 	
+	@Id
 	private int idPais;
 	private String nombre;
 	

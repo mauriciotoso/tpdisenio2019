@@ -1,7 +1,11 @@
 package Entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class MedidasSeguridad {
 
+	@Id
 	private int idMedidasSeguridad;
 	private boolean garage;
 	private boolean alarma;

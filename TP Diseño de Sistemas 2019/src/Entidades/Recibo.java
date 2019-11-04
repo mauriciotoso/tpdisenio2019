@@ -2,12 +2,16 @@ package Entidades;
 
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
 public class Recibo {
 	
+	@Id
+	private String nroRecibo;
 	private float importe;
 	private float vuelto;
 	private float importePagado;
-	private String nroRecibo;
 	private String operador;
 	private String mesAbonado;
 	private String anioAbonado;

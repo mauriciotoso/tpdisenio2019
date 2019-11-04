@@ -1,7 +1,10 @@
 package Entidades;
+import javax.persistence.*;
 
+@Entity
 public class ValoresPorcentualesPoliza {
 
+	@Id
 	private float idValoresPorcentualesPoliza;
 	private float valorPorcentualKmAnio;
 	private float valorPorcentualGarage;
