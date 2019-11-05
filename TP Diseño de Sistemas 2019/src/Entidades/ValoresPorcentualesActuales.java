@@ -4,145 +4,205 @@ import App.Usuario;
 import javax.persistence.*;
 
 @Entity
+@Table (name="valorporcentualactual")
 public class ValoresPorcentualesActuales {
 	
 	@Id
-	private int idValoresPorcentualesActuales;
-	private float valorPorcentualKmAnio;
-	private float valorPorcentualGarage;
-	private float valorPorcentualAlarma;
-	private float valorPorcentualRastreoVeicular;
-	private float valorPorcentualTuercasAntirrobo;
-	private float valorPorcentualSinSiniestro;
-	private float valorPorcentualUnSiniestro;
-	private float valorPorcentualDosSiniestro;
-	private float valorPorcentualTresSiniestro;
-	private float valorPorcentualHijo;
+	private int idValorPorcentualActual;
+	private float valorPorcentualKmAnioActual;
+	private float valorPorcentualGarageActual;
+	private float valorPorcentualAlarmaActual;
+	private float valorPorcentualRastreoVehicularActual;
+	private float valorPorcentualTuercasAntirroboActual;
+	private float valorPorcentualSinSiniestroActual;
+	private float valorPorcentualUnSiniestroActual;
+	private float valorPorcentualDosSiniestroActual;
+	private float valorPorcentualTresSiniestroActual;
+	private float valorPorcentualHijoActual;
 	private float derechoEmision;
+	@OneToOne
+	@JoinColumn (name="usuario")
 	private Usuario usuario;
 	
-	public ValoresPorcentualesActuales(int idValoresPorcentualesActuales, float valorPorcentualKmAnio,
-			float valorPorcentualGarage, float valorPorcentualAlarma, float valorPorcentualRastreoVeicular,
-			float valorPorcentualTuercasAntirrobo, float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro,
-			float valorPorcentualDosSiniestro, float valorPorcentualTresSiniestro, float valorPorcentualHijo,
-			float derechoEmision, Usuario usuario) {
+	
+
+	public ValoresPorcentualesActuales(int idValorPorcentualActual, float valorPorcentualKmAnioActual,
+			float valorPorcentualGarageActual, float valorPorcentualAlarmaActual,
+			float valorPorcentualRastreoVehicularActual, float valorPorcentualTuercasAntirroboActual,
+			float valorPorcentualSinSiniestroActual, float valorPorcentualUnSiniestroActual,
+			float valorPorcentualDosSiniestroActual, float valorPorcentualTresSiniestroActual,
+			float valorPorcentualHijoActual, float derechoEmision, Usuario usuario) {
 		super();
-		this.idValoresPorcentualesActuales = idValoresPorcentualesActuales;
-		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
-		this.valorPorcentualGarage = valorPorcentualGarage;
-		this.valorPorcentualAlarma = valorPorcentualAlarma;
-		this.valorPorcentualRastreoVeicular = valorPorcentualRastreoVeicular;
-		this.valorPorcentualTuercasAntirrobo = valorPorcentualTuercasAntirrobo;
-		this.valorPorcentualSinSiniestro = valorPorcentualSinSiniestro;
-		this.valorPorcentualUnSiniestro = valorPorcentualUnSiniestro;
-		this.valorPorcentualDosSiniestro = valorPorcentualDosSiniestro;
-		this.valorPorcentualTresSiniestro = valorPorcentualTresSiniestro;
-		this.valorPorcentualHijo = valorPorcentualHijo;
+		this.idValorPorcentualActual = idValorPorcentualActual;
+		this.valorPorcentualKmAnioActual = valorPorcentualKmAnioActual;
+		this.valorPorcentualGarageActual = valorPorcentualGarageActual;
+		this.valorPorcentualAlarmaActual = valorPorcentualAlarmaActual;
+		this.valorPorcentualRastreoVehicularActual = valorPorcentualRastreoVehicularActual;
+		this.valorPorcentualTuercasAntirroboActual = valorPorcentualTuercasAntirroboActual;
+		this.valorPorcentualSinSiniestroActual = valorPorcentualSinSiniestroActual;
+		this.valorPorcentualUnSiniestroActual = valorPorcentualUnSiniestroActual;
+		this.valorPorcentualDosSiniestroActual = valorPorcentualDosSiniestroActual;
+		this.valorPorcentualTresSiniestroActual = valorPorcentualTresSiniestroActual;
+		this.valorPorcentualHijoActual = valorPorcentualHijoActual;
 		this.derechoEmision = derechoEmision;
 		this.usuario = usuario;
 	}
 
-	public float getValorPorcentualKmAnio() {
-		return valorPorcentualKmAnio;
+
+
+	public int getIdValorPorcentualActual() {
+		return idValorPorcentualActual;
 	}
 
-	public void setValorPorcentualKmAnio(float valorPorcentualKmAnio) {
-		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
+
+
+	public void setIdValorPorcentualActual(int idValorPorcentualActual) {
+		this.idValorPorcentualActual = idValorPorcentualActual;
 	}
 
-	public float getValorPorcentualGarage() {
-		return valorPorcentualGarage;
+
+
+	public float getValorPorcentualKmAnioActual() {
+		return valorPorcentualKmAnioActual;
 	}
 
-	public void setValorPorcentualGarage(float valorPorcentualGarage) {
-		this.valorPorcentualGarage = valorPorcentualGarage;
+
+
+	public void setValorPorcentualKmAnioActual(float valorPorcentualKmAnioActual) {
+		this.valorPorcentualKmAnioActual = valorPorcentualKmAnioActual;
 	}
 
-	public float getValorPorcentualAlarma() {
-		return valorPorcentualAlarma;
+
+
+	public float getValorPorcentualGarageActual() {
+		return valorPorcentualGarageActual;
 	}
 
-	public void setValorPorcentualAlarma(float valorPorcentualAlarma) {
-		this.valorPorcentualAlarma = valorPorcentualAlarma;
+
+
+	public void setValorPorcentualGarageActual(float valorPorcentualGarageActual) {
+		this.valorPorcentualGarageActual = valorPorcentualGarageActual;
 	}
 
-	public float getValorPorcentualRastreoVeicular() {
-		return valorPorcentualRastreoVeicular;
+
+
+	public float getValorPorcentualAlarmaActual() {
+		return valorPorcentualAlarmaActual;
 	}
 
-	public void setValorPorcentualRastreoVeicular(float valorPorcentualRastreoVeicular) {
-		this.valorPorcentualRastreoVeicular = valorPorcentualRastreoVeicular;
+
+
+	public void setValorPorcentualAlarmaActual(float valorPorcentualAlarmaActual) {
+		this.valorPorcentualAlarmaActual = valorPorcentualAlarmaActual;
 	}
 
-	public float getValorPorcentualTuercasAntirrobo() {
-		return valorPorcentualTuercasAntirrobo;
+
+
+	public float getValorPorcentualRastreoVehicularActual() {
+		return valorPorcentualRastreoVehicularActual;
 	}
 
-	public void setValorPorcentualTuercasAntirrobo(float valorPorcentualTuercasAntirrobo) {
-		this.valorPorcentualTuercasAntirrobo = valorPorcentualTuercasAntirrobo;
+
+
+	public void setValorPorcentualRastreoVehicularActual(float valorPorcentualRastreoVehicularActual) {
+		this.valorPorcentualRastreoVehicularActual = valorPorcentualRastreoVehicularActual;
 	}
 
-	public float getValorPorcentualSinSiniestro() {
-		return valorPorcentualSinSiniestro;
+
+
+	public float getValorPorcentualTuercasAntirroboActual() {
+		return valorPorcentualTuercasAntirroboActual;
 	}
 
-	public void setValorPorcentualSinSiniestro(float valorPorcentualSinSiniestro) {
-		this.valorPorcentualSinSiniestro = valorPorcentualSinSiniestro;
+
+
+	public void setValorPorcentualTuercasAntirroboActual(float valorPorcentualTuercasAntirroboActual) {
+		this.valorPorcentualTuercasAntirroboActual = valorPorcentualTuercasAntirroboActual;
 	}
 
-	public float getValorPorcentualUnSiniestro() {
-		return valorPorcentualUnSiniestro;
+
+
+	public float getValorPorcentualSinSiniestroActual() {
+		return valorPorcentualSinSiniestroActual;
 	}
 
-	public void setValorPorcentualUnSiniestro(float valorPorcentualUnSiniestro) {
-		this.valorPorcentualUnSiniestro = valorPorcentualUnSiniestro;
+
+
+	public void setValorPorcentualSinSiniestroActual(float valorPorcentualSinSiniestroActual) {
+		this.valorPorcentualSinSiniestroActual = valorPorcentualSinSiniestroActual;
 	}
 
-	public float getValorPorcentualDosSiniestro() {
-		return valorPorcentualDosSiniestro;
+
+
+	public float getValorPorcentualUnSiniestroActual() {
+		return valorPorcentualUnSiniestroActual;
 	}
 
-	public void setValorPorcentualDosSiniestro(float valorPorcentualDosSiniestro) {
-		this.valorPorcentualDosSiniestro = valorPorcentualDosSiniestro;
+
+
+	public void setValorPorcentualUnSiniestroActual(float valorPorcentualUnSiniestroActual) {
+		this.valorPorcentualUnSiniestroActual = valorPorcentualUnSiniestroActual;
 	}
 
-	public float getValorPorcentualTresSiniestro() {
-		return valorPorcentualTresSiniestro;
+
+
+	public float getValorPorcentualDosSiniestroActual() {
+		return valorPorcentualDosSiniestroActual;
 	}
 
-	public void setValorPorcentualTresSiniestro(float valorPorcentualTresSiniestro) {
-		this.valorPorcentualTresSiniestro = valorPorcentualTresSiniestro;
+
+
+	public void setValorPorcentualDosSiniestroActual(float valorPorcentualDosSiniestroActual) {
+		this.valorPorcentualDosSiniestroActual = valorPorcentualDosSiniestroActual;
 	}
 
-	public float getValorPorcentualHijo() {
-		return valorPorcentualHijo;
+
+
+	public float getValorPorcentualTresSiniestroActual() {
+		return valorPorcentualTresSiniestroActual;
 	}
 
-	public void setValorPorcentualHijo(float valorPorcentualHijo) {
-		this.valorPorcentualHijo = valorPorcentualHijo;
+
+
+	public void setValorPorcentualTresSiniestroActual(float valorPorcentualTresSiniestroActual) {
+		this.valorPorcentualTresSiniestroActual = valorPorcentualTresSiniestroActual;
 	}
+
+
+
+	public float getValorPorcentualHijoActual() {
+		return valorPorcentualHijoActual;
+	}
+
+
+
+	public void setValorPorcentualHijoActual(float valorPorcentualHijoActual) {
+		this.valorPorcentualHijoActual = valorPorcentualHijoActual;
+	}
+
+
 
 	public float getDerechoEmision() {
 		return derechoEmision;
 	}
 
+
+
 	public void setDerechoEmision(float derechoEmision) {
 		this.derechoEmision = derechoEmision;
 	}
 
-	public int getIdValoresPorcentualesActuales() {
-		return idValoresPorcentualesActuales;
-	}
+
 
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
+
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public void setIdValoresPorcentualesActuales(int idValoresPorcentualesActuales) {
-		this.idValoresPorcentualesActuales = idValoresPorcentualesActuales;
-	}
+	
 }

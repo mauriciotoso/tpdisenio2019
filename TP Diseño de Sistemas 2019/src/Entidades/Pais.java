@@ -7,6 +7,7 @@ public class Pais {
 	
 	@Id
 	private int idPais;
+	@Column (name="pais")
 	private String nombre;
 	
 	public Pais(int idPais, String nombre) {

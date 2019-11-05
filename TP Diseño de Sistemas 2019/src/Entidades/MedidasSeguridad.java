@@ -7,9 +7,13 @@ public class MedidasSeguridad {
 
 	@Id
 	private int idMedidasSeguridad;
+	@Column(name="tienegarage")
 	private boolean garage;
+	@Column(name="tienealarma")
 	private boolean alarma;
+	@Column(name="tieneRastreo")
 	private boolean rastreoVehicular;
+	@Column(name="tienetuercasAntirrobo")
 	private boolean tuercaAntirrobo;
 	
 	public MedidasSeguridad(int idMedidasSeguridad, boolean garage, boolean alarma, boolean rastreoVehicular,

@@ -1,8 +1,5 @@
 package Entidades;
-
-import java.util.Date;
-import java.util.List;
-
+import java.util.ArrayList;
 import Enumerados.*;
 import javax.persistence.*;
 
@@ -11,28 +8,34 @@ public class Cliente {
 	
 	@Id
 	private String nroCliente;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private String nombre;
 	private String apellido;
 	private TipoDocumento tipoDocumento;
 	private String nroDocumento;
 	private String nroCuil;
 	private Sexo sexo;
+	@ManyToOne
+	@JoinColumn (name="condicioniva")
 	private CondicionIVA condicionIVA;
+	@Column (name="email")
 	private String correoElectronico;
 	private EstadoCivil estadoCivil;
 	private String profesion; 
 	private String anioRegistro;
+	@ManyToOne
+	@JoinColumn (name="estadoCliente")
 	private EstadoCliente etadoCliente;
-	private int nroSiniestros;
+	@OneToOne
+	@JoinColumn (name="direccion")
 	private Direccion direccion;
-	private List<Poliza> polizas;
+	//@OneToMany
+	//private List<Poliza> polizas;
 	
-	public Cliente(String nroCliente, Date fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
+	public Cliente(String nroCliente, String fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
 			String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIVA, String correoElectronico,
 			EstadoCivil estadoCivil, String profesion, String anioRegistro, EstadoCliente etadoCliente,
-			int nroSiniestros, Direccion direccion, List<Poliza> polizas) {
-		super();
+			 Direccion direccion, ArrayList<Poliza> polizas) {
 		this.nroCliente = nroCliente;
 		this.fechaNacimiento = fechaNacimiento;
 		this.nombre = nombre;
@@ -47,9 +50,8 @@ public class Cliente {
 		this.profesion = profesion;
 		this.anioRegistro = anioRegistro;
 		this.etadoCliente = etadoCliente;
-		this.nroSiniestros = nroSiniestros;
+		
 		this.direccion = direccion;
-		this.polizas = polizas;
 	}
 
 	public String getNroCliente() {
@@ -60,11 +62,11 @@ public class Cliente {
 		this.nroCliente = nroCliente;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -164,13 +166,6 @@ public class Cliente {
 		this.etadoCliente = etadoCliente;
 	}
 
-	public int getNroSiniestros() {
-		return nroSiniestros;
-	}
-
-	public void setNroSiniestros(int nroSiniestros) {
-		this.nroSiniestros = nroSiniestros;
-	}
 
 	public Direccion getDireccion() {
 		return direccion;
@@ -179,15 +174,6 @@ public class Cliente {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
-
-	public List<Poliza> getPolizas() {
-		return polizas;
-	}
-
-	public void setPolizas(List<Poliza> polizas) {
-		this.polizas = polizas;
-	}
-	
 	
 	
 }

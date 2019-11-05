@@ -10,8 +10,11 @@ public class Direccion {
 	private String calle;
 	private String numero;
 	private String piso;
+	@Column (name="nrodepto")
 	private String departamento;
 	private String codigoPostal;
+	@OneToOne
+	@JoinColumn (name="idlocalidad")
 	private Localidad localidad;
 
 	public Direccion(int idDireccion, String calle, String numero, String piso, String departamento,

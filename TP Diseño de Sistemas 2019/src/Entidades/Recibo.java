@@ -15,6 +15,7 @@ public class Recibo {
 	private String operador;
 	private String mesAbonado;
 	private String anioAbonado;
+	@OneToMany
 	private List<Cuota> cuotas;
 	
 	public Recibo(float importe, float vuelto, float importePagado, String nroRecibo, String operador,

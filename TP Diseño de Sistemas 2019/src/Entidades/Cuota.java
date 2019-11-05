@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,33 +7,38 @@ public class Cuota {
 	
 	@Id
 	private int idCuota;
-	private int nroCuenta;
-	private Date ultimoDiaPago;
+	private int nroCuota;
+	private String ultimoDiaPago;
 	private float importeCuota;
-	private boolean estePago;
+	private boolean estaPago;
+	private float recargosPorMora;
+	private float bonificacion;
 
-	public Cuota(int idCuota, int nroCuenta, Date ultimoDiaPago, float importeCuota, boolean estePago) {
+	public Cuota(int idCuota, int nroCuota, String ultimoDiaPago, float importeCuota, boolean estaPago,
+			float recargosPorMora, float bonificacion) {
 		super();
 		this.idCuota = idCuota;
-		this.nroCuenta = nroCuenta;
+		this.nroCuota = nroCuota;
 		this.ultimoDiaPago = ultimoDiaPago;
 		this.importeCuota = importeCuota;
-		this.estePago = estePago;
+		this.estaPago = estaPago;
+		this.recargosPorMora = recargosPorMora;
+		this.bonificacion = bonificacion;
 	}
 
-	public int getNroCuenta() {
-		return nroCuenta;
+	public int getNroCuota() {
+		return nroCuota;
 	}
 
-	public void setNroCuenta(int nroCuenta) {
-		this.nroCuenta = nroCuenta;
+	public void setNroCuota(int nroCuota) {
+		this.nroCuota = nroCuota;
 	}
 
-	public Date getUltimoDiaPago() {
+	public String getUltimoDiaPago() {
 		return ultimoDiaPago;
 	}
 
-	public void setUltimoDiaPago(Date ultimoDiaPago) {
+	public void setUltimoDiaPago(String ultimoDiaPago) {
 		this.ultimoDiaPago = ultimoDiaPago;
 	}
 
@@ -48,11 +51,11 @@ public class Cuota {
 	}
 
 	public boolean isEstePago() {
-		return estePago;
+		return estaPago;
 	}
 
 	public void setEstePago(boolean estePago) {
-		this.estePago = estePago;
+		this.estaPago = estePago;
 	}
 
 	public int getIdCuota() {
@@ -62,5 +65,30 @@ public class Cuota {
 	public void setIdCuota(int idCuota) {
 		this.idCuota = idCuota;
 	}
+
+	public boolean isEstaPago() {
+		return estaPago;
+	}
+
+	public void setEstaPago(boolean estaPago) {
+		this.estaPago = estaPago;
+	}
+
+	public float getRecargosPorMora() {
+		return recargosPorMora;
+	}
+
+	public void setRecargosPorMora(float recargosPorMora) {
+		this.recargosPorMora = recargosPorMora;
+	}
+
+	public float getBonificacion() {
+		return bonificacion;
+	}
+
+	public void setBonificacion(float bonificacion) {
+		this.bonificacion = bonificacion;
+	}
+	
 	
 }

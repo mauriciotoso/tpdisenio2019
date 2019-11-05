@@ -6,8 +6,12 @@ import javax.persistence.*;
 public class Modelo {
 	
 	@Id
+	@Column(name="idmodelo")
 	private int idModelo;
+	@Column(name="modelo")
 	private String nombre;
+	@ManyToOne
+	@JoinColumn(name="idmarca")
 	private Marca marca;
 
 	public Modelo(int idModelo, String nombre, Marca marca) {

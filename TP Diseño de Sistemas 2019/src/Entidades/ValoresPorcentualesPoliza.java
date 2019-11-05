@@ -2,14 +2,16 @@ package Entidades;
 import javax.persistence.*;
 
 @Entity
+@Table (name="valorporcentual")
 public class ValoresPorcentualesPoliza {
 
 	@Id
-	private float idValoresPorcentualesPoliza;
+	@Column (name="idvalorporcentual")
+	private int idValoresPorcentualesPoliza;
 	private float valorPorcentualKmAnio;
 	private float valorPorcentualGarage;
 	private float valorPorcentualAlarma;
-	private float valorPorcentualRastreoVeicular;
+	private float valorPorcentualRastreoVehicular;
 	private float valorPorcentualTuercasAntirrobo;
 	private float valorPorcentualSinSiniestro;
 	private float valorPorcentualUnSiniestro;
@@ -17,12 +19,15 @@ public class ValoresPorcentualesPoliza {
 	private float valorPorcentualTresSiniestro;
 	private float valorPorcentualHijo;
 	private float valorPorcentualModelo;
+	@Column (name="valorporcentualdomicilioderiesgo")
 	private float valorPorcentualLocalidad;
+	@Column (name="valorporcentualcobertura")
 	private float valorPorcentualTipoCobertura;
+	@Column (name="valorporcentualseguridad")
 	private float valorPorcentualMedidasSeguridad;
 	private float derechoEmision;
 	
-	public ValoresPorcentualesPoliza(float idValoresPorcentualesPoliza, float valorPorcentualKmAnio,
+	public ValoresPorcentualesPoliza(int idValoresPorcentualesPoliza, float valorPorcentualKmAnio,
 			float valorPorcentualGarage, float valorPorcentualAlarma, float valorPorcentualRastreoVeicular,
 			float valorPorcentualTuercasAntirrobo, float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro,
 			float valorPorcentualDosSiniestro, float valorPorcentualTresSiniestro, float valorPorcentualHijo,
@@ -33,7 +38,7 @@ public class ValoresPorcentualesPoliza {
 		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
 		this.valorPorcentualGarage = valorPorcentualGarage;
 		this.valorPorcentualAlarma = valorPorcentualAlarma;
-		this.valorPorcentualRastreoVeicular = valorPorcentualRastreoVeicular;
+		this.valorPorcentualRastreoVehicular = valorPorcentualRastreoVeicular;
 		this.valorPorcentualTuercasAntirrobo = valorPorcentualTuercasAntirrobo;
 		this.valorPorcentualSinSiniestro = valorPorcentualSinSiniestro;
 		this.valorPorcentualUnSiniestro = valorPorcentualUnSiniestro;
@@ -72,11 +77,11 @@ public class ValoresPorcentualesPoliza {
 	}
 
 	public float getValorPorcentualRastreoVeicular() {
-		return valorPorcentualRastreoVeicular;
+		return valorPorcentualRastreoVehicular;
 	}
 
 	public void setValorPorcentualRastreoVeicular(float valorPorcentualRastreoVeicular) {
-		this.valorPorcentualRastreoVeicular = valorPorcentualRastreoVeicular;
+		this.valorPorcentualRastreoVehicular = valorPorcentualRastreoVeicular;
 	}
 
 	public float getValorPorcentualTuercasAntirrobo() {
@@ -135,11 +140,11 @@ public class ValoresPorcentualesPoliza {
 		this.derechoEmision = derechoEmision;
 	}
 
-	public float getIdValoresPorcentualesPoliza() {
+	public int getIdValoresPorcentualesPoliza() {
 		return idValoresPorcentualesPoliza;
 	}
 
-	public void setIdValoresPorcentualesPoliza(float idValoresPorcentualesPoliza) {
+	public void setIdValoresPorcentualesPoliza(int idValoresPorcentualesPoliza) {
 		this.idValoresPorcentualesPoliza = idValoresPorcentualesPoliza;
 	}
 

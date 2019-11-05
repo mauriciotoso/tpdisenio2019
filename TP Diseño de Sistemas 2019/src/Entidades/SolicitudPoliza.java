@@ -1,6 +1,5 @@
 package Entidades;
 
-import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -8,37 +7,45 @@ import javax.persistence.*;
 public class SolicitudPoliza {
 	
 	@Id
-	private int idSolicituPoliza;
+	private int idSolicitudPoliza;
 	private int anio;
 	private String patente;
 	private String motor;
 	private String chasis;
 	private int kmAnio;
-	private int nroSiniestros;
-	private Date vigenciaDesde;
-	private Date vigenciaHasta;
+	@OneToOne
+	@JoinColumn(name = "medidasseguridad")
 	private MedidasSeguridad medidasSeguridad;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "solicitudpoliza")
 	private List<HijoDeclarado> hijos;
+	@ManyToOne
+	@JoinColumn(name = "tipocobertura")
 	private TipoCobertura tipoCobertura;
-	private Poliza poliza;
+	@OneToOne
+	@JoinColumn(name = "polizamensual")
+	private PolizaMensual polizaMensual;
+	@OneToOne
+	@JoinColumn(name = "polizasemestral")
+	private PolizaSemestral polizaSemestral;
 	
+	
+
 	public SolicitudPoliza(int idSolicituPoliza, int anio, String patente, String motor, String chasis, int kmAnio,
-			int nroSiniestros, Date vigenciaDesde, Date vigenciaHasta, MedidasSeguridad medidasSeguridad,
-			List<HijoDeclarado> hijos, TipoCobertura tipoCobertura, Poliza poliza) {
+			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
+			PolizaMensual polizaMensual, PolizaSemestral polizaSemestral) {
 		super();
-		this.idSolicituPoliza = idSolicituPoliza;
+		this.idSolicitudPoliza = idSolicituPoliza;
 		this.anio = anio;
 		this.patente = patente;
 		this.motor = motor;
 		this.chasis = chasis;
 		this.kmAnio = kmAnio;
-		this.nroSiniestros = nroSiniestros;
-		this.vigenciaDesde = vigenciaDesde;
-		this.vigenciaHasta = vigenciaHasta;
 		this.medidasSeguridad = medidasSeguridad;
 		this.hijos = hijos;
 		this.tipoCobertura = tipoCobertura;
-		this.poliza = poliza;
+		this.polizaMensual = polizaMensual;
+		this.polizaSemestral = polizaSemestral;
 	}
 
 	public int getAnio() {
@@ -81,36 +88,14 @@ public class SolicitudPoliza {
 		this.kmAnio = kmAnio;
 	}
 
-	public int getNroSiniestros() {
-		return nroSiniestros;
-	}
 
-	public void setNroSiniestros(int nroSiniestros) {
-		this.nroSiniestros = nroSiniestros;
-	}
-
-	public Date getVigenciaDesde() {
-		return vigenciaDesde;
-	}
-
-	public void setVigenciaDesde(Date vigenciaDesde) {
-		this.vigenciaDesde = vigenciaDesde;
-	}
-
-	public Date getVigenciaHasta() {
-		return vigenciaHasta;
-	}
-
-	public void setVigenciaHasta(Date vigenciaHasta) {
-		this.vigenciaHasta = vigenciaHasta;
-	}
 
 	public int getIdSolicituPoliza() {
-		return idSolicituPoliza;
+		return idSolicitudPoliza;
 	}
 
 	public void setIdSolicituPoliza(int idSolicituPoliza) {
-		this.idSolicituPoliza = idSolicituPoliza;
+		this.idSolicitudPoliza = idSolicituPoliza;
 	}
 
 	public MedidasSeguridad getMedidasSeguridad() {
@@ -137,12 +122,20 @@ public class SolicitudPoliza {
 		this.tipoCobertura = tipoCobertura;
 	}
 
-	public Poliza getPoliza() {
-		return poliza;
+	public PolizaMensual getPolizaMensual() {
+		return polizaMensual;
 	}
 
-	public void setPoliza(Poliza poliza) {
-		this.poliza = poliza;
+	public void setPolizaMensual(PolizaMensual polizaMensual) {
+		this.polizaMensual = polizaMensual;
+	}
+
+	public PolizaSemestral getPolizaSemestral() {
+		return polizaSemestral;
+	}
+
+	public void setPolizaSemestral(PolizaSemestral polizaSemestral) {
+		this.polizaSemestral = polizaSemestral;
 	}
 	
 }

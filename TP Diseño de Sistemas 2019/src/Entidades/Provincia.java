@@ -6,7 +6,10 @@ public class Provincia {
 	
 	@Id
 	private int idProvincia;
+	@Column(name="provincia")
 	private String nombre;
+	@ManyToOne
+	@JoinColumn (name="idpais")
 	private Pais pais;
 
 	public Provincia(int idProvincia, String nombre, Pais pais) {

@@ -6,17 +6,22 @@ import javax.persistence.*;
 public class Anio {
 	
 	@Id
+	@Column(name="idanio")
 	private int idAnio;
+	@Column(name="anio")
 	private int anio;
+	@Column(name="valorporcentualmodelo")
 	private float valorPorcentualModelo;
-	private Modelo modelo;
+	@ManyToOne
+	@JoinColumn(name="idmodelo")
+	private Modelo idModelo;
 	
 	public Anio(int idAnio, int anio, float valorPorcentualModelo, Modelo modelo) {
 		super();
 		this.idAnio = idAnio;
 		this.anio = anio;
 		this.valorPorcentualModelo = valorPorcentualModelo;
-		this.modelo = modelo;
+		this.idModelo = modelo;
 	}
 
 	public int getAnio() {
@@ -44,10 +49,10 @@ public class Anio {
 	}
 
 	public Modelo getModelo() {
-		return modelo;
+		return idModelo;
 	}
 	
 	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
+		this.idModelo = modelo;
 	}
 }

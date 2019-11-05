@@ -6,9 +6,12 @@ import javax.persistence.*;
 public class Marca {
 	
 	@Id
+	@Column (name="idmarca")
 	private int idMarca;
+	@Column (name="marca")
 	private String marca;
-	
+	//@OneToMany
+	//private List<Marca> marcas;
 	
 	public Marca(int idMarca, String marca) {
 		super();

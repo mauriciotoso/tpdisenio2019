@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.util.Date;
-
 import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
 import javax.persistence.*;
@@ -10,24 +8,25 @@ import javax.persistence.*;
 public class HijoDeclarado {
 	
 	@Id
+	@Column (name="idhijo")
 	private int idHijoDeclarado;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private Sexo sexo;
-	private EstadoCivil etadoCivil;
+	private EstadoCivil estadoCivil;
 
-	public HijoDeclarado(int idHijoDeclarado, Date fechaNacimiento, Sexo sexo, EstadoCivil etadoCivil) {
-		super();
-		this.idHijoDeclarado = idHijoDeclarado;
-		this.fechaNacimiento = fechaNacimiento;
+	public HijoDeclarado(int idHijoDeclarado2, String fechaNacimiento2, Sexo sexo, EstadoCivil estado) {
+		this.idHijoDeclarado = idHijoDeclarado2;
+		this.fechaNacimiento = fechaNacimiento2;
 		this.sexo = sexo;
-		this.etadoCivil = etadoCivil;
+		this.estadoCivil = estado;
 	}
 
-	public Date getFechaNacimiento() {
+
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -40,11 +39,11 @@ public class HijoDeclarado {
 	}
 
 	public EstadoCivil getEtadoCivil() {
-		return etadoCivil;
+		return estadoCivil;
 	}
 
 	public void setEtadoCivil(EstadoCivil etadoCivil) {
-		this.etadoCivil = etadoCivil;
+		this.estadoCivil = etadoCivil;
 	}
 
 	public int getIdHijoDeclarado() {

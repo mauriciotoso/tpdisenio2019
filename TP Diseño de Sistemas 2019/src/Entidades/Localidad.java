@@ -7,8 +7,11 @@ public class Localidad {
 	
 	@Id
 	private int idLocalidad;
+	@Column(name = "localidad")
 	private String nombre;
 	private float valorPorcentualLocalidad;
+	@ManyToOne
+	@JoinColumn(name = "idprovincia")
 	private Provincia provincia;
 
 	public Localidad(int idLocalidad, String nombre, float valorPorcentualLocalidad, Provincia provincia) {

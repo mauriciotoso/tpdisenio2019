@@ -1,6 +1,5 @@
 package Entidades;
 
-import java.util.Date;
 import java.util.List;
 
 import Enumerados.EstadoPoliza;
@@ -11,8 +10,8 @@ public abstract class Poliza{
 	
 	@Id
 	private String nroPoliza;
-	private Date vigenciaDesde;
-	private Date vigenciaHasta;
+	private String vigenciaDesde;
+	private String vigenciaHasta;
 	private String domicilioRiesgo;
 	private EstadoPoliza estadoPoliza;
 	private float prima;
@@ -34,7 +33,7 @@ public abstract class Poliza{
 	private Cliente cliente;
 	
 
-	public Poliza(String nroPoliza, Date vigenciaDesde, Date vigenciaHasta, String domicilioRiesgo,
+	public Poliza(String nroPoliza, String vigenciaDesde, String vigenciaHasta, String domicilioRiesgo,
 			EstadoPoliza estadoPoliza, float prima, float montoTotal, float descuentoUnidad, String patente,
 			String motor, String chasis, int kmAnio, int anio, float premio, List<Cuota> cuotas, Anio anioModelo,
 			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
@@ -72,19 +71,19 @@ public abstract class Poliza{
 		this.nroPoliza = nroPoliza;
 	}
 
-	public Date getVigenciaDesde() {
+	public String getVigenciaDesde() {
 		return vigenciaDesde;
 	}
 
-	public void setVigenciaDesde(Date vigenciaDesde) {
+	public void setVigenciaDesde(String vigenciaDesde) {
 		this.vigenciaDesde = vigenciaDesde;
 	}
 
-	public Date getVigenciaHasta() {
+	public String getVigenciaHasta() {
 		return vigenciaHasta;
 	}
 
-	public void setVigenciaHasta(Date vigenciaHasta) {
+	public void setVigenciaHasta(String vigenciaHasta) {
 		this.vigenciaHasta = vigenciaHasta;
 	}
 
