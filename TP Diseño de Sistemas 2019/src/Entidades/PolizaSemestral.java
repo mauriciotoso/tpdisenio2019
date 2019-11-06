@@ -38,6 +38,8 @@ public class PolizaSemestral {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "polizasemestral")
 	
+	
+	
 	private List<HijoDeclarado> hijos;
 	@ManyToOne
 	@JoinColumn (name="tipocobertura")
@@ -82,6 +84,11 @@ public class PolizaSemestral {
 		this.nroCliente = nroCliente;
 		this.bonificacion = bonificacion;
 	}
+	
+	public PolizaSemestral() {
+		
+	}
+	
 	public float getBonificacion() {
 		return bonificacion;
 	}
@@ -89,7 +96,12 @@ public class PolizaSemestral {
 		this.bonificacion = bonificacion;
 	}
 	
+	
 
+	@Override
+	public String toString() {
+		return "PolizaSemestral [nroPoliza=" + nroPoliza + "]";
+	}
 	public String getNroPoliza() {
 		return nroPoliza;
 	}

@@ -30,7 +30,11 @@ public class Recibo {
 		this.anioAbonado = anioAbonado;
 		this.cuotas = cuotas;
 	}
-
+	
+	public Recibo() {
+		
+	}
+	
 	public float getImporte() {
 		return importe;
 	}

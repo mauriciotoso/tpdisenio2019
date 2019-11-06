@@ -1,0 +1,260 @@
+drop table if exists anio cascade;
+drop table if exists cliente cascade;
+drop table if exists condicioniva cascade;
+drop table if exists cuota cascade;
+drop table if exists direccion cascade;
+drop table if exists estadocliente cascade;
+drop table if exists estadopoliza cascade;
+drop table if exists hijodeclarado cascade;
+drop table if exists localidad cascade;
+drop table if exists marca cascade;
+drop table if exists medidasseguridad cascade;
+drop table if exists modelo cascade;
+drop table if exists pais cascade;
+drop table if exists polizamensual cascade;
+drop table if exists polizasemestral cascade;
+drop table if exists provincia cascade;
+drop table if exists recibo cascade;
+drop table if exists solicitudpoliza cascade;
+drop table if exists student cascade;
+drop table if exists tipocobertura cascade;
+drop table if exists usuario cascade;
+drop table if exists valorporcentual cascade;
+drop table if exists valorporcentualactual cascade;
+
+create table condicionIVA
+(idCondicionIVA int,
+condicionIVA varchar(30),
+primary key(idCondicionIVA));
+
+create table estadoCliente
+(idEstadoCliente int,
+estadoCliente varchar(20),
+primary key(idEstadoCliente));
+
+create table estadoPoliza
+(idEstadoPoliza int,
+estadoPoliza varchar(20),
+primary key (idEstadoPoliza));
+
+create table pais
+(idPais int,
+pais varchar(30),
+primary key(idPais));
+
+create table provincia
+(idProvincia int,
+provincia varchar(30),
+idPais int references pais(idPais),
+primary key(idProvincia));
+
+create table localidad
+(idLocalidad int,
+localidad varchar(30),
+valorPorcentualLocalidad float,
+idProvincia int references provincia(idProvincia),
+primary key(idLocalidad));
+
+create table direccion
+(idDireccion int,
+calle varchar(40),
+numero varchar(20),
+piso varchar(20),
+nroDepto varchar(20),
+codigoPostal varchar(20),
+idLocalidad int references localidad(idLocalidad),
+primary key (idDireccion));
+
+create table cliente
+(nroCliente varchar(40),
+ fechaNacimiento varchar(20),
+ nombre varchar(20),
+ apellido varchar(20),
+ tipoDocumento varchar(30),
+ nroDocumento varchar(20),
+ nroCuil varchar(20),
+ sexo varchar(20),
+ condicionIVA int references condicionIVA(idCondicionIVA),
+ email varchar(40),
+ estadoCivil varchar(20),
+ profesion varchar(30),
+ anioRegistro varchar(10),
+ estadoCliente int references estadoCliente(idEstadoCliente),
+ direccion int references direccion(idDireccion),
+ primary key(nroCliente));
+
+--select * from cuota;
+
+create table marca
+(idMarca int,
+marca varchar(20),
+primary key(idMarca));
+
+create table modelo 
+(idModelo int,
+ modelo varchar(30),
+ idMarca int references marca(idMarca),
+ primary key(idModelo));
+
+--delete from marca;
+--select * from anio;
+
+create table anio
+(idAnio int,
+anio int,
+valorPorcentualModelo float,
+idmodelo int references modelo(idModelo),
+primary key(idAnio));
+
+create table tipoCobertura
+(idTipoCobertura int,
+ tipoCobertura varchar(50),
+ descripcion varchar(280),
+ valorPorcentualTipoCobertura float,
+primary key(idTipoCobertura));
+
+create table medidasSeguridad
+(idMedidasSeguridad int,
+ tieneGarage boolean,
+ tieneAlarma boolean,
+ tieneRastreo boolean,
+ tieneTuercasAntirrobo boolean,
+ primary key(idMedidasSeguridad));
+
+create table usuario
+ (usuario varchar(20),
+ nombre varchar(20),
+ apellido varchar(20),
+ contraseña varchar(30),
+ tipo varchar(30),
+ primary key(usuario));
+
+create table valorPorcentualActual
+(idValorPorcentualActual int,
+valorPorcentualAlarmaActual float,
+valorPorcentualGarageActual float,
+valorPorcentualRastreoVehicularActual float,
+valorPorcentualKmAnioActual float,
+valorPorcentualHijoActual float,
+valorPorcentualTuercasAntirroboActual float,
+valorPorcentualSinSiniestroActual float,
+valorPorcentualUnSiniestroActual float,
+valorPorcentualDosSiniestroActual float,
+valorPorcentualTresSiniestroActual float,
+derechoEmision float,
+usuario varchar(20) references usuario(usuario),
+primary key(idValorPorcentualActual));
+
+create table valorPorcentual
+(idValorPorcentual int,
+ derechoEmision float,
+valorPorcentualModelo float,
+valorPorcentualDomicilioDeRiesgo float,
+valorPorcentualCobertura float,
+valorPorcentualAlarma float,
+valorPorcentualGarage float,
+valorPorcentualKmAnio float,
+valorPorcentualRastreoVehicular float,
+valorPorcentualHijo float,
+valorPorcentualTuercasAntirrobo float,
+valorPorcentualSinSiniestro float,
+valorPorcentualUnSiniestro float,
+valorPorcentualDosSiniestro float,
+valorPorcentualTresSiniestro float,
+valorPorcentualSeguridad float,
+primary key(idValorPorcentual));
+
+create table polizaMensual
+(nroPoliza varchar(20),
+vigenciaDesde varchar(20),
+vigenciaHasta varchar(20),
+domicilioRiesgo varchar(50),
+estadoPoliza int references estadoPoliza(idEstadoPoliza),
+prima float,
+montoTotal float,
+descuentoUnidad float,
+patente varchar(20),
+motor varchar(30),
+chasis varchar(30),
+kmsPorAnio int,
+anio int,
+premio float,
+nroSiniestros int,
+idAnio int references anio(idAnio),
+idValorPorcentual int references valorPorcentual(idValorPorcentual),
+idMedidasSeguridad int references medidasSeguridad(idMedidasSeguridad),
+nrocliente varchar(40) references cliente(nroCliente),
+idtipoCobertura int references tipoCobertura(idTipoCobertura),
+primary key(nroPoliza));
+
+create table polizaSemestral
+(nroPoliza varchar(20),
+vigenciaDesde varchar(20),
+vigenciaHasta varchar(20),
+domicilioRiesgo varchar(50),
+estadoPoliza int references estadoPoliza(idEstadoPoliza),
+prima float,
+montoTotal float,
+descuentoUnidad float,
+patente varchar(20),
+motor varchar(30),
+chasis varchar(30),
+kmsPorAnio int,
+anio int,
+premio float,
+nroSiniestros int,
+anioModelo int references anio(idAnio),
+valoresPorcentualesPoliza int references valorPorcentual(idValorPorcentual),
+medidasSeguridad int references medidasSeguridad(idMedidasSeguridad),
+cliente varchar(40) references cliente(nroCliente),
+tipoCobertura int references tipoCobertura(idTipoCobertura),
+bonificacion float,
+primary key(nroPoliza));
+
+create table solicitudPoliza
+(idSolicitudPoliza int,
+anio int,
+patente varchar(20),
+motor varchar(30),
+chasis varchar(30),
+kmAnio int,
+medidasSeguridad int references medidasSeguridad(idMedidasSeguridad),
+tipoCobertura int references tipoCobertura(idTipoCobertura),
+polizaMensual varchar(20) references polizaMensual(nroPoliza),
+polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+primary key(idSolicitudPoliza));
+
+create table hijoDeclarado
+(idHijo int,
+fechaNacimiento varchar(20),
+sexo varchar(20),
+estadoCivil varchar(30),
+solicitudPoliza int references solicitudPoliza(idSolicitudPoliza),
+polizaMensual varchar(20) references polizaMensual(nroPoliza),
+polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+primary key(idHijo));
+
+create table recibo
+(nroRecibo int,
+ importe float,
+ vuelto float,
+ importePagado float,
+ fechaPago varchar(20),
+ horaPago varchar(20),
+ mesAbonado varchar(20),
+ anioAbonado varchar(10),
+ usuario varchar(20) references usuario(usuario),
+ primary key(nroRecibo));
+
+create table cuota
+(idCuota int,
+nroCuota int,
+recargosPorMora float,
+ultimoDiaPago varchar(20),
+importeCuota float,
+estaPago boolean,
+bonificacion float,
+recibo int references recibo(nroRecibo),
+polizaMensual varchar(20) references polizaMensual(nroPoliza),
+polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+primary key(idCuota));

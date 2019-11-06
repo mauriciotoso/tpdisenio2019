@@ -18,6 +18,15 @@ public class Marca {
 		this.idMarca = idMarca;
 		this.marca = marca;
 	}
+	
+	public Marca() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "Marca [idMarca=" + idMarca + ", marca=" + marca + "]";
+	}
 
 	public String getMarca() {
 		return marca;

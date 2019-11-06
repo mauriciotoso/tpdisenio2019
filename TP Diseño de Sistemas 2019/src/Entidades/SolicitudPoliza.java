@@ -29,8 +29,6 @@ public class SolicitudPoliza {
 	@JoinColumn(name = "polizasemestral")
 	private PolizaSemestral polizaSemestral;
 	
-	
-
 	public SolicitudPoliza(int idSolicituPoliza, int anio, String patente, String motor, String chasis, int kmAnio,
 			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
 			PolizaMensual polizaMensual, PolizaSemestral polizaSemestral) {
@@ -46,6 +44,10 @@ public class SolicitudPoliza {
 		this.tipoCobertura = tipoCobertura;
 		this.polizaMensual = polizaMensual;
 		this.polizaSemestral = polizaSemestral;
+	}
+	
+	public SolicitudPoliza() {
+		
 	}
 
 	public int getAnio() {

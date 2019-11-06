@@ -28,6 +28,10 @@ public class Direccion {
 		this.codigoPostal = codigoPostal;
 		this.localidad = localidad;
 	}
+	
+	public Direccion() {
+		
+	}
 
 	public String getCalle() {
 		return calle;

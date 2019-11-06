@@ -24,12 +24,22 @@ public class Anio {
 		this.idModelo = modelo;
 	}
 
+	public Anio() {
+		
+	}
+	
 	public int getAnio() {
 		return anio;
 	}
 
 	public void setAnio(int anio) {
 		this.anio = anio;
+	}
+	
+	@Override
+	public String toString() {
+		return "Anio [idAnio=" + idAnio + ", anio=" + anio + ", valorPorcentualModelo=" + valorPorcentualModelo
+				+ ", idModelo=" + idModelo + "]";
 	}
 
 	public float getValorPorcentualModelo() {

@@ -24,8 +24,6 @@ public class ValoresPorcentualesActuales {
 	@JoinColumn (name="usuario")
 	private Usuario usuario;
 	
-	
-
 	public ValoresPorcentualesActuales(int idValorPorcentualActual, float valorPorcentualKmAnioActual,
 			float valorPorcentualGarageActual, float valorPorcentualAlarmaActual,
 			float valorPorcentualRastreoVehicularActual, float valorPorcentualTuercasAntirroboActual,
@@ -48,7 +46,9 @@ public class ValoresPorcentualesActuales {
 		this.usuario = usuario;
 	}
 
-
+	public ValoresPorcentualesActuales() {
+		
+	}
 
 	public int getIdValorPorcentualActual() {
 		return idValorPorcentualActual;

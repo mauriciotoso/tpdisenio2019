@@ -20,6 +20,10 @@ public class HijoDeclarado {
 		this.sexo = sexo;
 		this.estadoCivil = estado;
 	}
+	
+	public HijoDeclarado() {
+		
+	}
 
 
 	public String getFechaNacimiento() {

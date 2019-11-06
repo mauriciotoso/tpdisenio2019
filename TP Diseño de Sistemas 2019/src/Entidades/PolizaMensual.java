@@ -79,6 +79,10 @@ public class PolizaMensual{
 		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
 		this.nroCliente = nroCliente;
 	}
+	
+	public PolizaMensual() {
+		
+	}
 
 	public String getNroPoliza() {
 		return nroPoliza;

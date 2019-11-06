@@ -19,6 +19,11 @@ public class TipoCobertura {
 		this.descripcion = descripcion;
 		this.valorPorcentualCobertura = valorPorcentualCobertura;
 	}
+	
+	public TipoCobertura() {
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

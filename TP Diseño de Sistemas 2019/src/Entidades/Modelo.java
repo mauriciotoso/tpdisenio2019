@@ -20,7 +20,20 @@ public class Modelo {
 		this.nombre = nombre;
 		this.marca = marca;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Modelo [idModelo=" + idModelo + ", nombre=" + nombre + ", marca=" + marca + "]";
+	}
 
+
+
+	public Modelo() {
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

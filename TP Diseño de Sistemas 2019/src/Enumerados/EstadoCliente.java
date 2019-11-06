@@ -13,6 +13,10 @@ public class EstadoCliente {
 		this.idEstadoCliente = idEstadoCliente;
 		this.estadoCliente = estadoCliente;
 	}
+	
+	public EstadoCliente() {
+		
+	}
 
 	public int getIdEstadoCliente() {
 		return idEstadoCliente;

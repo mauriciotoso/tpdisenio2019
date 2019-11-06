@@ -26,6 +26,10 @@ public class Cuota {
 		this.bonificacion = bonificacion;
 	}
 
+	public Cuota() {
+		
+	}
+	
 	public int getNroCuota() {
 		return nroCuota;
 	}

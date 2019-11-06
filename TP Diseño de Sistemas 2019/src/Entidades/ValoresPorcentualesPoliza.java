@@ -52,6 +52,10 @@ public class ValoresPorcentualesPoliza {
 		this.derechoEmision = derechoEmision;
 	}
 
+	public ValoresPorcentualesPoliza() {
+		
+	}
+	
 	public float getValorPorcentualKmAnio() {
 		return valorPorcentualKmAnio;
 	}

@@ -1,29 +1,28 @@
 package DTO;
 
-import java.util.Date;
 import java.util.List;
-
-import Entidades.Anio;
 
 public class PolizaDTO {
 
 	private String nroPoliza;
-	private String domicioRiesgo;
+	private String localidad;
+	private String provincia;
+	private String pais;
 	private String marca;
 	private String modelo;
-	private Anio anio;
+	private int anioModelo;
 	private String motor;
 	private String chasis;
 	private String patente;
-	private String kmAnio;
+	private int kmAnio;
 	private int nroSiniestros;
 	private String tipoCobertura;
 	private String tipoPoliza;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	private String formaPago;
 	private float valorPorcentualCobertura;
-	private int anioModelo;
+	private int anio;
 	private MedidasSeguridadDTO medidasSeguridad;
 	private List<CuotaDTO> cuotas;
 	private List<HijoDTO> hijos;
@@ -32,17 +31,20 @@ public class PolizaDTO {
 	
 	
 
-	public PolizaDTO(String nroPoliza, String domicioRiesgo, String marca, String modelo, Anio anio, String motor,
-			String chasis, String patente, String kmAnio, int nroSiniestros, String tipoCobertura, String tipoPoliza,
-			Date fechaInicio, Date fechaFin, String formaPago, float valorPorcentualCobertura, int anioModelo,
-			MedidasSeguridadDTO medidasSeguridad, List<CuotaDTO> cuotas, List<HijoDTO> hijos, ClienteDTO cliente,
-			ValorPorcentualDTO valoresPorcentualesDTO) {
+	
+	public PolizaDTO(String nroPoliza, String localidad, String provincia, String pais, String marca, String modelo,
+			int anioModelo, String motor, String chasis, String patente, int kmAnio, int nroSiniestros,
+			String tipoCobertura, String tipoPoliza, String fechaInicio, String fechaFin, String formaPago,
+			float valorPorcentualCobertura, int anio, MedidasSeguridadDTO medidasSeguridad, List<CuotaDTO> cuotas,
+			List<HijoDTO> hijos, ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO) {
 		super();
 		this.nroPoliza = nroPoliza;
-		this.domicioRiesgo = domicioRiesgo;
+		this.localidad = localidad;
+		this.provincia = provincia;
+		this.pais = pais;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.anio = anio;
+		this.anioModelo = anioModelo;
 		this.motor = motor;
 		this.chasis = chasis;
 		this.patente = patente;
@@ -54,7 +56,7 @@ public class PolizaDTO {
 		this.fechaFin = fechaFin;
 		this.formaPago = formaPago;
 		this.valorPorcentualCobertura = valorPorcentualCobertura;
-		this.anioModelo = anioModelo;
+		this.anio = anio;
 		this.medidasSeguridad = medidasSeguridad;
 		this.cuotas = cuotas;
 		this.hijos = hijos;
@@ -70,12 +72,29 @@ public class PolizaDTO {
 		this.nroPoliza = nroPoliza;
 	}
 
-	public String getDomicioRiesgo() {
-		return domicioRiesgo;
+
+	public String getLocalidad() {
+		return localidad;
 	}
 
-	public void setDomicioRiesgo(String domicioRiesgo) {
-		this.domicioRiesgo = domicioRiesgo;
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 
 	public String getMarca() {
@@ -94,11 +113,11 @@ public class PolizaDTO {
 		this.modelo = modelo;
 	}
 
-	public Anio getAnio() {
+	public int getAnio() {
 		return anio;
 	}
 
-	public void setAnio(Anio anio) {
+	public void setAnio(int anio) {
 		this.anio = anio;
 	}
 
@@ -126,11 +145,11 @@ public class PolizaDTO {
 		this.patente = patente;
 	}
 
-	public String getKmAnio() {
+	public int getKmAnio() {
 		return kmAnio;
 	}
 
-	public void setKmAnio(String kmAnio) {
+	public void setKmAnio(int kmAnio) {
 		this.kmAnio = kmAnio;
 	}
 
@@ -158,19 +177,19 @@ public class PolizaDTO {
 		this.tipoPoliza = tipoPoliza;
 	}
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

@@ -1,16 +1,13 @@
 package DTO;
 
-import java.util.Date;
-import java.util.List;
-
-import Entidades.Poliza;
+import Entidades.Cliente;
 import Enumerados.*;
 
 
 public class ClienteDTO {
 	
 	private String nroCliente;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private String nombre;
 	private String apellido;
 	private TipoDocumento tipoDocumento;
@@ -21,16 +18,14 @@ public class ClienteDTO {
 	private String correoElectronico;
 	private EstadoCivil estadoCivil;
 	private String profesion;
-	private int anioRegistro;
+	private String anioRegistro;
 	private EstadoCliente estadoCliente;
-	private int nroSiniestros;
 	private DireccionDTO direccionDTO;
-	private List<Poliza> polizas;
 	
-	public ClienteDTO(String nroCliente, Date fechaNacimiento, String nombre, String apellido,
+	public ClienteDTO(String nroCliente,String fechaNacimiento, String nombre, String apellido,
 			TipoDocumento tipoDocumento, String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIva,
-			String correoElectronico, EstadoCivil estadoCivil, String profesion, int anioRegistro,
-			EstadoCliente estadoCliente, int nroSiniestros, DireccionDTO direccionDTO, List<Poliza> polizas) {
+			String correoElectronico, EstadoCivil estadoCivil, String profesion, String anioRegistro,
+			EstadoCliente estadoCliente, DireccionDTO direccionDTO) {
 		super();
 		this.nroCliente = nroCliente;
 		this.fechaNacimiento = fechaNacimiento;
@@ -46,158 +41,137 @@ public class ClienteDTO {
 		this.profesion = profesion;
 		this.anioRegistro = anioRegistro;
 		this.estadoCliente = estadoCliente;
-		this.nroSiniestros = nroSiniestros;
 		this.direccionDTO = direccionDTO;
-		this.polizas = polizas;
+	}
+
+	public ClienteDTO(Cliente c) {
+		this.nroCliente = c.getNroCliente();
+		this.fechaNacimiento = c.getFechaNacimiento();
+		this.nombre = c.getNombre();
+		this.apellido = c.getApellido();
+		this.tipoDocumento = c.getTipoDocumento();
+		this.nroDocumento = c.getNroDocumento();
+		this.nroCuil = c.getNroCuil();
+		this.sexo = c.getSexo();
+		this.condicionIva = c.getCondicionIVA();
+		this.correoElectronico = c.getCorreoElectronico();
+		this.estadoCivil = c.getEstadoCivil();
+		this.profesion = c.getProfesion();
+		this.anioRegistro = c.getAnioRegistro();
+		this.estadoCliente = c.getEtadoCliente();
+		this.direccionDTO = new DireccionDTO(c.getDireccion());
 	}
 
 	public String getNroCliente() {
 		return nroCliente;
 	}
 
-
 	public void setNroCliente(String nroCliente) {
 		this.nroCliente = nroCliente;
 	}
 
-
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public String getApellido() {
 		return apellido;
 	}
 
-
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-
 
 	public TipoDocumento getTipoDocumento() {
 		return tipoDocumento;
 	}
 
-
 	public void setTipoDocumento(TipoDocumento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-
 
 	public String getNroDocumento() {
 		return nroDocumento;
 	}
 
-
 	public void setNroDocumento(String nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
-
 
 	public String getNroCuil() {
 		return nroCuil;
 	}
 
-
 	public void setNroCuil(String nroCuil) {
 		this.nroCuil = nroCuil;
 	}
-
 
 	public Sexo getSexo() {
 		return sexo;
 	}
 
-
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-
 
 	public CondicionIVA getCondicionIva() {
 		return condicionIva;
 	}
 
-
 	public void setCondicionIva(CondicionIVA condicionIva) {
 		this.condicionIva = condicionIva;
 	}
-
 
 	public String getCorreoElectronico() {
 		return correoElectronico;
 	}
 
-
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
-
 
 	public EstadoCivil getEstadoCivil() {
 		return estadoCivil;
 	}
 
-
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-
 
 	public String getProfesion() {
 		return profesion;
 	}
 
-
 	public void setProfesion(String profesion) {
 		this.profesion = profesion;
 	}
 
-
-	public int getAnioRegistro() {
+	public String getAnioRegistro() {
 		return anioRegistro;
 	}
 
-
-	public void setAnioRegistro(int anioRegistro) {
+	public void setAnioRegistro(String anioRegistro) {
 		this.anioRegistro = anioRegistro;
 	}
-
 
 	public EstadoCliente getEstadoCliente() {
 		return estadoCliente;
 	}
 
-
 	public void setEstadoCliente(EstadoCliente estadoCliente) {
 		this.estadoCliente = estadoCliente;
-	}
-
-
-	public int getNroSiniestros() {
-		return nroSiniestros;
-	}
-
-
-	public void setNroSiniestros(int nroSiniestros) {
-		this.nroSiniestros = nroSiniestros;
 	}
 
 	public DireccionDTO getDireccionDTO() {
@@ -208,14 +182,5 @@ public class ClienteDTO {
 		this.direccionDTO = direccionDTO;
 	}
 
-	public List<Poliza> getPolizas() {
-		return polizas;
-	}
-
-	public void setPolizas(List<Poliza> polizas) {
-		this.polizas = polizas;
-	}
-	
-	
 	
 }

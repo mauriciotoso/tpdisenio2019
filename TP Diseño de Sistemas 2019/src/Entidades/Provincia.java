@@ -18,6 +18,10 @@ public class Provincia {
 		this.nombre = nombre;
 		this.pais = pais;
 	}
+	
+	public Provincia() {
+		
+	}
 
 	public String getNombre() {
 		return nombre;

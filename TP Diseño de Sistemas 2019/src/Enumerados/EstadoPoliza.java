@@ -13,7 +13,11 @@ public class EstadoPoliza {
 		this.idEstadoPoliza = idEstadoPoliza;
 		this.estadoPoliza = estadoPoliza;
 	}
-
+	
+	public EstadoPoliza() {
+		
+	}
+	
 	public int getIdEstadoPoliza() {
 		return idEstadoPoliza;
 	}

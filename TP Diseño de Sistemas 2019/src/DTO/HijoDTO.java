@@ -6,22 +6,22 @@ import Enumerados.*;
 
 public class HijoDTO {
 	
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private Sexo sexo;
 	private EstadoCivil estadoCivil;
 
-	public HijoDTO(Date fechaNacimiento, Sexo sexo, EstadoCivil estadoCivil) {
+	public HijoDTO(String fechaNacimiento, Sexo sexo, EstadoCivil estadoCivil) {
 		super();
 		this.fechaNacimiento = fechaNacimiento;
 		this.sexo = sexo;
 		this.estadoCivil = estadoCivil;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

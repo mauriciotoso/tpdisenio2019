@@ -29,13 +29,11 @@ public class Cliente {
 	@OneToOne
 	@JoinColumn (name="direccion")
 	private Direccion direccion;
-	//@OneToMany
-	//private List<Poliza> polizas;
 	
 	public Cliente(String nroCliente, String fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
 			String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIVA, String correoElectronico,
 			EstadoCivil estadoCivil, String profesion, String anioRegistro, EstadoCliente etadoCliente,
-			 Direccion direccion, ArrayList<Poliza> polizas) {
+			 Direccion direccion) {
 		this.nroCliente = nroCliente;
 		this.fechaNacimiento = fechaNacimiento;
 		this.nombre = nombre;
@@ -54,6 +52,10 @@ public class Cliente {
 		this.direccion = direccion;
 	}
 
+	public Cliente() {
+		
+	}
+	
 	public String getNroCliente() {
 		return nroCliente;
 	}

@@ -1,5 +1,7 @@
 package DTO;
 
+import Entidades.Direccion;
+
 public class DireccionDTO {
 	private String calle;
 	private String numero;
@@ -21,6 +23,17 @@ public class DireccionDTO {
 		this.localidad = localidad;
 		this.provincia = provincia;
 		this.pais = pais;
+	}
+	
+	public DireccionDTO(Direccion d) {
+		this.calle = d.getCalle();
+		this.numero = d.getNumero();
+		this.piso = d.getPiso();
+		this.departamento = d.getDepartamento();
+		this.codigoPostal = d.getCodigoPostal();
+		this.localidad = d.getLocalidad().getNombre();
+		this.provincia = d.getLocalidad().getProvincia().getNombre();
+		this.pais = d.getLocalidad().getProvincia().getPais().getNombre();	
 	}
 
 	public String getCalle() {

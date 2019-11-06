@@ -13,7 +13,11 @@ public class CondicionIVA {
 		this.idCondicionIVA = idCondicionIVA;
 		this.condicionIVA = condicionIVA;
 	}
-
+	
+	public CondicionIVA() {
+		
+	}
+	
 	public int getIdCondicionIVA() {
 		return idCondicionIVA;
 	}

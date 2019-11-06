@@ -26,6 +26,10 @@ public class MedidasSeguridad {
 		this.tuercaAntirrobo = tuercaAntirrobo;
 	}
 
+	public MedidasSeguridad() {
+		
+	}
+	
 	public boolean isGarage() {
 		return garage;
 	}

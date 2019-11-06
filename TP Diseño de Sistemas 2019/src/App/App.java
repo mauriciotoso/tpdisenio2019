@@ -12,8 +12,13 @@ import Enumerados.*;
 public class App {
 
 	public static void main(String[] args) {
+		
+		
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
+		
+		
+		
 		
 		Marca marca = new Marca(1,"Ford");
 		Modelo modelo = new Modelo(1,"Focus",marca);
@@ -38,7 +43,7 @@ public class App {
 		ValoresPorcentualesPoliza vpp2 = new ValoresPorcentualesPoliza(2,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1);
 		ValoresPorcentualesActuales vpa = new ValoresPorcentualesActuales(1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,null);
 		Direccion direccion = new Direccion(1,"calle","numero","piso","departamento","codigo",localidad);
-		Cliente cliente = new Cliente("1","2000-1-1","Mauricio","Toso",TipoDocumento.DNI,"41160819","04116081921",Sexo.MASCULINO,condicionIVA,"mauricio.toso@yahoo.com.ar",EstadoCivil.SOLTERO,"Ingeniero","2010",estadoCliente,direccion,new ArrayList<Poliza>());
+		Cliente cliente = new Cliente("1","2000-1-1","Mauricio","Toso",TipoDocumento.DNI,"41160819","04116081921",Sexo.MASCULINO,condicionIVA,"mauricio.toso@yahoo.com.ar",EstadoCivil.SOLTERO,"Ingeniero","2010",estadoCliente,direccion);
 		
 		ArrayList<Cuota> cuotas1= new ArrayList<Cuota>();
 		cuotas1.add(cuota1);
@@ -52,7 +57,6 @@ public class App {
 		
 		ArrayList<HijoDeclarado> hijos= new ArrayList<HijoDeclarado>();
 		hijos.add(hijo);
-		
 		
 		PolizaMensual polizaM = new PolizaMensual("1","2011-1-1","2011-2-2","domicilio",estadoPoliza,(float)0.1,(float)0.1,(float)0.1,"000AAA","motor","chasis",10000,2010,(float)0.1,cuotas1,anio,medidasSeguridad,hijos,tipoCobertura,vpp1,cliente);
 		PolizaSemestral polizaS = new PolizaSemestral("2","2011-1-1","2011-2-2","domicilio",estadoPoliza,(float)0.1,(float)0.1,(float)0.1,"000AAA","motor","chasis",10000,2010,(float)0.1,cuotas2,anio,medidasSeguridad,hijos,tipoCobertura,vpp2,cliente,10);

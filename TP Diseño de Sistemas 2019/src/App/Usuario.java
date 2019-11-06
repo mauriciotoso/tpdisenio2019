@@ -18,6 +18,10 @@ public class Usuario {
 		this.apellido=apellido;
 		this.tipo=tipo;
 	}
+	
+	public Usuario() {
+		
+	}
 
 	public String getUsuario() {
 		return usuario;
