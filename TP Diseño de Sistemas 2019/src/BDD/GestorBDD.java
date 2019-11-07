@@ -1,6 +1,5 @@
 package BDD;
 
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -9,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 
 import DTO.*;
 import Entidades.*;
+import Enumerados.EstadoPoliza;
 
 public class GestorBDD {
 	
@@ -65,8 +65,6 @@ public class GestorBDD {
 		}
 		
 		session.getTransaction().commit();
-	
-		
 		
 		return new Anio();
 	}
@@ -91,6 +89,59 @@ public class GestorBDD {
 		return new Localidad();
 	}
 	
-
-
+	public TipoCobertura getTipoCobertura(PolizaDTO polDTO) {
+		
+		session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<TipoCobertura> coberturas = session.createQuery
+		("from TipoCobertura t where t.nombre='"+polDTO.getTipoCobertura()+"' ").getResultList();
+		
+		for(TipoCobertura t:coberturas) {
+			if(t.getNombre().compareTo(polDTO.getTipoCobertura())==0) {
+				return t;
+			}
+		}
+		
+		session.getTransaction().commit();
+		
+		return new TipoCobertura();
+	}
+	
+	public EstadoPoliza getEstadoPoliza(PolizaDTO polDTO) {
+		session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<EstadoPoliza> estadoPoliza = session.createQuery
+		("from EstadoPoliza ep where ep.estadoPoliza='"+polDTO.getEstadoPoliza()+"' ").getResultList();
+		
+		for (EstadoPoliza ep:estadoPoliza) {
+			if(ep.getEstadoPoliza().compareTo(polDTO.getEstadoPoliza())==0)
+				return ep;
+		}
+		
+		session.getTransaction().commit();
+		
+		return null;
+	}
+	
+	public ValoresPorcentualesActuales getVPA() {
+		session.beginTransaction();
+		ValoresPorcentualesActuales vpa = session.get(ValoresPorcentualesActuales.class, 1);
+		session.getTransaction().commit();
+		
+		return vpa;
+	}
+	
+	public void guardarPoliza(PolizaMensual poliza) {
+		session.beginTransaction();
+		session.save(poliza);
+		session.getTransaction().commit();
+	}
+	
+	public void guardarPoliza(PolizaSemestral poliza) {
+		session.beginTransaction();
+		session.save(poliza);
+		session.getTransaction().commit();
+	}
 }

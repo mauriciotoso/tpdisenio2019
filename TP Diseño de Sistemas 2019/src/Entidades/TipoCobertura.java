@@ -50,5 +50,11 @@ public class TipoCobertura {
 	public void setValorPorcentualCobertura(float valorPorcentualCobertura) {
 		this.valorPorcentualCobertura = valorPorcentualCobertura;
 	}
+
+	@Override
+	public String toString() {
+		return "TipoCobertura [idTipoCobertura=" + idTipoCobertura + ", nombre=" + nombre + ", descripcion="
+				+ descripcion + ", valorPorcentualCobertura=" + valorPorcentualCobertura + "]";
+	}
 	
 }

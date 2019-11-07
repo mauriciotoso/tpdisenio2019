@@ -7,8 +7,7 @@ public class MedidasSeguridadDTO {
 	private boolean rastreoVehicular;
 	private boolean tuercasAntirrobo;
 	
-	public MedidasSeguridadDTO(boolean alarma, boolean garage, boolean rastreoVehicular, boolean tuercasAntirrobo,
-			boolean valorPorcentualSeuridad) {
+	public MedidasSeguridadDTO(boolean alarma, boolean garage, boolean rastreoVehicular, boolean tuercasAntirrobo) {
 		super();
 		this.alarma = alarma;
 		this.garage = garage;

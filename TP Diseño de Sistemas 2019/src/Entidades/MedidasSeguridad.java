@@ -2,10 +2,14 @@ package Entidades;
 
 import javax.persistence.*;
 
+import DTO.*;
+
 @Entity
 public class MedidasSeguridad {
 
 	@Id
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_id", initialValue=2, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	private int idMedidasSeguridad;
 	@Column(name="tienegarage")
 	private boolean garage;
@@ -28,6 +32,13 @@ public class MedidasSeguridad {
 
 	public MedidasSeguridad() {
 		
+	}
+	
+	public MedidasSeguridad(MedidasSeguridadDTO msDTO) {
+		this.garage = msDTO.isGarage();
+		this.alarma = msDTO.isAlarma();
+		this.rastreoVehicular = msDTO.isRastreoVehicular();
+		this.tuercaAntirrobo = msDTO.isTuercasAntirrobo();	
 	}
 	
 	public boolean isGarage() {
@@ -68,6 +79,12 @@ public class MedidasSeguridad {
 
 	public void setIdMedidasSeguridad(int idMedidasSeguridad) {
 		this.idMedidasSeguridad = idMedidasSeguridad;
+	}
+
+	@Override
+	public String toString() {
+		return "MedidasSeguridad [idMedidasSeguridad=" + idMedidasSeguridad + ", garage=" + garage + ", alarma="
+				+ alarma + ", rastreoVehicular=" + rastreoVehicular + ", tuercaAntirrobo=" + tuercaAntirrobo + "]";
 	}
 	
 }

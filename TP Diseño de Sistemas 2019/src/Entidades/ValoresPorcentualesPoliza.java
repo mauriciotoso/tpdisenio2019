@@ -6,6 +6,8 @@ import javax.persistence.*;
 public class ValoresPorcentualesPoliza {
 
 	@Id
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_id", initialValue=3, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	@Column (name="idvalorporcentual")
 	private int idValoresPorcentualesPoliza;
 	private float valorPorcentualKmAnio;
@@ -50,6 +52,42 @@ public class ValoresPorcentualesPoliza {
 		this.valorPorcentualTipoCobertura = valorPorcentualTipoCobertura;
 		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
 		this.derechoEmision = derechoEmision;
+	}
+	
+	public ValoresPorcentualesPoliza(ValoresPorcentualesActuales vpa, Anio anio, Localidad localidad, TipoCobertura tc, MedidasSeguridad ms) {
+		
+		this.valorPorcentualKmAnio = vpa.getValorPorcentualKmAnioActual();
+		this.valorPorcentualGarage = vpa.getValorPorcentualGarageActual();
+		this.valorPorcentualAlarma = vpa.getValorPorcentualAlarmaActual();
+		this.valorPorcentualRastreoVehicular = vpa.getValorPorcentualRastreoVehicularActual();
+		this.valorPorcentualTuercasAntirrobo = vpa.getValorPorcentualTuercasAntirroboActual();
+		this.valorPorcentualSinSiniestro = vpa.getValorPorcentualSinSiniestroActual();
+		this.valorPorcentualUnSiniestro = vpa.getValorPorcentualUnSiniestroActual();
+		this.valorPorcentualDosSiniestro = vpa.getValorPorcentualDosSiniestroActual();
+		this.valorPorcentualTresSiniestro = vpa.getValorPorcentualTresSiniestroActual();
+		this.valorPorcentualHijo = vpa.getValorPorcentualHijoActual();
+		this.valorPorcentualModelo = anio.getValorPorcentualModelo();
+		this.valorPorcentualLocalidad = localidad.getValorPorcentualLocalidad();
+		this.valorPorcentualTipoCobertura = tc.getValorPorcentualCobertura();
+		this.valorPorcentualMedidasSeguridad = ms.getIdMedidasSeguridad();
+		this.derechoEmision = vpa.getDerechoEmision();
+	
+	}
+	
+	@Override
+	public String toString() {
+		return "ValoresPorcentualesPoliza [idValoresPorcentualesPoliza=" + idValoresPorcentualesPoliza
+				+ ", valorPorcentualKmAnio=" + valorPorcentualKmAnio + ", valorPorcentualGarage="
+				+ valorPorcentualGarage + ", valorPorcentualAlarma=" + valorPorcentualAlarma
+				+ ", valorPorcentualRastreoVehicular=" + valorPorcentualRastreoVehicular
+				+ ", valorPorcentualTuercasAntirrobo=" + valorPorcentualTuercasAntirrobo
+				+ ", valorPorcentualSinSiniestro=" + valorPorcentualSinSiniestro + ", valorPorcentualUnSiniestro="
+				+ valorPorcentualUnSiniestro + ", valorPorcentualDosSiniestro=" + valorPorcentualDosSiniestro
+				+ ", valorPorcentualTresSiniestro=" + valorPorcentualTresSiniestro + ", valorPorcentualHijo="
+				+ valorPorcentualHijo + ", valorPorcentualModelo=" + valorPorcentualModelo
+				+ ", valorPorcentualLocalidad=" + valorPorcentualLocalidad + ", valorPorcentualTipoCobertura="
+				+ valorPorcentualTipoCobertura + ", valorPorcentualMedidasSeguridad=" + valorPorcentualMedidasSeguridad
+				+ ", derechoEmision=" + derechoEmision + "]";
 	}
 
 	public ValoresPorcentualesPoliza() {
@@ -183,5 +221,7 @@ public class ValoresPorcentualesPoliza {
 	public void setValorPorcentualMedidasSeguridad(float valorPorcentualMedidasSeguridad) {
 		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
 	}
+	
+	
 	
 }

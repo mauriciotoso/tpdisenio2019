@@ -26,6 +26,8 @@
 <!-- Echo the SQL to stdout -->
 <property name="show_sql">true</property>
 
+<property name="hibernate.id.new_generator_mappings"> value="true"</property>
+
 <!-- Drop and re-create the database schema on startup -->
 <property name="hbm2dll.auto">create</property>
 

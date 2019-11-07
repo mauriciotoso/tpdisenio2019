@@ -3,12 +3,15 @@ package Entidades;
 import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
 import javax.persistence.*;
+import DTO.*;
 
 @Entity
 public class HijoDeclarado {
 	
 	@Id
 	@Column (name="idhijo")
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_id", initialValue=2, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	private int idHijoDeclarado;
 	private String fechaNacimiento;
 	private Sexo sexo;
@@ -25,6 +28,20 @@ public class HijoDeclarado {
 		
 	}
 
+	
+	public HijoDeclarado(HijoDTO hijoDTO) {
+		this.fechaNacimiento = hijoDTO.getFechaNacimiento();
+		this.sexo = hijoDTO.getSexo();
+		this.estadoCivil = hijoDTO.getEstadoCivil();	
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "HijoDeclarado [idHijoDeclarado=" + idHijoDeclarado + ", fechaNacimiento=" + fechaNacimiento + ", sexo="
+				+ sexo + ", estadoCivil=" + estadoCivil + "]";
+	}
 
 	public String getFechaNacimiento() {
 		return fechaNacimiento;

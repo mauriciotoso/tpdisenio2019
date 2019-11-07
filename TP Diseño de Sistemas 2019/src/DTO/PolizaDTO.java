@@ -2,6 +2,8 @@ package DTO;
 
 import java.util.List;
 
+import Enumerados.EstadoPoliza;
+
 public class PolizaDTO {
 
 	private String nroPoliza;
@@ -15,6 +17,7 @@ public class PolizaDTO {
 	private String chasis;
 	private String patente;
 	private int kmAnio;
+	private float montoTotal;
 	private int nroSiniestros;
 	private String tipoCobertura;
 	private String tipoPoliza;
@@ -28,15 +31,13 @@ public class PolizaDTO {
 	private List<HijoDTO> hijos;
 	private ClienteDTO cliente;
 	private ValorPorcentualDTO valoresPorcentualesDTO;
-	
-	
-
+	private String estadoPoliza;
 	
 	public PolizaDTO(String nroPoliza, String localidad, String provincia, String pais, String marca, String modelo,
-			int anioModelo, String motor, String chasis, String patente, int kmAnio, int nroSiniestros,
-			String tipoCobertura, String tipoPoliza, String fechaInicio, String fechaFin, String formaPago,
-			float valorPorcentualCobertura, int anio, MedidasSeguridadDTO medidasSeguridad, List<CuotaDTO> cuotas,
-			List<HijoDTO> hijos, ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO) {
+			int anioModelo, String motor, String chasis, String patente, int kmAnio, float montoTotal,
+			int nroSiniestros, String tipoCobertura, String tipoPoliza, String fechaInicio, String fechaFin,
+			String formaPago, float valorPorcentualCobertura, int anio, MedidasSeguridadDTO medidasSeguridad,
+			List<CuotaDTO> cuotas, List<HijoDTO> hijos, ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO, String estadoPoliza) {
 		super();
 		this.nroPoliza = nroPoliza;
 		this.localidad = localidad;
@@ -49,6 +50,7 @@ public class PolizaDTO {
 		this.chasis = chasis;
 		this.patente = patente;
 		this.kmAnio = kmAnio;
+		this.montoTotal = montoTotal;
 		this.nroSiniestros = nroSiniestros;
 		this.tipoCobertura = tipoCobertura;
 		this.tipoPoliza = tipoPoliza;
@@ -62,6 +64,15 @@ public class PolizaDTO {
 		this.hijos = hijos;
 		this.cliente = cliente;
 		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
+		this.estadoPoliza = estadoPoliza;
+	}
+
+	public String getEstadoPoliza() {
+		return estadoPoliza;
+	}
+
+	public void setEstadoPoliza(String estadoPoliza) {
+		this.estadoPoliza = estadoPoliza;
 	}
 
 	public String getNroPoliza() {
@@ -256,6 +267,15 @@ public class PolizaDTO {
 	public void setValoresPorcentualesDTO(ValorPorcentualDTO valoresPorcentualesDTO) {
 		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
 	}
+
+	public float getMontoTotal() {
+		return montoTotal;
+	}
+
+	public void setMontoTotal(float montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+	
 	
 	
 }

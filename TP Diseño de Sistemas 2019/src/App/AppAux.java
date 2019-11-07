@@ -1,5 +1,6 @@
 package App;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,6 +10,9 @@ import org.hibernate.cfg.Configuration;
 
 import DTO.*;
 import Entidades.*;
+import Enumerados.EstadoCivil;
+import Enumerados.EstadoPoliza;
+import Enumerados.Sexo;
 import Logica.*;
 
 public class AppAux {
@@ -17,23 +21,115 @@ public class AppAux {
 		
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
-	
-		String loc="La Capital";
-		String prov="Santa Fe";
-		String pais="Argentina";
+		
+		/*String estadoP = "VIGENTE";
+		EstadoPoliza ep2 = null;
+		session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
-		List<Localidad> localidades = session.createQuery
-		("from Localidad l where l.nombre='"+loc+"' ").getResultList();
+		List<EstadoPoliza> estadoPoliza = session.createQuery
+		("from EstadoPoliza ep where ep.estadoPoliza='"+estadoP+"' ").getResultList();
 		
-		Localidad local = null;
-		for(Localidad l:localidades) {
-			if(l.getProvincia().getNombre().compareTo(prov)==0 && l.getProvincia().getPais().getNombre().compareTo(pais)==0) {
-				local= l;
+		for (EstadoPoliza ep:estadoPoliza) {
+			if(ep.getEstadoPoliza().compareTo(estadoP)==0)
+				ep2=ep;
+		}
+		System.out.println(ep2);
+		session.getTransaction().commit();*/
+		/*
+		
+		Anio anio = session.get(Anio.class, 1);
+		Localidad localidad = session.get(Localidad.class, 1);
+		TipoCobertura tc = session.get(TipoCobertura.class, 1);
+		MedidasSeguridad ms = session.get(MedidasSeguridad.class, 1);
+		GestorParametros gp = new GestorParametros();
+		ValoresPorcentualesPoliza vp = gp.getValoresPorcentualesPoliza(anio, localidad, tc, ms);
+		
+		session.save(vp);
+		
+		session.getTransaction().commit();
+		
+		System.out.println(vp);
+		
+		
+		String fecha = "1990-03-07";
+		float monto = 20000;
+		
+		List<Cuota> cuotas = new ArrayList<Cuota>();
+		//if(polDTO.getTipoPoliza().compareTo("MENSUAL")==0) {
+			Cuota c1 = new Cuota(1,"M",fecha,monto);
+			Cuota c2 = new Cuota(2,"M",fecha,monto);
+			Cuota c3 = new Cuota(3,"M",fecha,monto);
+			Cuota c4 = new Cuota(4,"M",fecha,monto);
+			Cuota c5 = new Cuota(5,"M",fecha,monto);
+			Cuota c6 = new Cuota(6,"M",fecha,monto);
+			cuotas.add(c1);
+			cuotas.add(c2);
+			cuotas.add(c3);
+			cuotas.add(c4);
+			cuotas.add(c5);
+			cuotas.add(c6);	
+		//}else if(polDTO.getTipoPoliza().compareTo("SEMESTRAL")==0){
+		//	Cuota c = new Cuota(0,"S",fecha,monto);
+		//	cuotas.add(c);
+		//}
+			
+		for(Cuota c: cuotas) {
+			session.save(c);
+			System.out.println(c);
+		}
+		
+		session.getTransaction().commit();*/
+		/*
+		String tp="Tipo 1";
+		TipoCobertura tpUltimo = null;
+		session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<TipoCobertura> coberturas = session.createQuery
+		("from TipoCobertura t where t.nombre='"+tp+"' ").getResultList();
+		
+		for(TipoCobertura t:coberturas) {
+			if(t.getNombre().compareTo(tp)==0) {
+				tpUltimo=t;
 			}
 		}
 		
-		System.out.println(local);
+		session.getTransaction().commit();
+		*/
+		/*
+		HijoDTO h1=new HijoDTO("1999-05-18",Sexo.MASCULINO,EstadoCivil.SOLTERO);
+		HijoDTO h2=new HijoDTO("1998-05-18",Sexo.FEMENINO,EstadoCivil.DIVORCIADO);
+		HijoDTO h3=new HijoDTO("1997-05-18",Sexo.MASCULINO,EstadoCivil.CASADO);
+		
+		List<HijoDTO> hijosDTO = new ArrayList<HijoDTO>();
+		
+		hijosDTO.add(h1);
+		hijosDTO.add(h2);
+		hijosDTO.add(h3);
+		
+		List<HijoDeclarado> hijos = new ArrayList<HijoDeclarado>();
+		for(HijoDTO h:hijosDTO) {
+			hijos.add(new HijoDeclarado(h));
+		}
+		
+		session.beginTransaction();
+		for(HijoDeclarado h:hijos) {
+			session.save(h);
+		}
+		session.getTransaction().commit();
+		
+		System.out.println(hijos);
+		
+		
+		MedidasSeguridadDTO msDTO = new MedidasSeguridadDTO(true, false,true,false); 
+		MedidasSeguridad ms = new MedidasSeguridad(msDTO);
+		
+		session.beginTransaction();
+		session.save(ms);
+		session.getTransaction().commit();
+		
+		System.out.println(ms);*/
 		
 	/*	GestorPoliza gestorPoliza = new GestorPoliza();
 		MedidasSeguridad medidasSeguridad = new MedidasSeguridad(1,true,true,false,false);

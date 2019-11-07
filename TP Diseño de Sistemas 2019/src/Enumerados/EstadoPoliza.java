@@ -8,6 +8,11 @@ public class EstadoPoliza {
 	private int idEstadoPoliza;
 	private String estadoPoliza;
 	
+	@Override
+	public String toString() {
+		return "EstadoPoliza [idEstadoPoliza=" + idEstadoPoliza + ", estadoPoliza=" + estadoPoliza + "]";
+	}
+
 	public EstadoPoliza(int idEstadoPoliza, String estadoPoliza) {
 		super();
 		this.idEstadoPoliza = idEstadoPoliza;

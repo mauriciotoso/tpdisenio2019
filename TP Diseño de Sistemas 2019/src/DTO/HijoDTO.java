@@ -1,7 +1,5 @@
 package DTO;
 
-import java.util.Date;
-
 import Enumerados.*;
 
 public class HijoDTO {

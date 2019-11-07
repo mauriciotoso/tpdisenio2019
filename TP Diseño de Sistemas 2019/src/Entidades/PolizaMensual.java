@@ -80,6 +80,42 @@ public class PolizaMensual{
 		this.nroCliente = nroCliente;
 	}
 	
+	public PolizaMensual(String vigenciaDesde, String vigenciaHasta, Localidad localidad,
+			EstadoPoliza estadoPoliza, float montoTotal, String patente,
+			String motor, String chasis, int kmAnio, int anio, List<Cuota> cuotas, Anio idAnio,
+			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
+			ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
+		super();
+		this.nroPoliza = this.generarNroPoliza();
+		this.vigenciaDesde = vigenciaDesde;
+		this.vigenciaHasta = vigenciaHasta;
+		this.domicilioRiesgo = this.generarDomicilio(localidad);
+		this.estadoPoliza = estadoPoliza;
+		this.montoTotal = montoTotal;
+		this.patente = patente;
+		this.motor = motor;
+		this.chasis = chasis;
+		this.kmAnio = kmAnio;
+		this.anio = anio;
+		this.cuotas = cuotas;
+		this.idAnio = idAnio;
+		this.medidasSeguridad = medidasSeguridad;
+		this.hijos = hijos;
+		this.tipoCobertura = tipoCobertura;
+		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
+		this.nroCliente = nroCliente;
+	}
+	
+	public String generarNroPoliza() {
+		
+		double n = Math.random()*1002102124;
+		return Double.toString(n);
+	}
+	
+	public String generarDomicilio(Localidad localidad) {
+		return localidad.getProvincia().getNombre()+" - "+localidad.getProvincia();
+	}
+	
 	public PolizaMensual() {
 		
 	}
