@@ -17,12 +17,19 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
+
+import DTO.ClienteDTO;
+import DTO.PolizaDTO;
+import Logica.FachadaPoliza;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AgregarHijos extends JFrame {
@@ -32,6 +39,7 @@ public class AgregarHijos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,12 +51,12 @@ public class AgregarHijos extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public AgregarHijos(int a) {
+	public AgregarHijos(PolizaDTO polDTO, ClienteDTO clienteDTO,int a) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
@@ -102,11 +110,6 @@ public class AgregarHijos extends JFrame {
 		lblEstadoCivil1.setBounds(5, 64, 81, 14);
 		panelHijo1.add(lblEstadoCivil1);
 		
-		JFormattedTextField FechaNac1 = new JFormattedTextField();
-		FechaNac1.setBounds(130, 25, 100, 16);
-		mask1.install(FechaNac1);
-		panelHijo1.add(FechaNac1);
-		
 		JRadioButton rdbtnFemenino1 = new JRadioButton("Femenino");
 		rdbtnFemenino1.setBounds(130, 45, 95, 14);
 		panelHijo1.add(rdbtnFemenino1);
@@ -123,6 +126,11 @@ public class AgregarHijos extends JFrame {
 		comboBoxEstadoCivil1.setModel(new DefaultComboBoxModel(new String[] {"Seleccione estado civil", "Casado", "Soltero", "Viudo", "Divorciado"}));
 		comboBoxEstadoCivil1.setBounds(130, 63, 100, 16);
 		panelHijo1.add(comboBoxEstadoCivil1);
+		
+		JSpinner FechaNac1 = new JSpinner();
+		FechaNac1.setModel(new SpinnerDateModel(new Date(-2208973392000L), new Date(-2209064400000L), null, Calendar.DAY_OF_YEAR));
+		FechaNac1.setBounds(135, 23, 100, 20);
+		panelHijo1.add(FechaNac1);
 		
 		//Hijo2
 		
@@ -296,7 +304,7 @@ public class AgregarHijos extends JFrame {
 		btnAtras.setBounds(5, 531, 90, 25);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar();
+				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}
@@ -306,7 +314,128 @@ public class AgregarHijos extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cobertura cobertura = new Cobertura();
+				Date hijo1FN, hijo2FN, hijo3FN, hijo4FN, hijo5FN;
+				String hijo1EC, hijo2EC, hijo3EC, hijo4EC, hijo5EC;
+				Boolean hijo1Fem, hijo2Fem, hijo3Fem, hijo4Fem, hijo5Fem;
+				ArrayList<Date> fechasNac = new ArrayList<>();
+				ArrayList<Boolean> sexo = new ArrayList<>(); //femenino true, masculino false
+				ArrayList<String> estadoCivil = new ArrayList<>();
+				switch (a) {
+				case 5:
+					hijo1FN = (Date) FechaNac1.getValue();
+					hijo1Fem = rdbtnFemenino1.isSelected();
+					hijo1EC = (String) comboBoxEstadoCivil1.getSelectedItem();
+					fechasNac.add(hijo1FN);
+					sexo.add(hijo1Fem);
+					estadoCivil.add(hijo1EC);
+					
+					hijo2FN = (Date) FechaNac2.getValue();
+					hijo2Fem = rdbtnFemenino2.isSelected();
+					hijo2EC = (String) comboBoxEstadoCivil2.getSelectedItem();
+					fechasNac.add(hijo2FN);
+					sexo.add(hijo2Fem);
+					estadoCivil.add(hijo2EC);
+					
+					hijo3FN = (Date) FechaNac3.getValue();
+					hijo3Fem = rdbtnFemenino3.isSelected();
+					hijo3EC = (String) comboBoxEstadoCivil3.getSelectedItem();
+					fechasNac.add(hijo3FN);
+					sexo.add(hijo3Fem);
+					estadoCivil.add(hijo3EC);
+					
+					hijo4FN = (Date) FechaNac4.getValue();
+					hijo4Fem = rdbtnFemenino4.isSelected();
+					hijo4EC = (String) comboBoxEstadoCivil4.getSelectedItem();
+					fechasNac.add(hijo4FN);
+					sexo.add(hijo4Fem);
+					estadoCivil.add(hijo4EC);
+					
+					hijo5FN = (Date) FechaNac5.getValue();
+					hijo5Fem = rdbtnFemenino5.isSelected();
+					hijo5EC = (String) comboBoxEstadoCivil5.getSelectedItem();
+					fechasNac.add(hijo5FN);
+					sexo.add(hijo5Fem);
+					estadoCivil.add(hijo5EC);
+					
+				case 4: 
+					hijo1FN = (Date) FechaNac1.getValue();
+					hijo1Fem = rdbtnFemenino1.isSelected();
+					hijo1EC = (String) comboBoxEstadoCivil1.getSelectedItem();
+					fechasNac.add(hijo1FN);
+					sexo.add(hijo1Fem);
+					estadoCivil.add(hijo1EC);
+					
+					hijo2FN = (Date) FechaNac2.getValue();
+					hijo2Fem = rdbtnFemenino2.isSelected();
+					hijo2EC = (String) comboBoxEstadoCivil2.getSelectedItem();
+					fechasNac.add(hijo2FN);
+					sexo.add(hijo2Fem);
+					estadoCivil.add(hijo2EC);
+					
+					hijo3FN = (Date) FechaNac3.getValue();
+					hijo3Fem = rdbtnFemenino3.isSelected();
+					hijo3EC = (String) comboBoxEstadoCivil3.getSelectedItem();
+					fechasNac.add(hijo3FN);
+					sexo.add(hijo3Fem);
+					estadoCivil.add(hijo3EC);
+					
+					hijo4FN = (Date) FechaNac4.getValue();
+					hijo4Fem = rdbtnFemenino4.isSelected();
+					hijo4EC = (String) comboBoxEstadoCivil4.getSelectedItem();
+					fechasNac.add(hijo4FN);
+					sexo.add(hijo4Fem);
+					estadoCivil.add(hijo4EC);
+					
+				case 3: 
+					hijo1FN = (Date) FechaNac1.getValue();
+					hijo1Fem = rdbtnFemenino1.isSelected();
+					hijo1EC = (String) comboBoxEstadoCivil1.getSelectedItem();
+					fechasNac.add(hijo1FN);
+					sexo.add(hijo1Fem);
+					estadoCivil.add(hijo1EC);
+					
+					hijo2FN = (Date) FechaNac2.getValue();
+					hijo2Fem = rdbtnFemenino2.isSelected();
+					hijo2EC = (String) comboBoxEstadoCivil2.getSelectedItem();
+					fechasNac.add(hijo2FN);
+					sexo.add(hijo2Fem);
+					estadoCivil.add(hijo2EC);
+					
+					hijo3FN = (Date) FechaNac3.getValue();
+					hijo3Fem = rdbtnFemenino3.isSelected();
+					hijo3EC = (String) comboBoxEstadoCivil3.getSelectedItem();
+					fechasNac.add(hijo3FN);
+					sexo.add(hijo3Fem);
+					estadoCivil.add(hijo3EC);
+					
+				case 2:
+					hijo1FN = (Date) FechaNac1.getValue();
+					hijo1Fem = rdbtnFemenino1.isSelected();
+					hijo1EC = (String) comboBoxEstadoCivil1.getSelectedItem();
+					fechasNac.add(hijo1FN);
+					sexo.add(hijo1Fem);
+					estadoCivil.add(hijo1EC);
+					
+					hijo2FN = (Date) FechaNac2.getValue();
+					hijo2Fem = rdbtnFemenino2.isSelected();
+					hijo2EC = (String) comboBoxEstadoCivil2.getSelectedItem();
+					fechasNac.add(hijo2FN);
+					sexo.add(hijo2Fem);
+					estadoCivil.add(hijo2EC);
+				
+				case 1:
+					hijo1FN = (Date) FechaNac1.getValue();
+					hijo1Fem = rdbtnFemenino1.isSelected();
+					hijo1EC = (String) comboBoxEstadoCivil1.getSelectedItem();
+					fechasNac.add(hijo1FN);
+					sexo.add(hijo1Fem);
+					estadoCivil.add(hijo1EC);
+				}
+				FachadaPoliza fachadaPoliza = new FachadaPoliza();
+				fachadaPoliza.ingresarHijos(polDTO,fechasNac,sexo,estadoCivil,a);
+				
+				
+				Cobertura cobertura = new Cobertura(polDTO,clienteDTO);
 				cobertura.setVisible(true);
 				dispose();
 			}

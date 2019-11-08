@@ -13,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BDD.GestorBDD;
+import DTO.ClienteDTO;
+
 public class BuscarCliente extends JFrame {
 
 	private JPanel contentPane;
@@ -56,7 +59,10 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.setBounds(292, 250, 200, 50);
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar();
+				GestorBDD gestorBDD = new GestorBDD();
+				ClienteDTO clienteDTO = gestorBDD.getCliente();
+				
+				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}

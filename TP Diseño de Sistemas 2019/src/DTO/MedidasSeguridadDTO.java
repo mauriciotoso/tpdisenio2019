@@ -7,6 +7,9 @@ public class MedidasSeguridadDTO {
 	private boolean rastreoVehicular;
 	private boolean tuercasAntirrobo;
 	
+	public MedidasSeguridadDTO() {
+		
+	}
 	public MedidasSeguridadDTO(boolean alarma, boolean garage, boolean rastreoVehicular, boolean tuercasAntirrobo) {
 		super();
 		this.alarma = alarma;
@@ -15,6 +18,11 @@ public class MedidasSeguridadDTO {
 		this.tuercasAntirrobo = tuercasAntirrobo;
 	}
 
+	@Override
+	public String toString() {
+		return "MedidasSeguridadDTO [alarma=" + alarma + ", garage=" + garage + ", rastreoVehicular=" + rastreoVehicular
+				+ ", tuercasAntirrobo=" + tuercasAntirrobo + "]";
+	}
 	public boolean isAlarma() {
 		return alarma;
 	}

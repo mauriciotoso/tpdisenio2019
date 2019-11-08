@@ -26,6 +26,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
+import DTO.ClienteDTO;
+import DTO.PolizaDTO;
+import Logica.FachadaPoliza;
+
 public class PolizaGenerar extends JFrame {
 
 	private JPanel contentPane;
@@ -33,7 +37,7 @@ public class PolizaGenerar extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,12 +48,12 @@ public class PolizaGenerar extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public PolizaGenerar() {
+	public PolizaGenerar(ClienteDTO clienteDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -101,38 +105,44 @@ public class PolizaGenerar extends JFrame {
 		
 		JTextField textFieldNumeroCliente = new JTextField();
 		textFieldNumeroCliente.setEditable(false);
-		textFieldNumeroCliente.setBounds(145, 26, 100, 18);
+		textFieldNumeroCliente.setBounds(145, 26, 400, 18);
 		panel_DatosCliente.add(textFieldNumeroCliente);
+		textFieldNumeroCliente.setText(clienteDTO.getNroCliente());
 		textFieldNumeroCliente.setColumns(10);
 		
 		JTextField textFieldNombreCliente = new JTextField();
 		textFieldNombreCliente.setEditable(false);
 		textFieldNombreCliente.setColumns(10);
-		textFieldNombreCliente.setBounds(145, 46, 100, 18);
+		textFieldNombreCliente.setBounds(145, 46, 400, 18);
+		textFieldNombreCliente.setText(clienteDTO.getNombre());
 		panel_DatosCliente.add(textFieldNombreCliente);
 		
 		JTextField textFieldNumeroDoc = new JTextField();
 		textFieldNumeroDoc.setEditable(false);
 		textFieldNumeroDoc.setColumns(10);
-		textFieldNumeroDoc.setBounds(145, 106, 100, 18);
+		textFieldNumeroDoc.setBounds(145, 106, 400, 18);
+		textFieldNumeroDoc.setText(clienteDTO.getNroDocumento());
 		panel_DatosCliente.add(textFieldNumeroDoc);
 		
 		JTextField textFieldApellidoCliente = new JTextField();
 		textFieldApellidoCliente.setEditable(false);
 		textFieldApellidoCliente.setColumns(10);
-		textFieldApellidoCliente.setBounds(145, 66, 100, 18);
+		textFieldApellidoCliente.setBounds(145, 66, 400, 18);
+		textFieldApellidoCliente.setText(clienteDTO.getApellido());
 		panel_DatosCliente.add(textFieldApellidoCliente);
 		
 		JTextField textFieldTipoDoc = new JTextField();
 		textFieldTipoDoc.setEditable(false);
 		textFieldTipoDoc.setColumns(10);
-		textFieldTipoDoc.setBounds(145, 86, 100, 18);
+		textFieldTipoDoc.setBounds(145, 86, 400, 18);
+		textFieldTipoDoc.setText(clienteDTO.getTipoDocumento().toString());
 		panel_DatosCliente.add(textFieldTipoDoc);
 		
 		JTextField textFieldDomicilio = new JTextField();
 		textFieldDomicilio.setEditable(false);
 		textFieldDomicilio.setColumns(10);
-		textFieldDomicilio.setBounds(145, 126, 100, 18);
+		textFieldDomicilio.setBounds(145, 126, 400, 18);
+		textFieldDomicilio.setText(clienteDTO.getDireccionDTO().mostrarDomicilio());
 		panel_DatosCliente.add(textFieldDomicilio);
 		
 		JPanel panel_DatosPoliza = new JPanel();
@@ -237,7 +247,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(lblMotor);
 		
 		JSpinner spinnerKms = new JSpinner();
-		spinnerKms.setModel(new SpinnerNumberModel(new Long(0), new Long(0), null, new Long(10000)));
+		spinnerKms.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(10000)));
 		spinnerKms.setBounds(340, 88, 170, 18);
 		panel_DatosPoliza.add(spinnerKms);
 		
@@ -291,18 +301,22 @@ public class PolizaGenerar extends JFrame {
 		JRadioButton rdbtnNinguno = new JRadioButton("Ninguno");
 		rdbtnNinguno.setSelected(true);
 		rdbtnNinguno.setBounds(340, 160, 109, 18);
+		rdbtnNinguno.setEnabled(false);
 		panel_DatosPoliza.add(rdbtnNinguno);
 		
 		JRadioButton rdbtnUno = new JRadioButton("Uno");
 		rdbtnUno.setBounds(340, 180, 109, 18);
+		rdbtnUno.setEnabled(false);
 		panel_DatosPoliza.add(rdbtnUno);
 		
 		JRadioButton rdbtnDos = new JRadioButton("Dos");
 		rdbtnDos.setBounds(340, 200, 109, 18);
+		rdbtnDos.setEnabled(false);
 		panel_DatosPoliza.add(rdbtnDos);
 		
 		JRadioButton rdbtnTresOMs = new JRadioButton("Tres o m\u00E1s");
 		rdbtnTresOMs.setBounds(340, 220, 109, 18);
+		rdbtnTresOMs.setEnabled(false);
 		panel_DatosPoliza.add(rdbtnTresOMs);
 		
 		ButtonGroup buttonGroupSiniestros = new ButtonGroup();
@@ -310,6 +324,7 @@ public class PolizaGenerar extends JFrame {
 		buttonGroupSiniestros.add(rdbtnUno);
 		buttonGroupSiniestros.add(rdbtnDos);
 		buttonGroupSiniestros.add(rdbtnTresOMs);
+		rdbtnTresOMs.setEnabled(false);
 		
 		JLabel lblposeeHijosEntre = new JLabel("\u00BFPosee hijos entre 18 y 30 a\u00F1os?");
 		lblposeeHijosEntre.setBounds(5, 250, 200, 18);
@@ -382,12 +397,31 @@ public class PolizaGenerar extends JFrame {
 		btnConfirmarPAG.setBounds(674, 526, 100, 25);
 		btnConfirmarPAG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String prov = (String) comboBoxProvincia.getSelectedItem();
+				String loc = (String) comboBoxLocalidad.getSelectedItem();
+				String marca = (String) comboBoxMarca.getSelectedItem();
+				String modelo = (String) comboBoxModelo.getSelectedItem();
+				int anioModelo = (int) spinnerAnio.getValue();
+				String patente = formattedTextFieldPatente.getText();
+				String chasis = txtFieldChasis.getText();
+				String motor = textFieldMotor.getText();
+				int kmAnio = (int) spinnerKms.getValue(); 
+				boolean garage = chckbxNewCheckBox.isSelected();
+				boolean alarma = chckbxtieneAlarma.isSelected();
+				boolean dispRastreo = chckbxposeeDispositivoDe.isSelected();
+				boolean tuercasAntirrobo = chckbxposeeTuercasAntirrobo.isSelected();
+				int nroSiniestros = 0;
+				
+				
+				FachadaPoliza fachadaPoliza = new FachadaPoliza();
+				PolizaDTO polDTO = fachadaPoliza.ingresarDatos(prov,loc,marca,modelo,anioModelo,patente,chasis,motor,kmAnio,
+						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);
 				if (rdbtnSi.isSelected()) {
-					AgregarHijos agregarHijos = new AgregarHijos((int) spinnerCantHijos.getValue());
+					AgregarHijos agregarHijos = new AgregarHijos(polDTO, clienteDTO, (int) spinnerCantHijos.getValue());
 					agregarHijos.setVisible(true);
 					dispose();
 				} else {
-					Cobertura cobertura = new Cobertura();
+					Cobertura cobertura = new Cobertura(polDTO, clienteDTO);
 					cobertura.setVisible(true);
 					dispose();
 				}

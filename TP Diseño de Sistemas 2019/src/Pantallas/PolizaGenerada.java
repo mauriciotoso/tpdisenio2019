@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import DTO.ClienteDTO;
+import DTO.PolizaDTO;
+import Logica.FachadaPoliza;
+
 public class PolizaGenerada extends JFrame {
 
 	private JPanel contentPane;
@@ -23,7 +29,7 @@ public class PolizaGenerada extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -34,12 +40,12 @@ public class PolizaGenerada extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public PolizaGenerada() {
+	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -154,17 +160,17 @@ public class PolizaGenerada extends JFrame {
 		panelArriba.add(lblFechaIni);
 		
 		JTextField tfFechaIni = new JTextField();
-		tfFechaIni.setBounds(125, 170, 100, 20);
+		tfFechaIni.setBounds(125, 170, 180, 20);
 		tfFechaIni.setEditable(false);
 		tfFechaIni.setColumns(10);
 		panelArriba.add(tfFechaIni);
 		
 		JLabel lblFechaFin = new JLabel("Fecha de fin:");
-		lblFechaFin.setBounds(250, 170, 80, 20);
+		lblFechaFin.setBounds(330, 170, 80, 20);
 		panelArriba.add(lblFechaFin);
 		
 		JTextField tfFechaFin = new JTextField();
-		tfFechaFin.setBounds(340, 170, 100, 20);
+		tfFechaFin.setBounds(420, 170, 180, 20);
 		tfFechaFin.setEditable(false);
 		tfFechaFin.setColumns(10);
 		panelArriba.add(tfFechaFin);
@@ -199,7 +205,7 @@ public class PolizaGenerada extends JFrame {
 		panelAbajo.add(lblUltimoDia);
 		
 		JTextField tfUltimoDia = new JTextField();
-		tfUltimoDia.setBounds(160, 72, 100, 20);
+		tfUltimoDia.setBounds(160, 72, 180, 20);
 		tfUltimoDia.setEditable(false);
 		tfUltimoDia.setColumns(10);
 		panelAbajo.add(tfUltimoDia);
@@ -263,7 +269,7 @@ public class PolizaGenerada extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cambiar el tipo de cobertura?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
-					Cobertura cobertura = new Cobertura();
+					Cobertura cobertura = new Cobertura(polDTO,clienteDTO);
 					cobertura.setVisible(true);
 					dispose();
 				}
@@ -283,12 +289,48 @@ public class PolizaGenerada extends JFrame {
 					MenuProductorSeguro menuProductorSeguro = new MenuProductorSeguro();
 					menuProductorSeguro.setVisible(true);
 					dispose();
+					
+					FachadaPoliza fPoliza=new FachadaPoliza();
+					fPoliza.altaPoliza(polDTO);
+		
 				}
 				
 			}
 			
 		});
 		polizaGenerada.add(btnConfirmarPG);
+		
+		tfNombre.setText(polDTO.getCliente().getNombre());
+		tfApellido.setText(polDTO.getCliente().getApellido());
+		tfMarca.setText(polDTO.getMarca());
+		tfModelo.setText(polDTO.getModelo());
+		tfMotor.setText(polDTO.getMotor());
+		tfChasis.setText(polDTO.getChasis());
+		tfPatente.setText(polDTO.getPatente());
+		//tener en cuenta el formato de fecha al usar el string 
+		tfFechaIni.setText(polDTO.getFechaInicio().toString());
+		tfFechaFin.setText(polDTO.getFechaFin().toString());
+		tfSumaAseg.setText("0");
+		tfPremio.setText("0");
+		tfDescuento.setText("0");
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(polDTO.getFechaInicio());
+		c.add(Calendar.DATE, -1);
+		Date ultimoDiaPago = c.getTime();
+		
+		tfDescuento.setText("0");
+		tfUltimoDia.setText(ultimoDiaPago.toString());
+		
+		if(polDTO.getTipoPoliza()=="MENSUAL") {
+			tfMontoCuota.setText(Float.toString(polDTO.getMontoTotal()/6));
+		}else {
+			tfMontoCuota.setText(Float.toString(polDTO.getMontoTotal()));	
+		}
+		
+		tfMontoTotal.setText(Float.toString(polDTO.getMontoTotal()));
+		
+		System.out.println(polDTO);
 	}
 
 }

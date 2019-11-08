@@ -26,14 +26,14 @@ public class GestorBDD {
 		@SuppressWarnings("unchecked")
 		List<PolizaMensual> listaPolizas1 = session.createQuery
 				("from PolizaMensual p "
-				+ "where p.patente='"+polDTO.getPatente()+"' "
+				+ "where (p.patente='"+polDTO.getPatente()+"' "
 				+ "or p.motor='"+polDTO.getMotor()+"' "
 				+ "or p.chasis='"+polDTO.getChasis()+"') and p.estadoPoliza=1").getResultList();
 		
 		@SuppressWarnings("unchecked")
 		List<PolizaSemestral> listaPolizas2 = session.createQuery
 				("from PolizaSemestral p "
-				+ "where p.patente='"+polDTO.getPatente()+"' "
+				+ "where (p.patente='"+polDTO.getPatente()+"' "
 				+ "or p.motor='"+polDTO.getMotor()+"' "
 				+ "or p.chasis='"+polDTO.getChasis()+"') and p.estadoPoliza=1").getResultList();
 		session.getTransaction().commit();
@@ -143,5 +143,15 @@ public class GestorBDD {
 		session.beginTransaction();
 		session.save(poliza);
 		session.getTransaction().commit();
+	}
+	
+	public ClienteDTO getCliente() {
+		session.beginTransaction();
+		Cliente c = session.get(Cliente.class, "1");
+		session.getTransaction().commit();
+		
+		ClienteDTO cDTO = new ClienteDTO(c);
+		
+		return cDTO;
 	}
 }

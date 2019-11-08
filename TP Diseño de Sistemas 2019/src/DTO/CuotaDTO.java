@@ -19,6 +19,12 @@ public class CuotaDTO {
 		this.bonificacion = bonificacion;
 	}
 
+	@Override
+	public String toString() {
+		return "CuotaDTO [nroCuota=" + nroCuota + ", ultimoDiaPago=" + ultimoDiaPago + ", importeCuota=" + importeCuota
+				+ ", recargosPorMora=" + recargosPorMora + ", bonificacion=" + bonificacion + "]";
+	}
+
 	public float getRecargosPorMora() {
 		return recargosPorMora;
 	}

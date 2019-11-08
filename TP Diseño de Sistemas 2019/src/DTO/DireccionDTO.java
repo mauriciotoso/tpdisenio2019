@@ -36,6 +36,11 @@ public class DireccionDTO {
 		this.pais = d.getLocalidad().getProvincia().getPais().getNombre();	
 	}
 
+	public String mostrarDomicilio () {
+		String dom = this.calle+" "+this.numero+", "+this.localidad+", "+this.provincia;
+		
+		return dom;
+	}
 	public String getCalle() {
 		return calle;
 	}

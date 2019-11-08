@@ -1,5 +1,6 @@
 package DTO;
 
+import java.util.Date;
 import java.util.List;
 
 import Enumerados.EstadoPoliza;
@@ -21,8 +22,8 @@ public class PolizaDTO {
 	private int nroSiniestros;
 	private String tipoCobertura;
 	private String tipoPoliza;
-	private String fechaInicio;
-	private String fechaFin;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private String formaPago;
 	private float valorPorcentualCobertura;
 	private int anio;
@@ -33,9 +34,13 @@ public class PolizaDTO {
 	private ValorPorcentualDTO valoresPorcentualesDTO;
 	private String estadoPoliza;
 	
+	public PolizaDTO() {
+		
+	}
+	
 	public PolizaDTO(String nroPoliza, String localidad, String provincia, String pais, String marca, String modelo,
 			int anioModelo, String motor, String chasis, String patente, int kmAnio, float montoTotal,
-			int nroSiniestros, String tipoCobertura, String tipoPoliza, String fechaInicio, String fechaFin,
+			int nroSiniestros, String tipoCobertura, String tipoPoliza, Date fechaInicio, Date fechaFin,
 			String formaPago, float valorPorcentualCobertura, int anio, MedidasSeguridadDTO medidasSeguridad,
 			List<CuotaDTO> cuotas, List<HijoDTO> hijos, ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO, String estadoPoliza) {
 		super();
@@ -188,19 +193,19 @@ public class PolizaDTO {
 		this.tipoPoliza = tipoPoliza;
 	}
 
-	public String getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(String fechaInicio) {
+	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public String getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(String fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
@@ -274,6 +279,18 @@ public class PolizaDTO {
 
 	public void setMontoTotal(float montoTotal) {
 		this.montoTotal = montoTotal;
+	}
+
+	@Override
+	public String toString() {
+		return "PolizaDTO [nroPoliza=" + nroPoliza + ", localidad=" + localidad + ", provincia=" + provincia + ", pais="
+				+ pais + ", marca=" + marca + ", modelo=" + modelo + ", anioModelo=" + anioModelo + ", motor=" + motor
+				+ ", chasis=" + chasis + ", patente=" + patente + ", kmAnio=" + kmAnio + ", montoTotal=" + montoTotal
+				+ ", nroSiniestros=" + nroSiniestros + ", tipoCobertura=" + tipoCobertura + ", tipoPoliza=" + tipoPoliza
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", formaPago=" + formaPago
+				+ ", valorPorcentualCobertura=" + valorPorcentualCobertura + ", anio=" + anio + ", medidasSeguridad="
+				+ medidasSeguridad + ", cuotas=" + cuotas + ", hijos=" + hijos + ", cliente=" + cliente
+				+ ", valoresPorcentualesDTO=" + valoresPorcentualesDTO + ", estadoPoliza=" + estadoPoliza + "]";
 	}
 	
 	
