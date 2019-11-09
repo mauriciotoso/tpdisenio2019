@@ -104,6 +104,13 @@ public class DireccionDTO {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
+
+	@Override
+	public String toString() {
+		return "DireccionDTO [calle=" + calle + ", numero=" + numero + ", piso=" + piso + ", departamento="
+				+ departamento + ", codigoPostal=" + codigoPostal + ", localidad=" + localidad + ", provincia="
+				+ provincia + ", pais=" + pais + "]";
+	}
 	
 
 }

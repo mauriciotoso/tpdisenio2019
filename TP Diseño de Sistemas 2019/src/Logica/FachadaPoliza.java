@@ -2,8 +2,8 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import DTO.*;
+import Entidades.*;
 
 public class FachadaPoliza {
 
@@ -12,10 +12,10 @@ public class FachadaPoliza {
 		gestorP.altaPoliza(polDTO);
 	}
 	
-	public PolizaDTO ingresarDatos (String prov, String loc, String marca, String modelo, int anioModelo, String patente, String chasis, String motor, 
+	public PolizaDTO ingresarDatos (Localidad localidad, Anio anioModelo, String patente, String chasis, String motor, 
 			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO) {
 		GestorPoliza gestorPoliza = new GestorPoliza();
-		PolizaDTO polDTO = gestorPoliza.ingresarDatos(prov,loc,marca,modelo,anioModelo,patente,chasis,motor,kmAnio,
+		PolizaDTO polDTO = gestorPoliza.ingresarDatos(localidad,anioModelo,patente,chasis,motor,kmAnio,
 						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros, clienteDTO);
 		
 		return polDTO;

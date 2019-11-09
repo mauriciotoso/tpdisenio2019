@@ -7,8 +7,9 @@ import javax.persistence.*;
 public class SolicitudPoliza {
 	
 	@Id
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_idsolicitud", initialValue=1, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	private int idSolicitudPoliza;
-	private int anio;
 	private String patente;
 	private String motor;
 	private String chasis;
@@ -23,18 +24,14 @@ public class SolicitudPoliza {
 	@JoinColumn(name = "tipocobertura")
 	private TipoCobertura tipoCobertura;
 	@OneToOne
-	@JoinColumn(name = "polizamensual")
-	private PolizaMensual polizaMensual;
-	@OneToOne
-	@JoinColumn(name = "polizasemestral")
-	private PolizaSemestral polizaSemestral;
+	@JoinColumn(name = "nropoliza")
+	private Poliza poliza;
 	
-	public SolicitudPoliza(int idSolicituPoliza, int anio, String patente, String motor, String chasis, int kmAnio,
+	public SolicitudPoliza(int idSolicituPoliza, String patente, String motor, String chasis, int kmAnio,
 			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
-			PolizaMensual polizaMensual, PolizaSemestral polizaSemestral) {
+			Poliza poliza) {
 		super();
 		this.idSolicitudPoliza = idSolicituPoliza;
-		this.anio = anio;
 		this.patente = patente;
 		this.motor = motor;
 		this.chasis = chasis;
@@ -42,20 +39,25 @@ public class SolicitudPoliza {
 		this.medidasSeguridad = medidasSeguridad;
 		this.hijos = hijos;
 		this.tipoCobertura = tipoCobertura;
-		this.polizaMensual = polizaMensual;
-		this.polizaSemestral = polizaSemestral;
+		this.poliza = poliza;
+	}
+	
+	public SolicitudPoliza(String patente, String motor, String chasis, int kmAnio,
+			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
+			Poliza poliza) {
+		super();
+		this.patente = patente;
+		this.motor = motor;
+		this.chasis = chasis;
+		this.kmAnio = kmAnio;
+		this.medidasSeguridad = medidasSeguridad;
+		this.hijos = hijos;
+		this.tipoCobertura = tipoCobertura;
+		this.poliza = poliza;
 	}
 	
 	public SolicitudPoliza() {
 		
-	}
-
-	public int getAnio() {
-		return anio;
-	}
-
-	public void setAnio(int anio) {
-		this.anio = anio;
 	}
 
 	public String getPatente() {
@@ -124,20 +126,21 @@ public class SolicitudPoliza {
 		this.tipoCobertura = tipoCobertura;
 	}
 
-	public PolizaMensual getPolizaMensual() {
-		return polizaMensual;
+	public int getIdSolicitudPoliza() {
+		return idSolicitudPoliza;
 	}
 
-	public void setPolizaMensual(PolizaMensual polizaMensual) {
-		this.polizaMensual = polizaMensual;
+	public void setIdSolicitudPoliza(int idSolicitudPoliza) {
+		this.idSolicitudPoliza = idSolicitudPoliza;
 	}
 
-	public PolizaSemestral getPolizaSemestral() {
-		return polizaSemestral;
+	public Poliza getPoliza() {
+		return poliza;
 	}
 
-	public void setPolizaSemestral(PolizaSemestral polizaSemestral) {
-		this.polizaSemestral = polizaSemestral;
+	public void setPoliza(Poliza poliza) {
+		this.poliza = poliza;
 	}
+	
 	
 }

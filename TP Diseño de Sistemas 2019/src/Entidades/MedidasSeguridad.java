@@ -8,7 +8,7 @@ import DTO.*;
 public class MedidasSeguridad {
 
 	@Id
-	@SequenceGenerator(name="seq-gen",sequenceName="sec_id", initialValue=2, allocationSize=1)
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_idms", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	private int idMedidasSeguridad;
 	@Column(name="tienegarage")

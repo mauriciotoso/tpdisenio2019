@@ -1,7 +1,7 @@
 package Logica;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +29,7 @@ public class GestorPoliza {
 			}else{
 				
 				boolean validarF= this.validarFechas(polDTO);
+				
 				if(!validarF) {
 					//error fechas	
 				}else{
@@ -51,45 +52,34 @@ public class GestorPoliza {
 					
 					List<Cuota> cuotas = new ArrayList<Cuota>();
 					if(polDTO.getTipoPoliza().compareTo("MENSUAL")==0) {
-						Cuota c1 = new Cuota(1,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
-						Cuota c2 = new Cuota(2,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
-						Cuota c3 = new Cuota(3,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
-						Cuota c4 = new Cuota(4,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
-						Cuota c5 = new Cuota(5,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
-						Cuota c6 = new Cuota(6,"M",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
+						Cuota c1 = new Cuota(polDTO.getCuotas().get(0));
+						Cuota c2 = new Cuota(polDTO.getCuotas().get(1));
+						Cuota c3 = new Cuota(polDTO.getCuotas().get(2));
+						Cuota c4 = new Cuota(polDTO.getCuotas().get(3));
+						Cuota c5 = new Cuota(polDTO.getCuotas().get(4));
+						Cuota c6 = new Cuota(polDTO.getCuotas().get(5));
 						cuotas.add(c1);
 						cuotas.add(c2);
 						cuotas.add(c3);
 						cuotas.add(c4);
 						cuotas.add(c5);
-						cuotas.add(c6);	
-						
-						PolizaMensual poliza = new PolizaMensual(polDTO.getFechaInicio().toString(),polDTO.getFechaFin().toString(),localidad,
-								estadoPoliza,polDTO.getMontoTotal(),polDTO.getPatente(),polDTO.getMotor(),
-								polDTO.getChasis(),polDTO.getKmAnio(),polDTO.getAnio(),cuotas,anio,ms,hijos,
-								tipoCobertura,vp,cliente);
-						
-						GestorCalculo gestorC = new GestorCalculo();
-						poliza = gestorC.calcularPDD(poliza);
-						//PASAR ESTADO POLIZA A GENERADA 
-						
-						GestorBDD gestorBDD = new GestorBDD();
-						gestorBDD.guardarPoliza(poliza);
-						
+						cuotas.add(c6);
 					}else if(polDTO.getTipoPoliza().compareTo("SEMESTRAL")==0){
-						Cuota c = new Cuota(0,"S",polDTO.getFechaInicio().toString(),polDTO.getMontoTotal());
+						Cuota c = new Cuota(polDTO.getCuotas().get(0));
 						cuotas.add(c);
-						PolizaSemestral poliza = new PolizaSemestral(polDTO.getFechaInicio().toString(),polDTO.getFechaFin().toString(),localidad,
-								estadoPoliza,polDTO.getMontoTotal(),polDTO.getPatente(),polDTO.getMotor(),
-								polDTO.getChasis(),polDTO.getKmAnio(),polDTO.getAnio(),cuotas,anio,ms,hijos,
-								tipoCobertura,vp,cliente);
-						
-						GestorCalculo gestorC = new GestorCalculo();
-						poliza = gestorC.calcularPDD(poliza);
-						
-						GestorBDD gestorBDD = new GestorBDD();
-						gestorBDD.guardarPoliza(poliza);
 					}
+
+					Poliza poliza = new Poliza(polDTO.getFechaInicio(),polDTO.getFechaFin(),localidad,
+							estadoPoliza,polDTO.getPatente(),polDTO.getMotor(),
+							polDTO.getChasis(),polDTO.getKmAnio(),cuotas,anio,polDTO.getTipoPoliza(),
+							polDTO.getNroSiniestros(),ms,hijos,
+							tipoCobertura,vp,cliente);
+					
+					GestorCalculo gestorC = new GestorCalculo();
+					poliza = gestorC.calcularPDD(poliza);
+					//PASAR ESTADO POLIZA A GENERADA 
+					GestorBDD gestorBDD = new GestorBDD();
+					gestorBDD.guardarPoliza(poliza);
 					//ACTUALIZAR ESTADO DEL CLIENTE (mirar enunciado)
 				}
 		}
@@ -150,65 +140,21 @@ public class GestorPoliza {
 		
 		fechaInicioAnterior.add(Calendar.DATE, -1);
 		
-		if (fechaInicio.compareTo(fechaInicioAnterior)<0)
+		if (fechaInicio.compareTo(fechaInicioAnterior)!=0)
 			correcto=true;
 		
+		System.out.println(correcto);
 		return correcto;
- 		
-		/*
-		Date date = new Date();
-        String fechaactual = sdf.format(date);
-        
-        String anioactual= fechaactual.substring(0, 4);
-        int anio = Integer.parseInt(anioactual);
-        String diaactual= fechaactual.substring(8,10);
-        int dia = Integer.parseInt(diaactual);
-        String mesactual= fechaactual.substring(5, 7);
-        int mes = Integer.parseInt(mesactual);
-        
-        if((mes==2 && dia<28)|| ((mes==1||mes==3||mes==5||mes==7||mes==8||mes==10||mes==12)&& dia<31)||((mes==4||mes==6||mes==9||mes==11))&& dia<30) {
-        dia = dia +1;
-        }else {
-        	dia=1;
-        	if(mes==12) {
-        		mes=1;
-        		anio=anio+1;
-        	}else {
-        		mes=mes+1;
-        	}
-        }
-        String anioString = String.valueOf(anio);  
-        String mesString = String.valueOf(mes);
-        String diaString = String.valueOf(dia);
-        String fechaPosterior = (anioString.concat(mesString)).concat(diaString);
-        
-        anio = Integer.parseInt(anioactual);
-        dia = Integer.parseInt(diaactual);
-        mes = Integer.parseInt(mesactual);
-        
-        if(mes==12) {
-        	mes=1;
-        	anio=anio+1;
-        }else mes++;
-        
-        anioString = String.valueOf(anio);  
-        mesString = String.valueOf(mes);
-        diaString = String.valueOf(dia);
-        String mesPosterior = (anioString.concat(mesString)).concat(diaString);
-        
-    	int fp=polDTO.getFechaInicio().compareTo(fechaPosterior);
-    	int mp=polDTO.getFechaInicio().compareTo(mesPosterior);
-		
-    	if(fp<0||mp>0) return false;
-    	else return true;
-        */
       	}
 	
 	public List<HijoDeclarado> crearHijos(PolizaDTO polDTO){
 		
 		List<HijoDeclarado> hijos = new ArrayList<HijoDeclarado>();
-		for(HijoDTO h:polDTO.getHijos()) {
-			hijos.add(new HijoDeclarado(h));
+		
+		if(polDTO.getHijos()!=null) {
+			for(HijoDTO h:polDTO.getHijos()) {
+				hijos.add(new HijoDeclarado(h));
+			}
 		}
 		
 		return hijos;
@@ -218,28 +164,11 @@ public class GestorPoliza {
 		return new MedidasSeguridad(polDTO.getMedidasSeguridad());
 	}
 	
-	public PolizaDTO ingresarDatos (String prov, String loc, String marca, String modelo, int anioModelo, String patente, String chasis, String motor, 
+	public PolizaDTO ingresarDatos (Localidad localidad,Anio anioModelo, String patente, String chasis, String motor, 
 			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO) {
-		PolizaDTO polDTO = new PolizaDTO();
-		MedidasSeguridadDTO medidasSeguridadDTO = new MedidasSeguridadDTO();
 		
-		
-		polDTO.setProvincia(prov);
-		polDTO.setLocalidad(loc);
-		polDTO.setMarca(marca);
-		polDTO.setModelo(modelo);
-		polDTO.setAnioModelo(anioModelo);
-		polDTO.setPatente(patente);
-		polDTO.setChasis(chasis);
-		polDTO.setMotor(motor);
-		polDTO.setKmAnio(kmAnio);
-		medidasSeguridadDTO.setGarage(garage);
-		medidasSeguridadDTO.setAlarma(alarma);
-		medidasSeguridadDTO.setRastreoVehicular(dispRastreo);
-		medidasSeguridadDTO.setTuercasAntirrobo(tuercasAntirrobo);
-		polDTO.setMedidasSeguridad(medidasSeguridadDTO);
-		polDTO.setNroSiniestros(nroSiniestros);
-		polDTO.setCliente(clienteDTO);
+		MedidasSeguridadDTO medidasSeguridadDTO = new MedidasSeguridadDTO(alarma,garage,dispRastreo,tuercasAntirrobo);
+		PolizaDTO polDTO = new PolizaDTO(localidad, anioModelo,motor,chasis,patente,kmAnio,nroSiniestros,medidasSeguridadDTO,clienteDTO);
 		
 		return polDTO;
 	}
@@ -273,7 +202,6 @@ public class GestorPoliza {
 	public void setCobertura(PolizaDTO polDTO, String cobertura, Date inicioVigencia, String tipoPoliza) {
 		polDTO.setTipoCobertura(cobertura);
 		polDTO.setFechaInicio(inicioVigencia);
-		polDTO.setAnio(2019);
 		Calendar c = Calendar.getInstance();
 		c.setTime(inicioVigencia);
 		c.add(Calendar.MONTH, 6);
@@ -281,6 +209,7 @@ public class GestorPoliza {
 		polDTO.setMontoTotal(100000);
 		polDTO.setFechaFin(fechaFin);
 		polDTO.setTipoPoliza(tipoPoliza);
+		polDTO.setPais("Argentina");
 		
 		List<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();
 		if(tipoPoliza=="MENSUAL") {
@@ -290,8 +219,7 @@ public class GestorPoliza {
 			fechaInicio.add(Calendar.DATE, -1);
 			
 			Date fecha = fechaInicio.getTime();
-			
-			
+						
 			for(int i=1;i<7;i++) {
 				cuotasDTO.add(new CuotaDTO(i,fecha,(float)polDTO.getMontoTotal()/6,(float)0,(float) 0));
 				

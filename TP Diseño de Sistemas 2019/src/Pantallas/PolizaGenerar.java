@@ -1,12 +1,12 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -26,33 +26,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
+import BDD.FachadaBDD;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
+import Entidades.*;
 import Logica.FachadaPoliza;
 
 public class PolizaGenerar extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PolizaGenerar frame = new PolizaGenerar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
 	public PolizaGenerar(ClienteDTO clienteDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
@@ -160,7 +147,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(lblDatosPolizaTitulo);
 		
 		JLabel lblProvincia = new JLabel("Provincia:");
-		lblProvincia.setBounds(5, 30, 64, 15);
+		lblProvincia.setBounds(270, 30, 64, 15);
 		panel_DatosPoliza.add(lblProvincia);
 		
 		JLabel lblMarca = new JLabel("Marca: ");
@@ -168,7 +155,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(lblMarca);
 		
 		JLabel lblLocalidad = new JLabel("Localidad:");
-		lblLocalidad.setBounds(270, 30, 64, 15);
+		lblLocalidad.setBounds(520, 30, 64, 15);
 		panel_DatosPoliza.add(lblLocalidad);
 		
 		JLabel lblModelo = new JLabel("Modelo:");
@@ -180,49 +167,126 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(lblSumaAsegurada);
 		
 		JLabel lblAo = new JLabel("A\u00F1o:");
-		lblAo.setBounds(530, 50, 37, 15);
+		lblAo.setBounds(520, 50, 37, 15);
 		panel_DatosPoliza.add(lblAo);
+		
+		FachadaBDD fachadaBDD = new FachadaBDD();
+		ArrayList<Provincia> provincias = (ArrayList<Provincia>) fachadaBDD.getProvincias();
+
+		String[] listaProvincias = new String[provincias.size()+1];
+ 		listaProvincias[0]="Seleccione una provincia";
+ 		int cont=1;
+ 		for(Provincia p:provincias) {
+ 			listaProvincias[cont]=p.getNombre();
+ 			cont++;
+ 		}
 		
 		JComboBox comboBoxProvincia = new JComboBox();
 		comboBoxProvincia.setMaximumRowCount(6);
 		comboBoxProvincia.setToolTipText("");
-		comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una provincia", "Santa Fe", "Entre Rios", "Buenos Aires", "C\u00F3rdoba"}));
+		comboBoxProvincia.setModel(new DefaultComboBoxModel(listaProvincias));
 		comboBoxProvincia.setSelectedIndex(0);
 		comboBoxProvincia.setEditable(true);
-		comboBoxProvincia.setBounds(90, 26, 170, 18);
+		comboBoxProvincia.setBounds(340, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxProvincia);
+		
+		ArrayList<Marca> marcas = (ArrayList<Marca>) fachadaBDD.getMarcas();
+		String[] listaMarcas = new String[marcas.size()+1];
+ 		listaMarcas[0]="Seleccione una marca";
+ 		cont=1;
+ 		for(Marca m:marcas) {
+ 			listaMarcas[cont]=m.getMarca();
+ 			cont++;
+ 		}
 		
 		JComboBox comboBoxMarca = new JComboBox();
 		comboBoxMarca.setToolTipText("");
-		comboBoxMarca.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una marca", "Volkswagen", "Chevrolet", "Mazda", "Nissan"}));
+		comboBoxMarca.setModel(new DefaultComboBoxModel(listaMarcas));
 		comboBoxMarca.setSelectedIndex(0);
 		comboBoxMarca.setMaximumRowCount(6);
 		comboBoxMarca.setEditable(true);
 		comboBoxMarca.setBounds(90, 46, 170, 18);
 		panel_DatosPoliza.add(comboBoxMarca);
 		
+		ArrayList<Localidad> localidades = (ArrayList<Localidad>) fachadaBDD.getLocalidades();
+		String[] listaLocalidades = new String[localidades.size()+1];
+ 		listaLocalidades[0]="Seleccione una localidad";
+ 		cont=1;
+ 		for(Localidad l:localidades) {
+ 			listaLocalidades[cont]=l.getNombre();
+ 			cont++;
+ 		}
+ 		
 		JComboBox comboBoxLocalidad = new JComboBox();
 		comboBoxLocalidad.setToolTipText("");
-		comboBoxLocalidad.setModel(new DefaultComboBoxModel(new String[] {"Seleccione una localidad", "Santa Fe", "Col\u00E1stine", "Rincon", "Laguna Paiva"}));
+		comboBoxLocalidad.setModel(new DefaultComboBoxModel(listaLocalidades));
 		comboBoxLocalidad.setSelectedIndex(0);
 		comboBoxLocalidad.setMaximumRowCount(6);
 		comboBoxLocalidad.setEditable(true);
-		comboBoxLocalidad.setBounds(340, 26, 170, 18);
+		comboBoxLocalidad.setBounds(584, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxLocalidad);
 		
+		ArrayList<Modelo> modelos = (ArrayList<Modelo>) fachadaBDD.getModelos();
+		String[] listaModelos = new String[modelos.size()+1];
+ 		listaModelos[0]="Seleccione un modelo";
+ 		cont=1;
+ 		for(Modelo m:modelos) {
+ 			listaModelos[cont]=m.getNombre();
+ 			cont++;
+ 		}
+ 		
 		JComboBox comboBoxModelo = new JComboBox();
 		comboBoxModelo.setToolTipText("");
-		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"Seleccione un modelo", "Gol Trend", "Corsa", "MX-5", "GT-R"}));
+		comboBoxModelo.setModel(new DefaultComboBoxModel(listaModelos));
 		comboBoxModelo.setSelectedIndex(0);
 		comboBoxModelo.setMaximumRowCount(6);
 		comboBoxModelo.setEditable(true);
 		comboBoxModelo.setBounds(340, 48, 170, 18);
 		panel_DatosPoliza.add(comboBoxModelo);
 		
-		JSpinner spinnerAnio = new JSpinner();
-		spinnerAnio.setModel(new SpinnerNumberModel(2019, 1980, 2019, 1));
-		spinnerAnio.setBounds(560, 48, 60, 18);
-		panel_DatosPoliza.add(spinnerAnio);
+		ArrayList<Pais> paises = (ArrayList<Pais>) fachadaBDD.getPaises();
+		String[] listaPaises = new String[paises.size()+1];
+ 		listaPaises[0]="Seleccione un pais";
+ 		cont=1;
+ 		for(Pais p:paises) {
+ 			listaPaises[cont]=p.getNombre();
+ 			cont++;
+ 		}
+ 		
+		JComboBox comboBoxPais = new JComboBox();
+		comboBoxPais.setToolTipText("");
+		comboBoxPais.setModel(new DefaultComboBoxModel(listaPaises));
+		comboBoxPais.setSelectedIndex(0);
+		comboBoxPais.setMaximumRowCount(6);
+		comboBoxPais.setEditable(true);
+		comboBoxPais.setBounds(90, 27, 170, 18);
+		panel_DatosPoliza.add(comboBoxPais);
+		
+		ArrayList<Anio> anios = (ArrayList<Anio>) fachadaBDD.getAnios();
+		String[] listaAnios = new String[anios.size()+1];
+ 		listaAnios[0]="Seleccione un año";
+ 		cont=1;
+ 		for(Anio a:anios) {
+ 			listaAnios[cont]=String.valueOf(a.getAnio());
+ 			cont++;
+ 		}
+ 		
+		System.out.println(provincias);
+		System.out.println(marcas);
+		System.out.println(localidades);
+		System.out.println(modelos);
+		System.out.println(paises);
+		System.out.println(anios);
+		System.out.println(clienteDTO);
+		
+		JComboBox comboBoxAnioModelo = new JComboBox();
+		comboBoxAnioModelo.setToolTipText("");
+		comboBoxAnioModelo.setModel(new DefaultComboBoxModel(listaAnios));
+		comboBoxAnioModelo.setSelectedIndex(0);
+		comboBoxAnioModelo.setMaximumRowCount(6);
+		comboBoxAnioModelo.setEditable(true);
+		comboBoxAnioModelo.setBounds(584, 47, 170, 18);
+		panel_DatosPoliza.add(comboBoxAnioModelo);
 		
 		JTextField textFieldSumaAsegurada = new JTextField();
 		textFieldSumaAsegurada.setEditable(false);
@@ -353,6 +417,10 @@ public class PolizaGenerar extends JFrame {
 		ButtonGroup buttonGruopHijos = new ButtonGroup();
 		buttonGruopHijos.add(rdbtnSi);
 		buttonGruopHijos.add(rdbtnNo);		
+		
+		JLabel lblPais = new JLabel("Pa\u00EDs ");
+		lblPais.setBounds(5, 30, 64, 15);
+		panel_DatosPoliza.add(lblPais);
 		rdbtnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				spinnerCantHijos.setEnabled(true);
@@ -397,11 +465,21 @@ public class PolizaGenerar extends JFrame {
 		btnConfirmarPAG.setBounds(674, 526, 100, 25);
 		btnConfirmarPAG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String pais = (String) comboBoxPais.getSelectedItem();
 				String prov = (String) comboBoxProvincia.getSelectedItem();
 				String loc = (String) comboBoxLocalidad.getSelectedItem();
+				int idLocalidad = comboBoxLocalidad.getSelectedIndex();
+				
+				Localidad localidadPoliza = localidades.get(idLocalidad-1);
+				
 				String marca = (String) comboBoxMarca.getSelectedItem();
 				String modelo = (String) comboBoxModelo.getSelectedItem();
-				int anioModelo = (int) spinnerAnio.getValue();
+				String txAnioModelo = (String) comboBoxAnioModelo.getSelectedItem();
+				int anioModelo = comboBoxAnioModelo.getSelectedIndex();
+				
+				Anio anioPoliza = anios.get(anioModelo-1);
+				
 				String patente = formattedTextFieldPatente.getText();
 				String chasis = txtFieldChasis.getText();
 				String motor = textFieldMotor.getText();
@@ -410,17 +488,20 @@ public class PolizaGenerar extends JFrame {
 				boolean alarma = chckbxtieneAlarma.isSelected();
 				boolean dispRastreo = chckbxposeeDispositivoDe.isSelected();
 				boolean tuercasAntirrobo = chckbxposeeTuercasAntirrobo.isSelected();
-				int nroSiniestros = 0;
 				
+				int nroSiniestros = fachadaBDD.getNroSiniestros(clienteDTO);
 				
 				FachadaPoliza fachadaPoliza = new FachadaPoliza();
-				PolizaDTO polDTO = fachadaPoliza.ingresarDatos(prov,loc,marca,modelo,anioModelo,patente,chasis,motor,kmAnio,
+				PolizaDTO polDTO = fachadaPoliza.ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
 						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);
+				
+				System.out.println(polDTO);
+				
 				if (rdbtnSi.isSelected()) {
 					AgregarHijos agregarHijos = new AgregarHijos(polDTO, clienteDTO, (int) spinnerCantHijos.getValue());
 					agregarHijos.setVisible(true);
 					dispose();
-				} else {
+				}else {
 					Cobertura cobertura = new Cobertura(polDTO, clienteDTO);
 					cobertura.setVisible(true);
 					dispose();

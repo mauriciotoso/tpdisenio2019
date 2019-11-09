@@ -37,7 +37,7 @@ public class Localidad {
 	@Override
 	public String toString() {
 		return "Localidad [idLocalidad=" + idLocalidad + ", nombre=" + nombre + ", valorPorcentualLocalidad="
-				+ valorPorcentualLocalidad + ", provincia=" + provincia + "]";
+				+ valorPorcentualLocalidad + "]";
 	}
 
 	public float getValorPorcentualLocalidad() {

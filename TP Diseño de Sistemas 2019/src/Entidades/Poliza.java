@@ -1,17 +1,17 @@
 package Entidades;
 
-
+import java.util.Date;
 import java.util.List;
-
-import Enumerados.EstadoPoliza;
+import Enumerados.*;
 import javax.persistence.*;
 
 @Entity
-public class PolizaMensual{
+public class Poliza{
+	
 	@Id
 	private String nroPoliza;
-	private String vigenciaDesde;
-	private String vigenciaHasta;
+	private Date vigenciaDesde;
+	private Date vigenciaHasta;
 	private String domicilioRiesgo;
 	@OneToOne
 	@JoinColumn (name="estadoPoliza")
@@ -24,38 +24,38 @@ public class PolizaMensual{
 	private String chasis;
 	@Column (name="kmsPorAnio")
 	private int kmAnio;
-	private int anio;
 	private float premio;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "polizamensual")
+	@JoinColumn(name = "nropoliza")
 	private List<Cuota> cuotas;
 	@OneToOne
 	@JoinColumn (name="idanio")
 	private Anio idAnio;
+	private String tipoPoliza;
+	private int nroSiniestros;
 	@OneToOne
 	@JoinColumn (name="idmedidasseguridad")
 	private MedidasSeguridad medidasSeguridad;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "polizamensual")
+	@JoinColumn(name = "nropoliza")
 	private List<HijoDeclarado> hijos;
 	@ManyToOne
 	@JoinColumn (name="idtipocobertura")
 	private TipoCobertura tipoCobertura;
-	
 	@OneToOne
 	@JoinColumn (name="idvalorporcentual")
 	private ValoresPorcentualesPoliza valoresPorcentualesPoliza;
 	@ManyToOne
 	@JoinColumn (name="nrocliente")
 	private Cliente nroCliente;
-		
-
 	
-	public PolizaMensual(String nroPoliza, String vigenciaDesde, String vigenciaHasta, String domicilioRiesgo,
+	public Poliza(){}
+	
+	public Poliza(String nroPoliza, Date vigenciaDesde, Date vigenciaHasta, String domicilioRiesgo,
 			EstadoPoliza estadoPoliza, float prima, float montoTotal, float descuentoUnidad, String patente,
-			String motor, String chasis, int kmAnio, int anio, float premio, List<Cuota> cuotas, Anio idAnio,
-			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
-			ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
+			String motor, String chasis, int kmAnio, float premio, List<Cuota> cuotas, Anio idAnio, String tipoPoliza,
+			int nroSiniestros, MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos,
+			TipoCobertura tipoCobertura, ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
 		super();
 		this.nroPoliza = nroPoliza;
 		this.vigenciaDesde = vigenciaDesde;
@@ -69,55 +69,54 @@ public class PolizaMensual{
 		this.motor = motor;
 		this.chasis = chasis;
 		this.kmAnio = kmAnio;
-		this.anio = anio;
 		this.premio = premio;
 		this.cuotas = cuotas;
 		this.idAnio = idAnio;
+		this.tipoPoliza = tipoPoliza;
+		this.nroSiniestros = nroSiniestros;
 		this.medidasSeguridad = medidasSeguridad;
 		this.hijos = hijos;
 		this.tipoCobertura = tipoCobertura;
 		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
 		this.nroCliente = nroCliente;
+
 	}
 	
-	public PolizaMensual(String vigenciaDesde, String vigenciaHasta, Localidad localidad,
-			EstadoPoliza estadoPoliza, float montoTotal, String patente,
-			String motor, String chasis, int kmAnio, int anio, List<Cuota> cuotas, Anio idAnio,
-			MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos, TipoCobertura tipoCobertura,
-			ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
+
+	public Poliza(Date vigenciaDesde, Date vigenciaHasta, Localidad localidad,
+			EstadoPoliza estadoPoliza, String patente,
+			String motor, String chasis, int kmAnio, List<Cuota> cuotas, Anio idAnio, String tipoPoliza,
+			int nroSiniestros, MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos,
+			TipoCobertura tipoCobertura, ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
 		super();
 		this.nroPoliza = this.generarNroPoliza();
 		this.vigenciaDesde = vigenciaDesde;
 		this.vigenciaHasta = vigenciaHasta;
 		this.domicilioRiesgo = this.generarDomicilio(localidad);
 		this.estadoPoliza = estadoPoliza;
-		this.montoTotal = montoTotal;
 		this.patente = patente;
 		this.motor = motor;
 		this.chasis = chasis;
 		this.kmAnio = kmAnio;
-		this.anio = anio;
 		this.cuotas = cuotas;
 		this.idAnio = idAnio;
+		this.tipoPoliza = tipoPoliza;
+		this.nroSiniestros = nroSiniestros;
 		this.medidasSeguridad = medidasSeguridad;
 		this.hijos = hijos;
 		this.tipoCobertura = tipoCobertura;
 		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
 		this.nroCliente = nroCliente;
+
 	}
 	
 	public String generarNroPoliza() {
-		
-		double n = Math.random()*1002102124;
+		double n = Math.random()*1000;
 		return Double.toString(n);
 	}
 	
 	public String generarDomicilio(Localidad localidad) {
-		return localidad.getProvincia().getNombre()+" - "+localidad.getProvincia();
-	}
-	
-	public PolizaMensual() {
-		
+		return localidad.getNombre()+", "+localidad.getProvincia().getNombre();
 	}
 
 	public String getNroPoliza() {
@@ -128,19 +127,19 @@ public class PolizaMensual{
 		this.nroPoliza = nroPoliza;
 	}
 
-	public String getVigenciaDesde() {
+	public Date getVigenciaDesde() {
 		return vigenciaDesde;
 	}
 
-	public void setVigenciaDesde(String vigenciaDesde) {
+	public void setVigenciaDesde(Date vigenciaDesde) {
 		this.vigenciaDesde = vigenciaDesde;
 	}
 
-	public String getVigenciaHasta() {
+	public Date getVigenciaHasta() {
 		return vigenciaHasta;
 	}
 
-	public void setVigenciaHasta(String vigenciaHasta) {
+	public void setVigenciaHasta(Date vigenciaHasta) {
 		this.vigenciaHasta = vigenciaHasta;
 	}
 
@@ -216,14 +215,6 @@ public class PolizaMensual{
 		this.kmAnio = kmAnio;
 	}
 
-	public int getAnio() {
-		return anio;
-	}
-
-	public void setAnio(int anio) {
-		this.anio = anio;
-	}
-
 	public float getPremio() {
 		return premio;
 	}
@@ -287,6 +278,47 @@ public class PolizaMensual{
 	public void setCliente(Cliente cliente) {
 		this.nroCliente = cliente;
 	}
+
+	public Anio getIdAnio() {
+		return idAnio;
+	}
+
+	public void setIdAnio(Anio idAnio) {
+		this.idAnio = idAnio;
+	}
+
+	public String getTipoPoliza() {
+		return tipoPoliza;
+	}
+
+	public void setTipoPoliza(String tipoPoliza) {
+		this.tipoPoliza = tipoPoliza;
+	}
+
+	public Cliente getNroCliente() {
+		return nroCliente;
+	}
+
+	public void setNroCliente(Cliente nroCliente) {
+		this.nroCliente = nroCliente;
+	}
+	public int getNroSiniestros() {
+		return nroSiniestros;
+	}
+	public void setNroSiniestros(int nroSiniestros) {
+		this.nroSiniestros = nroSiniestros;
+	}
+	@Override
+	public String toString() {
+		return "Poliza [nroPoliza=" + nroPoliza + ", vigenciaDesde=" + vigenciaDesde + ", vigenciaHasta="
+				+ vigenciaHasta + ", domicilioRiesgo=" + domicilioRiesgo + ", estadoPoliza=" + estadoPoliza + ", prima="
+				+ prima + ", montoTotal=" + montoTotal + ", descuentoUnidad=" + descuentoUnidad + ", patente=" + patente
+				+ ", motor=" + motor + ", chasis=" + chasis + ", kmAnio=" + kmAnio + ", premio=" + premio + ", cuotas="
+				+ cuotas + ", idAnio=" + idAnio + ", tipoPoliza=" + tipoPoliza + ", nroSiniestros=" + nroSiniestros
+				+ ", medidasSeguridad=" + medidasSeguridad + ", hijos=" + hijos + ", tipoCobertura=" + tipoCobertura
+				+ ", valoresPorcentualesPoliza=" + valoresPorcentualesPoliza + ", nroCliente=" + nroCliente + "]";
+	}
+
 	
 	
 }

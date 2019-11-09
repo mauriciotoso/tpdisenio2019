@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Date;
+
 import Entidades.Cliente;
 import Enumerados.*;
 
@@ -7,7 +9,7 @@ import Enumerados.*;
 public class ClienteDTO {
 	
 	private String nroCliente;
-	private String fechaNacimiento;
+	private Date fechaNacimiento;
 	private String nombre;
 	private String apellido;
 	private TipoDocumento tipoDocumento;
@@ -22,7 +24,7 @@ public class ClienteDTO {
 	private EstadoCliente estadoCliente;
 	private DireccionDTO direccionDTO;
 	
-	public ClienteDTO(String nroCliente,String fechaNacimiento, String nombre, String apellido,
+	public ClienteDTO(String nroCliente,Date fechaNacimiento, String nombre, String apellido,
 			TipoDocumento tipoDocumento, String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIva,
 			String correoElectronico, EstadoCivil estadoCivil, String profesion, String anioRegistro,
 			EstadoCliente estadoCliente, DireccionDTO direccionDTO) {
@@ -62,6 +64,15 @@ public class ClienteDTO {
 		this.direccionDTO = new DireccionDTO(c.getDireccion());
 	}
 
+	@Override
+	public String toString() {
+		return "ClienteDTO [nroCliente=" + nroCliente + ", fechaNacimiento=" + fechaNacimiento + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
+				+ ", nroCuil=" + nroCuil + ", sexo=" + sexo + ", condicionIva=" + condicionIva + ", correoElectronico="
+				+ correoElectronico + ", estadoCivil=" + estadoCivil + ", profesion=" + profesion + ", anioRegistro="
+				+ anioRegistro + ", estadoCliente=" + estadoCliente + ", direccionDTO=" + direccionDTO + "]";
+	}
+
 	public String getNroCliente() {
 		return nroCliente;
 	}
@@ -70,11 +81,11 @@ public class ClienteDTO {
 		this.nroCliente = nroCliente;
 	}
 
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

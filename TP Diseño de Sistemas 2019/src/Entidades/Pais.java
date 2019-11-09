@@ -35,6 +35,11 @@ public class Pais {
 	public void setIdPais(int idPais) {
 		this.idPais = idPais;
 	}
+
+	@Override
+	public String toString() {
+		return "Pais [idPais=" + idPais + ", nombre=" + nombre + "]";
+	}
 	
 	
 }

@@ -38,8 +38,7 @@ public class Anio {
 	
 	@Override
 	public String toString() {
-		return "Anio [idAnio=" + idAnio + ", anio=" + anio + ", valorPorcentualModelo=" + valorPorcentualModelo
-				+ ", idModelo=" + idModelo + "]";
+		return "Anio [idAnio=" + idAnio + ", anio=" + anio + ", valorPorcentualModelo=" + valorPorcentualModelo + "]";
 	}
 
 	public float getValorPorcentualModelo() {

@@ -4,6 +4,11 @@ import javax.persistence.*;
 @Entity
 public class EstadoCliente {
 	
+	@Override
+	public String toString() {
+		return "EstadoCliente [idEstadoCliente=" + idEstadoCliente + ", estadoCliente=" + estadoCliente + "]";
+	}
+
 	@Id
 	private int idEstadoCliente;
 	private String estadoCliente;

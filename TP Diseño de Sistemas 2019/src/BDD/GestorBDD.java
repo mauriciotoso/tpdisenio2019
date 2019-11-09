@@ -1,10 +1,10 @@
 package BDD;
 
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 
 import DTO.*;
 import Entidades.*;
@@ -19,26 +19,86 @@ public class GestorBDD {
 		this.sessionFactory = new Configuration().configure().buildSessionFactory();
 		this.session = sessionFactory.openSession();
 	}
+
+	public List<Pais> getPaises(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Pais> paises = session.createQuery("from Pais").getResultList();
+		session.getTransaction().commit();
+		
+		return paises;
+		
+	}
+	
+	public List<Provincia> getProvincias(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Provincia> provincias = session.createQuery("from Provincia").getResultList();
+		session.getTransaction().commit();
+		
+		return provincias;
+		
+	}
+	
+	public List<Localidad> getLocalidades(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Localidad> localidades = session.createQuery("from Localidad").getResultList();
+		session.getTransaction().commit();
+		
+		return localidades;
+		
+	}
+	
+	public List<Marca> getMarcas(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Marca> marcas = session.createQuery("from Marca").getResultList();
+		session.getTransaction().commit();
+		
+		return marcas;
+		
+	}
+	
+	public List<Modelo> getModelos(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Modelo> modelos = session.createQuery("from Modelo").getResultList();
+		session.getTransaction().commit();
+		
+		return modelos;
+	}
+	
+	public List<Anio> getAnios(){
+
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Anio> anios = session.createQuery("from Anio").getResultList();
+		session.getTransaction().commit();
+		
+		return anios;
+		
+	}
 	
 	public int validarIDs(PolizaDTO polDTO) {
 		
 		session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		List<PolizaMensual> listaPolizas1 = session.createQuery
-				("from PolizaMensual p "
-				+ "where (p.patente='"+polDTO.getPatente()+"' "
-				+ "or p.motor='"+polDTO.getMotor()+"' "
-				+ "or p.chasis='"+polDTO.getChasis()+"') and p.estadoPoliza=1").getResultList();
-		
-		@SuppressWarnings("unchecked")
-		List<PolizaSemestral> listaPolizas2 = session.createQuery
-				("from PolizaSemestral p "
+		List<Poliza> listaPolizas = session.createQuery
+				("from Poliza p "
 				+ "where (p.patente='"+polDTO.getPatente()+"' "
 				+ "or p.motor='"+polDTO.getMotor()+"' "
 				+ "or p.chasis='"+polDTO.getChasis()+"') and p.estadoPoliza=1").getResultList();
 		session.getTransaction().commit();
-		
-		return listaPolizas1.size() + listaPolizas2.size();
+
+		int val=listaPolizas.size();
+		System.out.println(val);
+		return val;
 	}
 	
 	public Cliente getCliente(String nroCliente) {
@@ -56,10 +116,10 @@ public class GestorBDD {
 		
 		@SuppressWarnings("unchecked")
 		List<Anio> anios = session.createQuery
-		("from Anio a where a.anio="+polDTO.getAnio()+" ").getResultList();
+		("from Anio a where a.anio=2006 ").getResultList();
 		
 		for(Anio a:anios) {
-			if(a.getModelo().getNombre().compareTo(polDTO.getModelo())==0 && a.getModelo().getMarca().getMarca().compareTo(polDTO.getMarca())==0) {
+			if(a.getModelo().getNombre().compareTo("Focus")==0 && a.getModelo().getMarca().getMarca().compareTo("Ford")==0) {
 				return a;
 			}
 		}
@@ -133,15 +193,13 @@ public class GestorBDD {
 		return vpa;
 	}
 	
-	public void guardarPoliza(PolizaMensual poliza) {
+	public void guardarPoliza(Poliza poliza) {
 		session.beginTransaction();
+		
+		session.save(poliza.getMedidasSeguridad());
+		session.save(poliza.getValoresPorcentualesPoliza());
 		session.save(poliza);
-		session.getTransaction().commit();
-	}
-	
-	public void guardarPoliza(PolizaSemestral poliza) {
-		session.beginTransaction();
-		session.save(poliza);
+		
 		session.getTransaction().commit();
 	}
 	

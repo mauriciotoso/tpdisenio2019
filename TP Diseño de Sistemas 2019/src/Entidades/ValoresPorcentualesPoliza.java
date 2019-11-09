@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class ValoresPorcentualesPoliza {
 
 	@Id
-	@SequenceGenerator(name="seq-gen",sequenceName="sec_id", initialValue=3, allocationSize=1)
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_idvp", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	@Column (name="idvalorporcentual")
 	private int idValoresPorcentualesPoliza;
@@ -37,6 +37,29 @@ public class ValoresPorcentualesPoliza {
 			float valorPorcentualMedidasSeguridad, float derechoEmision) {
 		super();
 		this.idValoresPorcentualesPoliza = idValoresPorcentualesPoliza;
+		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
+		this.valorPorcentualGarage = valorPorcentualGarage;
+		this.valorPorcentualAlarma = valorPorcentualAlarma;
+		this.valorPorcentualRastreoVehicular = valorPorcentualRastreoVeicular;
+		this.valorPorcentualTuercasAntirrobo = valorPorcentualTuercasAntirrobo;
+		this.valorPorcentualSinSiniestro = valorPorcentualSinSiniestro;
+		this.valorPorcentualUnSiniestro = valorPorcentualUnSiniestro;
+		this.valorPorcentualDosSiniestro = valorPorcentualDosSiniestro;
+		this.valorPorcentualTresSiniestro = valorPorcentualTresSiniestro;
+		this.valorPorcentualHijo = valorPorcentualHijo;
+		this.valorPorcentualModelo = valorPorcentualModelo;
+		this.valorPorcentualLocalidad = valorPorcentualLocalidad;
+		this.valorPorcentualTipoCobertura = valorPorcentualTipoCobertura;
+		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
+		this.derechoEmision = derechoEmision;
+	}
+	
+	public ValoresPorcentualesPoliza(float valorPorcentualKmAnio,
+			float valorPorcentualGarage, float valorPorcentualAlarma, float valorPorcentualRastreoVeicular,
+			float valorPorcentualTuercasAntirrobo, float valorPorcentualSinSiniestro, float valorPorcentualUnSiniestro,
+			float valorPorcentualDosSiniestro, float valorPorcentualTresSiniestro, float valorPorcentualHijo,
+			float valorPorcentualModelo, float valorPorcentualLocalidad, float valorPorcentualTipoCobertura,
+			float valorPorcentualMedidasSeguridad, float derechoEmision) {
 		this.valorPorcentualKmAnio = valorPorcentualKmAnio;
 		this.valorPorcentualGarage = valorPorcentualGarage;
 		this.valorPorcentualAlarma = valorPorcentualAlarma;
@@ -221,7 +244,4 @@ public class ValoresPorcentualesPoliza {
 	public void setValorPorcentualMedidasSeguridad(float valorPorcentualMedidasSeguridad) {
 		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
 	}
-	
-	
-	
 }

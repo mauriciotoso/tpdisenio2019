@@ -2,84 +2,96 @@ package DTO;
 
 import java.util.Date;
 import java.util.List;
-
-import Enumerados.EstadoPoliza;
+import Entidades.*;
 
 public class PolizaDTO {
 
 	private String nroPoliza;
+	private int idlocalidad;
 	private String localidad;
 	private String provincia;
 	private String pais;
 	private String marca;
 	private String modelo;
-	private int anioModelo;
+	private int idAnioModelo;
 	private String motor;
 	private String chasis;
 	private String patente;
 	private int kmAnio;
 	private float montoTotal;
 	private int nroSiniestros;
+	private int idTipoCobertura;
 	private String tipoCobertura;
 	private String tipoPoliza;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String formaPago;
-	private float valorPorcentualCobertura;
-	private int anio;
 	private MedidasSeguridadDTO medidasSeguridad;
 	private List<CuotaDTO> cuotas;
 	private List<HijoDTO> hijos;
 	private ClienteDTO cliente;
 	private ValorPorcentualDTO valoresPorcentualesDTO;
+	private int idEstadoPoliza;
 	private String estadoPoliza;
 	
-	public PolizaDTO() {
-		
-	}
+	public PolizaDTO() {}
 	
-	public PolizaDTO(String nroPoliza, String localidad, String provincia, String pais, String marca, String modelo,
-			int anioModelo, String motor, String chasis, String patente, int kmAnio, float montoTotal,
-			int nroSiniestros, String tipoCobertura, String tipoPoliza, Date fechaInicio, Date fechaFin,
-			String formaPago, float valorPorcentualCobertura, int anio, MedidasSeguridadDTO medidasSeguridad,
-			List<CuotaDTO> cuotas, List<HijoDTO> hijos, ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO, String estadoPoliza) {
+	public PolizaDTO(String nroPoliza, int idlocalidad, String localidad, String provincia, String pais, String marca,
+			String modelo, int idAnioModelo, String motor, String chasis, String patente, int kmAnio, float montoTotal,
+			int nroSiniestros, int idTipoCobertura, String tipoCobertura, String tipoPoliza, Date fechaInicio,
+			Date fechaFin, MedidasSeguridadDTO medidasSeguridad, List<CuotaDTO> cuotas, List<HijoDTO> hijos,
+			ClienteDTO cliente, ValorPorcentualDTO valoresPorcentualesDTO, int idEstadoPoliza, String estadoPoliza) {
 		super();
 		this.nroPoliza = nroPoliza;
+		this.idlocalidad = idlocalidad;
 		this.localidad = localidad;
 		this.provincia = provincia;
 		this.pais = pais;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.anioModelo = anioModelo;
+		this.idAnioModelo = idAnioModelo;
 		this.motor = motor;
 		this.chasis = chasis;
 		this.patente = patente;
 		this.kmAnio = kmAnio;
 		this.montoTotal = montoTotal;
 		this.nroSiniestros = nroSiniestros;
+		this.idTipoCobertura = idTipoCobertura;
 		this.tipoCobertura = tipoCobertura;
 		this.tipoPoliza = tipoPoliza;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.formaPago = formaPago;
-		this.valorPorcentualCobertura = valorPorcentualCobertura;
-		this.anio = anio;
 		this.medidasSeguridad = medidasSeguridad;
 		this.cuotas = cuotas;
 		this.hijos = hijos;
 		this.cliente = cliente;
 		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
+		this.idEstadoPoliza = idEstadoPoliza;
 		this.estadoPoliza = estadoPoliza;
 	}
 
-	public String getEstadoPoliza() {
-		return estadoPoliza;
+	public PolizaDTO(Localidad localidad, Anio anio, String motor, String chasis, String patente, int kmAnio,
+			int nroSiniestros, MedidasSeguridadDTO medidasSeguridad,
+			ClienteDTO cliente) {
+		
+		this.nroPoliza = "-";
+		this.idlocalidad = localidad.getIdLocalidad();
+		this.localidad = localidad.getNombre();
+		this.provincia = localidad.getProvincia().getNombre();
+		this.pais = localidad.getProvincia().getPais().getNombre();
+		this.marca = anio.getModelo().getMarca().getMarca();
+		this.modelo = anio.getModelo().getNombre();
+		this.idAnioModelo = anio.getIdAnio();
+		this.motor = motor;
+		this.chasis = chasis;
+		this.patente = patente;
+		this.kmAnio = kmAnio;
+		this.nroSiniestros = nroSiniestros;
+		this.medidasSeguridad = medidasSeguridad;
+		this.cliente = cliente;
 	}
 
-	public void setEstadoPoliza(String estadoPoliza) {
-		this.estadoPoliza = estadoPoliza;
-	}
-
+	
+	
 	public String getNroPoliza() {
 		return nroPoliza;
 	}
@@ -88,6 +100,13 @@ public class PolizaDTO {
 		this.nroPoliza = nroPoliza;
 	}
 
+	public int getIdlocalidad() {
+		return idlocalidad;
+	}
+
+	public void setIdlocalidad(int idlocalidad) {
+		this.idlocalidad = idlocalidad;
+	}
 
 	public String getLocalidad() {
 		return localidad;
@@ -129,12 +148,12 @@ public class PolizaDTO {
 		this.modelo = modelo;
 	}
 
-	public int getAnio() {
-		return anio;
+	public int getIdAnioModelo() {
+		return idAnioModelo;
 	}
 
-	public void setAnio(int anio) {
-		this.anio = anio;
+	public void setIdAnioModelo(int idAnioModelo) {
+		this.idAnioModelo = idAnioModelo;
 	}
 
 	public String getMotor() {
@@ -169,12 +188,28 @@ public class PolizaDTO {
 		this.kmAnio = kmAnio;
 	}
 
+	public float getMontoTotal() {
+		return montoTotal;
+	}
+
+	public void setMontoTotal(float montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+
 	public int getNroSiniestros() {
 		return nroSiniestros;
 	}
 
 	public void setNroSiniestros(int nroSiniestros) {
 		this.nroSiniestros = nroSiniestros;
+	}
+
+	public int getIdTipoCobertura() {
+		return idTipoCobertura;
+	}
+
+	public void setIdTipoCobertura(int idTipoCobertura) {
+		this.idTipoCobertura = idTipoCobertura;
 	}
 
 	public String getTipoCobertura() {
@@ -207,30 +242,6 @@ public class PolizaDTO {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-	public String getFormaPago() {
-		return formaPago;
-	}
-
-	public void setFormaPago(String formaPago) {
-		this.formaPago = formaPago;
-	}
-
-	public float getValorPorcentualCobertura() {
-		return valorPorcentualCobertura;
-	}
-
-	public void setValorPorcentualCobertura(float valorPorcentualCobertura) {
-		this.valorPorcentualCobertura = valorPorcentualCobertura;
-	}
-
-	public int getAnioModelo() {
-		return anioModelo;
-	}
-
-	public void setAnioModelo(int anioModelo) {
-		this.anioModelo = anioModelo;
 	}
 
 	public MedidasSeguridadDTO getMedidasSeguridad() {
@@ -273,26 +284,33 @@ public class PolizaDTO {
 		this.valoresPorcentualesDTO = valoresPorcentualesDTO;
 	}
 
-	public float getMontoTotal() {
-		return montoTotal;
+	public int getIdEstadoPoliza() {
+		return idEstadoPoliza;
 	}
 
-	public void setMontoTotal(float montoTotal) {
-		this.montoTotal = montoTotal;
+	public void setIdEstadoPoliza(int idEstadoPoliza) {
+		this.idEstadoPoliza = idEstadoPoliza;
+	}
+
+	public String getEstadoPoliza() {
+		return estadoPoliza;
+	}
+
+	public void setEstadoPoliza(String estadoPoliza) {
+		this.estadoPoliza = estadoPoliza;
 	}
 
 	@Override
 	public String toString() {
-		return "PolizaDTO [nroPoliza=" + nroPoliza + ", localidad=" + localidad + ", provincia=" + provincia + ", pais="
-				+ pais + ", marca=" + marca + ", modelo=" + modelo + ", anioModelo=" + anioModelo + ", motor=" + motor
-				+ ", chasis=" + chasis + ", patente=" + patente + ", kmAnio=" + kmAnio + ", montoTotal=" + montoTotal
-				+ ", nroSiniestros=" + nroSiniestros + ", tipoCobertura=" + tipoCobertura + ", tipoPoliza=" + tipoPoliza
-				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", formaPago=" + formaPago
-				+ ", valorPorcentualCobertura=" + valorPorcentualCobertura + ", anio=" + anio + ", medidasSeguridad="
+		return "PolizaDTO [nroPoliza=" + nroPoliza + ", idlocalidad=" + idlocalidad + ", localidad=" + localidad
+				+ ", provincia=" + provincia + ", pais=" + pais + ", marca=" + marca + ", modelo=" + modelo
+				+ ", idAnioModelo=" + idAnioModelo + ", motor=" + motor + ", chasis=" + chasis + ", patente=" + patente
+				+ ", kmAnio=" + kmAnio + ", montoTotal=" + montoTotal + ", nroSiniestros=" + nroSiniestros
+				+ ", idTipoCobertura=" + idTipoCobertura + ", tipoCobertura=" + tipoCobertura + ", tipoPoliza="
+				+ tipoPoliza + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", medidasSeguridad="
 				+ medidasSeguridad + ", cuotas=" + cuotas + ", hijos=" + hijos + ", cliente=" + cliente
-				+ ", valoresPorcentualesDTO=" + valoresPorcentualesDTO + ", estadoPoliza=" + estadoPoliza + "]";
+				+ ", valoresPorcentualesDTO=" + valoresPorcentualesDTO + ", idEstadoPoliza=" + idEstadoPoliza
+				+ ", estadoPoliza=" + estadoPoliza + "]";
 	}
-	
-	
-	
+		
 }

@@ -6,6 +6,8 @@ import javax.persistence.*;
 public class Direccion {
 	
 	@Id
+	@SequenceGenerator(name="seq-gen",sequenceName="sec_iddireccion", initialValue=1, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
 	private int idDireccion;
 	private String calle;
 	private String numero;
@@ -17,6 +19,9 @@ public class Direccion {
 	@JoinColumn (name="idlocalidad")
 	private Localidad localidad;
 
+
+	public Direccion() {}
+	
 	public Direccion(int idDireccion, String calle, String numero, String piso, String departamento,
 			String codigoPostal, Localidad localidad) {
 		super();
@@ -28,9 +33,16 @@ public class Direccion {
 		this.codigoPostal = codigoPostal;
 		this.localidad = localidad;
 	}
-	
-	public Direccion() {
-		
+
+
+	public Direccion(String calle, String numero, String piso, String departamento,
+			String codigoPostal, Localidad localidad) {
+		this.calle = calle;
+		this.numero = numero;
+		this.piso = piso;
+		this.departamento = departamento;
+		this.codigoPostal = codigoPostal;
+		this.localidad = localidad;
 	}
 
 	public String getCalle() {

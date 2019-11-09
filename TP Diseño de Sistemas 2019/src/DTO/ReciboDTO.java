@@ -1,5 +1,6 @@
 package DTO;
 
+import java.util.Date;
 import java.util.List;
 
 public class ReciboDTO {
@@ -12,9 +13,11 @@ public class ReciboDTO {
 	private int mesAbonado;
 	private String anioAbonado;
 	private List<CuotaDTO> cuotas;
-	
+	private Date fechaRecibo;
+	private Date horaRecibo;
+
 	public ReciboDTO(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			int mesAbonado, String anioAbonado, List<CuotaDTO> cuotas) {
+			int mesAbonado, String anioAbonado, List<CuotaDTO> cuotas, Date fechaRecibo, Date horaRecibo) {
 		super();
 		this.importe = importe;
 		this.vuelto = vuelto;
@@ -24,6 +27,8 @@ public class ReciboDTO {
 		this.mesAbonado = mesAbonado;
 		this.anioAbonado = anioAbonado;
 		this.cuotas = cuotas;
+		this.fechaRecibo = fechaRecibo;
+		this.horaRecibo = horaRecibo;
 	}
 
 	public float getImporte() {
@@ -88,6 +93,22 @@ public class ReciboDTO {
 
 	public void setCuotas(List<CuotaDTO> cuotas) {
 		this.cuotas = cuotas;
+	}
+
+	public Date getFechaRecibo() {
+		return fechaRecibo;
+	}
+
+	public void setFechaRecibo(Date fechaRecibo) {
+		this.fechaRecibo = fechaRecibo;
+	}
+
+	public Date getHoraRecibo() {
+		return horaRecibo;
+	}
+
+	public void setHoraRecibo(Date horaRecibo) {
+		this.horaRecibo = horaRecibo;
 	}
 	
 	

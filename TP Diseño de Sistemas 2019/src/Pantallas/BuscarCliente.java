@@ -59,6 +59,7 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.setBounds(292, 250, 200, 50);
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				GestorBDD gestorBDD = new GestorBDD();
 				ClienteDTO clienteDTO = gestorBDD.getCliente();
 				

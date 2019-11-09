@@ -1,5 +1,6 @@
 package Entidades;
-import java.util.ArrayList;
+import java.util.Date;
+
 import Enumerados.*;
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ public class Cliente {
 	
 	@Id
 	private String nroCliente;
-	private String fechaNacimiento;
+	private Date fechaNacimiento;
 	private String nombre;
 	private String apellido;
 	private TipoDocumento tipoDocumento;
@@ -30,7 +31,9 @@ public class Cliente {
 	@JoinColumn (name="direccion")
 	private Direccion direccion;
 	
-	public Cliente(String nroCliente, String fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
+	public Cliente() {}
+	
+	public Cliente(String nroCliente, Date fechaNacimiento, String nombre, String apellido, TipoDocumento tipoDocumento,
 			String nroDocumento, String nroCuil, Sexo sexo, CondicionIVA condicionIVA, String correoElectronico,
 			EstadoCivil estadoCivil, String profesion, String anioRegistro, EstadoCliente etadoCliente,
 			 Direccion direccion) {
@@ -47,13 +50,8 @@ public class Cliente {
 		this.estadoCivil = estadoCivil;
 		this.profesion = profesion;
 		this.anioRegistro = anioRegistro;
-		this.etadoCliente = etadoCliente;
-		
+		this.etadoCliente = etadoCliente;	
 		this.direccion = direccion;
-	}
-
-	public Cliente() {
-		
 	}
 	
 	public String getNroCliente() {
@@ -64,11 +62,11 @@ public class Cliente {
 		this.nroCliente = nroCliente;
 	}
 
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

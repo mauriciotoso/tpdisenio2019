@@ -33,6 +33,11 @@ public class CondicionIVA {
 	public void setCondicionIVA(String condicionIVA) {
 		this.condicionIVA = condicionIVA;
 	}
+
+	@Override
+	public String toString() {
+		return "CondicionIVA [idCondicionIVA=" + idCondicionIVA + ", condicionIVA=" + condicionIVA + "]";
+	}
 	
 	
 

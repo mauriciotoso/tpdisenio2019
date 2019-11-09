@@ -1,5 +1,6 @@
 package Entidades;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,22 +16,26 @@ public class Recibo {
 	private String operador;
 	private String mesAbonado;
 	private String anioAbonado;
+	private Date fechaRecibo;
+	private Date horaRecibo;
 	@OneToMany
 	private List<Cuota> cuotas;
 	
-	public Recibo(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			String mesAbonado, String anioAbonado, List<Cuota> cuotas) {
+	public Recibo(String nroRecibo, float importe, float vuelto, float importePagado, String operador,
+			String mesAbonado, String anioAbonado, Date fechaRecibo, Date horaRecibo, List<Cuota> cuotas) {
 		super();
+		this.nroRecibo = nroRecibo;
 		this.importe = importe;
 		this.vuelto = vuelto;
 		this.importePagado = importePagado;
-		this.nroRecibo = nroRecibo;
 		this.operador = operador;
 		this.mesAbonado = mesAbonado;
 		this.anioAbonado = anioAbonado;
+		this.fechaRecibo = fechaRecibo;
+		this.horaRecibo = horaRecibo;
 		this.cuotas = cuotas;
 	}
-	
+
 	public Recibo() {
 		
 	}
@@ -97,6 +102,22 @@ public class Recibo {
 
 	public void setCuotas(List<Cuota> cuotas) {
 		this.cuotas = cuotas;
+	}
+
+	public Date getFechaRecibo() {
+		return fechaRecibo;
+	}
+
+	public void setFechaRecibo(Date fechaRecibo) {
+		this.fechaRecibo = fechaRecibo;
+	}
+
+	public Date getHoraRecibo() {
+		return horaRecibo;
+	}
+
+	public void setHoraRecibo(Date horaRecibo) {
+		this.horaRecibo = horaRecibo;
 	}
 	
 	

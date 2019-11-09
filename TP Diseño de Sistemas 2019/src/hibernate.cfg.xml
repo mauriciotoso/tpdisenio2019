@@ -43,8 +43,7 @@
 <mapping class="Entidades.MedidasSeguridad"/>
 <mapping class="Entidades.Modelo"/>
 <mapping class="Entidades.Pais"/>
-<mapping class="Entidades.PolizaMensual"/>
-<mapping class="Entidades.PolizaSemestral"/>
+<mapping class="Entidades.Poliza"/>
 <mapping class="Entidades.Provincia"/>
 <mapping class="Entidades.Recibo"/>
 <mapping class="Entidades.SolicitudPoliza"/>
