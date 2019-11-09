@@ -1,3 +1,5 @@
+﻿--CREATES E INSERTS
+
 drop table if exists anio cascade;
 drop table if exists cliente cascade;
 drop table if exists condicioniva cascade;
@@ -11,16 +13,21 @@ drop table if exists marca cascade;
 drop table if exists medidasseguridad cascade;
 drop table if exists modelo cascade;
 drop table if exists pais cascade;
-drop table if exists polizamensual cascade;
-drop table if exists polizasemestral cascade;
+drop table if exists poliza cascade;
 drop table if exists provincia cascade;
 drop table if exists recibo cascade;
 drop table if exists solicitudpoliza cascade;
-drop table if exists student cascade;
 drop table if exists tipocobertura cascade;
 drop table if exists usuario cascade;
 drop table if exists valorporcentual cascade;
 drop table if exists valorporcentualactual cascade;
+
+drop sequence if exists sec_iddireccion cascade;
+drop sequence if exists sec_idcuota cascade;
+drop sequence if exists sec_idms cascade;
+drop sequence if exists sec_idvp cascade;
+drop sequence if exists sec_idhijo cascade;
+drop sequence if exists sec_idsolicitud cascade;
 
 create table condicionIVA
 (idCondicionIVA int,
@@ -55,6 +62,7 @@ valorPorcentualLocalidad float,
 idProvincia int references provincia(idProvincia),
 primary key(idLocalidad));
 
+create sequence sec_iddireccion start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table direccion
 (idDireccion int,
 calle varchar(40),
@@ -67,7 +75,7 @@ primary key (idDireccion));
 
 create table cliente
 (nroCliente varchar(40),
- fechaNacimiento varchar(20),
+ fechaNacimiento Date,
  nombre varchar(20),
  apellido varchar(20),
  tipoDocumento varchar(30),
@@ -75,15 +83,13 @@ create table cliente
  nroCuil varchar(20),
  sexo varchar(20),
  condicionIVA int references condicionIVA(idCondicionIVA),
- email varchar(40),
+ email varchar(50),
  estadoCivil varchar(20),
- profesion varchar(30),
+ profesion varchar(50),
  anioRegistro varchar(10),
  estadoCliente int references estadoCliente(idEstadoCliente),
  direccion int references direccion(idDireccion),
  primary key(nroCliente));
-
---select * from cuota;
 
 create table marca
 (idMarca int,
@@ -95,9 +101,6 @@ create table modelo
  modelo varchar(30),
  idMarca int references marca(idMarca),
  primary key(idModelo));
-
---delete from marca;
---select * from anio;
 
 create table anio
 (idAnio int,
@@ -113,6 +116,7 @@ create table tipoCobertura
  valorPorcentualTipoCobertura float,
 primary key(idTipoCobertura));
 
+create sequence sec_idms start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table medidasSeguridad
 (idMedidasSeguridad int,
  tieneGarage boolean,
@@ -125,7 +129,7 @@ create table usuario
  (usuario varchar(20),
  nombre varchar(20),
  apellido varchar(20),
- contraseña varchar(30),
+ contrasenia varchar(30),
  tipo varchar(30),
  primary key(usuario));
 
@@ -145,6 +149,7 @@ derechoEmision float,
 usuario varchar(20) references usuario(usuario),
 primary key(idValorPorcentualActual));
 
+create sequence sec_idvp start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table valorPorcentual
 (idValorPorcentual int,
  derechoEmision float,
@@ -164,12 +169,13 @@ valorPorcentualTresSiniestro float,
 valorPorcentualSeguridad float,
 primary key(idValorPorcentual));
 
-create table polizaMensual
+create table poliza
 (nroPoliza varchar(20),
-vigenciaDesde varchar(20),
-vigenciaHasta varchar(20),
-domicilioRiesgo varchar(50),
+vigenciaDesde Date,
+vigenciaHasta Date,
+domicilioRiesgo varchar(80),
 estadoPoliza int references estadoPoliza(idEstadoPoliza),
+tipoPoliza varchar(20),
 prima float,
 montoTotal float,
 descuentoUnidad float,
@@ -177,7 +183,6 @@ patente varchar(20),
 motor varchar(30),
 chasis varchar(30),
 kmsPorAnio int,
-anio int,
 premio float,
 nroSiniestros int,
 idAnio int references anio(idAnio),
@@ -187,51 +192,26 @@ nrocliente varchar(40) references cliente(nroCliente),
 idtipoCobertura int references tipoCobertura(idTipoCobertura),
 primary key(nroPoliza));
 
-create table polizaSemestral
-(nroPoliza varchar(20),
-vigenciaDesde varchar(20),
-vigenciaHasta varchar(20),
-domicilioRiesgo varchar(50),
-estadoPoliza int references estadoPoliza(idEstadoPoliza),
-prima float,
-montoTotal float,
-descuentoUnidad float,
-patente varchar(20),
-motor varchar(30),
-chasis varchar(30),
-kmsPorAnio int,
-anio int,
-premio float,
-nroSiniestros int,
-anioModelo int references anio(idAnio),
-valoresPorcentualesPoliza int references valorPorcentual(idValorPorcentual),
-medidasSeguridad int references medidasSeguridad(idMedidasSeguridad),
-cliente varchar(40) references cliente(nroCliente),
-tipoCobertura int references tipoCobertura(idTipoCobertura),
-bonificacion float,
-primary key(nroPoliza));
-
+create sequence sec_idsolicitud start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table solicitudPoliza
 (idSolicitudPoliza int,
-anio int,
 patente varchar(20),
 motor varchar(30),
 chasis varchar(30),
 kmAnio int,
 medidasSeguridad int references medidasSeguridad(idMedidasSeguridad),
 tipoCobertura int references tipoCobertura(idTipoCobertura),
-polizaMensual varchar(20) references polizaMensual(nroPoliza),
-polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+nroPoliza varchar(20) references poliza(nroPoliza),
 primary key(idSolicitudPoliza));
 
+create sequence sec_idhijo start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table hijoDeclarado
 (idHijo int,
-fechaNacimiento varchar(20),
+fechaNacimiento Date,
 sexo varchar(20),
 estadoCivil varchar(30),
 solicitudPoliza int references solicitudPoliza(idSolicitudPoliza),
-polizaMensual varchar(20) references polizaMensual(nroPoliza),
-polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+nropoliza varchar(20) references poliza(nroPoliza),
 primary key(idHijo));
 
 create table recibo
@@ -239,22 +219,112 @@ create table recibo
  importe float,
  vuelto float,
  importePagado float,
- fechaPago varchar(20),
+ fechaPago Date,
  horaPago varchar(20),
  mesAbonado varchar(20),
  anioAbonado varchar(10),
  usuario varchar(20) references usuario(usuario),
  primary key(nroRecibo));
 
+create sequence sec_idcuota start with 1 increment by 1 maxvalue 99999 minvalue 0;
 create table cuota
 (idCuota int,
 nroCuota int,
 recargosPorMora float,
-ultimoDiaPago varchar(20),
+ultimoDiaPago Date,
 importeCuota float,
 estaPago boolean,
 bonificacion float,
 recibo int references recibo(nroRecibo),
-polizaMensual varchar(20) references polizaMensual(nroPoliza),
-polizaSemestral varchar(20) references polizaSemestral(nroPoliza),
+nroPoliza varchar(20) references poliza(nroPoliza),
 primary key(idCuota));
+
+--INSERTS FIJOS
+
+insert into estadopoliza values (1,'GENERADA');
+insert into estadopoliza values (2,'CON COBERTURA');
+insert into estadopoliza values (3,'SIN COBERTURA');
+insert into estadopoliza values (4,'VIGENTE');
+
+insert into estadocliente values (1,'NORMAL');
+insert into estadocliente values (2,'ACTIVO');
+insert into estadocliente values (3,'PLATA');
+
+insert into condicioniva values (1,'CONSUMIDOR FINAL');
+insert into condicioniva values (2,'RESPONSABLE INSCRIPTO');
+insert into condicioniva values (3,'RESPONSABLE NO INSCRIPTO');
+insert into condicioniva values (4,'EXCENTO');
+
+insert into tipocobertura values (1,'Responsabilidad civil','Descripcion responsabilidad civil',0.1);
+insert into tipocobertura values (2,'Responsabilidad civil - Robo - Incendio total','Descripcion civil+robo+incendio',0.2);
+insert into tipocobertura values (3,'Todo total','Descripcion todo total',0.3);
+insert into tipocobertura values (4,'Todo terceros','Descripcion terceros',0.15);
+insert into tipocobertura values (5,'Todo riesgo con franquicia','Descripcion franquicia',0.25);
+
+insert into pais values (1,'Argentina');
+insert into pais values (2,'Chile');
+insert into pais values (3,'Uruguay');
+
+insert into provincia values (1,'Santa Fe',1);
+insert into provincia values (2,'Entre Rios',1);
+insert into provincia values (3,'Montevideo',3);
+insert into provincia values (4,'Cordoba',1);
+insert into provincia values (5,'Santiago de Chile',1);
+
+insert into localidad values (1,'Santa Fe',0.5,1);
+insert into localidad values (2,'Sunchales',1);
+insert into localidad values (3,'Rosario',1);
+insert into localidad values (4,'Colon',2);
+insert into localidad values (5,'Gualeguaychu',1);
+insert into localidad values (6,'Paraná',0.4,2);
+insert into localidad values (7,'Villa Maria',0.2,4);
+insert into localidad values (8,'Cordoba',0.2,4);
+insert into localidad values (9,'Montevideo',0.3,3);
+insert into localidad values (10,'Santiago de Chile',0.2,5);
+
+insert into marca values (1,'Volkswagen');
+insert into marca values (2,'Chevrolet');
+insert into marca values (3,'Ford');
+insert into marca values (4,'Nissan');
+
+insert into modelo values (1,'Gol Trend',1);
+insert into modelo values (2,'Golf GTI',1);
+insert into modelo values (3,'Cruze',2);
+insert into modelo values (4,'Corsa',2);
+insert into modelo values (5,'Focus',3);
+insert into modelo values (6,'Fiesta',3);
+insert into modelo values (7,'GT-R',4);
+insert into modelo values (8,'Kicks',4);
+
+insert into anio values (1,2015,0.23,1);
+insert into anio values (2,2016,0.25,1);
+insert into anio values (3,2018,0.36,2);
+insert into anio values (4,2014,0.20,3);
+insert into anio values (5,2010,0.30,4);
+insert into anio values (6,2008,0.32,4);
+insert into anio values (7,2006,0.25,5);
+insert into anio values (8,2017,0.30,5);
+insert into anio values (9,2012,0.28,6);
+insert into anio values (10,2018,0.62,7);
+insert into anio values (11,2018,0.45,8);
+insert into anio values (12,2017,0.40,8);
+
+--INSERTS DE PRUEBA
+
+insert into direccion values(nextval('sec_iddireccion'),'Lavaisse','610','3','2','3000',1);
+
+insert into cliente values ('1','1980-05-05','Santiago','Marnetto','DNI','20852741','202085274101','0',1,'smarnett@frsf.utn.edu.ar','1','Ing. en Sistemas','2019',3,1);
+
+insert into usuario values ('aguknussel','agustin','knussel','Aguknussel7%','Productor de Seguro');
+
+insert into valorporcentualactual values (1,0.3,0.2,0.23,0.6,0.14,0.23,0.33,0.54,0.45,0.44,0.11,'aguknussel');
+
+insert into valorporcentual values (nextval('sec_idvp'),0.3,0.2,0.23,0.6,0.14,0.23,0.33,0.54,0.45,0.44,0.11,0.2,0.33,0.12,0.43);
+
+insert into medidasseguridad values (nextval('sec_idms'),true, true , true ,false);
+
+insert into poliza values ('1','2019-12-03','2020-06-03','Santa Fe, Santa Fe',1,'SEMESTRAL',0.15,10000,0,'AD 214 DD','Motor1','Chasis1',20000,0.30,0,7,1,1,'1',3);
+
+insert into cuota values (nextval('sec_idcuota'),0,null,'2019-12-02',10000,false,null,null,1);
+
+insert into hijodeclarado values (nextval('sec_idhijo'),'1998-12-03','0',1,null,'1');
