@@ -13,33 +13,33 @@ public class FachadaBDD {
 	}
 	
 	public List<Pais> getPaises() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getPaises();
+		
+		return GestorBDD.getInstance().getPaises();
 	}
 	
 	public List<Provincia> getProvincias() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getProvincias();
+		
+		return GestorBDD.getInstance().getProvincias();
 	}
 	
 	public List<Localidad> getLocalidades() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getLocalidades();
+		
+		return GestorBDD.getInstance().getLocalidades();
 	}
 	
 	public List<Marca> getMarcas() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getMarcas();
+	
+		return GestorBDD.getInstance().getMarcas();
 	}
 	
 	public List<Modelo> getModelos() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getModelos();
+		
+		return GestorBDD.getInstance().getModelos();
 	}
 	
 	public List<Anio> getAnios() {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getAnios();
+		
+		return GestorBDD.getInstance().getAnios();
 	}
 
 }

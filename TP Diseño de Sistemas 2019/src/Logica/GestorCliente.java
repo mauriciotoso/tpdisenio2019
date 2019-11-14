@@ -5,10 +5,22 @@ import Entidades.*;
 
 public class GestorCliente {
 	
+	private static GestorCliente gestorCliente;
+	
+	private GestorCliente() {
+		
+	}
+	
+	public static GestorCliente getInstance() {
+		if(gestorCliente == null) {
+			gestorCliente = new GestorCliente();
+		}
+		return gestorCliente;
+	}
+	
 	public Cliente getCliente(String nroCliente) {
 		
-		GestorBDD gestorBDD = new GestorBDD();
-		Cliente c=gestorBDD.getCliente(nroCliente);
+		Cliente c=GestorBDD.getInstance().getCliente(nroCliente);
 		return c;
 	}
 

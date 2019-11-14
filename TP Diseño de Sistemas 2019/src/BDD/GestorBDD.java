@@ -11,18 +11,26 @@ import Entidades.*;
 import Enumerados.EstadoPoliza;
 
 public class GestorBDD {
-	
+	private static GestorBDD gestorBDD;
 	SessionFactory sessionFactory;
 	Session session;
 	
-	public GestorBDD() {
+	private GestorBDD() {
 		this.sessionFactory = new Configuration().configure().buildSessionFactory();
 		this.session = sessionFactory.openSession();
+	}
+	
+	public static GestorBDD getInstance() {
+		if(gestorBDD==null) {
+			gestorBDD = new GestorBDD();
+		}
+		return gestorBDD;
 	}
 
 	public List<Pais> getPaises(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
 		@SuppressWarnings("unchecked")
 		List<Pais> paises = session.createQuery("from Pais").getResultList();
 		session.getTransaction().commit();
@@ -33,7 +41,7 @@ public class GestorBDD {
 	
 	public List<Provincia> getProvincias(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Provincia> provincias = session.createQuery("from Provincia").getResultList();
 		session.getTransaction().commit();
@@ -44,7 +52,7 @@ public class GestorBDD {
 	
 	public List<Localidad> getLocalidades(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Localidad> localidades = session.createQuery("from Localidad").getResultList();
 		session.getTransaction().commit();
@@ -55,7 +63,7 @@ public class GestorBDD {
 	
 	public List<Marca> getMarcas(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Marca> marcas = session.createQuery("from Marca").getResultList();
 		session.getTransaction().commit();
@@ -66,7 +74,7 @@ public class GestorBDD {
 	
 	public List<Modelo> getModelos(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Modelo> modelos = session.createQuery("from Modelo").getResultList();
 		session.getTransaction().commit();
@@ -76,7 +84,7 @@ public class GestorBDD {
 	
 	public List<Anio> getAnios(){
 
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Anio> anios = session.createQuery("from Anio").getResultList();
 		session.getTransaction().commit();
@@ -87,7 +95,7 @@ public class GestorBDD {
 	
 	public int validarIDs(PolizaDTO polDTO) {
 		
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<Poliza> listaPolizas = session.createQuery
 				("from Poliza p "
@@ -103,7 +111,7 @@ public class GestorBDD {
 	
 	public Cliente getCliente(String nroCliente) {
 		
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		Cliente c = session.get(Cliente.class, nroCliente);
 		session.getTransaction().commit();
 		
@@ -112,7 +120,7 @@ public class GestorBDD {
 	
 	public Anio getAnio(PolizaDTO polDTO){
 		
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
 		List<Anio> anios = session.createQuery
@@ -132,7 +140,8 @@ public class GestorBDD {
 
 	public Localidad getLocalidad(PolizaDTO polDTO){
 		
-		session.beginTransaction();
+		
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
 		List<Localidad> localidades = session.createQuery
@@ -151,7 +160,7 @@ public class GestorBDD {
 	
 	public TipoCobertura getTipoCobertura(PolizaDTO polDTO) {
 		
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
 		List<TipoCobertura> coberturas = session.createQuery
@@ -169,7 +178,7 @@ public class GestorBDD {
 	}
 	
 	public EstadoPoliza getEstadoPoliza(PolizaDTO polDTO) {
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
 		List<EstadoPoliza> estadoPoliza = session.createQuery
@@ -186,7 +195,7 @@ public class GestorBDD {
 	}
 	
 	public ValoresPorcentualesActuales getVPA() {
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		ValoresPorcentualesActuales vpa = session.get(ValoresPorcentualesActuales.class, 1);
 		session.getTransaction().commit();
 		
@@ -194,7 +203,7 @@ public class GestorBDD {
 	}
 	
 	public void guardarPoliza(Poliza poliza) {
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
 		session.save(poliza.getMedidasSeguridad());
 		session.save(poliza.getValoresPorcentualesPoliza());
@@ -204,10 +213,10 @@ public class GestorBDD {
 	}
 	
 	public ClienteDTO getCliente() {
-		session.beginTransaction();
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		Cliente c = session.get(Cliente.class, "1");
 		session.getTransaction().commit();
-		
+		System.out.println(c);
 		ClienteDTO cDTO = new ClienteDTO(c);
 		
 		return cDTO;

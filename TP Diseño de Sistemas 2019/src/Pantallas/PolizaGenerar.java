@@ -182,6 +182,7 @@ public class PolizaGenerar extends JFrame {
  		}
 		
 		JComboBox comboBoxProvincia = new JComboBox();
+
 		comboBoxProvincia.setMaximumRowCount(6);
 		comboBoxProvincia.setToolTipText("");
 		comboBoxProvincia.setModel(new DefaultComboBoxModel(listaProvincias));
@@ -216,15 +217,38 @@ public class PolizaGenerar extends JFrame {
  			listaLocalidades[cont]=l.getNombre();
  			cont++;
  		}
+		/*if(comboBoxProvincia.getSelectedItem()!=null) {
+		ArrayList<Localidad> localidadesProv = new ArrayList<Localidad>();
+		String provSeleccionada = (String) comboBoxProvincia.getSelectedItem();
+		if(!provSeleccionada.isBlank()) {
+		for(Localidad loc:localidades){
+		if(!loc.getProvincia().getNombre().isEmpty()) {
+			if(loc.getProvincia().getNombre().compareTo(provSeleccionada)==0) {
+			localidadesProv.add(loc);
+		}}
+		}
+		
+ 		}
+		}*/
  		
-		JComboBox comboBoxLocalidad = new JComboBox();
+		JComboBox<String> comboBoxLocalidad = new JComboBox<String>();
 		comboBoxLocalidad.setToolTipText("");
-		comboBoxLocalidad.setModel(new DefaultComboBoxModel(listaLocalidades));
+		comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
 		comboBoxLocalidad.setSelectedIndex(0);
 		comboBoxLocalidad.setMaximumRowCount(6);
 		comboBoxLocalidad.setEditable(true);
 		comboBoxLocalidad.setBounds(584, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxLocalidad);
+		comboBoxLocalidad.setEnabled(false);
+		comboBoxProvincia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxProvincia.getSelectedItem()==null || comboBoxProvincia.getSelectedItem().toString().compareTo("Seleccione una provincia")==0) {
+					comboBoxLocalidad.setEnabled(false);
+				}else {
+					comboBoxLocalidad.setEnabled(true);
+				}
+			}
+		});
 		
 		ArrayList<Modelo> modelos = (ArrayList<Modelo>) fachadaBDD.getModelos();
 		String[] listaModelos = new String[modelos.size()+1];
@@ -243,6 +267,16 @@ public class PolizaGenerar extends JFrame {
 		comboBoxModelo.setEditable(true);
 		comboBoxModelo.setBounds(340, 48, 170, 18);
 		panel_DatosPoliza.add(comboBoxModelo);
+		comboBoxModelo.setEnabled(false);
+		comboBoxMarca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxMarca.getSelectedItem()==null || comboBoxMarca.getSelectedItem().toString().compareTo("Seleccione una marca")==0) {
+					comboBoxModelo.setEnabled(false);
+				}else {
+					comboBoxModelo.setEnabled(true);
+				}
+			}
+		});
 		
 		ArrayList<Pais> paises = (ArrayList<Pais>) fachadaBDD.getPaises();
 		String[] listaPaises = new String[paises.size()+1];
@@ -252,8 +286,17 @@ public class PolizaGenerar extends JFrame {
  			listaPaises[cont]=p.getNombre();
  			cont++;
  		}
- 		
+ 		comboBoxProvincia.setEnabled(false);
 		JComboBox comboBoxPais = new JComboBox();
+		comboBoxPais.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxPais.getSelectedItem()==null || comboBoxPais.getSelectedItem().toString().compareTo("Seleccione un pais")==0) {
+					comboBoxProvincia.setEnabled(false);
+				}else {
+					comboBoxProvincia.setEnabled(true);
+				}
+			}
+		});
 		comboBoxPais.setToolTipText("");
 		comboBoxPais.setModel(new DefaultComboBoxModel(listaPaises));
 		comboBoxPais.setSelectedIndex(0);
@@ -287,6 +330,16 @@ public class PolizaGenerar extends JFrame {
 		comboBoxAnioModelo.setEditable(true);
 		comboBoxAnioModelo.setBounds(584, 47, 170, 18);
 		panel_DatosPoliza.add(comboBoxAnioModelo);
+		comboBoxAnioModelo.setEnabled(false);
+		comboBoxModelo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxModelo.getSelectedItem()==null || comboBoxModelo.getSelectedItem().toString().compareTo("Seleccione un modelo")==0) {
+					comboBoxAnioModelo.setEnabled(false);
+				}else {
+					comboBoxAnioModelo.setEnabled(true);
+				}
+			}
+		});
 		
 		JTextField textFieldSumaAsegurada = new JTextField();
 		textFieldSumaAsegurada.setEditable(false);
@@ -491,8 +544,7 @@ public class PolizaGenerar extends JFrame {
 				
 				int nroSiniestros = fachadaBDD.getNroSiniestros(clienteDTO);
 				
-				FachadaPoliza fachadaPoliza = new FachadaPoliza();
-				PolizaDTO polDTO = fachadaPoliza.ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
+				PolizaDTO polDTO = FachadaPoliza.getInstance().ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
 						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);
 				
 				System.out.println(polDTO);

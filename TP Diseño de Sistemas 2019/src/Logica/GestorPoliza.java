@@ -18,6 +18,19 @@ import Enumerados.Sexo;
 
 public class GestorPoliza {
    
+	private static GestorPoliza gestorPoliza;
+	
+	private GestorPoliza() {
+		
+	}
+	
+	public static GestorPoliza getInstance() {
+		if(gestorPoliza == null) {
+			gestorPoliza = new GestorPoliza();
+		}
+		return gestorPoliza;
+	}
+	
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	public void altaPoliza(PolizaDTO polDTO) {
@@ -33,21 +46,18 @@ public class GestorPoliza {
 				if(!validarF) {
 					//error fechas	
 				}else{
-			
-					GestorCliente gestorCliente = new GestorCliente();
-					Cliente cliente = gestorCliente.getCliente(polDTO.getCliente().getNroCliente());
+
+					Cliente cliente = GestorCliente.getInstance().getCliente(polDTO.getCliente().getNroCliente());
 					
-					GestorInformacion gestorInf = new GestorInformacion();
-					Anio anio = gestorInf.getAnio(polDTO);
-					Localidad localidad = gestorInf.getLocalidad(polDTO);
-					TipoCobertura tipoCobertura = gestorInf.getTipoCobertura(polDTO);
-					EstadoPoliza estadoPoliza = gestorInf.getEstadoPoliza(polDTO);
+					Anio anio = GestorInformacion.getInstance().getAnio(polDTO);
+					Localidad localidad = GestorInformacion.getInstance().getLocalidad(polDTO);
+					TipoCobertura tipoCobertura = GestorInformacion.getInstance().getTipoCobertura(polDTO);
+					EstadoPoliza estadoPoliza = GestorInformacion.getInstance().getEstadoPoliza(polDTO);
 					
 					List<HijoDeclarado> hijos = this.crearHijos(polDTO);
 					MedidasSeguridad ms = this.crearMedidasSeguridad(polDTO);
 					
-					GestorParametros gestorP = new GestorParametros();
-					ValoresPorcentualesPoliza vp = gestorP.getValoresPorcentualesPoliza(anio,localidad,tipoCobertura,ms);
+					ValoresPorcentualesPoliza vp = GestorParametros.getInstance().getValoresPorcentualesPoliza(anio,localidad,tipoCobertura,ms);
 					
 					
 					List<Cuota> cuotas = new ArrayList<Cuota>();
@@ -74,12 +84,11 @@ public class GestorPoliza {
 							polDTO.getChasis(),polDTO.getKmAnio(),cuotas,anio,polDTO.getTipoPoliza(),
 							polDTO.getNroSiniestros(),ms,hijos,
 							tipoCobertura,vp,cliente);
-					
-					GestorCalculo gestorC = new GestorCalculo();
-					poliza = gestorC.calcularPDD(poliza);
+
+					poliza = GestorCalculo.getInstance().calcularPDD(poliza);
 					//PASAR ESTADO POLIZA A GENERADA 
-					GestorBDD gestorBDD = new GestorBDD();
-					gestorBDD.guardarPoliza(poliza);
+
+					GestorBDD.getInstance().guardarPoliza(poliza);
 					//ACTUALIZAR ESTADO DEL CLIENTE (mirar enunciado)
 				}
 		}
@@ -125,9 +134,7 @@ public class GestorPoliza {
 	
 	public boolean validarIDs(PolizaDTO polDTO) {
 		
-		GestorBDD gestorBDD = new GestorBDD();
-		
-		if (gestorBDD.validarIDs(polDTO)==0) return true;
+		if (GestorBDD.getInstance().validarIDs(polDTO)==0) return true;
 		else return false;
 	}
 	

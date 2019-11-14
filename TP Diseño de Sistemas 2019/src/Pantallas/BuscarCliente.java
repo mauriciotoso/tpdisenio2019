@@ -60,8 +60,7 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				GestorBDD gestorBDD = new GestorBDD();
-				ClienteDTO clienteDTO = gestorBDD.getCliente();
+				ClienteDTO clienteDTO = GestorBDD.getInstance().getCliente();
 				
 				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
 				polizaGenerar.setVisible(true);

@@ -431,8 +431,8 @@ public class AgregarHijos extends JFrame {
 					sexo.add(hijo1Fem);
 					estadoCivil.add(hijo1EC);
 				}
-				FachadaPoliza fachadaPoliza = new FachadaPoliza();
-				fachadaPoliza.ingresarHijos(polDTO,fechasNac,sexo,estadoCivil,a);
+				
+				FachadaPoliza.getInstance().ingresarHijos(polDTO,fechasNac,sexo,estadoCivil,a);
 				
 				
 				Cobertura cobertura = new Cobertura(polDTO,clienteDTO);

@@ -4,6 +4,19 @@ import Entidades.*;
 
 public class GestorCalculo {
 	
+	private static GestorCalculo gestorCalculo;
+	
+	private GestorCalculo() {
+		
+	}
+	
+	public static GestorCalculo getInstance() {
+		if(gestorCalculo == null) {
+			gestorCalculo = new GestorCalculo();
+		}
+		return gestorCalculo;
+	}
+	
 	public Poliza calcularPDD(Poliza poliza) {
 		
 		poliza.setPrima(1);

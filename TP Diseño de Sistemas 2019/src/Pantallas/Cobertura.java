@@ -27,7 +27,6 @@ import javax.swing.table.DefaultTableModel;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Logica.FachadaPoliza;
-import javafx.scene.control.Spinner;
 
 public class Cobertura extends JFrame {
 
@@ -172,8 +171,7 @@ public class Cobertura extends JFrame {
 		label.setBounds(277, 75, 96, 19);
 		alternativasCobertura.add(label);
 		
-		FachadaPoliza fachadaP = new FachadaPoliza();
-		boolean datosValidos = fachadaP.validarPoliza(polDTO);
+		boolean datosValidos = FachadaPoliza.getInstance().validarPoliza(polDTO);
 		
 		if (!datosValidos) {
 			JOptionPane.showMessageDialog(null, "Datos ingresados erróneos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -207,8 +205,7 @@ public class Cobertura extends JFrame {
 						else 
 							tipoPoliza="SEMESTRAL";
 						
-						FachadaPoliza fachadaPoliza = new FachadaPoliza();
-						fachadaPoliza.setCobertura(polDTO,cobertura,inicioVigencia,tipoPoliza);
+						FachadaPoliza.getInstance().setCobertura(polDTO,cobertura,inicioVigencia,tipoPoliza);
 						
 						PolizaGenerada polizaGenerada = new PolizaGenerada(polDTO,clienteDTO);
 						polizaGenerada.setVisible(true);

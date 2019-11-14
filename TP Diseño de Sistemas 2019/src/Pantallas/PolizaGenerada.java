@@ -286,8 +286,8 @@ public class PolizaGenerada extends JFrame {
 				int input = JOptionPane.showConfirmDialog(null, "Desea confirmar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
 					JOptionPane.showMessageDialog(null, "Póliza generada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-					FachadaPoliza fPoliza=new FachadaPoliza();
-					fPoliza.altaPoliza(polDTO);
+					
+					FachadaPoliza.getInstance().altaPoliza(polDTO);
 					
 					MenuProductorSeguro menuProductorSeguro = new MenuProductorSeguro();
 					menuProductorSeguro.setVisible(true);

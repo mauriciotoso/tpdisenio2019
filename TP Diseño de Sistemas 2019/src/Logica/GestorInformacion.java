@@ -7,26 +7,36 @@ import Enumerados.EstadoPoliza;
 
 public class GestorInformacion {
 	
+	private static GestorInformacion gestorInformacion;
+	
+	private GestorInformacion() {
+		
+	}
+	
+	public static GestorInformacion getInstance() {
+		if(gestorInformacion == null) {
+			gestorInformacion = new GestorInformacion();
+		}
+		return gestorInformacion;
+	}
+	
 	public Anio getAnio(PolizaDTO polDTO) {
 		
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getAnio(polDTO);
+		return GestorBDD.getInstance().getAnio(polDTO);
 	}
 	
 	public Localidad getLocalidad(PolizaDTO polDTO) {
-		
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getLocalidad(polDTO);
+
+		return GestorBDD.getInstance().getLocalidad(polDTO);
 	}
 	
 	public TipoCobertura getTipoCobertura(PolizaDTO polDTO) {
-		
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getTipoCobertura(polDTO);
+
+		return GestorBDD.getInstance().getTipoCobertura(polDTO);
 	}
 	
 	public EstadoPoliza getEstadoPoliza(PolizaDTO polDTO) {
-		GestorBDD gestorBDD = new GestorBDD();
-		return gestorBDD.getEstadoPoliza(polDTO);
+		
+		return GestorBDD.getInstance().getEstadoPoliza(polDTO);
 	}
 }

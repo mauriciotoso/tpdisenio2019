@@ -49,10 +49,10 @@ public class App {
 		ValoresPorcentualesPoliza vpp2 = new ValoresPorcentualesPoliza((float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1);
 		ValoresPorcentualesActuales vpa = new ValoresPorcentualesActuales(1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,(float) 0.1,null);
 		*/
-		Pais pais = new Pais(1, "Argentin");
-		Provincia provincia = new Provincia(1,"SantaFe", pais);
-		Localidad localidad = new Localidad (1,"SantFe",(float)0.2, provincia);
-		CondicionIVA condicionIVA  = new CondicionIVA(1,"CONSUMIDOFINAL");
+		Pais pais = new Pais(1, "Argentina");
+		Provincia provincia = new Provincia(1,"Santa Fe", pais);
+		Localidad localidad = new Localidad (1,"Santa Fe",(float)0.2, provincia);
+		CondicionIVA condicionIVA  = new CondicionIVA(1,"CONSUMIDOR FINAL");
 		Direccion direccion = new Direccion("Lavaisse","610","3","-","3000",localidad);
 		EstadoCliente estadoCliente = new EstadoCliente(3,"PLATA");
 		Cliente cliente = new Cliente("1",date,"Mauricio","Toso",TipoDocumento.DNI,"41160819","04116081921",Sexo.MASCULINO,condicionIVA,"mauricio.toso@yahoo.com.ar",EstadoCivil.SOLTERO,"Ingeniero","2010",estadoCliente,direccion);
