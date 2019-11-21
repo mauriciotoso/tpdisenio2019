@@ -170,8 +170,7 @@ public class PolizaGenerar extends JFrame {
 		lblAo.setBounds(520, 50, 37, 15);
 		panel_DatosPoliza.add(lblAo);
 		
-		FachadaBDD fachadaBDD = new FachadaBDD();
-		ArrayList<Provincia> provincias = (ArrayList<Provincia>) fachadaBDD.getProvincias();
+		ArrayList<Provincia> provincias = (ArrayList<Provincia>) FachadaBDD.getInstance().getProvincias();
 
 		String[] listaProvincias = new String[provincias.size()+1];
  		listaProvincias[0]="Seleccione una provincia";
@@ -191,7 +190,7 @@ public class PolizaGenerar extends JFrame {
 		comboBoxProvincia.setBounds(340, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxProvincia);
 		
-		ArrayList<Marca> marcas = (ArrayList<Marca>) fachadaBDD.getMarcas();
+		ArrayList<Marca> marcas = (ArrayList<Marca>) FachadaBDD.getInstance().getMarcas();
 		String[] listaMarcas = new String[marcas.size()+1];
  		listaMarcas[0]="Seleccione una marca";
  		cont=1;
@@ -209,7 +208,7 @@ public class PolizaGenerar extends JFrame {
 		comboBoxMarca.setBounds(90, 46, 170, 18);
 		panel_DatosPoliza.add(comboBoxMarca);
 		
-		ArrayList<Localidad> localidades = (ArrayList<Localidad>) fachadaBDD.getLocalidades();
+		ArrayList<Localidad> localidades = (ArrayList<Localidad>) FachadaBDD.getInstance().getLocalidades();
 		String[] listaLocalidades = new String[localidades.size()+1];
  		listaLocalidades[0]="Seleccione una localidad";
  		cont=1;
@@ -250,7 +249,7 @@ public class PolizaGenerar extends JFrame {
 			}
 		});
 		
-		ArrayList<Modelo> modelos = (ArrayList<Modelo>) fachadaBDD.getModelos();
+		ArrayList<Modelo> modelos = (ArrayList<Modelo>) FachadaBDD.getInstance().getModelos();
 		String[] listaModelos = new String[modelos.size()+1];
  		listaModelos[0]="Seleccione un modelo";
  		cont=1;
@@ -278,7 +277,7 @@ public class PolizaGenerar extends JFrame {
 			}
 		});
 		
-		ArrayList<Pais> paises = (ArrayList<Pais>) fachadaBDD.getPaises();
+		ArrayList<Pais> paises = (ArrayList<Pais>) FachadaBDD.getInstance().getPaises();
 		String[] listaPaises = new String[paises.size()+1];
  		listaPaises[0]="Seleccione un pais";
  		cont=1;
@@ -305,7 +304,7 @@ public class PolizaGenerar extends JFrame {
 		comboBoxPais.setBounds(90, 27, 170, 18);
 		panel_DatosPoliza.add(comboBoxPais);
 		
-		ArrayList<Anio> anios = (ArrayList<Anio>) fachadaBDD.getAnios();
+		ArrayList<Anio> anios = (ArrayList<Anio>) FachadaBDD.getInstance().getAnios();
 		String[] listaAnios = new String[anios.size()+1];
  		listaAnios[0]="Seleccione un año";
  		cont=1;
@@ -542,7 +541,7 @@ public class PolizaGenerar extends JFrame {
 				boolean dispRastreo = chckbxposeeDispositivoDe.isSelected();
 				boolean tuercasAntirrobo = chckbxposeeTuercasAntirrobo.isSelected();
 				
-				int nroSiniestros = fachadaBDD.getNroSiniestros(clienteDTO);
+				int nroSiniestros = FachadaBDD.getInstance().getNroSiniestros(clienteDTO);
 				
 				PolizaDTO polDTO = FachadaPoliza.getInstance().ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
 						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);

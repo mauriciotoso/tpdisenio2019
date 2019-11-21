@@ -1,5 +1,9 @@
 package Logica;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import DTO.CuotaDTO;
 import Entidades.*;
 
 public class GestorCalculo {
@@ -26,4 +30,17 @@ public class GestorCalculo {
 		return poliza;
 	}
 	
+	public float calculoImporte(ArrayList<CuotaDTO> cuotasDTO) {
+		float importeTotal = 0;
+		Date hoy = new Date();
+		for(CuotaDTO cuota:cuotasDTO) {
+			float importeCuota = cuota.getImporteCuota();
+			importeTotal += importeCuota;
+			if(cuota.getUltimoDiaPago().before(hoy)) {
+				float recargo = cuota.getRecargosPorMora();
+				importeTotal += recargo;
+			}
+		}
+		return importeTotal;
+	}
 }

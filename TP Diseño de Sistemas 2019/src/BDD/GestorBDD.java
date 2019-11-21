@@ -1,5 +1,6 @@
 package BDD;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -220,5 +221,30 @@ public class GestorBDD {
 		ClienteDTO cDTO = new ClienteDTO(c);
 		
 		return cDTO;
+	}
+	
+	public Poliza getPoliza(PolizaDTO polDTO) {
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		Poliza pol = session.get(Poliza.class, polDTO.getNroPoliza());
+		session.getTransaction().commit();
+		
+		return pol;
+	}
+	
+	public void actualizarCuotas(Poliza pol, ArrayList<Cuota> cuotas) {
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		for(Cuota c: cuotas) {
+			session.delete(c);
+			session.save(c);
+		}
+		session.getTransaction().commit();
+		/*session.createQuery
+		("delete from cuota using poliza where cuota.nropoliza=poliza.nropoliza");*/
+	}
+	
+	public void guardarRecibo(Recibo recibo) {
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		session.save(recibo);
+		session.getTransaction().commit();
 	}
 }

@@ -47,5 +47,23 @@ public class FachadaPoliza {
 
 		GestorPoliza.getInstance().setCobertura(polDTO, cobertura, inicioVigencia, tipoPoliza);
 	}
+	
+	public float calculoImporte(ArrayList<CuotaDTO> cuotasDTO) {
+		
+		float importe = GestorCalculo.getInstance().calculoImporte(cuotasDTO);
+		return importe;
+	}
+	
+	public ReciboDTO generarRecibo(float monto, ArrayList<CuotaDTO> cuotasDTO, PolizaDTO polDTO, float importe) {
+		ReciboDTO reciboDTO = new ReciboDTO();
+		reciboDTO = GestorPoliza.getInstance().generarRecibo(monto, cuotasDTO, polDTO, importe);
+		
+		return reciboDTO;
+	}
+	
+	public Recibo registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
+		Recibo recibo = GestorPoliza.getInstance().registrarPago(polDTO, reciboDTO);
+		return recibo;
+	}
 }
  

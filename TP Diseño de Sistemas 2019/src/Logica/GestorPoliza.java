@@ -247,4 +247,44 @@ public class GestorPoliza {
 		polDTO.setCuotas(cuotasDTO);
 		polDTO.setEstadoPoliza("GENERADA");
 	}
+	
+	public ReciboDTO generarRecibo(float monto, ArrayList<CuotaDTO> cuotasDTO, PolizaDTO polDTO, float importe) {
+		ReciboDTO reciboDTO = new ReciboDTO();
+		reciboDTO.setImportePagado(monto);
+		reciboDTO.setImporte(importe);
+		reciboDTO.setCuotas(cuotasDTO);
+		
+		return reciboDTO;
+	}
+	
+	public Recibo registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
+		Poliza pol = GestorBDD.getInstance().getPoliza(polDTO);
+		ArrayList<Cuota> cuotasOriginales = (ArrayList<Cuota>) pol.getCuotas();
+		boolean valida = false;
+		
+		for (Cuota cOri: cuotasOriginales) {
+			for (CuotaDTO c: reciboDTO.getCuotas()) {
+				if (cOri.getIdCuota()==c.getIdCuota()) {
+					cOri.setEstaPago(true);
+					valida = true;
+				}
+			}
+			if (!valida)
+				cOri.setEstaPago(false);
+		}
+		
+		GestorBDD.getInstance().actualizarCuotas(pol,cuotasOriginales);
+		//aca hacer delete de las cuotas no modificadas
+		
+		
+		Recibo recibo = new Recibo(reciboDTO);
+		for(Cuota cOri: cuotasOriginales) {
+			if (cOri.isEstaPago())
+				recibo.setCuotas(cOri);
+		}
+		
+		GestorBDD.getInstance().guardarRecibo(recibo);
+		
+		return recibo;
+	}
 }

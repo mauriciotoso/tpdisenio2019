@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CuotaDTO {
 	
+	private int idCuota;
 	private int nroCuota;
 	private Date ultimoDiaPago;
 	private float importeCuota;
@@ -23,6 +24,15 @@ public class CuotaDTO {
 	public String toString() {
 		return "CuotaDTO [nroCuota=" + nroCuota + ", ultimoDiaPago=" + ultimoDiaPago + ", importeCuota=" + importeCuota
 				+ ", recargosPorMora=" + recargosPorMora + ", bonificacion=" + bonificacion + "]";
+	}
+
+	
+	public int getIdCuota() {
+		return idCuota;
+	}
+
+	public void setIdCuota(int idCuota) {
+		this.idCuota = idCuota;
 	}
 
 	public float getRecargosPorMora() {

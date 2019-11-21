@@ -7,6 +7,19 @@ import Entidades.*;
 
 public class FachadaBDD {
 	
+	private static FachadaBDD fachadaBDD;
+	
+	private FachadaBDD() {
+		
+	}
+	
+	public static FachadaBDD getInstance() {
+		if(fachadaBDD==null) {
+			fachadaBDD = new FachadaBDD();
+		}
+		return fachadaBDD;
+	}
+	
 	public int getNroSiniestros(ClienteDTO cDTO) {
 		GestorSubSistemaSiniestros gestorSiniestros = new GestorSubSistemaSiniestros();
 		return gestorSiniestros.getNroSiniestros(cDTO);

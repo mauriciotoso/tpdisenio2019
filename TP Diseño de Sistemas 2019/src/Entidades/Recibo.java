@@ -1,9 +1,12 @@
 package Entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import DTO.ReciboDTO;
 
 @Entity
 public class Recibo {
@@ -34,6 +37,20 @@ public class Recibo {
 		this.fechaRecibo = fechaRecibo;
 		this.horaRecibo = horaRecibo;
 		this.cuotas = cuotas;
+	}
+	
+	public Recibo (ReciboDTO r) {
+		super();
+		this.nroRecibo = r.getNroRecibo();
+		this.importe = r.getImporte();
+		this.vuelto = r.getVuelto();
+		this.importePagado = r.getImportePagado();
+		this.operador = r.getOperador();
+		this.mesAbonado = r.getMesAbonado();
+		this.anioAbonado = r.getAnioAbonado();
+		this.fechaRecibo = r.getFechaRecibo();
+		this.horaRecibo = r.getHoraRecibo();
+		
 	}
 
 	public Recibo() {
@@ -102,6 +119,10 @@ public class Recibo {
 
 	public void setCuotas(List<Cuota> cuotas) {
 		this.cuotas = cuotas;
+	}
+	
+	public void setCuotas(Cuota cuota) {
+		this.cuotas.add(cuota);
 	}
 
 	public Date getFechaRecibo() {

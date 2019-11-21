@@ -10,14 +10,18 @@ public class ReciboDTO {
 	private float importePagado;
 	private String nroRecibo;
 	private String operador;
-	private int mesAbonado;
+	private String mesAbonado;
 	private String anioAbonado;
 	private List<CuotaDTO> cuotas;
 	private Date fechaRecibo;
 	private Date horaRecibo;
+	
+	public ReciboDTO() {
+		
+	}
 
 	public ReciboDTO(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			int mesAbonado, String anioAbonado, List<CuotaDTO> cuotas, Date fechaRecibo, Date horaRecibo) {
+			String mesAbonado, String anioAbonado, List<CuotaDTO> cuotas, Date fechaRecibo, Date horaRecibo) {
 		super();
 		this.importe = importe;
 		this.vuelto = vuelto;
@@ -71,11 +75,11 @@ public class ReciboDTO {
 		this.operador = operador;
 	}
 
-	public int getMesAbonado() {
+	public String getMesAbonado() {
 		return mesAbonado;
 	}
 
-	public void setMesAbonado(int mesAbonado) {
+	public void setMesAbonado(String mesAbonado) {
 		this.mesAbonado = mesAbonado;
 	}
 
