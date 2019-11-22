@@ -8,6 +8,7 @@ public class Usuario {
 	
 	@Id
 	private String usuario;
+	private String contrasenia;
 	private String nombre;
 	private String apellido;
 	private String tipo;
@@ -21,6 +22,12 @@ public class Usuario {
 	
 	public Usuario() {
 		
+	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [usuario=" + usuario + ", contrasenia=" + contrasenia + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", tipo=" + tipo + "]";
 	}
 
 	public String getUsuario() {
@@ -53,6 +60,14 @@ public class Usuario {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 	
 	

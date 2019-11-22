@@ -272,17 +272,13 @@ public class GestorPoliza {
 			if (!valida)
 				cOri.setEstaPago(false);
 		}
-		
 		GestorBDD.getInstance().actualizarCuotas(pol,cuotasOriginales);
-		//aca hacer delete de las cuotas no modificadas
-		
 		
 		Recibo recibo = new Recibo(reciboDTO);
 		for(Cuota cOri: cuotasOriginales) {
 			if (cOri.isEstaPago())
 				recibo.setCuotas(cOri);
 		}
-		
 		GestorBDD.getInstance().guardarRecibo(recibo);
 		
 		return recibo;

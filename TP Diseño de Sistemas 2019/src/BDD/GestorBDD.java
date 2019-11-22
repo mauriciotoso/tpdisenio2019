@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-
+import App.Usuario;
 import DTO.*;
 import Entidades.*;
 import Enumerados.EstadoPoliza;
@@ -246,5 +246,14 @@ public class GestorBDD {
 		if (!session.isJoinedToTransaction()) session.beginTransaction();
 		session.save(recibo);
 		session.getTransaction().commit();
+	}
+	
+	public ArrayList<Usuario> getUsuario(){
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) session.createQuery("from Usuario").getResultList();
+		session.getTransaction().commit();
+		
+		return usuarios;
 	}
 }

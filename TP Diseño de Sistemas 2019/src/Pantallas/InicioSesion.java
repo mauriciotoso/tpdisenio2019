@@ -17,6 +17,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import App.Usuario;
+import BDD.GestorBDD;
+import Logica.FachadaSesion;
+
 import javax.swing.ImageIcon;
 
 public class InicioSesion extends JFrame {
@@ -137,9 +142,23 @@ public class InicioSesion extends JFrame {
 							correctoUser=true;
 					}
 					if (correctoUser && correctoPw) {
-						MenuProductorSeguro productorSeguroMenu = new MenuProductorSeguro();
-						productorSeguroMenu.setVisible(true);
-						dispose();
+						Usuario usuario = FachadaSesion.getInstance().verifUserPw(user,pw);
+						if (usuario!=null) {
+							if (usuario.getTipo().compareTo("Productor de Seguro")==0) {
+								MenuProductorSeguro productorSeguroMenu = new MenuProductorSeguro();
+								productorSeguroMenu.setVisible(true);
+								dispose();
+							} else if (usuario.getTipo().compareTo("Cobrador")==0) {
+								MenuCobrador menuCobrador = new MenuCobrador();
+								menuCobrador.setVisible(true);
+								dispose();
+							} else if (usuario.getTipo().compareTo("Gerente")==0) {
+								MenuGerente menuGerente = new MenuGerente();
+								menuGerente.setVisible(true);
+								dispose();
+							} else 
+								JOptionPane.showMessageDialog(null, "Error lectura de derechos.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					} else {
 						tfNombreUsuario.setText(null);
 						tfContrasenia.setText(null);
