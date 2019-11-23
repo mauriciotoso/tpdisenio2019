@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import Entidades.*;
@@ -311,6 +313,50 @@ public class PolizaDTO {
 				+ medidasSeguridad + ", cuotas=" + cuotas + ", hijos=" + hijos + ", cliente=" + cliente
 				+ ", valoresPorcentualesDTO=" + valoresPorcentualesDTO + ", idEstadoPoliza=" + idEstadoPoliza
 				+ ", estadoPoliza=" + estadoPoliza + "]";
+	}
+	
+	public ArrayList<CuotaDTO> getCuotasA(){
+		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
+		Date hoy = new Date();
+		for(CuotaDTO cuo:this.getCuotas()) {
+			if(cuo.getUltimoDiaPago().before(hoy)) cuotasA.add(cuo);
+		}
+		return cuotasA;
+	}
+	public Object[][] getDatosCuotasA(int cantColum){
+		ArrayList<CuotaDTO> cuotasA = this.getCuotasA();
+		Object[][] aux=new Object[cuotasA.size()][cantColum];
+		for(int i=0; i<cuotasA.size();i++) {
+			aux[i][0]= Integer.toString(cuotasA.get(i).getNroCuota());
+			aux[i][1]= Float.toString(cuotasA.get(i).getImporteCuota());
+			float importeActual= cuotasA.get(i).getImporteCuota()+cuotasA.get(i).getRecargosPorMora();
+			aux[i][2]= Float.toString(importeActual);
+		}
+		
+		return aux;
+	}
+	
+
+	public ArrayList<CuotaDTO> getCuotasF(){
+		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
+		Date hoy = new Date();
+		for(CuotaDTO cuo:this.getCuotas()) {
+			if(cuo.getUltimoDiaPago().getMinutes()>hoy.getMonth()) 
+				cuotasA.add(cuo);
+		}
+		return cuotasA;
+	}
+	public Object[][] getDatosCuotasF(){
+		ArrayList<CuotaDTO> cuotasF = this.getCuotasF();
+		Object[][] aux=new Object[cuotasF.size()][3];
+		for(int i=0; i<cuotasF.size();i++) {
+			aux[i][0]= Integer.toString(cuotasF.get(i).getNroCuota());
+			aux[i][1]= Float.toString(cuotasF.get(i).getImporteCuota());
+			float importeActual= cuotasF.get(i).getImporteCuota()-cuotasF.get(i).getBonificacion();
+			aux[i][2]= Float.toString(importeActual);
+		}
+		
+		return aux;
 	}
 		
 }

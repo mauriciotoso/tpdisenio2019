@@ -12,6 +12,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DatosPoliza extends JFrame {
 
@@ -96,41 +98,49 @@ public class DatosPoliza extends JFrame {
 		panel.add(label_7);
 		
 		textField_6 = new JTextField();
+		textField_6.setEditable(false);
 		textField_6.setColumns(10);
 		textField_6.setBounds(52, 42, 150, 20);
 		panel.add(textField_6);
 		
 		textField_7 = new JTextField();
+		textField_7.setEditable(false);
 		textField_7.setColumns(10);
 		textField_7.setBounds(390, 42, 150, 20);
 		panel.add(textField_7);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setBounds(110, 11, 150, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		textField_1.setBounds(60, 42, 150, 20);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setColumns(10);
 		textField_2.setBounds(115, 73, 150, 20);
 		contentPane.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setColumns(10);
 		textField_3.setBounds(450, 14, 150, 20);
 		contentPane.add(textField_3);
 		
 		textField_4 = new JTextField();
+		textField_4.setEditable(false);
 		textField_4.setColumns(10);
 		textField_4.setBounds(403, 42, 150, 20);
 		contentPane.add(textField_4);
 		
 		textField_5 = new JTextField();
+		textField_5.setEditable(false);
 		textField_5.setColumns(10);
 		textField_5.setBounds(475, 73, 150, 20);
 		contentPane.add(textField_5);
@@ -142,6 +152,11 @@ public class DatosPoliza extends JFrame {
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Aceptar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_1.setBackground(Color.WHITE);
 		button_1.setBounds(684, 527, 90, 25);
