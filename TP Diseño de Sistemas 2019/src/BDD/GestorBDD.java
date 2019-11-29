@@ -10,6 +10,7 @@ import App.Usuario;
 import DTO.*;
 import Entidades.*;
 import Enumerados.EstadoPoliza;
+import Enumerados.TipoDocumento;
 
 public class GestorBDD {
 	private static GestorBDD gestorBDD;
@@ -256,4 +257,34 @@ public class GestorBDD {
 		
 		return usuarios;
 	}
+	
+public ArrayList<Cliente> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
+		
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Cliente> clientesObtenidos = (ArrayList<Cliente>) session.createQuery(
+				"from Cliente "
+				+ "where nroCliente like '%"+nroCliente+"%'"
+				+ " and nombre like '"+nombre+"%'"
+				+ " and apellido like '"+apellido+"%'"
+				+ " and nroDocumento like '%"+nroDoc+"%'"
+				+ " and estadoCliente=2"
+				).getResultList();
+		
+		session.getTransaction().commit();
+		
+		ArrayList<Cliente> clientesObtenidosAux = new ArrayList<Cliente>();
+				
+		for (Cliente c:clientesObtenidos) {
+			if (c.getTipoDocumento()==tipoDoc) {
+				clientesObtenidosAux.add(c);
+			}
+		}
+		
+		return clientesObtenidosAux;
+	}
+
+
+
 }

@@ -174,6 +174,15 @@ public class Cliente {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [nroCliente=" + nroCliente + ", fechaNacimiento=" + fechaNacimiento + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
+				+ ", nroCuil=" + nroCuil + ", sexo=" + sexo + ", condicionIVA=" + condicionIVA + ", correoElectronico="
+				+ correoElectronico + ", estadoCivil=" + estadoCivil + ", profesion=" + profesion + ", anioRegistro="
+				+ anioRegistro + ", etadoCliente=" + etadoCliente + ", direccion=" + direccion + "]";
+	}
 	
 	
 }
