@@ -339,6 +339,14 @@ public class GestorBDD {
 		
 		return clientesObtenidosAux;
 	}
+	
+	public Poliza buscarPoliza (String nPoliza){
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		Poliza p = session.get(Poliza.class, nPoliza);
+		session.getTransaction().commit();
+		
+		return p;	
+		}
 
 
 }

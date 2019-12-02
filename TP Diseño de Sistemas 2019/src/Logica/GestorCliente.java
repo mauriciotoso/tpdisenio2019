@@ -33,6 +33,4 @@ public class GestorCliente {
 		clientesBuscados=GestorBDD.getInstance().getClientes(nroCliente, apellido, nombre, tipoDoc, nroDoc);
 		return clientesBuscados;
 	}
-	
-	
 }

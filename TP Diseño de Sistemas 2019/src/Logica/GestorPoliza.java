@@ -96,6 +96,7 @@ public class GestorPoliza {
 		boolean validarIDs = this.validarIDs(polDTO);
 		return validarIDs;
 	}
+	
 	public boolean validarHijos(PolizaDTO polDTO) {
 		
 		if (polDTO.getHijos()!=null) {
@@ -120,7 +121,7 @@ public class GestorPoliza {
 			}
 		}
 		return true;
-}
+	}
 
 	public boolean validarIDs(PolizaDTO polDTO) {
 		
@@ -170,7 +171,6 @@ public class GestorPoliza {
 		return polDTO;
 	}
 	
-
 	public void ingresarHijos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
 		List<HijoDTO> hijosLista = new ArrayList<>();
 		
@@ -186,10 +186,8 @@ public class GestorPoliza {
 		
 		polDTO.setHijos(hijosLista);
 	}
-	
 
 	public void setCobertura(PolizaDTO polDTO, TipoCobertura cobertura, Date inicioVigencia, String tipoPoliza) {
-	
 		polDTO.setTipoCobertura(cobertura.getNombre());
 		polDTO.setIdTipoCobertura(cobertura.getIdTipoCobertura());
 		polDTO.setFechaInicio(inicioVigencia);
@@ -266,5 +264,12 @@ public class GestorPoliza {
 		GestorBDD.getInstance().guardarRecibo(recibo);
 		
 		return recibo;
+	}
+	
+	public Poliza buscarPoliza (String nPoliza) {
+		Poliza pol = new Poliza();
+		pol = GestorBDD.getInstance().buscarPoliza(nPoliza);
+			
+		return pol;
 	}
 }

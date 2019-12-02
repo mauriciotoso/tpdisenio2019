@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+
+import Entidades.Poliza;
+import Logica.FachadaPoliza;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -30,6 +34,7 @@ public class DatosPoliza extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,11 +47,11 @@ public class DatosPoliza extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
 	 */
-	public DatosPoliza() {
+	public DatosPoliza(String nPoliza) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -162,7 +167,20 @@ public class DatosPoliza extends JFrame {
 		button_1.setBounds(684, 527, 90, 25);
 		contentPane.add(button_1);
 		
-		
+		Poliza pol = FachadaPoliza.getInstance().buscarPoliza(nPoliza);
+		textField.setText(pol.getNroCliente().getNroCliente());
+		textField_1.setText(pol.getNroCliente().getNombre());
+		textField_2.setText(pol.getNroCliente().getTipoDocumento().toString());
+		textField_3.setText(pol.getNroPoliza());
+		textField_4.setText(pol.getNroCliente().getApellido());
+		textField_5.setText(pol.getNroCliente().getNroDocumento());
+		String fecha = new String();
+		if(pol.getTipoPoliza().compareTo("SEMESTRAL")==0)
+			fecha=pol.getCuotas().get(0).getUltimoDiaPago().toString();
+		else 
+			fecha=pol.getCuotas().get(5).getUltimoDiaPago().toString();
+		textField_6.setText(fecha);
+		textField_7.setText(Float.toString(pol.getMontoTotal()));
 	}
 
 }

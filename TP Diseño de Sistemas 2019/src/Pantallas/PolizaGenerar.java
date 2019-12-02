@@ -1,13 +1,11 @@
 package Pantallas;
 
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -26,7 +24,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
-
 import BDD.FachadaBDD;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
@@ -37,9 +34,6 @@ import java.awt.event.KeyEvent;
 
 public class PolizaGenerar extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private ArrayList<Pais> paises = new ArrayList<>();

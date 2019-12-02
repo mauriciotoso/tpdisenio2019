@@ -90,7 +90,8 @@ public class BuscarPoliza extends JFrame {
 		JButton button_1 = new JButton("Seleccionar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DatosPoliza datosPoliza = new DatosPoliza();
+				String nPoliza = textField.getText();
+				DatosPoliza datosPoliza = new DatosPoliza(nPoliza);
 				datosPoliza.setVisible(true);
 				dispose();
 			}
