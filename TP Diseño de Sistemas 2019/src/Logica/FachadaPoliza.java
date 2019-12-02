@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import DTO.*;
 import Entidades.*;
+import Enumerados.*;
 
 public class FachadaPoliza {
 
@@ -33,7 +34,7 @@ public class FachadaPoliza {
 		return polDTO;
 	}
 	
-	public void ingresarHijos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Boolean> sexo, ArrayList<String> estadoCivil, int a) {
+	public void ingresarHijos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
 
 		GestorPoliza.getInstance().ingresarHijos(polDTO, fechasNac, sexo, estadoCivil, a);
 	}
@@ -42,8 +43,9 @@ public class FachadaPoliza {
 	
 		return GestorPoliza.getInstance().validarPoliza(polDTO);
 	}
+
 	
-	public void setCobertura(PolizaDTO polDTO, String cobertura, Date inicioVigencia, String tipoPoliza) {
+	public void setCobertura(PolizaDTO polDTO, TipoCobertura cobertura, Date inicioVigencia, String tipoPoliza) {
 
 		GestorPoliza.getInstance().setCobertura(polDTO, cobertura, inicioVigencia, tipoPoliza);
 	}

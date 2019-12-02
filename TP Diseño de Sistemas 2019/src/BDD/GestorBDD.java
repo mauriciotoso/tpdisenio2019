@@ -258,7 +258,62 @@ public class GestorBDD {
 		return usuarios;
 	}
 	
-public ArrayList<Cliente> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
+
+	public List<Provincia> getProvincias(int idpais){
+
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Provincia> provincias = session.createQuery("from Provincia where pais="+idpais+"").getResultList();
+		session.getTransaction().commit();
+		
+		return provincias;
+		
+	}
+	
+	public List<Localidad> getLocalidades(int idprovincia){
+
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Localidad> localidades = session.createQuery("from Localidad where idprovincia="+idprovincia+"").getResultList();
+		session.getTransaction().commit();
+		
+		return localidades;
+		
+	}
+
+	public List<Modelo> getModelos(int idmarca){
+
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Modelo> modelos = session.createQuery("from Modelo where idmarca="+idmarca+"").getResultList();
+		session.getTransaction().commit();
+		
+		return modelos;
+	}
+	
+	public List<Anio> getAnios(int idmodelo){
+
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Anio> anios = session.createQuery("from Anio where idmodelo="+idmodelo+"").getResultList();
+		session.getTransaction().commit();
+		
+		return anios;
+		
+	}
+
+	public ArrayList<TipoCobertura> getCoberturas(){
+		
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		ArrayList<TipoCobertura> coberturas = (ArrayList<TipoCobertura>) session.createQuery("from TipoCobertura").getResultList();
+		session.getTransaction().commit();
+		
+		return coberturas;
+		
+	}
+	
+	public ArrayList<ClienteDTO> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
@@ -274,17 +329,16 @@ public ArrayList<Cliente> getClientes(String nroCliente, String apellido, String
 		
 		session.getTransaction().commit();
 		
-		ArrayList<Cliente> clientesObtenidosAux = new ArrayList<Cliente>();
+		ArrayList<ClienteDTO> clientesObtenidosAux = new ArrayList<ClienteDTO>();
 				
 		for (Cliente c:clientesObtenidos) {
 			if (c.getTipoDocumento()==tipoDoc) {
-				clientesObtenidosAux.add(c);
+				clientesObtenidosAux.add(new ClienteDTO(c));
 			}
 		}
 		
 		return clientesObtenidosAux;
 	}
-
 
 
 }

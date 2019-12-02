@@ -1,8 +1,8 @@
 package Pantallas;
 
 import java.awt.Color;
+
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
@@ -31,6 +32,8 @@ import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PolizaGenerar extends JFrame {
 
@@ -39,19 +42,51 @@ public class PolizaGenerar extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private ArrayList<Pais> paises = new ArrayList<>();
+	private String[] listaPaises = {"Seleccione un pais"};
+	private ArrayList<Provincia> provincias = new ArrayList<>();
+	private String[] listaProvincias= {"Seleccione una provincia"};
+	private ArrayList<Localidad> localidades = new ArrayList<>();
+	private String[] listaLocalidades= {"Seleccione una localidad"};
+	private ArrayList<Marca> marcas = new ArrayList<>();
+	private String[] listaMarcas= {"Seleccione una marca"};
+	private ArrayList<Modelo> modelos = new ArrayList<>();
+	private String[] listaModelos= {"Seleccione un modelo"};
+	private ArrayList<Anio> anios = new ArrayList<>();
+	private String[] listaAnios = {"Seleccione un año"};
+	private JTextField tfChasis;
+	private JTextField tfMotor;
+	private JFormattedTextField tfPatente;
+	private JSpinner spinnerKms;
+	private JComboBox<String> comboBoxPais;
+	private JComboBox<String> comboBoxProvincia;
+	private JComboBox<String> comboBoxLocalidad;
+	private JComboBox<String> comboBoxMarca;
+	private JComboBox<String> comboBoxModelo;
+	private JComboBox<String> comboBoxAnio;
+	private JButton btnConfirmar;
+	private MaskFormatter mask1;
+	private MaskFormatter mask2;
+	
 	public PolizaGenerar(ClienteDTO clienteDTO) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 784, 561);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBounds(674, 526, 100, 25);
+		btnConfirmar.setEnabled(false);
+		panel.add(btnConfirmar);
 		
 		JPanel panel_DatosCliente = new JPanel();
 		panel_DatosCliente.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -59,16 +94,16 @@ public class PolizaGenerar extends JFrame {
 		panel.add(panel_DatosCliente);
 		panel_DatosCliente.setLayout(null);
 		
-		JLabel lblDatosClienteTitulo = new JLabel("Datos Cliente");
-		lblDatosClienteTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDatosClienteTitulo.setForeground(Color.BLACK);
-		lblDatosClienteTitulo.setBackground(Color.DARK_GRAY);
-		lblDatosClienteTitulo.setBounds(5, 5, 105, 20);
-		panel_DatosCliente.add(lblDatosClienteTitulo);
+		JLabel lblDatosCliente = new JLabel("Datos Cliente");
+		lblDatosCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDatosCliente.setForeground(Color.BLACK);
+		lblDatosCliente.setBackground(Color.DARK_GRAY);
+		lblDatosCliente.setBounds(5, 5, 105, 20);
+		panel_DatosCliente.add(lblDatosCliente);
 		
-		JLabel lblNmeroDeCliente = new JLabel("N\u00FAmero de cliente:");
-		lblNmeroDeCliente.setBounds(5, 30, 118, 15);
-		panel_DatosCliente.add(lblNmeroDeCliente);
+		JLabel lblNroCliente = new JLabel("N\u00FAmero de cliente:");
+		lblNroCliente.setBounds(5, 30, 118, 15);
+		panel_DatosCliente.add(lblNroCliente);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(5, 50, 57, 15);
@@ -82,55 +117,55 @@ public class PolizaGenerar extends JFrame {
 		lblTipoDocumento.setBounds(5, 90, 94, 15);
 		panel_DatosCliente.add(lblTipoDocumento);
 		
-		JLabel lblNmeroDeDocumento = new JLabel("N\u00FAmero de documento:");
-		lblNmeroDeDocumento.setBounds(5, 110, 138, 15);
-		panel_DatosCliente.add(lblNmeroDeDocumento);
+		JLabel lblNroDocumento = new JLabel("N\u00FAmero de documento:");
+		lblNroDocumento.setBounds(5, 110, 138, 15);
+		panel_DatosCliente.add(lblNroDocumento);
 		
 		JLabel lblDomicilio = new JLabel("Domicilio:");
 		lblDomicilio.setBounds(5, 130, 57, 15);
 		panel_DatosCliente.add(lblDomicilio);
 		
-		JTextField textFieldNumeroCliente = new JTextField();
-		textFieldNumeroCliente.setEditable(false);
-		textFieldNumeroCliente.setBounds(145, 26, 400, 18);
-		panel_DatosCliente.add(textFieldNumeroCliente);
-		textFieldNumeroCliente.setText(clienteDTO.getNroCliente());
-		textFieldNumeroCliente.setColumns(10);
+		JTextField tfNumeroCliente = new JTextField();
+		tfNumeroCliente.setEditable(false);
+		tfNumeroCliente.setBounds(145, 26, 400, 18);
+		panel_DatosCliente.add(tfNumeroCliente);
+		tfNumeroCliente.setText(clienteDTO.getNroCliente());
+		tfNumeroCliente.setColumns(10);
 		
-		JTextField textFieldNombreCliente = new JTextField();
-		textFieldNombreCliente.setEditable(false);
-		textFieldNombreCliente.setColumns(10);
-		textFieldNombreCliente.setBounds(145, 46, 400, 18);
-		textFieldNombreCliente.setText(clienteDTO.getNombre());
-		panel_DatosCliente.add(textFieldNombreCliente);
+		JTextField tfNombreCliente = new JTextField();
+		tfNombreCliente.setEditable(false);
+		tfNombreCliente.setColumns(10);
+		tfNombreCliente.setBounds(145, 46, 400, 18);
+		tfNombreCliente.setText(clienteDTO.getNombre());
+		panel_DatosCliente.add(tfNombreCliente);
 		
-		JTextField textFieldNumeroDoc = new JTextField();
-		textFieldNumeroDoc.setEditable(false);
-		textFieldNumeroDoc.setColumns(10);
-		textFieldNumeroDoc.setBounds(145, 106, 400, 18);
-		textFieldNumeroDoc.setText(clienteDTO.getNroDocumento());
-		panel_DatosCliente.add(textFieldNumeroDoc);
+		JTextField tfNroDocumento = new JTextField();
+		tfNroDocumento.setEditable(false);
+		tfNroDocumento.setColumns(10);
+		tfNroDocumento.setBounds(145, 106, 400, 18);
+		tfNroDocumento.setText(clienteDTO.getNroDocumento());
+		panel_DatosCliente.add(tfNroDocumento);
 		
-		JTextField textFieldApellidoCliente = new JTextField();
-		textFieldApellidoCliente.setEditable(false);
-		textFieldApellidoCliente.setColumns(10);
-		textFieldApellidoCliente.setBounds(145, 66, 400, 18);
-		textFieldApellidoCliente.setText(clienteDTO.getApellido());
-		panel_DatosCliente.add(textFieldApellidoCliente);
+		JTextField tfApellidoCliente = new JTextField();
+		tfApellidoCliente.setEditable(false);
+		tfApellidoCliente.setColumns(10);
+		tfApellidoCliente.setBounds(145, 66, 400, 18);
+		tfApellidoCliente.setText(clienteDTO.getApellido());
+		panel_DatosCliente.add(tfApellidoCliente);
 		
-		JTextField textFieldTipoDoc = new JTextField();
-		textFieldTipoDoc.setEditable(false);
-		textFieldTipoDoc.setColumns(10);
-		textFieldTipoDoc.setBounds(145, 86, 400, 18);
-		textFieldTipoDoc.setText(clienteDTO.getTipoDocumento().toString());
-		panel_DatosCliente.add(textFieldTipoDoc);
+		JTextField tfTipoDocumento = new JTextField();
+		tfTipoDocumento.setEditable(false);
+		tfTipoDocumento.setColumns(10);
+		tfTipoDocumento.setBounds(145, 86, 400, 18);
+		tfTipoDocumento.setText(clienteDTO.getTipoDocumento().toString());
+		panel_DatosCliente.add(tfTipoDocumento);
 		
-		JTextField textFieldDomicilio = new JTextField();
-		textFieldDomicilio.setEditable(false);
-		textFieldDomicilio.setColumns(10);
-		textFieldDomicilio.setBounds(145, 126, 400, 18);
-		textFieldDomicilio.setText(clienteDTO.getDireccionDTO().mostrarDomicilio());
-		panel_DatosCliente.add(textFieldDomicilio);
+		JTextField tfDomicilio = new JTextField();
+		tfDomicilio.setEditable(false);
+		tfDomicilio.setColumns(10);
+		tfDomicilio.setBounds(145, 126, 400, 18);
+		tfDomicilio.setText(clienteDTO.getDireccionDTO().mostrarDomicilio());
+		panel_DatosCliente.add(tfDomicilio);
 		
 		JPanel panel_DatosPoliza = new JPanel();
 		panel_DatosPoliza.setToolTipText("");
@@ -139,12 +174,12 @@ public class PolizaGenerar extends JFrame {
 		panel.add(panel_DatosPoliza);
 		panel_DatosPoliza.setLayout(null);
 		
-		JLabel lblDatosPolizaTitulo = new JLabel("Datos P\u00F3liza");
-		lblDatosPolizaTitulo.setForeground(Color.BLACK);
-		lblDatosPolizaTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDatosPolizaTitulo.setBackground(Color.DARK_GRAY);
-		lblDatosPolizaTitulo.setBounds(5, 5, 105, 20);
-		panel_DatosPoliza.add(lblDatosPolizaTitulo);
+		JLabel lblDatosPoliza = new JLabel("Datos P\u00F3liza");
+		lblDatosPoliza.setForeground(Color.BLACK);
+		lblDatosPoliza.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDatosPoliza.setBackground(Color.DARK_GRAY);
+		lblDatosPoliza.setBounds(5, 5, 105, 20);
+		panel_DatosPoliza.add(lblDatosPoliza);
 		
 		JLabel lblProvincia = new JLabel("Provincia:");
 		lblProvincia.setBounds(270, 30, 64, 15);
@@ -163,74 +198,203 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(lblModelo);
 		
 		JLabel lblSumaAsegurada = new JLabel("Suma asegurada:");
-		lblSumaAsegurada.setBounds(5, 70, 105, 15);
+		lblSumaAsegurada.setBounds(5, 70, 84, 15);
 		panel_DatosPoliza.add(lblSumaAsegurada);
 		
-		JLabel lblAo = new JLabel("A\u00F1o:");
-		lblAo.setBounds(520, 50, 37, 15);
-		panel_DatosPoliza.add(lblAo);
+		JLabel lblAnio = new JLabel("A\u00F1o:");
+		lblAnio.setBounds(520, 50, 37, 15);
+		panel_DatosPoliza.add(lblAnio);
 		
-		ArrayList<Provincia> provincias = (ArrayList<Provincia>) FachadaBDD.getInstance().getProvincias();
-
-		String[] listaProvincias = new String[provincias.size()+1];
- 		listaProvincias[0]="Seleccione una provincia";
+		
+		JTextField tfSumaAsegurada = new JTextField();
+		tfSumaAsegurada.setText(String.valueOf((FachadaBDD.getInstance().getSumaAsegurada())));
+		tfSumaAsegurada.setEditable(false);
+		tfSumaAsegurada.setBounds(90, 65, 170, 20);
+		panel_DatosPoliza.add(tfSumaAsegurada);
+		tfSumaAsegurada.setColumns(10);
+		
+		JLabel lblPatente = new JLabel("Patente:");
+		lblPatente.setBounds(5, 110, 64, 15);
+		panel_DatosPoliza.add(lblPatente);
+		
+		JLabel lblChasis = new JLabel("Chasis: ");
+		lblChasis.setBounds(270, 90, 64, 15);
+		panel_DatosPoliza.add(lblChasis);
+		
+		JLabel lblKms = new JLabel("Kms/a\u00F1o:");
+		lblKms.setBounds(520, 90, 64, 15);
+		panel_DatosPoliza.add(lblKms);
+		
+		JLabel lblMotor = new JLabel("Motor:");
+		lblMotor.setBounds(270, 110, 64, 15);
+		panel_DatosPoliza.add(lblMotor);
+		
+		spinnerKms = new JSpinner();
+		spinnerKms.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), new Integer(1000000), new Integer(10000)));
+		spinnerKms.setBounds(584, 88, 170, 18);
+		panel_DatosPoliza.add(spinnerKms);
+		((DefaultEditor) spinnerKms.getEditor()).getTextField().setEditable(false);
+		
+		tfChasis = new JTextField();
+		tfChasis.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				desbloquearConfirmar();
+			}
+		});
+		tfChasis.setBounds(340, 88, 170, 18);
+		panel_DatosPoliza.add(tfChasis);
+		tfChasis.setColumns(10);
+		
+		tfMotor = new JTextField();
+		tfMotor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				desbloquearConfirmar();
+			}
+		});
+		tfMotor.setBounds(340, 110, 170, 18);
+		panel_DatosPoliza.add(tfMotor);
+		tfMotor.setColumns(10);
+		
+		tfPatente = new JFormattedTextField();
+		tfPatente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				desbloquearConfirmar();
+			}
+		});
+		tfPatente.setToolTipText("");
+		tfPatente.setBounds(90, 108, 170, 18);
+		panel_DatosPoliza.add(tfPatente);
+		try {
+			mask1 = new MaskFormatter("?? ### ??");
+			mask2 = new MaskFormatter("??? ###");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		mask1.install(tfPatente);
+		//mask2.install(tfPatente);
+		
+		JLabel lblMedidasDeSeguridad = new JLabel("Medidas de seguridad:");
+		lblMedidasDeSeguridad.setBounds(5, 140, 128, 18);
+		panel_DatosPoliza.add(lblMedidasDeSeguridad);
+		
+		JCheckBox cbGarage = new JCheckBox("\u00BFSe guarda en garage?");
+		cbGarage.setBounds(5, 160, 170, 18);
+		panel_DatosPoliza.add(cbGarage);
+		
+		JCheckBox cbAlarma = new JCheckBox("\u00BFTiene alarma?");
+		cbAlarma.setBounds(5, 180, 155, 18);
+		panel_DatosPoliza.add(cbAlarma);
+		
+		JCheckBox cbRastreo = new JCheckBox("\u00BFPosee dispositivo de rastreo vehicular?");
+		cbRastreo.setBounds(5, 200, 265, 18);
+		panel_DatosPoliza.add(cbRastreo);
+		
+		JCheckBox cbTuercas = new JCheckBox("\u00BFPosee tuercas antirrobo en las cuatro ruedas?");
+		cbTuercas.setBounds(5, 220, 310, 18);
+		panel_DatosPoliza.add(cbTuercas);
+		
+		JLabel lblNumeroDeSiniestros = new JLabel("Numero de siniestros en el ultimo a\u00F1o:");
+		lblNumeroDeSiniestros.setBounds(340, 140, 194, 18);
+		panel_DatosPoliza.add(lblNumeroDeSiniestros);
+		
+		JRadioButton rbNinguno = new JRadioButton("Ninguno");
+		rbNinguno.setSelected(true);
+		rbNinguno.setBounds(340, 160, 109, 18);
+		rbNinguno.setEnabled(false);
+		panel_DatosPoliza.add(rbNinguno);
+		
+		JRadioButton rbUno = new JRadioButton("Uno");
+		rbUno.setBounds(340, 180, 109, 18);
+		rbUno.setEnabled(false);
+		panel_DatosPoliza.add(rbUno);
+		
+		JRadioButton rbDos = new JRadioButton("Dos");
+		rbDos.setBounds(340, 200, 109, 18);
+		rbDos.setEnabled(false);
+		panel_DatosPoliza.add(rbDos);
+		
+		JRadioButton rbTres = new JRadioButton("Tres o m\u00E1s");
+		rbTres.setBounds(340, 220, 109, 18);
+		rbTres.setEnabled(false);
+		panel_DatosPoliza.add(rbTres);
+		
+		ButtonGroup buttonGroupSiniestros = new ButtonGroup();
+		buttonGroupSiniestros.add(rbNinguno);
+		buttonGroupSiniestros.add(rbUno);
+		buttonGroupSiniestros.add(rbDos);
+		buttonGroupSiniestros.add(rbTres);
+		rbTres.setEnabled(false);
+		
+		JLabel lblPoseeHijos = new JLabel("\u00BFPosee hijos entre 18 y 30 a\u00F1os?");
+		lblPoseeHijos.setBounds(5, 250, 200, 18);
+		panel_DatosPoliza.add(lblPoseeHijos);
+		
+		JRadioButton rbSi = new JRadioButton("Si");
+		rbSi.setBounds(200, 250, 50, 18);
+		panel_DatosPoliza.add(rbSi);
+		
+		JRadioButton rbNo = new JRadioButton("No");
+		rbNo.setSelected(true);
+		rbNo.setBounds(270, 250, 50, 18);
+		panel_DatosPoliza.add(rbNo);
+		
+		JLabel lblIndiqueCantidad = new JLabel("Indique cantidad de hijos:");
+		lblIndiqueCantidad.setBounds(5, 270, 200, 18);
+		panel_DatosPoliza.add(lblIndiqueCantidad);
+		
+		JLabel lblPais = new JLabel("Pa\u00EDs ");
+		lblPais.setBounds(5, 30, 64, 15);
+		panel_DatosPoliza.add(lblPais);
+		
+		paises = (ArrayList<Pais>) FachadaBDD.getInstance().getPaises();
+		listaPaises = new String[paises.size()+1];
+ 		listaPaises[0]="Seleccione un pais";
  		int cont=1;
- 		for(Provincia p:provincias) {
- 			listaProvincias[cont]=p.getNombre();
+ 		for(Pais p:paises) {
+ 			listaPaises[cont]=p.getNombre();
  			cont++;
  		}
-		
-		JComboBox comboBoxProvincia = new JComboBox();
-
+ 		
+ 		comboBoxPais = new JComboBox<String>();
+ 		comboBoxPais.setToolTipText("");
+		comboBoxPais.setModel(new DefaultComboBoxModel<String>(listaPaises));
+		comboBoxPais.setEnabled(false);
+		comboBoxPais.setSelectedIndex(1);
+		comboBoxPais.setEditable(true);
+		comboBoxPais.setBounds(90, 27, 170, 18);
+		panel_DatosPoliza.add(comboBoxPais);
+				
+		comboBoxProvincia = new JComboBox<String>();
 		comboBoxProvincia.setMaximumRowCount(6);
 		comboBoxProvincia.setToolTipText("");
-		comboBoxProvincia.setModel(new DefaultComboBoxModel(listaProvincias));
+		comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
 		comboBoxProvincia.setSelectedIndex(0);
 		comboBoxProvincia.setEditable(true);
 		comboBoxProvincia.setBounds(340, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxProvincia);
+
+		cont=1;	
 		
-		ArrayList<Marca> marcas = (ArrayList<Marca>) FachadaBDD.getInstance().getMarcas();
-		String[] listaMarcas = new String[marcas.size()+1];
- 		listaMarcas[0]="Seleccione una marca";
- 		cont=1;
- 		for(Marca m:marcas) {
- 			listaMarcas[cont]=m.getMarca();
- 			cont++;
- 		}
-		
-		JComboBox comboBoxMarca = new JComboBox();
-		comboBoxMarca.setToolTipText("");
-		comboBoxMarca.setModel(new DefaultComboBoxModel(listaMarcas));
-		comboBoxMarca.setSelectedIndex(0);
-		comboBoxMarca.setMaximumRowCount(6);
-		comboBoxMarca.setEditable(true);
-		comboBoxMarca.setBounds(90, 46, 170, 18);
-		panel_DatosPoliza.add(comboBoxMarca);
-		
-		ArrayList<Localidad> localidades = (ArrayList<Localidad>) FachadaBDD.getInstance().getLocalidades();
-		String[] listaLocalidades = new String[localidades.size()+1];
- 		listaLocalidades[0]="Seleccione una localidad";
- 		cont=1;
- 		for(Localidad l:localidades) {
- 			listaLocalidades[cont]=l.getNombre();
- 			cont++;
- 		}
-		/*if(comboBoxProvincia.getSelectedItem()!=null) {
-		ArrayList<Localidad> localidadesProv = new ArrayList<Localidad>();
-		String provSeleccionada = (String) comboBoxProvincia.getSelectedItem();
-		if(!provSeleccionada.isBlank()) {
-		for(Localidad loc:localidades){
-		if(!loc.getProvincia().getNombre().isEmpty()) {
-			if(loc.getProvincia().getNombre().compareTo(provSeleccionada)==0) {
-			localidadesProv.add(loc);
-		}}
-		}
-		
- 		}
-		}*/
+		provincias = (ArrayList<Provincia>) FachadaBDD.getInstance().getProvincias(comboBoxPais.getSelectedIndex());		
+		listaProvincias = new String[provincias.size()+1];
  		
-		JComboBox<String> comboBoxLocalidad = new JComboBox<String>();
+		for(Provincia p:provincias) {
+ 			listaProvincias[cont]=p.getNombre();
+ 			cont++;
+ 		}
+		listaProvincias[0]="Seleccione una Provincia";
+		comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
+		comboBoxProvincia.setEnabled(true);
+
+		comboBoxLocalidad = new JComboBox<String>();
+		comboBoxLocalidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				desbloquearConfirmar();
+			}
+		});
 		comboBoxLocalidad.setToolTipText("");
 		comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
 		comboBoxLocalidad.setSelectedIndex(0);
@@ -239,254 +403,224 @@ public class PolizaGenerar extends JFrame {
 		comboBoxLocalidad.setBounds(584, 28, 170, 18);
 		panel_DatosPoliza.add(comboBoxLocalidad);
 		comboBoxLocalidad.setEnabled(false);
-		comboBoxProvincia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(comboBoxProvincia.getSelectedItem()==null || comboBoxProvincia.getSelectedItem().toString().compareTo("Seleccione una provincia")==0) {
-					comboBoxLocalidad.setEnabled(false);
-				}else {
-					comboBoxLocalidad.setEnabled(true);
-				}
-			}
-		});
-		
-		ArrayList<Modelo> modelos = (ArrayList<Modelo>) FachadaBDD.getInstance().getModelos();
-		String[] listaModelos = new String[modelos.size()+1];
- 		listaModelos[0]="Seleccione un modelo";
+
+		marcas = (ArrayList<Marca>) FachadaBDD.getInstance().getMarcas();
+		listaMarcas = new String[marcas.size()+1];
+ 		listaMarcas[0]="Seleccione una marca";
  		cont=1;
- 		for(Modelo m:modelos) {
- 			listaModelos[cont]=m.getNombre();
+ 		for(Marca m:marcas) {
+ 			listaMarcas[cont]=m.getMarca();
  			cont++;
  		}
  		
-		JComboBox comboBoxModelo = new JComboBox();
+		comboBoxMarca = new JComboBox<String>();
+		comboBoxMarca.setToolTipText("");
+		comboBoxMarca.setModel(new DefaultComboBoxModel<String>(listaMarcas));
+		comboBoxMarca.setSelectedIndex(0);
+		comboBoxMarca.setMaximumRowCount(6);
+		comboBoxMarca.setEditable(true);
+		comboBoxMarca.setBounds(90, 46, 170, 18);
+		panel_DatosPoliza.add(comboBoxMarca);
+		//comboBoxProvincia.setEnabled(false);
+ 		
+		comboBoxModelo = new JComboBox<String>();
+ 		//listaModelos={"Seleccione una Marca"};
 		comboBoxModelo.setToolTipText("");
-		comboBoxModelo.setModel(new DefaultComboBoxModel(listaModelos));
+		comboBoxModelo.setModel(new DefaultComboBoxModel<String>(listaModelos));
 		comboBoxModelo.setSelectedIndex(0);
 		comboBoxModelo.setMaximumRowCount(6);
 		comboBoxModelo.setEditable(true);
 		comboBoxModelo.setBounds(340, 48, 170, 18);
 		panel_DatosPoliza.add(comboBoxModelo);
 		comboBoxModelo.setEnabled(false);
-		comboBoxMarca.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(comboBoxMarca.getSelectedItem()==null || comboBoxMarca.getSelectedItem().toString().compareTo("Seleccione una marca")==0) {
-					comboBoxModelo.setEnabled(false);
-				}else {
-					comboBoxModelo.setEnabled(true);
-				}
-			}
-		});
-		
-		ArrayList<Pais> paises = (ArrayList<Pais>) FachadaBDD.getInstance().getPaises();
-		String[] listaPaises = new String[paises.size()+1];
- 		listaPaises[0]="Seleccione un pais";
- 		cont=1;
- 		for(Pais p:paises) {
- 			listaPaises[cont]=p.getNombre();
- 			cont++;
- 		}
- 		comboBoxProvincia.setEnabled(false);
-		JComboBox comboBoxPais = new JComboBox();
+ 		
+ 		comboBoxAnio = new JComboBox<String>();
+ 		comboBoxAnio.addActionListener(new ActionListener() {
+ 			public void actionPerformed(ActionEvent e) {
+ 				desbloquearConfirmar();	
+ 			}
+ 		});
+		comboBoxAnio.setToolTipText("");
+		comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
+		comboBoxAnio.setSelectedIndex(0);
+		comboBoxAnio.setMaximumRowCount(6);
+		comboBoxAnio.setEditable(true);
+		comboBoxAnio.setBounds(584, 47, 170, 18);
+		panel_DatosPoliza.add(comboBoxAnio);
+		comboBoxAnio.setEnabled(false);
+
 		comboBoxPais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				comboBoxProvincia.setEnabled(false);
+				comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
+				comboBoxLocalidad.setEnabled(false);
+				comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
+
 				if(comboBoxPais.getSelectedItem()==null || comboBoxPais.getSelectedItem().toString().compareTo("Seleccione un pais")==0) {
 					comboBoxProvincia.setEnabled(false);
+					comboBoxLocalidad.setEnabled(false);
+					comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
+					comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
 				}else {
+					int cont=1;	
+					
+					provincias = (ArrayList<Provincia>) FachadaBDD.getInstance().getProvincias(comboBoxPais.getSelectedIndex());		
+					listaProvincias = new String[provincias.size()+1];
+			 		
+					for(Provincia p:provincias) {
+			 			listaProvincias[cont]=p.getNombre();
+			 			cont++;
+			 		}
+					listaProvincias[0]="Seleccione una Provincia";
+					comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
 					comboBoxProvincia.setEnabled(true);
 				}
+				desbloquearConfirmar();
 			}
 		});
-		comboBoxPais.setToolTipText("");
-		comboBoxPais.setModel(new DefaultComboBoxModel(listaPaises));
-		comboBoxPais.setSelectedIndex(0);
-		comboBoxPais.setMaximumRowCount(6);
-		comboBoxPais.setEditable(true);
-		comboBoxPais.setBounds(90, 27, 170, 18);
-		panel_DatosPoliza.add(comboBoxPais);
 		
-		ArrayList<Anio> anios = (ArrayList<Anio>) FachadaBDD.getInstance().getAnios();
-		String[] listaAnios = new String[anios.size()+1];
- 		listaAnios[0]="Seleccione un año";
- 		cont=1;
- 		for(Anio a:anios) {
- 			listaAnios[cont]=String.valueOf(a.getAnio());
- 			cont++;
- 		}
- 		
-		System.out.println(provincias);
-		System.out.println(marcas);
-		System.out.println(localidades);
-		System.out.println(modelos);
-		System.out.println(paises);
-		System.out.println(anios);
-		System.out.println(clienteDTO);
+		comboBoxProvincia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxLocalidad.setEnabled(false);
+				comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
+				if(comboBoxProvincia.getSelectedItem()==null || comboBoxProvincia.getSelectedItem().toString().compareTo("Seleccione una provincia")==0 )
+				{
+					comboBoxLocalidad.setEnabled(false);
+					comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
+				}else {
+					
+					int cont=1;
+					int idProvincia =  provincias.get(comboBoxProvincia.getSelectedIndex()-1).getIdProvincia();
+					localidades = (ArrayList<Localidad>) FachadaBDD.getInstance().getLocalidades(idProvincia);
+					listaLocalidades = new String[localidades.size()+1];
+			 		
+					for(Localidad p:localidades) {
+			 			listaLocalidades[cont]=p.getNombre();
+			 			cont++;
+			 		}
+					listaLocalidades[0]="Seleccione una Localidad";
+					comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
+					comboBoxLocalidad.setEnabled(true);
+				}
+				desbloquearConfirmar();
+			}
+		});
 		
-		JComboBox comboBoxAnioModelo = new JComboBox();
-		comboBoxAnioModelo.setToolTipText("");
-		comboBoxAnioModelo.setModel(new DefaultComboBoxModel(listaAnios));
-		comboBoxAnioModelo.setSelectedIndex(0);
-		comboBoxAnioModelo.setMaximumRowCount(6);
-		comboBoxAnioModelo.setEditable(true);
-		comboBoxAnioModelo.setBounds(584, 47, 170, 18);
-		panel_DatosPoliza.add(comboBoxAnioModelo);
-		comboBoxAnioModelo.setEnabled(false);
+		comboBoxMarca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxModelo.setEnabled(false);
+				comboBoxModelo.setModel(new DefaultComboBoxModel<String>(listaModelos));
+				comboBoxAnio.setEnabled(false);
+				comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
+				if(comboBoxMarca.getSelectedIndex()==0)
+				{
+					comboBoxAnio.setEnabled(false);
+					comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
+					comboBoxModelo.setEnabled(false);
+					comboBoxModelo.setModel(new DefaultComboBoxModel<String>(listaModelos));
+				}else {
+					int cont=1;
+					int idMarca =  marcas.get(comboBoxMarca.getSelectedIndex()-1).getIdMarca();
+					modelos = (ArrayList<Modelo>) FachadaBDD.getInstance().getModelos(idMarca);
+					listaModelos = new String[modelos.size()+1];
+					for(Modelo m:modelos) {
+			 			listaModelos[cont]=m.getNombre();
+			 			cont++;
+			 		}
+					
+					listaModelos[0]="Seleccione un Modelo";
+					comboBoxModelo.setModel(new DefaultComboBoxModel<String>(listaModelos));
+					comboBoxModelo.setEnabled(true);
+					
+				}
+				desbloquearConfirmar();
+			}
+		});
+		
 		comboBoxModelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBoxModelo.getSelectedItem()==null || comboBoxModelo.getSelectedItem().toString().compareTo("Seleccione un modelo")==0) {
-					comboBoxAnioModelo.setEnabled(false);
+				comboBoxAnio.setEnabled(false);
+				comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
+				System.out.println("Hola1");
+				if(comboBoxModelo.getSelectedIndex()==0)
+				{
+					System.out.println("Hola2");
+					
+					comboBoxAnio.setEnabled(false);
+					comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
 				}else {
-					comboBoxAnioModelo.setEnabled(true);
+					int cont=1;
+					int idModelo =  modelos.get(comboBoxModelo.getSelectedIndex()-1).getIdModelo();
+					anios = (ArrayList<Anio>) FachadaBDD.getInstance().getAnios(idModelo);
+					listaAnios = new String[anios.size()+1];
+			 		
+					for(Anio p:anios) {
+			 			listaAnios[cont]=String.valueOf(p.getAnio());
+			 			cont++;
+			 		}
+					
+					listaAnios[0]="Seleccione un Año";
+					comboBoxAnio.setModel(new DefaultComboBoxModel<String>(listaAnios));
+					comboBoxAnio.setEnabled(true);
+					
 				}
+				desbloquearConfirmar();
 			}
 		});
 		
-		JTextField textFieldSumaAsegurada = new JTextField();
-		textFieldSumaAsegurada.setEditable(false);
-		textFieldSumaAsegurada.setBounds(110, 65, 150, 20);
-		panel_DatosPoliza.add(textFieldSumaAsegurada);
-		textFieldSumaAsegurada.setColumns(10);
-		
-		JLabel lblPatente = new JLabel("Patente:");
-		lblPatente.setBounds(5, 90, 64, 15);
-		panel_DatosPoliza.add(lblPatente);
-		
-		JLabel lblChasis = new JLabel("Chasis: ");
-		lblChasis.setBounds(5, 110, 64, 15);
-		panel_DatosPoliza.add(lblChasis);
-		
-		JLabel lblKmsao = new JLabel("Kms/a\u00F1o:");
-		lblKmsao.setBounds(270, 90, 64, 15);
-		panel_DatosPoliza.add(lblKmsao);
-		
-		JLabel lblMotor = new JLabel("Motor:");
-		lblMotor.setBounds(270, 110, 64, 15);
-		panel_DatosPoliza.add(lblMotor);
-		
-		JSpinner spinnerKms = new JSpinner();
-		spinnerKms.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(10000)));
-		spinnerKms.setBounds(340, 88, 170, 18);
-		panel_DatosPoliza.add(spinnerKms);
-		
-		JTextField txtFieldChasis = new JTextField();
-		txtFieldChasis.setBounds(90, 106, 170, 18);
-		panel_DatosPoliza.add(txtFieldChasis);
-		txtFieldChasis.setColumns(10);
-		
-		JTextField textFieldMotor = new JTextField();
-		textFieldMotor.setBounds(340, 110, 170, 18);
-		panel_DatosPoliza.add(textFieldMotor);
-		textFieldMotor.setColumns(10);
-		
-		JFormattedTextField formattedTextFieldPatente = new JFormattedTextField();
-		formattedTextFieldPatente.setToolTipText("");
-		formattedTextFieldPatente.setBounds(90, 86, 170, 18);
-		panel_DatosPoliza.add(formattedTextFieldPatente);
-		MaskFormatter mask = null;
-		try {
-			mask = new MaskFormatter("?? ### ??");
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		mask.install(formattedTextFieldPatente);
-		
-		JLabel lblMedidasDeSeguridad = new JLabel("Medidas de seguridad:");
-		lblMedidasDeSeguridad.setBounds(5, 140, 128, 18);
-		panel_DatosPoliza.add(lblMedidasDeSeguridad);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("\u00BFSe guarda en garage?");
-		chckbxNewCheckBox.setBounds(5, 160, 170, 18);
-		panel_DatosPoliza.add(chckbxNewCheckBox);
-		
-		JCheckBox chckbxtieneAlarma = new JCheckBox("\u00BFTiene alarma?");
-		chckbxtieneAlarma.setBounds(5, 180, 155, 18);
-		panel_DatosPoliza.add(chckbxtieneAlarma);
-		
-		JCheckBox chckbxposeeDispositivoDe = new JCheckBox("\u00BFPosee dispositivo de rastreo vehicular?");
-		chckbxposeeDispositivoDe.setBounds(5, 200, 265, 18);
-		panel_DatosPoliza.add(chckbxposeeDispositivoDe);
-		
-		JCheckBox chckbxposeeTuercasAntirrobo = new JCheckBox("\u00BFPosee tuercas antirrobo en las cuatro ruedas?");
-		chckbxposeeTuercasAntirrobo.setBounds(5, 220, 310, 18);
-		panel_DatosPoliza.add(chckbxposeeTuercasAntirrobo);
-		
-		JLabel lblNumeroDeSiniestros = new JLabel("Numero de siniestros en el ultimo a\u00F1o:");
-		lblNumeroDeSiniestros.setBounds(340, 140, 194, 18);
-		panel_DatosPoliza.add(lblNumeroDeSiniestros);
-		
-		JRadioButton rdbtnNinguno = new JRadioButton("Ninguno");
-		rdbtnNinguno.setSelected(true);
-		rdbtnNinguno.setBounds(340, 160, 109, 18);
-		rdbtnNinguno.setEnabled(false);
-		panel_DatosPoliza.add(rdbtnNinguno);
-		
-		JRadioButton rdbtnUno = new JRadioButton("Uno");
-		rdbtnUno.setBounds(340, 180, 109, 18);
-		rdbtnUno.setEnabled(false);
-		panel_DatosPoliza.add(rdbtnUno);
-		
-		JRadioButton rdbtnDos = new JRadioButton("Dos");
-		rdbtnDos.setBounds(340, 200, 109, 18);
-		rdbtnDos.setEnabled(false);
-		panel_DatosPoliza.add(rdbtnDos);
-		
-		JRadioButton rdbtnTresOMs = new JRadioButton("Tres o m\u00E1s");
-		rdbtnTresOMs.setBounds(340, 220, 109, 18);
-		rdbtnTresOMs.setEnabled(false);
-		panel_DatosPoliza.add(rdbtnTresOMs);
-		
-		ButtonGroup buttonGroupSiniestros = new ButtonGroup();
-		buttonGroupSiniestros.add(rdbtnNinguno);
-		buttonGroupSiniestros.add(rdbtnUno);
-		buttonGroupSiniestros.add(rdbtnDos);
-		buttonGroupSiniestros.add(rdbtnTresOMs);
-		rdbtnTresOMs.setEnabled(false);
-		
-		JLabel lblposeeHijosEntre = new JLabel("\u00BFPosee hijos entre 18 y 30 a\u00F1os?");
-		lblposeeHijosEntre.setBounds(5, 250, 200, 18);
-		panel_DatosPoliza.add(lblposeeHijosEntre);
-		
-		JRadioButton rdbtnSi = new JRadioButton("Si");
-		rdbtnSi.setBounds(200, 250, 50, 18);
-		panel_DatosPoliza.add(rdbtnSi);
-		
-		JRadioButton rdbtnNo = new JRadioButton("No");
-		rdbtnNo.setSelected(true);
-		rdbtnNo.setBounds(270, 250, 50, 18);
-		panel_DatosPoliza.add(rdbtnNo);
-		
-		JLabel lblIndiqueCantidadDe = new JLabel("Indique cantidad de hijos:");
-		lblIndiqueCantidadDe.setBounds(5, 270, 200, 18);
-		panel_DatosPoliza.add(lblIndiqueCantidadDe);
-		
-		JSpinner spinnerCantHijos = new JSpinner();
-		spinnerCantHijos.setModel(new SpinnerNumberModel(1, 1, 5, 1));
-		spinnerCantHijos.setEnabled(false);
-		spinnerCantHijos.setBounds(200, 270, 40, 18);
-		panel_DatosPoliza.add(spinnerCantHijos);
-		
+		JSpinner spinnerCantidadHijos = new JSpinner();
+		spinnerCantidadHijos.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+		spinnerCantidadHijos.setEnabled(false);
+		spinnerCantidadHijos.setBounds(200, 270, 40, 18);
+		panel_DatosPoliza.add(spinnerCantidadHijos);
+		((DefaultEditor) spinnerCantidadHijos.getEditor()).getTextField().setEditable(false);
 		
 		ButtonGroup buttonGruopHijos = new ButtonGroup();
-		buttonGruopHijos.add(rdbtnSi);
-		buttonGruopHijos.add(rdbtnNo);		
-		
-		JLabel lblPais = new JLabel("Pa\u00EDs ");
-		lblPais.setBounds(5, 30, 64, 15);
-		panel_DatosPoliza.add(lblPais);
-		rdbtnSi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				spinnerCantHijos.setEnabled(true);
+		buttonGruopHijos.add(rbSi);
+		buttonGruopHijos.add(rbNo);
+
+		JRadioButton rbFP2 = new JRadioButton("AA 999 AA");
+		rbFP2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mask1.install(tfPatente);
+				btnConfirmar.setEnabled(false);
 			}
 		});
-		rdbtnNo.addActionListener(new ActionListener() {
+		rbFP2.setSelected(true);
+		rbFP2.setBounds(177, 88, 83, 18);
+		panel_DatosPoliza.add(rbFP2);
+		
+		JRadioButton rbFP1 = new JRadioButton("AAA 999");
+		rbFP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				spinnerCantHijos.setValue(1);
-				spinnerCantHijos.setEnabled(false);
+				mask2.install(tfPatente);
+				btnConfirmar.setEnabled(false);
+				
 			}
 		});
 		
-		JButton btnAtrasPAG = new JButton("Atrás");
-		btnAtrasPAG.addActionListener(new ActionListener() {
+		rbFP1.setBounds(100, 88, 67, 18);
+		panel_DatosPoliza.add(rbFP1);
+		
+		ButtonGroup buttonFP = new ButtonGroup();
+		buttonFP.add(rbFP1);
+		buttonFP.add(rbFP2);
+		
+		rbSi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				spinnerCantidadHijos.setEnabled(true);
+			}
+		});
+		rbNo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				spinnerCantidadHijos.setValue(1);
+				spinnerCantidadHijos.setEnabled(false);
+			}
+		});
+		
+		JButton btnAtras = new JButton("Atrás");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea volver atrás?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
@@ -496,12 +630,12 @@ public class PolizaGenerar extends JFrame {
 				}
 			}
 		});
-		btnAtrasPAG.setBounds(110, 526, 70, 25);
-		panel.add(btnAtrasPAG);
+		btnAtras.setBounds(110, 526, 70, 25);
+		panel.add(btnAtras);
 		
-		JButton btnCancelarPAG = new JButton("Cancelar");
-		btnCancelarPAG.setBounds(10, 526, 90, 25);
-		btnCancelarPAG.addActionListener(new ActionListener() {
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(10, 526, 90, 25);
+		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
@@ -511,54 +645,84 @@ public class PolizaGenerar extends JFrame {
 				}
 			}
 		});
-		panel.add(btnCancelarPAG);
+		panel.add(btnCancelar);
 		
-		JButton btnConfirmarPAG = new JButton("Siguiente");
-		btnConfirmarPAG.setBounds(674, 526, 100, 25);
-		btnConfirmarPAG.addActionListener(new ActionListener() {
+		comboBoxPais.setEditable(false);
+		comboBoxProvincia.setEditable(false);
+		comboBoxLocalidad.setEditable(false);
+		comboBoxMarca.setEditable(false);
+		comboBoxModelo.setEditable(false);
+		comboBoxAnio.setEditable(false);
+		
+		JLabel lblFormatoPatente = new JLabel("Formato patente: ");
+		lblFormatoPatente.setBounds(5, 90, 105, 15);
+		panel_DatosPoliza.add(lblFormatoPatente);
+
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String pais = (String) comboBoxPais.getSelectedItem();
-				String prov = (String) comboBoxProvincia.getSelectedItem();
-				String loc = (String) comboBoxLocalidad.getSelectedItem();
 				int idLocalidad = comboBoxLocalidad.getSelectedIndex();
-				
 				Localidad localidadPoliza = localidades.get(idLocalidad-1);
-				
-				String marca = (String) comboBoxMarca.getSelectedItem();
-				String modelo = (String) comboBoxModelo.getSelectedItem();
-				String txAnioModelo = (String) comboBoxAnioModelo.getSelectedItem();
-				int anioModelo = comboBoxAnioModelo.getSelectedIndex();
-				
+				int anioModelo = comboBoxAnio.getSelectedIndex();
 				Anio anioPoliza = anios.get(anioModelo-1);
 				
-				String patente = formattedTextFieldPatente.getText();
-				String chasis = txtFieldChasis.getText();
-				String motor = textFieldMotor.getText();
-				int kmAnio = (int) spinnerKms.getValue(); 
-				boolean garage = chckbxNewCheckBox.isSelected();
-				boolean alarma = chckbxtieneAlarma.isSelected();
-				boolean dispRastreo = chckbxposeeDispositivoDe.isSelected();
-				boolean tuercasAntirrobo = chckbxposeeTuercasAntirrobo.isSelected();
+				String patenteAux = tfPatente.getText().toUpperCase();
+				String patente="";
 				
+				for (int x=0; x < patenteAux.length(); x++) {
+					  if (patenteAux.charAt(x) != ' ')
+					    patente += patenteAux.charAt(x);
+					}
+				
+				String chasis = tfChasis.getText().toUpperCase();
+				String motor = tfMotor.getText().toUpperCase();
+				int kmAnio = (int) spinnerKms.getValue(); 
+				boolean garage = cbGarage.isSelected();
+				boolean alarma = cbAlarma.isSelected();
+				boolean dispRastreo = cbRastreo.isSelected();
+				boolean tuercasAntirrobo = cbTuercas.isSelected();
 				int nroSiniestros = FachadaBDD.getInstance().getNroSiniestros(clienteDTO);
 				
 				PolizaDTO polDTO = FachadaPoliza.getInstance().ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
 						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);
 				
+				boolean datosValidos = FachadaPoliza.getInstance().validarPoliza(polDTO);
+				
+				if ((rbFP2.isSelected()&&patente.length()!=7)||(rbFP1.isSelected()&&patente.length()!=6)) {
+					
+					JOptionPane.showMessageDialog(null, "La patente ingresada no es válida", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				} else if (!datosValidos) {
+					JOptionPane.showMessageDialog(null, "Ya existe una póliza para la patente, chasis y/o el motor ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else {
+				
 				System.out.println(polDTO);
 				
-				if (rdbtnSi.isSelected()) {
-					AgregarHijos agregarHijos = new AgregarHijos(polDTO, clienteDTO, (int) spinnerCantHijos.getValue());
+				if (rbSi.isSelected()) {
+					AgregarHijos agregarHijos = new AgregarHijos(polDTO, clienteDTO, (int) spinnerCantidadHijos.getValue(),Integer.parseInt((String)comboBoxAnio.getSelectedItem()));
 					agregarHijos.setVisible(true);
 					dispose();
-				}else {
-					Cobertura cobertura = new Cobertura(polDTO, clienteDTO);
+				}else{
+					Cobertura cobertura = new Cobertura(polDTO, clienteDTO,Integer.parseInt((String) comboBoxAnio.getSelectedItem()));
 					cobertura.setVisible(true);
 					dispose();
 				}
-			}
+			}}
 		});
-		panel.add(btnConfirmarPAG);
+		
+	}
+	
+	private void desbloquearConfirmar() {
+		
+		btnConfirmar.setEnabled(false);
+		
+		if(comboBoxPais.getSelectedIndex()!=0 && comboBoxProvincia.getSelectedIndex()!=0 && comboBoxLocalidad.getSelectedIndex()!=0 && 
+			comboBoxMarca.getSelectedIndex()!=0 && comboBoxModelo.getSelectedIndex()!=0 && comboBoxAnio.getSelectedIndex()!=0 &&
+			tfChasis.getText().compareTo("")!=0 && tfMotor.getText().compareTo("")!=0 && (tfPatente.getText().compareTo("         ")!=0)) {
+			btnConfirmar.setEnabled(true);
+		}
 	}
 }
+
+

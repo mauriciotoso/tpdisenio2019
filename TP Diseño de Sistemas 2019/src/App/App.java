@@ -1,14 +1,9 @@
 package App;
 
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import Entidades.*;
 import Enumerados.*;
 

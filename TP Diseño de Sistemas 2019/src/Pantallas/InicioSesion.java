@@ -1,13 +1,11 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,15 +15,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import App.Usuario;
-import BDD.GestorBDD;
+import BDD.FachadaBDD;
 import Logica.FachadaSesion;
-
-import javax.swing.ImageIcon;
 
 public class InicioSesion extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -48,6 +47,9 @@ public class InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
+		
+		FachadaBDD.getInstance();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();

@@ -1,15 +1,12 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,102 +17,108 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerDateModel;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-
+import BDD.FachadaBDD;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
+import Entidades.*;
 import Logica.FachadaPoliza;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Cobertura extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cobertura frame = new Cobertura();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
-	public Cobertura(PolizaDTO polDTO, ClienteDTO clienteDTO) {
+	public Cobertura(PolizaDTO polDTO, ClienteDTO clienteDTO,int anio) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(283, 84, 800, 600);
+		setBounds(283, 84, 800, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		
 		JPanel alternativasCobertura = new JPanel();
-		alternativasCobertura.setBounds(0, 0, 784, 561);
+		alternativasCobertura.setBounds(0, 11, 794, 561);
 		alternativasCobertura.setLayout(null);
 		contentPane.add(alternativasCobertura);
 		
 		JLabel lblSeleccione = new JLabel("Seleccione tipo de p\u00F3liza");
 		lblSeleccione.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblSeleccione.setBounds(50, 25, 280, 25);
+		lblSeleccione.setBounds(28, 25, 280, 25);
 		alternativasCobertura.add(lblSeleccione);
 		
+		ArrayList<TipoCobertura> tipoCobertura;
+		
+		Calendar cal= Calendar.getInstance();
+        int year= cal.get(Calendar.YEAR);
+        
+        if(year-anio>10) {
+        	tipoCobertura = new ArrayList<TipoCobertura>();
+    		
+        	tipoCobertura.add(((ArrayList<TipoCobertura>) FachadaBDD.getInstance().getCoberturas()).get(0));
+        	
+        }else tipoCobertura = (ArrayList<TipoCobertura>) FachadaBDD.getInstance().getCoberturas();
+		
+        
+		String[][] listaTC= new String[tipoCobertura.size()][2];
+		
+		//ButtonGroup groupCoberturas = new ButtonGroup();
+		
+		int cont=0;
+		for(TipoCobertura tc:tipoCobertura) {
+			
+			listaTC[cont][0]=tc.getNombre();
+			listaTC[cont][1]=tc.getDescripcion();
+			
+			/*JRadioButton aux = new JRadioButton();
+			aux.setBounds(700,97+cont*26,109,23);
+			groupCoberturas.add(aux);
+			alternativasCobertura.add(aux);
+			*/
+			cont++;
+		}
+		
 		JTable tableAC = new JTable();
+		tableAC.setRowHeight(25);
 		tableAC.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tableAC.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableAC.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Responsabilidad civil", null, null},
-				{"Responsabilidad civil - Robo - Incendio total", null, null},
-				{"Todo total", null, null},
-				{"Terceros completos", null, null},
-				{"Todo riesgo con franquicia", null, null},
-			},
-			new String[] {
-				"Tipo de cobertura", "Descripci\u00F3n", ""
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, Boolean.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		tableAC.setModel(new DefaultTableModel(listaTC,new String[] {"Tipo de cobertura", "Descripci\u00F3n"}));
+
 		tableAC.getColumnModel().getColumn(0).setResizable(false);
-		tableAC.getColumnModel().getColumn(0).setPreferredWidth(250);
-		tableAC.getColumnModel().getColumn(0).setMinWidth(5);
+		tableAC.getColumnModel().getColumn(0).setPreferredWidth(280);
+		tableAC.getColumnModel().getColumn(0).setMinWidth(10);
 		tableAC.getColumnModel().getColumn(0).setMaxWidth(500);
 		tableAC.getColumnModel().getColumn(1).setPreferredWidth(409);
-		tableAC.setBounds(25, 100, 734, 80);
+		tableAC.setBounds(20, 100, 739, 125);
 		alternativasCobertura.add(tableAC);
 		
 		JLabel lblFechaInicio = new JLabel("Fecha de inicio de vigencia de la p\u00F3liza: ");
 		lblFechaInicio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFechaInicio.setBounds(25, 195, 313, 25);
+		lblFechaInicio.setBounds(20, 236, 313, 25);
 		alternativasCobertura.add(lblFechaInicio);
 		
 		JLabel lblFormaPago = new JLabel("Forma de pago:");
 		lblFormaPago.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFormaPago.setBounds(25, 223, 121, 25);
+		lblFormaPago.setBounds(20, 272, 121, 25);
 		alternativasCobertura.add(lblFormaPago);
 		
 		JRadioButton rdBtnMensual = new JRadioButton("MENSUAL");
-		rdBtnMensual.setBounds(152, 226, 100, 23);
+		rdBtnMensual.setBounds(147, 275, 74, 23);
 		alternativasCobertura.add(rdBtnMensual);
 		
 		JRadioButton rdBtnSemestral = new JRadioButton("SEMESTRAL");
-		rdBtnSemestral.setBounds(260, 226, 110, 23);
+		rdBtnSemestral.setBounds(246, 275, 110, 23);
 		alternativasCobertura.add(rdBtnSemestral);
+		rdBtnSemestral.setSelected(true);;
 		
 		ButtonGroup eleccion = new ButtonGroup();
 		eleccion.add(rdBtnMensual);
@@ -124,7 +127,7 @@ public class Cobertura extends JFrame {
 		JButton btnAtrasAC = new JButton("Atr\u00E1s");
 		btnAtrasAC.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnAtrasAC.setBackground(Color.WHITE);
-		btnAtrasAC.setBounds(25, 526, 90, 25);
+		btnAtrasAC.setBounds(10, 308, 90, 25);
 		btnAtrasAC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
@@ -137,7 +140,7 @@ public class Cobertura extends JFrame {
 		JButton btnCancelarAC = new JButton("Cancelar");
 		btnCancelarAC.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCancelarAC.setBackground(Color.WHITE);
-		btnCancelarAC.setBounds(125, 526, 90, 25);
+		btnCancelarAC.setBounds(110, 308, 90, 25);
 		btnCancelarAC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -150,15 +153,35 @@ public class Cobertura extends JFrame {
 		});
 		alternativasCobertura.add(btnCancelarAC);
 		
-		Calendar actualDate = Calendar.getInstance();
-		Calendar proxDate = Calendar.getInstance();
-		proxDate.add(Calendar.DATE, 1);
-		Calendar postDate = Calendar.getInstance();
-		postDate.add(Calendar.DATE, 30);
+		/*
+		//Calendar actualDate = Calendar.getInstance();
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerDateModel(proxDate.getTime(), actualDate.getTime(), postDate.getTime(), Calendar.DAY_OF_YEAR));
-		spinner.setBounds(343, 195, 120, 25);
+		Calendar proxDate = Calendar.getInstance();
+		proxDate.setTime(new Date());
+		proxDate.add(Calendar.DATE, +1);
+		
+		Calendar postDate = Calendar.getInstance();
+		postDate.setTime(new Date());
+		postDate.add(Calendar.DATE, +30);
+		*/		
+		Date today = new Date();
+		
+        Calendar unmes = Calendar.getInstance();
+        Calendar undia = Calendar.getInstance();
+        
+        undia.setTime(today);
+        unmes.setTime(today);
+        
+        unmes.add(Calendar.MONTH, 1);
+        undia.add(Calendar.DATE, 1);
+        
+		JSpinner spinner = new JSpinner(new SpinnerDateModel(unmes.getTime(),undia.getTime(),unmes.getTime(), Calendar.DATE));
+		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "dd/MM/yy");
+		spinner.setEditor(editor);
+		((DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
+		
+		
+		spinner.setBounds(343, 238, 120, 25);
 		alternativasCobertura.add(spinner);
 		
 		JLabel lblTipoDeCobertura = new JLabel("Tipo de cobertura");
@@ -166,39 +189,56 @@ public class Cobertura extends JFrame {
 		lblTipoDeCobertura.setBounds(27, 75, 141, 19);
 		alternativasCobertura.add(lblTipoDeCobertura);
 		
-		JLabel label = new JLabel("Descripci\u00F3n");
-		label.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label.setBounds(277, 75, 96, 19);
-		alternativasCobertura.add(label);
-		
-		boolean datosValidos = FachadaPoliza.getInstance().validarPoliza(polDTO);
-		
-		if (!datosValidos) {
-			JOptionPane.showMessageDialog(null, "Datos ingresados erróneos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
-			PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
-			polizaGenerar.setVisible(true);
-			dispose();
-		} 
+		JLabel lblDescripcion = new JLabel("Descripci\u00F3n");
+		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDescripcion.setBounds(301, 75, 96, 19);
+		alternativasCobertura.add(lblDescripcion);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSiguiente.setBackground(Color.WHITE);
-		btnSiguiente.setBounds(663, 526, 96, 25);
+		btnSiguiente.setBounds(674, 308, 96, 25);
+		btnSiguiente.setEnabled(false);
+		
+		tableAC.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				btnSiguiente.setEnabled(true);
+			}
+		});
+		
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean[] seleccionado = new boolean[5];
+
+				String tipoPoliza;
+				if (rdBtnMensual.isSelected())
+					tipoPoliza="MENSUAL";
+				else 
+					tipoPoliza="SEMESTRAL";
+				
+				TipoCobertura cobertura= tipoCobertura.get(tableAC.getSelectedRow());
+				Date inicioVigencia = (Date) spinner.getValue();
+				
+				FachadaPoliza.getInstance().setCobertura(polDTO,cobertura,inicioVigencia,tipoPoliza);
+				PolizaGenerada polizaGenerada = new PolizaGenerada(polDTO,clienteDTO,anio);
+				polizaGenerada.setVisible(true);
+				dispose();
+				
+				/*//boolean[] seleccionado = new boolean[5];
 				int contSeleccion=0;
 				
+				eleccion.isSelected(null);
 				if (rdBtnMensual.isSelected() || rdBtnSemestral.isSelected()) {
-					/*for (int i=0;i<5;i++) {
+					for (int i=0;i<5;i++) {
 						seleccionado[i]=(boolean) tableAC.getModel().getValueAt(i, 2);
 						if (seleccionado[i]==true)
 							contSeleccion++;
-					}*///ARREGLAR!
+					}//ARREGLAR!
 					if (contSeleccion==0 && datosValidos) {
 						int f = tableAC.getSelectedRow();
 						String cobertura= (String) tableAC.getValueAt(f, 0);
 						Date inicioVigencia = (Date) spinner.getValue();
+				
 						String tipoPoliza;
 						if (rdBtnMensual.isSelected())
 							tipoPoliza="MENSUAL";
@@ -214,7 +254,7 @@ public class Cobertura extends JFrame {
 						JOptionPane.showMessageDialog(null, "Solo puede seleccionar un tipo de poliza.", "Error", JOptionPane.ERROR_MESSAGE);
 				} else
 					JOptionPane.showMessageDialog(null, "Debe seleccionar una forma de pago.", "Error", JOptionPane.ERROR_MESSAGE);
-				
+				*/
 			}
 		});
 		alternativasCobertura.add(btnSiguiente);

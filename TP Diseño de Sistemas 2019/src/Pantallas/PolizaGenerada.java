@@ -1,13 +1,11 @@
 package Pantallas;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,13 +15,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Logica.FachadaPoliza;
 
 public class PolizaGenerada extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -45,7 +46,7 @@ public class PolizaGenerada extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO) {
+	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO,int anio) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -269,7 +270,7 @@ public class PolizaGenerada extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cambiar el tipo de cobertura?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
-					Cobertura cobertura = new Cobertura(polDTO,clienteDTO);
+					Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio);
 					cobertura.setVisible(true);
 					dispose();
 				}

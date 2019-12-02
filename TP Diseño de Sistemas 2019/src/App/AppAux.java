@@ -1,20 +1,16 @@
 package App;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import DTO.*;
+/*import DTO.*;
 import Entidades.*;
 import Enumerados.EstadoCivil;
 import Enumerados.EstadoPoliza;
 import Enumerados.Sexo;
 import Logica.*;
-
+*/
 public class AppAux {
 
 	public static void main(String[] args) {
