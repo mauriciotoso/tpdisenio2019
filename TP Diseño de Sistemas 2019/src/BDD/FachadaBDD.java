@@ -92,5 +92,11 @@ public class FachadaBDD {
 	public ArrayList<ClienteDTO> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
 		return GestorBDD.getInstance().getClientes(nroCliente,apellido,nombre,tipoDoc,nroDoc);
 	}	
+	
+	public PolizaDTO getPoliza (String nPoliza) {
+		PolizaDTO pol = new PolizaDTO(GestorBDD.getInstance().getPoliza(nPoliza));
+			
+		return pol;
+	}
 
 }

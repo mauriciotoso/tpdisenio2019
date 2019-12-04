@@ -5,22 +5,39 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import BDD.FachadaBDD;
+import BDD.GestorBDD;
+import DTO.ClienteDTO;
+import DTO.PolizaDTO;
+import Entidades.Poliza;
+import Enumerados.TipoDocumento;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BuscarPoliza extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTable table;
+	private JTextField tfNroPoliza;
+	private PolizaDTO polBuscada;
+	private PolizaDTO polSeleccionada;
+	private JTable tabla;
+	private ListSelectionModel model;
+
 
 	/**
 	 * Launch the application.
@@ -49,37 +66,11 @@ public class BuscarPoliza extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("Ingrese numero de poliza:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(10, 11, 240, 25);
-		contentPane.add(lblNewLabel);
+		String[] columnas = {"Nro póliza","Tipo cobertura","Estado poliza","Monto total"};
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField.setBounds(249, 11, 200, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
-			}
-		));
-		table.setBounds(20, 47, 500, 160);
-		contentPane.add(table);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 119, 764, 251);
+		contentPane.add(scrollPane);
 		
 		JButton button = new JButton("Cancelar");
 		button.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -90,8 +81,7 @@ public class BuscarPoliza extends JFrame {
 		JButton button_1 = new JButton("Seleccionar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nPoliza = textField.getText();
-				DatosPoliza datosPoliza = new DatosPoliza(nPoliza);
+				DatosPolizaCompletos datosPoliza = new DatosPolizaCompletos(polSeleccionada);
 				datosPoliza.setVisible(true);
 				dispose();
 			}
@@ -99,8 +89,78 @@ public class BuscarPoliza extends JFrame {
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_1.setBackground(Color.WHITE);
 		button_1.setBounds(664, 525, 110, 25);
+		button_1.setEnabled(false);
 		contentPane.add(button_1);
 		
+		JLabel lblNewLabel = new JLabel("Ingrese numero de poliza:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(10, 11, 240, 25);
+		contentPane.add(lblNewLabel);
 		
+		tfNroPoliza = new JTextField();
+		tfNroPoliza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				tabla = new JTable(filtrarTabla(tfNroPoliza.getText()),columnas);
+				scrollPane.setViewportView(tabla);
+				tabla.setAutoCreateRowSorter(true);
+				model = tabla.getSelectionModel();
+				
+				model.addListSelectionListener(new ListSelectionListener() {
+					
+					public void valueChanged(ListSelectionEvent e) {
+						if(!model.isSelectionEmpty()) {
+							
+							button_1.setEnabled(true);
+							polSeleccionada  = polBuscada;
+							
+							System.out.println(polSeleccionada);
+						}
+					}
+				});
+			}
+		});
+		tfNroPoliza.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tfNroPoliza.setBounds(249, 11, 200, 25);
+		contentPane.add(tfNroPoliza);
+		tfNroPoliza.setColumns(10);
+		
+		Object[][] datosClientes=filtrarTabla(tfNroPoliza.getText());
+		
+		tabla = new JTable(datosClientes,columnas);
+		model=tabla.getSelectionModel();
+		tabla.setAutoCreateRowSorter(true);
+		scrollPane.setViewportView(tabla);
+		tabla.editingCanceled(null);
+		button_1.setEnabled(false);
+		model.addListSelectionListener(new ListSelectionListener() {
+			
+			public void valueChanged(ListSelectionEvent e) {
+				if(!model.isSelectionEmpty()) {
+					
+					button_1.setEnabled(true);
+					polSeleccionada = polBuscada;
+					
+					System.out.println(polSeleccionada);
+				}
+			}
+		});
+		
+	}
+	
+private Object[][] filtrarTabla(String nroPoliza) {
+		
+		System.out.println(nroPoliza);
+		
+		polBuscada = FachadaBDD.getInstance().getPoliza(nroPoliza);
+		
+		String[][] datos = new String[1][4];
+		datos[1][1] = polBuscada.getNroPoliza();
+		datos[1][2] = polBuscada.getTipoCobertura();
+		datos[1][3] = polBuscada.getEstadoPoliza();
+		datos[1][4] = Float.toString(polBuscada.getMontoTotal());
+		
+		System.out.println(polBuscada);
+		return datos;
 	}
 }

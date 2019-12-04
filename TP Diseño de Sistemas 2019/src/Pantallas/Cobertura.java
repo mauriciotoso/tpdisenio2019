@@ -112,7 +112,7 @@ public class Cobertura extends JFrame {
 		alternativasCobertura.add(lblFormaPago);
 		
 		JRadioButton rdBtnMensual = new JRadioButton("MENSUAL");
-		rdBtnMensual.setBounds(147, 275, 74, 23);
+		rdBtnMensual.setBounds(147, 275, 90, 23);
 		alternativasCobertura.add(rdBtnMensual);
 		
 		JRadioButton rdBtnSemestral = new JRadioButton("SEMESTRAL");
@@ -153,29 +153,14 @@ public class Cobertura extends JFrame {
 		});
 		alternativasCobertura.add(btnCancelarAC);
 		
-		/*
-		//Calendar actualDate = Calendar.getInstance();
-		
-		Calendar proxDate = Calendar.getInstance();
-		proxDate.setTime(new Date());
-		proxDate.add(Calendar.DATE, +1);
-		
-		Calendar postDate = Calendar.getInstance();
-		postDate.setTime(new Date());
-		postDate.add(Calendar.DATE, +30);
-		*/		
-		Date today = new Date();
-		
+		Calendar actual = Calendar.getInstance();
         Calendar unmes = Calendar.getInstance();
         Calendar undia = Calendar.getInstance();
-        
-        undia.setTime(today);
-        unmes.setTime(today);
         
         unmes.add(Calendar.MONTH, 1);
         undia.add(Calendar.DATE, 1);
         
-		JSpinner spinner = new JSpinner(new SpinnerDateModel(unmes.getTime(),undia.getTime(),unmes.getTime(), Calendar.DATE));
+		JSpinner spinner = new JSpinner(new SpinnerDateModel(undia.getTime(),actual.getTime(),unmes.getTime(), Calendar.DATE));
 		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "dd/MM/yy");
 		spinner.setEditor(editor);
 		((DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);

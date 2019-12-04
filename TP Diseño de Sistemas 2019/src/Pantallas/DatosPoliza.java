@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 
+import DTO.PolizaDTO;
 import Entidades.Poliza;
 import Logica.FachadaPoliza;
 
@@ -51,7 +52,7 @@ public class DatosPoliza extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DatosPoliza(String nPoliza) {
+	public DatosPoliza(PolizaDTO polDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -167,8 +168,8 @@ public class DatosPoliza extends JFrame {
 		button_1.setBounds(684, 527, 90, 25);
 		contentPane.add(button_1);
 		
-		Poliza pol = FachadaPoliza.getInstance().buscarPoliza(nPoliza);
-		textField.setText(pol.getNroCliente().getNroCliente());
+		
+		/*textField.setText(pol.getNroCliente().getNroCliente());
 		textField_1.setText(pol.getNroCliente().getNombre());
 		textField_2.setText(pol.getNroCliente().getTipoDocumento().toString());
 		textField_3.setText(pol.getNroPoliza());
@@ -180,7 +181,7 @@ public class DatosPoliza extends JFrame {
 		else 
 			fecha=pol.getCuotas().get(5).getUltimoDiaPago().toString();
 		textField_6.setText(fecha);
-		textField_7.setText(Float.toString(pol.getMontoTotal()));
+		textField_7.setText(Float.toString(pol.getMontoTotal()));*/
 	}
 
 }

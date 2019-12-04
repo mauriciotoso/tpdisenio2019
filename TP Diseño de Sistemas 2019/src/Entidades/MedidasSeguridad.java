@@ -80,6 +80,8 @@ public class MedidasSeguridad {
 	public void setIdMedidasSeguridad(int idMedidasSeguridad) {
 		this.idMedidasSeguridad = idMedidasSeguridad;
 	}
+	
+	
 
 	@Override
 	public String toString() {

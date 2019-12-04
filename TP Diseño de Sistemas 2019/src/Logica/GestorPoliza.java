@@ -266,10 +266,9 @@ public class GestorPoliza {
 		return recibo;
 	}
 	
-	public Poliza buscarPoliza (String nPoliza) {
-		Poliza pol = new Poliza();
-		pol = GestorBDD.getInstance().buscarPoliza(nPoliza);
-			
+	public PolizaDTO getPoliza (String nPoliza) {
+		PolizaDTO pol = new PolizaDTO(GestorBDD.getInstance().getPoliza(nPoliza));
+		
 		return pol;
 	}
 }

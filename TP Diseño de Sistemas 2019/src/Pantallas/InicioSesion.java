@@ -141,7 +141,7 @@ public class InicioSesion extends JFrame {
 							i++;
 						}*/
 						if (contMayus>0 && contMin>0 && contNum>0 && contCaract>0)
-							correctoUser=true;
+							correctoPw=true;
 					}
 					if (correctoUser && correctoPw) {
 						Usuario usuario = FachadaSesion.getInstance().verifUserPw(user,pw);
@@ -160,11 +160,15 @@ public class InicioSesion extends JFrame {
 								dispose();
 							} else 
 								JOptionPane.showMessageDialog(null, "Error lectura de derechos.", "Error", JOptionPane.ERROR_MESSAGE);
+						} else {
+							tfNombreUsuario.setText(null);
+							tfContrasenia.setText(null);
+							JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
 						tfNombreUsuario.setText(null);
 						tfContrasenia.setText(null);
-						JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña inválidos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else 
 					JOptionPane.showMessageDialog(null, "Por favor, complete los campos.", "Error", JOptionPane.ERROR_MESSAGE);

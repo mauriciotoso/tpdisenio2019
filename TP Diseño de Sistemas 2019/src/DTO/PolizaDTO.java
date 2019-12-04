@@ -90,9 +90,49 @@ public class PolizaDTO {
 		this.medidasSeguridad = medidasSeguridad;
 		this.cliente = cliente;
 	}
+	
+	public PolizaDTO(Poliza pol) {
+		this.nroPoliza = pol.getNroPoliza();
+		/*
+		this.idlocalidad = idlocalidad;
+		this.localidad = localidad;
+		this.provincia = provincia;
+		this.pais = pais;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.idAnioModelo = pol.getIdAnio();
+		this.idTipoCobertura = idTipoCobertura;
+		this.tipoCobertura = pol.getTipoCobertura();
+		*/
+		ArrayList<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();
+		for (Cuota cuota: pol.getCuotas()) {
+			CuotaDTO c = new CuotaDTO(cuota);
+			cuotasDTO.add(c);
+		}
+		ArrayList<HijoDTO> hijosDTO = new ArrayList<HijoDTO>();
+		for (HijoDeclarado hijo: pol.getHijos()) {
+			HijoDTO h = new HijoDTO(hijo);
+			hijosDTO.add(h);
+		}
+		
+		this.motor = pol.getMotor();
+		this.chasis = pol.getChasis();
+		this.patente = pol.getPatente();
+		this.kmAnio = pol.getKmAnio();
+		this.montoTotal = pol.getMontoTotal();
+		this.nroSiniestros = pol.getNroSiniestros();
+		this.tipoPoliza = pol.getTipoPoliza();
+		this.fechaInicio = pol.getVigenciaDesde();
+		this.fechaFin = pol.getVigenciaHasta();
+		this.medidasSeguridad = new MedidasSeguridadDTO(pol.getMedidasSeguridad());
+		this.cuotas = cuotasDTO;
+		this.hijos = hijosDTO;
+		this.cliente = new ClienteDTO(pol.getNroCliente());
+		this.valoresPorcentualesDTO = new ValorPorcentualDTO(pol.getValoresPorcentualesPoliza());
+		//this.idEstadoPoliza = idEstadoPoliza;
+		this.estadoPoliza = pol.getEstadoPoliza().toString();
+	}
 
-	
-	
 	public String getNroPoliza() {
 		return nroPoliza;
 	}

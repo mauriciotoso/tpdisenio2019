@@ -2,6 +2,7 @@ package DTO;
 
 import java.util.Date;
 
+import Entidades.HijoDeclarado;
 import Enumerados.*;
 
 public class HijoDTO {
@@ -19,6 +20,12 @@ public class HijoDTO {
 		this.fechaNacimiento = fechaNacimiento;
 		this.sexo = sexo;
 		this.estadoCivil = estadoCivil;
+	}
+	
+	public HijoDTO(HijoDeclarado h) {
+		this.fechaNacimiento = h.getFechaNacimiento();
+		this.sexo = h.getSexo();
+		this.estadoCivil = h.getEtadoCivil();
 	}
 
 	public Date getFechaNacimiento() {

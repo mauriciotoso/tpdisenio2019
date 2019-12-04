@@ -1,5 +1,7 @@
 package DTO;
 
+import Entidades.MedidasSeguridad;
+
 public class MedidasSeguridadDTO {
 	
 	private boolean alarma;
@@ -10,12 +12,20 @@ public class MedidasSeguridadDTO {
 	public MedidasSeguridadDTO() {
 		
 	}
+	
 	public MedidasSeguridadDTO(boolean alarma, boolean garage, boolean rastreoVehicular, boolean tuercasAntirrobo) {
 		super();
 		this.alarma = alarma;
 		this.garage = garage;
 		this.rastreoVehicular = rastreoVehicular;
 		this.tuercasAntirrobo = tuercasAntirrobo;
+	}
+	
+	public MedidasSeguridadDTO(MedidasSeguridad ms) {
+		this.alarma = ms.isAlarma();
+		this.garage = ms.isGarage();
+		this.rastreoVehicular = ms.isRastreoVehicular();
+		this.tuercasAntirrobo = ms.isTuercaAntirrobo();
 	}
 
 	@Override

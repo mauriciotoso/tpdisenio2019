@@ -232,6 +232,14 @@ public class GestorBDD {
 		return pol;
 	}
 	
+	public Poliza getPoliza(String nroPoliza) {
+		if (!session.isJoinedToTransaction()) session.beginTransaction();
+		Poliza pol = session.get(Poliza.class, nroPoliza);
+		session.getTransaction().commit();
+		
+		return pol;
+	}
+	
 	public void actualizarCuotas(Poliza pol, ArrayList<Cuota> cuotas) {
 		if (!session.isJoinedToTransaction()) session.beginTransaction();
 		for(Cuota c: cuotas) {
@@ -340,13 +348,6 @@ public class GestorBDD {
 		return clientesObtenidosAux;
 	}
 	
-	public Poliza buscarPoliza (String nPoliza){
-		if(!session.isJoinedToTransaction()) session.beginTransaction();
-		Poliza p = session.get(Poliza.class, nPoliza);
-		session.getTransaction().commit();
-		
-		return p;	
-		}
 
 
 }

@@ -2,6 +2,8 @@ package DTO;
 
 import java.util.Date;
 
+import Entidades.Cuota;
+
 public class CuotaDTO {
 	
 	private int idCuota;
@@ -18,6 +20,14 @@ public class CuotaDTO {
 		this.importeCuota = importeCuota;
 		this.recargosPorMora = recargosPorMora;
 		this.bonificacion = bonificacion;
+	}
+	
+	public CuotaDTO(Cuota c) {
+		this.nroCuota = c.getNroCuota();
+		this.ultimoDiaPago = c.getUltimoDiaPago();
+		this.importeCuota = c.getImporteCuota();
+		this.recargosPorMora = c.getRecargosPorMora();
+		this.bonificacion = c.getBonificacion();
 	}
 
 	@Override

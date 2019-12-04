@@ -68,9 +68,9 @@ public class FachadaPoliza {
 		return recibo;
 	}
 	
-	public Poliza buscarPoliza(String nPoliza){
-		Poliza pol = new Poliza();
-		pol = GestorPoliza.getInstance().buscarPoliza(nPoliza);
+	public PolizaDTO buscarPoliza(String nPoliza){
+		PolizaDTO pol = new PolizaDTO();
+		pol = GestorPoliza.getInstance().getPoliza(nPoliza);
 			
 		return pol;
 		}

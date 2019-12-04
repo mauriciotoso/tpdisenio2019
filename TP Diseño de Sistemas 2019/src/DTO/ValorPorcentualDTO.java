@@ -1,5 +1,7 @@
 package DTO;
 
+import Entidades.ValoresPorcentualesPoliza;
+
 public class ValorPorcentualDTO {
 	
 	private float valorPorcentualKmAnio;
@@ -40,6 +42,24 @@ public class ValorPorcentualDTO {
 		this.valorPorcentualTipoCobertura = valorPorcentualTipoCobertura;
 		this.valorPorcentualMedidasSeguridad = valorPorcentualMedidasSeguridad;
 		this.derechosEmision = derechosEmision;
+	}
+	
+	public ValorPorcentualDTO(ValoresPorcentualesPoliza vp) {
+		this.valorPorcentualKmAnio = vp.getValorPorcentualKmAnio();
+		this.valorPorcentualGarage = vp.getValorPorcentualGarage();
+		this.valorPorcentualAlarma = vp.getValorPorcentualAlarma();
+		this.valorPorcentualRastreoVehicular = vp.getValorPorcentualRastreoVeicular();
+		this.valorPorcentualTuercasAntirrobo = vp.getValorPorcentualTuercasAntirrobo();
+		this.valorPorcentualSinSiniestro = vp.getValorPorcentualSinSiniestro();
+		this.valorPorcentualUnSiniestro = vp.getValorPorcentualUnSiniestro();
+		this.valorPorcentualDosSiniestros = vp.getValorPorcentualDosSiniestro();
+		this.valorPorcentualTresSiniestros = vp.getValorPorcentualTresSiniestro();
+		this.valorPorcentualHijo = vp.getValorPorcentualHijo();
+		this.valorPorcentualModelo = vp.getValorPorcentualModelo();
+		this.valorPorcentualLocalidad = vp.getValorPorcentualLocalidad();
+		this.valorPorcentualTipoCobertura = vp.getValorPorcentualTipoCobertura();
+		this.valorPorcentualMedidasSeguridad = vp.getValorPorcentualMedidasSeguridad();
+		this.derechosEmision = vp.getDerechoEmision();
 	}
 
 	public float getValorPorcentualKmAnio() {
