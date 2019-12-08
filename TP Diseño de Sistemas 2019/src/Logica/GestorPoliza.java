@@ -239,7 +239,7 @@ public class GestorPoliza {
 		return reciboDTO;
 	}
 	
-	public Recibo registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
+	public void registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
 		Poliza pol = GestorBDD.getInstance().getPoliza(polDTO);
 		ArrayList<Cuota> cuotasOriginales = (ArrayList<Cuota>) pol.getCuotas();
 		boolean valida = false;
@@ -262,8 +262,6 @@ public class GestorPoliza {
 				recibo.setCuotas(cOri);
 		}
 		GestorBDD.getInstance().guardarRecibo(recibo);
-		
-		return recibo;
 	}
 	
 	public PolizaDTO getPoliza (String nPoliza) {

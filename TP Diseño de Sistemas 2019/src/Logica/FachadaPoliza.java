@@ -63,9 +63,8 @@ public class FachadaPoliza {
 		return reciboDTO;
 	}
 	
-	public Recibo registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
-		Recibo recibo = GestorPoliza.getInstance().registrarPago(polDTO, reciboDTO);
-		return recibo;
+	public void registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
+		GestorPoliza.getInstance().registrarPago(polDTO, reciboDTO);
 	}
 	
 	public PolizaDTO buscarPoliza(String nPoliza){

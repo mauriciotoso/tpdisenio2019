@@ -7,14 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DTO.CuotaDTO;
 import DTO.PolizaDTO;
+import DTO.ReciboDTO;
 import Entidades.Recibo;
+import Logica.FachadaPoliza;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -46,7 +52,7 @@ public class DetallePago extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DetallePago(PolizaDTO polDTO, Recibo recibo) {
+	public DetallePago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 400, 200);
 		contentPane = new JPanel();
@@ -57,8 +63,11 @@ public class DetallePago extends JFrame {
 		JButton button = new JButton("Aceptar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DetalleRecibo detalleRecibo = new DetalleRecibo(polDTO,recibo);
-				detalleRecibo.setVisible(true);
+				FachadaPoliza.getInstance().registrarPago(polDTO, reciboDTO);
+				
+				JOptionPane.showMessageDialog(null, "Recibo de pago emitido con éxito", "Éxtio", JOptionPane.INFORMATION_MESSAGE);
+				MenuCobrador menuCobrador = new MenuCobrador();
+				menuCobrador.setVisible(true);
 				dispose();
 			}
 		});
@@ -103,8 +112,8 @@ public class DetallePago extends JFrame {
 		textField_2.setBounds(55, 56, 86, 15);
 		panel.add(textField_2);
 		
-		textField.setText(Float.toString(recibo.getImporte()));
-		textField_1.setText(Float.toString(recibo.getImportePagado()));
-		textField_2.setText(Float.toString(recibo.getVuelto()));
+		textField.setText(Float.toString(reciboDTO.getImporte()));
+		textField_1.setText(Float.toString(reciboDTO.getImportePagado()));
+		textField_2.setText(Float.toString(reciboDTO.getVuelto()));
 	}
 }

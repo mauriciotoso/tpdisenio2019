@@ -71,9 +71,8 @@ public class ImporteIngresado extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReciboDTO reciboDTO = FachadaPoliza.getInstance().generarRecibo(Float.valueOf(textField.getText()), cuotasPagar, polDTO, importeTotal);
-				Recibo recibo = FachadaPoliza.getInstance().registrarPago(polDTO, reciboDTO);
 				
-				DetallePago detallePago = new DetallePago(polDTO,recibo);
+				DetallePago detallePago = new DetallePago(polDTO, reciboDTO);
 				detallePago.setVisible(true);
 				dispose();
 			}

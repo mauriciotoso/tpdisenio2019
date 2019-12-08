@@ -291,7 +291,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(cbTuercas);
 		
 		JLabel lblNumeroDeSiniestros = new JLabel("Numero de siniestros en el ultimo a\u00F1o:");
-		lblNumeroDeSiniestros.setBounds(340, 140, 194, 18);
+		lblNumeroDeSiniestros.setBounds(340, 140, 210, 18);
 		panel_DatosPoliza.add(lblNumeroDeSiniestros);
 		
 		JRadioButton rbNinguno = new JRadioButton("Ninguno");
@@ -575,6 +575,7 @@ public class PolizaGenerar extends JFrame {
 		buttonGruopHijos.add(rbNo);
 
 		JRadioButton rbFP2 = new JRadioButton("AA 999 AA");
+		rbFP2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		rbFP2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mask1.install(tfPatente);
@@ -586,6 +587,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(rbFP2);
 		
 		JRadioButton rbFP1 = new JRadioButton("AAA 999");
+		rbFP1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		rbFP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mask2.install(tfPatente);
@@ -594,7 +596,7 @@ public class PolizaGenerar extends JFrame {
 			}
 		});
 		
-		rbFP1.setBounds(100, 88, 67, 18);
+		rbFP1.setBounds(100, 88, 70, 18);
 		panel_DatosPoliza.add(rbFP1);
 		
 		ButtonGroup buttonFP = new ButtonGroup();
