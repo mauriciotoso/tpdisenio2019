@@ -9,6 +9,7 @@ public class CuotaDTO {
 	private int idCuota;
 	private int nroCuota;
 	private Date ultimoDiaPago;
+	private boolean  estaPago;
 	private float importeCuota;
 	private float recargosPorMora;
 	private float bonificacion;
@@ -25,6 +26,7 @@ public class CuotaDTO {
 	public CuotaDTO(Cuota c) {
 		this.nroCuota = c.getNroCuota();
 		this.ultimoDiaPago = c.getUltimoDiaPago();
+		this.estaPago = c.isEstaPago();
 		this.importeCuota = c.getImporteCuota();
 		this.recargosPorMora = c.getRecargosPorMora();
 		this.bonificacion = c.getBonificacion();
@@ -83,6 +85,14 @@ public class CuotaDTO {
 
 	public void setImporteCuota(float importeCuota) {
 		this.importeCuota = importeCuota;
+	}
+
+	public boolean isEstaPago() {
+		return estaPago;
+	}
+
+	public void setEstaPago(boolean estaPago) {
+		this.estaPago = estaPago;
 	}
 	
 	

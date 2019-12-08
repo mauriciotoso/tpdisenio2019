@@ -87,14 +87,6 @@ public class Cuota {
 		this.importeCuota = importeCuota;
 	}
 
-	public boolean isEstePago() {
-		return estaPago;
-	}
-
-	public void setEstePago(boolean estePago) {
-		this.estaPago = estePago;
-	}
-
 	public int getIdCuota() {
 		return idCuota;
 	}

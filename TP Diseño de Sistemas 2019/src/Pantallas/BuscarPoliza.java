@@ -32,7 +32,7 @@ import java.awt.event.KeyEvent;
 public class BuscarPoliza extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField tfNroPoliza;
+	private JTextField textField;
 	private PolizaDTO polBuscada;
 	private PolizaDTO polSeleccionada;
 	private JTable tabla;
@@ -66,6 +66,11 @@ public class BuscarPoliza extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
+		JLabel label = new JLabel("Ingrese numero de poliza:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label.setBounds(10, 11, 240, 25);
+		contentPane.add(label);
+		
 		String[] columnas = {"Nro póliza","Tipo cobertura","Estado poliza","Monto total"};
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -81,9 +86,17 @@ public class BuscarPoliza extends JFrame {
 		JButton button_1 = new JButton("Seleccionar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DatosPolizaCompletos datosPoliza = new DatosPolizaCompletos(polSeleccionada);
-				datosPoliza.setVisible(true);
-				dispose();
+				//si tiene cuota atrasadas y sino ir a cutoas futuras
+				if (!polSeleccionada.getCuotasA().isEmpty()) {
+					PolizaCuotaAtrasada cuotaAtrasada = new PolizaCuotaAtrasada(polSeleccionada);
+					cuotaAtrasada.setVisible(true);
+					dispose();
+				} else {
+					PolizaCuotaFutura cuotaFutura = new PolizaCuotaFutura(polSeleccionada);
+					cuotaFutura.setVisible(true);
+					dispose();
+				}
+				
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -92,16 +105,12 @@ public class BuscarPoliza extends JFrame {
 		button_1.setEnabled(false);
 		contentPane.add(button_1);
 		
-		JLabel lblNewLabel = new JLabel("Ingrese numero de poliza:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(10, 11, 240, 25);
-		contentPane.add(lblNewLabel);
-		
-		tfNroPoliza = new JTextField();
-		tfNroPoliza.addKeyListener(new KeyAdapter() {
+		//INICIALIZAR TABLA CON DATO DE ENTRADA
+		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				tabla = new JTable(filtrarTabla(tfNroPoliza.getText()),columnas);
+				tabla = new JTable(filtrarTabla(textField.getText()),columnas);
 				scrollPane.setViewportView(tabla);
 				tabla.setAutoCreateRowSorter(true);
 				model = tabla.getSelectionModel();
@@ -120,12 +129,14 @@ public class BuscarPoliza extends JFrame {
 				});
 			}
 		});
-		tfNroPoliza.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tfNroPoliza.setBounds(249, 11, 200, 25);
-		contentPane.add(tfNroPoliza);
-		tfNroPoliza.setColumns(10);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField.setBounds(249, 11, 200, 25);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
-		Object[][] datosClientes=filtrarTabla(tfNroPoliza.getText());
+		
+		//INICIALIZAR TABLA CON TODOS LAS POLIZAS
+		Object[][] datosClientes=filtrarTabla(textField.getText());
 		
 		tabla = new JTable(datosClientes,columnas);
 		model=tabla.getSelectionModel();

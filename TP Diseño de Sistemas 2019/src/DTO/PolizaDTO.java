@@ -357,14 +357,15 @@ public class PolizaDTO {
 	public ArrayList<CuotaDTO> getCuotasA(){
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
 		Date hoy = new Date();
-		for(CuotaDTO cuo:this.getCuotas()) {
-			if(cuo.getUltimoDiaPago().before(hoy)) cuotasA.add(cuo);
+		for(CuotaDTO cuo: this.getCuotas()) {
+			if(cuo.getUltimoDiaPago().before(hoy) && !cuo.isEstaPago()) 
+				cuotasA.add(cuo);
 		}
 		return cuotasA;
 	}
 	public Object[][] getDatosCuotasA(int cantColum){
 		ArrayList<CuotaDTO> cuotasA = this.getCuotasA();
-		Object[][] aux=new Object[cuotasA.size()][cantColum];
+		Object[][] aux = new Object[cuotasA.size()][cantColum];
 		for(int i=0; i<cuotasA.size();i++) {
 			aux[i][0]= Integer.toString(cuotasA.get(i).getNroCuota());
 			aux[i][1]= Float.toString(cuotasA.get(i).getImporteCuota());
@@ -380,7 +381,7 @@ public class PolizaDTO {
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
 		Date hoy = new Date();
 		for(CuotaDTO cuo:this.getCuotas()) {
-			if(cuo.getUltimoDiaPago().getMinutes()>hoy.getMonth()) 
+			if(cuo.getUltimoDiaPago().after(hoy) && !cuo.isEstaPago()) 
 				cuotasA.add(cuo);
 		}
 		return cuotasA;
