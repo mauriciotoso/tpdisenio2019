@@ -163,15 +163,19 @@ private Object[][] filtrarTabla(String nroPoliza) {
 		
 		System.out.println(nroPoliza);
 		
-		polBuscada = FachadaBDD.getInstance().getPoliza(nroPoliza);
+		this.polBuscada = FachadaBDD.getInstance().getPoliza(nroPoliza);
 		
 		String[][] datos = new String[1][4];
-		datos[1][1] = polBuscada.getNroPoliza();
-		datos[1][2] = polBuscada.getTipoCobertura();
-		datos[1][3] = polBuscada.getEstadoPoliza();
-		datos[1][4] = Float.toString(polBuscada.getMontoTotal());
+		
+		if(this.polBuscada!=null) {
+		datos[0][0] = polBuscada.getNroPoliza();
+		datos[0][1] = polBuscada.getTipoCobertura();
+		datos[0][2] = polBuscada.getEstadoPoliza();
+		datos[0][3] = Float.toString(polBuscada.getMontoTotal());
+		}
 		
 		System.out.println(polBuscada);
+		
 		return datos;
 	}
 }

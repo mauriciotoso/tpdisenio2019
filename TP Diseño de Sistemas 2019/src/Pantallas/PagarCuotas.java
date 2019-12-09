@@ -65,11 +65,14 @@ public class PagarCuotas extends JFrame {
 		panel_1.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 37, 680, 52);
+		scrollPane.setBounds(10, 37, 680, 151);
 		panel_1.add(scrollPane);
-		
-		Object[][] datosCuotasPagar = new Object[cuotasPagar.size()][2];
-		for(int i=0; i<=cuotasPagar.size()-1;i++) {
+		int tamCuotas=0;
+		if(cuotasPagar!=null) {
+			tamCuotas=cuotasPagar.size();
+		}
+		Object[][] datosCuotasPagar = new Object[tamCuotas][2];
+		for(int i=0; i<=tamCuotas-1;i++) {
 			CuotaDTO c = cuotasPagar.get(i);
 			datosCuotasPagar[i][0]= c.getNroCuota();
 			datosCuotasPagar[i][1]= c.getImporteCuota();
@@ -81,7 +84,7 @@ public class PagarCuotas extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setAutoCreateRowSorter(true);
 		table.editingCanceled(null);
-		
+
 		JLabel label = new JLabel("Cuotas seleccionadas");
 		label.setBounds(10, 1, 172, 25);
 		panel_1.add(label);
@@ -120,10 +123,10 @@ public class PagarCuotas extends JFrame {
 		textField.setBounds(150, 252, 90, 25);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+		if(cuotasPagar!=null) {
 		for(CuotaDTO c: cuotasPagar) 
 			importeTotal+=c.getImporteCuota();
-		
+		}
 		textField.setText(Float.toString(importeTotal));
 	}
 }

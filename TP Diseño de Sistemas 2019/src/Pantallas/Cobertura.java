@@ -130,7 +130,7 @@ public class Cobertura extends JFrame {
 		btnAtrasAC.setBounds(10, 308, 90, 25);
 		btnAtrasAC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
+				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO,polDTO);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}

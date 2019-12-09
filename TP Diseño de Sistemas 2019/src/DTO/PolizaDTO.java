@@ -92,6 +92,7 @@ public class PolizaDTO {
 	}
 	
 	public PolizaDTO(Poliza pol) {
+		if(pol!=null) {
 		this.nroPoliza = pol.getNroPoliza();
 		/*
 		this.idlocalidad = idlocalidad;
@@ -131,6 +132,7 @@ public class PolizaDTO {
 		this.valoresPorcentualesDTO = new ValorPorcentualDTO(pol.getValoresPorcentualesPoliza());
 		//this.idEstadoPoliza = idEstadoPoliza;
 		this.estadoPoliza = pol.getEstadoPoliza().toString();
+		}
 	}
 
 	public String getNroPoliza() {
@@ -357,9 +359,13 @@ public class PolizaDTO {
 	public ArrayList<CuotaDTO> getCuotasA(){
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
 		Date hoy = new Date();
-		for(CuotaDTO cuo: this.getCuotas()) {
-			if(cuo.getUltimoDiaPago().before(hoy) && !cuo.isEstaPago()) 
+		ArrayList<CuotaDTO> cuotasPol =(ArrayList<CuotaDTO>) this.getCuotas();
+		for(CuotaDTO cuo: cuotasPol) {
+			Date diaCuota = cuo.getUltimoDiaPago();
+			if(diaCuota!=null) {
+			if(diaCuota.before(hoy) && !cuo.isEstaPago()) 
 				cuotasA.add(cuo);
+			}
 		}
 		return cuotasA;
 	}

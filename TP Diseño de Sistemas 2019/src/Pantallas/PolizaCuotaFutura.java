@@ -173,7 +173,7 @@ public class PolizaCuotaFutura extends JFrame {
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 35, 680, 60);
+		scrollPane_1.setBounds(10, 35, 680, 144);
 		panel_2.add(scrollPane_1);
 		
 		Object[][] datosCuotasFuturas = new Object[3][3];

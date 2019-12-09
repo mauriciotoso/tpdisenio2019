@@ -25,7 +25,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 import BDD.FachadaBDD;
+import BDD.GestorBDD;
 import DTO.ClienteDTO;
+import DTO.HijoDTO;
+import DTO.MedidasSeguridadDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
@@ -62,7 +65,7 @@ public class PolizaGenerar extends JFrame {
 	private MaskFormatter mask1;
 	private MaskFormatter mask2;
 	
-	public PolizaGenerar(ClienteDTO clienteDTO) {
+	public PolizaGenerar(ClienteDTO clienteDTO, PolizaDTO polDTO) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
@@ -654,6 +657,52 @@ public class PolizaGenerar extends JFrame {
 		lblFormatoPatente.setBounds(5, 90, 105, 15);
 		panel_DatosPoliza.add(lblFormatoPatente);
 
+		
+		
+		
+		
+		
+		
+		//SI POLDTO NO ES NULA, ENTONCES:
+		if(polDTO!=null) {
+		spinnerKms.setValue(polDTO.getKmAnio());
+		tfChasis.setText(polDTO.getChasis());
+		tfMotor.setText(polDTO.getMotor());
+		tfPatente.setText(polDTO.getPatente());
+		MedidasSeguridadDTO msDTO = polDTO.getMedidasSeguridad();
+		if(msDTO.isAlarma()) cbAlarma.setSelected(true);
+		if(msDTO.isGarage()) cbGarage.setSelected(true);
+		if(msDTO.isRastreoVehicular()) cbRastreo.setSelected(true);
+		if(msDTO.isTuercasAntirrobo()) cbTuercas.setSelected(true);
+		ArrayList<HijoDTO> hijos = (ArrayList<HijoDTO>) polDTO.getHijos();
+		if(hijos!=null) {
+		spinnerCantidadHijos.setValue(hijos.size());
+		if(hijos.size()>0) {
+			rbSi.setSelected(true);
+			rbNo.setSelected(false);
+		}else {
+			rbNo.setSelected(true);
+			rbSi.setSelected(false);
+		}
+		}
+		Localidad localidad = GestorBDD.getInstance().getLocalidad(polDTO);
+		comboBoxProvincia.setSelectedItem(localidad.getProvincia().getNombre());
+		comboBoxLocalidad.setSelectedItem(localidad.getNombre());
+		comboBoxMarca.setSelectedItem(polDTO.getMarca());
+		comboBoxModelo.setSelectedItem(polDTO.getModelo());
+		Anio anioModelo = GestorBDD.getInstance().getAnio(polDTO);
+		comboBoxAnio.setSelectedItem(anioModelo.getAnio());
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+		//BOTONES QUE USAN DATOS
+		
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

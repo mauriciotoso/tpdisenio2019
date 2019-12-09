@@ -83,7 +83,7 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion);
+				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion, null);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}

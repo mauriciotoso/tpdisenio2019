@@ -183,7 +183,7 @@ public class PolizaCuotaAtrasada extends JFrame {
 		panel_1.add(label_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 37, 680, 52);
+		scrollPane.setBounds(10, 37, 680, 172);
 		panel_1.add(scrollPane);
 	
 		cuotasAtrasadas = polDTO.getCuotasA();

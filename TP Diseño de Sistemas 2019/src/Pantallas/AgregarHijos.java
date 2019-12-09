@@ -264,7 +264,7 @@ public class AgregarHijos extends JFrame {
 		btnAtras.setBounds(5, 581, 90, 25);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO);
+				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO, polDTO);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}

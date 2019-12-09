@@ -318,7 +318,7 @@ insert into valorporcentualactual values (1,0.3,0.2,0.23,0.6,0.14,0.23,0.33,0.54
 
 insert into direccion values(nextval('sec_iddireccion'),'Lavaisse','610','3','2','3000',1);
 
-insert into cliente values ('1','1980-05-05','Santiago','Marnetto','DNI','20852741','202085274101','0',1,'smarnett@frsf.utn.edu.ar','1','Ing. en Sistemas','2019',3,1);
+insert into cliente values ('1','1980-05-05','Santiago','Marnetto','0','20852741','202085274101','0',1,'smarnett@frsf.utn.edu.ar','1','Ing. en Sistemas','2019',2,1);
 
 insert into valorporcentual values (nextval('sec_idvp'),0.3,0.2,0.23,0.6,0.14,0.23,0.33,0.54,0.45,0.44,0.11,0.2,0.33,0.12,0.43);
 
