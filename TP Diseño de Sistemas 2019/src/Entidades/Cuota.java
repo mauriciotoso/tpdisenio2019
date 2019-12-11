@@ -17,6 +17,15 @@ public class Cuota {
 	private boolean estaPago;
 	private float recargosPorMora;
 	private float bonificacion;
+	private Date fechaPago;
+	
+	public Date getFechaPago() {
+		return fechaPago;
+	}
+
+	public void setFechaPago(Date fechaPago) {
+		this.fechaPago = fechaPago;
+	}
 
 	public Cuota(int idCuota, int nroCuota, Date ultimoDiaPago, float importeCuota, boolean estaPago,
 			float recargosPorMora, float bonificacion) {

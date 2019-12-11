@@ -264,7 +264,7 @@ public class AgregarHijos extends JFrame {
 		btnAtras.setBounds(5, 581, 90, 25);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO, polDTO);
+				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO, polDTO,numeroHijos);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}
@@ -298,6 +298,38 @@ public class AgregarHijos extends JFrame {
 		((DefaultEditor) fechaNac4.getEditor()).getTextField().setEditable(false);
 		((DefaultEditor) fechaNac5.getEditor()).getTextField().setEditable(false);
 		
+		if(polDTO.getHijos()!=null) {
+			if(polDTO.getHijos().size()>=1) {
+				System.out.println(polDTO.getHijos().get(0));
+				fechaNac1.setValue(polDTO.getHijos().get(0).getFechaNacimiento());
+				comboBoxSexo1.setSelectedItem(polDTO.getHijos().get(0).getSexo());
+				comboBoxEC1.setSelectedItem(polDTO.getHijos().get(0).getEstadoCivil());
+			}
+			if(polDTO.getHijos().size()>=2) {
+				System.out.println(polDTO.getHijos().get(1));
+				fechaNac2.setValue(polDTO.getHijos().get(1).getFechaNacimiento());
+				comboBoxSexo2.setSelectedItem(polDTO.getHijos().get(1).getSexo());
+				comboBoxEC2.setSelectedItem(polDTO.getHijos().get(1).getEstadoCivil());
+			}
+			if(polDTO.getHijos().size()>=3) {
+				System.out.println(polDTO.getHijos().get(2));
+				fechaNac3.setValue(polDTO.getHijos().get(2).getFechaNacimiento());
+				comboBoxSexo3.setSelectedItem(polDTO.getHijos().get(2).getSexo());
+				comboBoxEC3.setSelectedItem(polDTO.getHijos().get(2).getEstadoCivil());
+			}
+			if(polDTO.getHijos().size()>=4) {
+				System.out.println(polDTO.getHijos().get(3));
+				fechaNac4.setValue(polDTO.getHijos().get(3).getFechaNacimiento());
+				comboBoxSexo4.setSelectedItem(polDTO.getHijos().get(3).getSexo());
+				comboBoxEC4.setSelectedItem(polDTO.getHijos().get(3).getEstadoCivil());
+			}
+			if(polDTO.getHijos().size()>=5) {
+				System.out.println(polDTO.getHijos().get(4));
+				fechaNac5.setValue(polDTO.getHijos().get(4).getFechaNacimiento());
+				comboBoxSexo5.setSelectedItem(polDTO.getHijos().get(4).getSexo());
+				comboBoxEC5.setSelectedItem(polDTO.getHijos().get(4).getEstadoCivil());
+			}
+		}
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
@@ -318,33 +350,33 @@ public class AgregarHijos extends JFrame {
 				estadoCivil.add(hijo1EC);
 					
 				if(numeroHijos>1) {
-					hijo2FN = (Date) fechaNac1.getValue();
-					hijo2Sexo = (Sexo) comboBoxSexo1.getSelectedItem();
-					hijo2EC = (EstadoCivil) comboBoxEC1.getSelectedItem();
+					hijo2FN = (Date) fechaNac2.getValue();
+					hijo2Sexo = (Sexo) comboBoxSexo2.getSelectedItem();
+					hijo2EC = (EstadoCivil) comboBoxEC2.getSelectedItem();
 					fechasNac.add(hijo2FN);
 					sexo.add(hijo2Sexo);
 					estadoCivil.add(hijo2EC);
 				}
 				if(numeroHijos>2){
-					hijo3FN = (Date) fechaNac1.getValue();
-					hijo3Sexo = (Sexo) comboBoxSexo1.getSelectedItem();
-					hijo3EC = (EstadoCivil) comboBoxEC1.getSelectedItem();
+					hijo3FN = (Date) fechaNac3.getValue();
+					hijo3Sexo = (Sexo) comboBoxSexo3.getSelectedItem();
+					hijo3EC = (EstadoCivil) comboBoxEC3.getSelectedItem();
 					fechasNac.add(hijo3FN);
 					sexo.add(hijo3Sexo);
 					estadoCivil.add(hijo3EC);	
 				}
 				if(numeroHijos>3){
-					hijo4FN = (Date) fechaNac1.getValue();
-					hijo4Sexo = (Sexo) comboBoxSexo1.getSelectedItem();
-					hijo4EC = (EstadoCivil) comboBoxEC1.getSelectedItem();
+					hijo4FN = (Date) fechaNac4.getValue();
+					hijo4Sexo = (Sexo) comboBoxSexo4.getSelectedItem();
+					hijo4EC = (EstadoCivil) comboBoxEC4.getSelectedItem();
 					fechasNac.add(hijo4FN);
 					sexo.add(hijo4Sexo);
 					estadoCivil.add(hijo4EC);	
 				}
 				if(numeroHijos>4){
-					hijo5FN = (Date) fechaNac1.getValue();
-					hijo5Sexo = (Sexo) comboBoxSexo1.getSelectedItem();
-					hijo5EC = (EstadoCivil) comboBoxEC1.getSelectedItem();
+					hijo5FN = (Date) fechaNac5.getValue();
+					hijo5Sexo = (Sexo) comboBoxSexo5.getSelectedItem();
+					hijo5EC = (EstadoCivil) comboBoxEC5.getSelectedItem();
 					fechasNac.add(hijo5FN);
 					sexo.add(hijo5Sexo);
 					estadoCivil.add(hijo5EC);	
@@ -352,7 +384,7 @@ public class AgregarHijos extends JFrame {
 				
 				FachadaPoliza.getInstance().ingresarHijos(polDTO,fechasNac,sexo,estadoCivil,numeroHijos);
 				
-				Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio);
+				Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio,numeroHijos);
 				cobertura.setVisible(true);
 				dispose();
 			}

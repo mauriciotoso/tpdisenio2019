@@ -28,6 +28,9 @@ drop sequence if exists sec_idms cascade;
 drop sequence if exists sec_idvp cascade;
 drop sequence if exists sec_idhijo cascade;
 drop sequence if exists sec_idsolicitud cascade;
+drop sequence if exists nropoliza cascade;
+
+create sequence nropoliza start with 0 increment by 1 maxvalue 9999999 minvalue 0;
 
 create table condicionIVA
 (idCondicionIVA int,
@@ -236,6 +239,7 @@ importeCuota float,
 estaPago boolean,
 bonificacion float,
 recibo int references recibo(nroRecibo),
+fechapago Date,
 nroPoliza varchar(20) references poliza(nroPoliza),
 primary key(idCuota));
 

@@ -31,60 +31,58 @@ public class GestorPoliza {
 	
 		boolean validar= this.validarPoliza(polDTO);
 		
-		if(!validar) {
-			//error campos
-			}else{
+		if(!validar) FachadaPoliza.getInstance().notificarError();
+		else {
+			
+			boolean validarF= this.validarFechas(polDTO);	
+			if(!validarF) FachadaPoliza.getInstance().notificarError();
+			else {
+				Cliente cliente = GestorCliente.getInstance().getCliente(polDTO.getCliente().getNroCliente());
+					
+				Anio anio = GestorInformacion.getInstance().getAnio(polDTO);
+				Localidad localidad = GestorInformacion.getInstance().getLocalidad(polDTO);
+				TipoCobertura tipoCobertura = GestorInformacion.getInstance().getTipoCobertura(polDTO);
+				EstadoPoliza estadoPoliza = GestorInformacion.getInstance().getEstadoPoliza(polDTO);
 				
-				boolean validarF= this.validarFechas(polDTO);
+				List<HijoDeclarado> hijos = this.crearHijos(polDTO);
+				MedidasSeguridad ms = this.crearMedidasSeguridad(polDTO);
 				
-				if(!validarF) {
-					//error fechas	
-				}else{
-
-					Cliente cliente = GestorCliente.getInstance().getCliente(polDTO.getCliente().getNroCliente());
-					
-					Anio anio = GestorInformacion.getInstance().getAnio(polDTO);
-					Localidad localidad = GestorInformacion.getInstance().getLocalidad(polDTO);
-					TipoCobertura tipoCobertura = GestorInformacion.getInstance().getTipoCobertura(polDTO);
-					EstadoPoliza estadoPoliza = GestorInformacion.getInstance().getEstadoPoliza(polDTO);
-					
-					List<HijoDeclarado> hijos = this.crearHijos(polDTO);
-					MedidasSeguridad ms = this.crearMedidasSeguridad(polDTO);
-					
-					ValoresPorcentualesPoliza vp = GestorParametros.getInstance().getValoresPorcentualesPoliza(anio,localidad,tipoCobertura,ms);
-					
-					
-					List<Cuota> cuotas = new ArrayList<Cuota>();
-					if(polDTO.getTipoPoliza().compareTo("MENSUAL")==0) {
-						Cuota c1 = new Cuota(polDTO.getCuotas().get(0));
-						Cuota c2 = new Cuota(polDTO.getCuotas().get(1));
-						Cuota c3 = new Cuota(polDTO.getCuotas().get(2));
-						Cuota c4 = new Cuota(polDTO.getCuotas().get(3));
-						Cuota c5 = new Cuota(polDTO.getCuotas().get(4));
-						Cuota c6 = new Cuota(polDTO.getCuotas().get(5));
-						cuotas.add(c1);
-						cuotas.add(c2);
-						cuotas.add(c3);
-						cuotas.add(c4);
-						cuotas.add(c5);
-						cuotas.add(c6);
+				ValoresPorcentualesPoliza vp = GestorParametros.getInstance().getValoresPorcentualesPoliza(anio,localidad,tipoCobertura,ms);
+	
+				List<Cuota> cuotas = new ArrayList<Cuota>();
+				if(polDTO.getTipoPoliza().compareTo("MENSUAL")==0) {
+					Cuota c1 = new Cuota(polDTO.getCuotas().get(0));
+					Cuota c2 = new Cuota(polDTO.getCuotas().get(1));
+					Cuota c3 = new Cuota(polDTO.getCuotas().get(2));
+					Cuota c4 = new Cuota(polDTO.getCuotas().get(3));
+					Cuota c5 = new Cuota(polDTO.getCuotas().get(4));
+					Cuota c6 = new Cuota(polDTO.getCuotas().get(5));
+					cuotas.add(c1);
+					cuotas.add(c2);
+					cuotas.add(c3);
+					cuotas.add(c4);
+					cuotas.add(c5);
+					cuotas.add(c6);
 					}else if(polDTO.getTipoPoliza().compareTo("SEMESTRAL")==0){
 						Cuota c = new Cuota(polDTO.getCuotas().get(0));
 						cuotas.add(c);
 					}
+				
+				long nroPoliza = GestorBDD.getInstance().nextNroPoliza();
+				Poliza poliza = new Poliza(nroPoliza,polDTO.getFechaInicio(),polDTO.getFechaFin(),localidad,
+						estadoPoliza,polDTO.getPatente(),polDTO.getMotor(),
+						polDTO.getChasis(),polDTO.getKmAnio(),cuotas,anio,polDTO.getTipoPoliza(),
+						polDTO.getNroSiniestros(),ms,hijos,
+						tipoCobertura,vp,cliente);
 
-					Poliza poliza = new Poliza(polDTO.getFechaInicio(),polDTO.getFechaFin(),localidad,
-							estadoPoliza,polDTO.getPatente(),polDTO.getMotor(),
-							polDTO.getChasis(),polDTO.getKmAnio(),cuotas,anio,polDTO.getTipoPoliza(),
-							polDTO.getNroSiniestros(),ms,hijos,
-							tipoCobertura,vp,cliente);
-
-					poliza = GestorCalculo.getInstance().calcularPDD(poliza);
-					//PASAR ESTADO POLIZA A GENERADA 
-
-					GestorBDD.getInstance().guardarPoliza(poliza);
+				poliza = GestorCalculo.getInstance().calcularPDD(poliza);
+				
+				poliza.actualizarGenerada();
+				
+				GestorBDD.getInstance().guardarPoliza(poliza);
 					//ACTUALIZAR ESTADO DEL CLIENTE (mirar enunciado)
-				}
+				GestorCliente.getInstance().actualizarEstado(cliente);
+			}
 		}
 	}
 	
@@ -180,7 +178,6 @@ public class GestorPoliza {
 			hijo.setFechaNacimiento(fechasNac.get(i));
 			hijo.setSexo(sexo.get(i));
 			hijo.setEstadoCivil(estadoCivil.get(i));
-			
 			hijosLista.add(hijo);
 		}
 		

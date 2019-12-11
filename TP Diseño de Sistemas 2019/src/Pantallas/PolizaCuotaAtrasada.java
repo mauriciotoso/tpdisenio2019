@@ -1,8 +1,5 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,58 +7,49 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import BDD.GestorBDD;
-import DTO.CuotaDTO;
-import DTO.PolizaDTO;
-
+import DTO.*;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class PolizaCuotaAtrasada extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField tfNroCliente;
+	private JTextField tfNombre;
+	private JTextField tfApellido;
+	private JTextField tfNroPoliza;
+	private JTextField tfFechaInicio;
+	private JTextField tfFechaFin;
+	private JTextField tfMarca;
+	private JTextField tfModelo;
+	private JTextField tfPatente;
 	private ArrayList<CuotaDTO> cuotasAtrasadas;
+	private ArrayList<CuotaDTO> cuotasAtrasadasSeleccionadas;
+	private ArrayList<CuotaDTO> cuotasFuturas;
+	private ArrayList<CuotaDTO> cuotasFuturasSeleccionadas;
+	private JTable tableCA;
+	private JTable tableCF;
+	private ListSelectionModel modelCA;
+	private ListSelectionModel modelCF;
+	private CuotaDTO seleccionCA;
+	private CuotaDTO seleccionCF;
 	private ArrayList<CuotaDTO> cuotasSeleccionadas;
-	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DatosPolizaCompletos frame = new DatosPolizaCompletos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public PolizaCuotaAtrasada(PolizaDTO polDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
@@ -69,122 +57,127 @@ public class PolizaCuotaAtrasada extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		
-		JLabel label = new JLabel("Numero de cliente:");
-		label.setBounds(10, 11, 100, 20);
-		contentPane.add(label);
+		JLabel labelNroCliente = new JLabel("Numero de cliente:");
+		labelNroCliente.setBounds(10, 11, 100, 20);
+		contentPane.add(labelNroCliente);
 		
-		JLabel label_1 = new JLabel("Nombre:");
-		label_1.setBounds(267, 11, 50, 20);
-		contentPane.add(label_1);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(498, 11, 50, 20);
+		contentPane.add(lblNombre);
 		
-		JLabel label_2 = new JLabel("Apellido:");
-		label_2.setBounds(498, 11, 50, 20);
-		contentPane.add(label_2);
+		JLabel lblApellido = new JLabel("Apellido:");
+		lblApellido.setBounds(267, 11, 50, 20);
+		contentPane.add(lblApellido);
 		
-		JLabel label_3 = new JLabel("Numero de poliza:");
-		label_3.setBounds(10, 42, 90, 20);
-		contentPane.add(label_3);
+		JLabel lblNroPoliza = new JLabel("Numero de poliza:");
+		lblNroPoliza.setBounds(10, 42, 90, 20);
+		contentPane.add(lblNroPoliza);
 		
-		JLabel label_4 = new JLabel("Fecha inicio:");
-		label_4.setBounds(267, 42, 70, 20);
-		contentPane.add(label_4);
+		JLabel lblFechaInicio = new JLabel("Fecha inicio:");
+		lblFechaInicio.setBounds(267, 42, 70, 20);
+		contentPane.add(lblFechaInicio);
 		
-		JLabel label_5 = new JLabel("Fecha fin:");
-		label_5.setBounds(498, 42, 56, 20);
-		contentPane.add(label_5);
+		JLabel lblFechaFin = new JLabel("Fecha fin:");
+		lblFechaFin.setBounds(498, 42, 56, 20);
+		contentPane.add(lblFechaFin);
 		
-		JLabel label_6 = new JLabel("Marca:");
-		label_6.setBounds(10, 73, 39, 20);
-		contentPane.add(label_6);
+		JLabel lblMarca = new JLabel("Marca:");
+		lblMarca.setBounds(10, 73, 39, 20);
+		contentPane.add(lblMarca);
 		
-		JLabel label_7 = new JLabel("Modelo:");
-		label_7.setBounds(208, 73, 50, 20);
-		contentPane.add(label_7);
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setBounds(267, 73, 50, 20);
+		contentPane.add(lblModelo);
 		
-		JLabel label_8 = new JLabel("Patente del veh\u00EDculo:");
-		label_8.setBounds(410, 73, 104, 20);
-		contentPane.add(label_8);
+		JLabel lblPatente = new JLabel("Patente:");
+		lblPatente.setBounds(498, 73, 50, 20);
+		contentPane.add(lblPatente);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(107, 11, 150, 20);
-		contentPane.add(textField);
+		tfNroCliente = new JTextField();
+		tfNroCliente.setEditable(false);
+		tfNroCliente.setColumns(10);
+		tfNroCliente.setBounds(107, 11, 150, 20);
+		contentPane.add(tfNroCliente);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(338, 11, 150, 20);
-		contentPane.add(textField_1);
+		tfNombre = new JTextField();
+		tfNombre.setEditable(false);
+		tfNombre.setColumns(10);
+		tfNombre.setBounds(555, 11, 150, 20);
+		contentPane.add(tfNombre);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(555, 11, 150, 20);
-		contentPane.add(textField_2);
+		tfApellido = new JTextField();
+		tfApellido.setEditable(false);
+		tfApellido.setColumns(10);
+		tfApellido.setBounds(338, 11, 150, 20);
+		contentPane.add(tfApellido);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(107, 42, 150, 20);
-		contentPane.add(textField_3);
+		tfNroPoliza = new JTextField();
+		tfNroPoliza.setEditable(false);
+		tfNroPoliza.setColumns(10);
+		tfNroPoliza.setBounds(107, 42, 150, 20);
+		contentPane.add(tfNroPoliza);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		textField_4.setBounds(338, 42, 150, 20);
-		contentPane.add(textField_4);
+		tfFechaInicio = new JTextField();
+		tfFechaInicio.setEditable(false);
+		tfFechaInicio.setColumns(10);
+		tfFechaInicio.setBounds(338, 42, 150, 20);
+		contentPane.add(tfFechaInicio);
 
-		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		textField_5.setBounds(555, 42, 150, 20);
-		contentPane.add(textField_5);
+		tfFechaFin = new JTextField();
+		tfFechaFin.setEditable(false);
+		tfFechaFin.setColumns(10);
+		tfFechaFin.setBounds(555, 42, 150, 20);
+		contentPane.add(tfFechaFin);
 
-		textField_6 = new JTextField();
-		textField_6.setEditable(false);
-		textField_6.setColumns(10);
-		textField_6.setBounds(48, 73, 150, 20);
-		contentPane.add(textField_6);
+		tfMarca = new JTextField();
+		tfMarca.setEditable(false);
+		tfMarca.setColumns(10);
+		tfMarca.setBounds(107, 73, 150, 20);
+		contentPane.add(tfMarca);
 
-		textField_7 = new JTextField();
-		textField_7.setEditable(false);
-		textField_7.setColumns(10);
-		textField_7.setBounds(250, 73, 150, 20);
-		contentPane.add(textField_7);
+		tfModelo = new JTextField();
+		tfModelo.setEditable(false);
+		tfModelo.setColumns(10);
+		tfModelo.setBounds(338, 73, 150, 20);
+		contentPane.add(tfModelo);
 
-		textField_8 = new JTextField();
-		textField_8.setEditable(false);
-		textField_8.setColumns(10);
-		textField_8.setBounds(515, 73, 150, 20);
-		contentPane.add(textField_8);
+		tfPatente = new JTextField();
+		tfPatente.setEditable(false);
+		tfPatente.setColumns(10);
+		tfPatente.setBounds(555, 73, 150, 20);
+		contentPane.add(tfPatente);
 		
-		textField.setText(polDTO.getCliente().getNroCliente());
-		textField_1.setText(polDTO.getCliente().getNombre());
-		textField_2.setText(polDTO.getCliente().getApellido());
-		textField_3.setText(polDTO.getNroPoliza());
-		textField_4.setText(polDTO.getFechaInicio().toString());
-		textField_5.setText(polDTO.getFechaFin().toString());
-		textField_6.setText(polDTO.getMarca());
-		textField_7.setText(polDTO.getModelo());
-		textField_8.setText(polDTO.getPatente());
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+		String fechaInicio = dateFormat.format(polDTO.getFechaInicio()); 
+		String fechaFin = dateFormat.format(polDTO.getFechaFin()); 
+		
+		tfNroCliente.setText(polDTO.getCliente().getNroCliente());
+		tfNombre.setText(polDTO.getCliente().getNombre());
+		tfApellido.setText(polDTO.getCliente().getApellido());
+		tfNroPoliza.setText(polDTO.getNroPoliza());
+		tfFechaInicio.setText(fechaInicio);
+		tfFechaFin.setText(fechaFin);
+		tfMarca.setText(polDTO.getMarca());
+		tfModelo.setText(polDTO.getModelo());
+		tfPatente.setText(polDTO.getPatente());
 		
 		//TABLA
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(35, 140, 700, 220);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelCA = new JPanel();
+		panelCA.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelCA.setBounds(10, 104, 764, 172);
+		contentPane.add(panelCA);
+		panelCA.setLayout(null);
 		
-		JLabel label_9 = new JLabel("Cuotas atrasadas");
-		label_9.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_9.setBounds(10, 11, 185, 20);
-		panel_1.add(label_9);
+		JLabel lblCuotasAtrasadas = new JLabel("Cuotas atrasadas");
+		lblCuotasAtrasadas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCuotasAtrasadas.setBounds(10, 11, 185, 20);
+		panelCA.add(lblCuotasAtrasadas);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 37, 680, 172);
-		panel_1.add(scrollPane);
+		JScrollPane scrollPaneCA = new JScrollPane();
+		scrollPaneCA.setBounds(10, 37, 744, 123);
+		panelCA.add(scrollPaneCA);
 	
 		cuotasAtrasadas = polDTO.getCuotasA();
 		Object[][] datosCuotasAtrasadas = new Object[cuotasAtrasadas.size()][3];
@@ -192,56 +185,137 @@ public class PolizaCuotaAtrasada extends JFrame {
 			CuotaDTO c = cuotasAtrasadas.get(i);
 			datosCuotasAtrasadas[i][0]= c.getNroCuota();
 			datosCuotasAtrasadas[i][1]= c.getImporteCuota();
-			datosCuotasAtrasadas[i][2]= Float.toString(400);
+			datosCuotasAtrasadas[i][2]= c.getImporteCuota()+c.getRecargosPorMora();
 		}
 		
-		String[] columnas = {"Nro Cuota","Valor original","Valor actualizado"};
+		String[] columnas = {"Nro. cuota","Valor original","Valor actualizado"};
 
-		table = new JTable(datosCuotasAtrasadas, columnas);
-		scrollPane.setViewportView(table);
-		table.setAutoCreateRowSorter(true);
-		table.editingCanceled(null);
-		
+		tableCA = new JTable(datosCuotasAtrasadas, columnas);
+		modelCA=tableCA.getSelectionModel();
+		scrollPaneCA.setViewportView(tableCA);
+		tableCA.editingCanceled(null);
 		
 		//BOTONES
-		JButton button = new JButton("Cancelar");
-		button.addActionListener(new ActionListener() {
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				MenuCobrador mc =new MenuCobrador();
+				mc.setVisible(true);
+				dispose();
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button.setBackground(Color.WHITE);
-		button.setBounds(10, 525, 90, 25);
-		contentPane.add(button);
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCancelar.setBackground(Color.WHITE);
+		btnCancelar.setBounds(10, 525, 90, 25);
+		contentPane.add(btnCancelar);
 		
-		JButton button_1 = new JButton("Seleccionar");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnSeleccionar = new JButton("Seleccionar");
+		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int indexs[] = table.getSelectedRows();
-				Object fila = new Object();
-				 
-				for (int i=0;i<indexs.length;i++) {
-					fila = table.getValueAt(indexs[i], 0);
-					
-					for(CuotaDTO c: cuotasAtrasadas) {
-						if(c.getNroCuota()==(int)fila)
-							cuotasSeleccionadas.add(c);
-					}
-				}
 				PagarCuotas pagarCuotas = new PagarCuotas(polDTO,cuotasSeleccionadas);
 				pagarCuotas.setVisible(true);
 				dispose();
 			}
 		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_1.setBackground(Color.WHITE);
-		button_1.setBounds(674, 525, 100, 25);
-		contentPane.add(button_1);
 		
-		JButton button_2 = new JButton("Elegir otra p\u00F3liza");
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_2.setBackground(Color.WHITE);
-		button_2.setBounds(524, 525, 140, 25);
-		contentPane.add(button_2);
+		btnSeleccionar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnSeleccionar.setBackground(Color.WHITE);
+		btnSeleccionar.setBounds(648, 525, 126, 25);
+		contentPane.add(btnSeleccionar);
+		
+		JButton btnElegirPoliza = new JButton("Elegir otra p\u00F3liza");
+		btnElegirPoliza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BuscarPoliza bp = new BuscarPoliza();
+				bp.setVisible(true);
+				dispose();
+			}
+		});
+		
+		btnElegirPoliza.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnElegirPoliza.setBackground(Color.WHITE);
+		btnElegirPoliza.setBounds(498, 525, 140, 25);
+		contentPane.add(btnElegirPoliza);
+		
+		JPanel panelCF = new JPanel();
+		panelCF.setLayout(null);
+		panelCF.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelCF.setBounds(10, 287, 764, 172);
+		contentPane.add(panelCF);
+		
+		JScrollPane scrollPaneCF = new JScrollPane();
+		scrollPaneCF.setBounds(10, 37, 744, 123);
+		panelCF.add(scrollPaneCF);
+		
+		cuotasFuturas = polDTO.getCuotasF();
+		Object[][] datosCuotasFuturas = new Object[cuotasFuturas.size()][3];
+		for(int i=0; i<=cuotasFuturas.size()-1;i++) {
+			CuotaDTO c = cuotasFuturas.get(i);
+			datosCuotasFuturas[i][0]= c.getNroCuota();
+			datosCuotasFuturas[i][1]= c.getImporteCuota();
+			datosCuotasFuturas[i][2]= c.getImporteCuota()+c.getBonificacion();
+		}
+		
+		tableCF = new JTable(datosCuotasFuturas, columnas);
+		modelCF=tableCF.getSelectionModel();
+		scrollPaneCF.setViewportView(tableCF);
+		tableCF.editingCanceled(null);
+		
+		JLabel lblCuotasFuturas = new JLabel("Cuotas futuras");
+		lblCuotasFuturas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCuotasFuturas.setBounds(10, 11, 185, 20);
+		panelCF.add(lblCuotasFuturas);
+		
+		modelCA.addListSelectionListener(new ListSelectionListener() {	
+			public void valueChanged(ListSelectionEvent e) {
+				if(!modelCA.isSelectionEmpty()) {
+					
+					cuotasAtrasadasSeleccionadas=new ArrayList<>();
+					seleccionCA=cuotasAtrasadas.get(modelCA.getMinSelectionIndex());
+					
+					if(seleccionCA.getNroCuota()!=0) {
+						for(CuotaDTO c:cuotasAtrasadas) {
+							if(c.getNroCuota()<=seleccionCA.getNroCuota()) cuotasAtrasadasSeleccionadas.add(c);
+						}
+					}else cuotasAtrasadasSeleccionadas=cuotasAtrasadas;
+					
+					cuotasFuturasSeleccionadas=new ArrayList<>();
+					
+					btnSeleccionar.setEnabled(true);
+					
+					cuotasSeleccionadas = new ArrayList<>();
+					cuotasSeleccionadas.addAll(cuotasAtrasadasSeleccionadas);
+					cuotasSeleccionadas.addAll(cuotasFuturasSeleccionadas);
+					
+					System.out.println(cuotasSeleccionadas);
+				}
+			}
+		});
+		
+		modelCF.addListSelectionListener(new ListSelectionListener() {	
+			public void valueChanged(ListSelectionEvent e) {
+				if(!modelCF.isSelectionEmpty()) {
+					
+					cuotasFuturasSeleccionadas=new ArrayList<>();
+					seleccionCF=cuotasFuturas.get(modelCF.getMinSelectionIndex());
+					
+					if(seleccionCF.getNroCuota()!=0) {
+						for(CuotaDTO c:cuotasFuturas) {
+							if(c.getNroCuota()<=seleccionCF.getNroCuota()) cuotasFuturasSeleccionadas.add(c);
+						}
+					}else cuotasFuturasSeleccionadas=cuotasFuturas;
+					
+					cuotasAtrasadasSeleccionadas=cuotasAtrasadas;
+					
+					btnSeleccionar.setEnabled(true);
+
+					cuotasSeleccionadas = new ArrayList<>();
+					cuotasSeleccionadas.addAll(cuotasAtrasadasSeleccionadas);
+					cuotasSeleccionadas.addAll(cuotasFuturasSeleccionadas);
+					
+					System.out.println(cuotasSeleccionadas);
+				}
+			}
+		});
 	}
 }

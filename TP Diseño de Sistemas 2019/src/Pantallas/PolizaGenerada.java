@@ -21,32 +21,10 @@ import Logica.FachadaPoliza;
 
 public class PolizaGenerada extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PolizaGenerada frame = new PolizaGenerada();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
-	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO,int anio) {
+	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO,int anio,int numeroHijos) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -270,7 +248,7 @@ public class PolizaGenerada extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cambiar el tipo de cobertura?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
-					Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio);
+					Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio,numeroHijos);
 					cobertura.setVisible(true);
 					dispose();
 				}

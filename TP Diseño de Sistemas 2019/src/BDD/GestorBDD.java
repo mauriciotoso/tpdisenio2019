@@ -1,11 +1,12 @@
 package BDD;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
+import org.hibernate.query.NativeQuery;
 import App.Usuario;
 import DTO.*;
 import Entidades.*;
@@ -123,20 +124,10 @@ public class GestorBDD {
 	public Anio getAnio(PolizaDTO polDTO){
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
-		
-		@SuppressWarnings("unchecked")
-		List<Anio> anios = session.createQuery
-		("from Anio a where a.anio=2006 ").getResultList();
-		
-		for(Anio a:anios) {
-			if(a.getModelo().getNombre().compareTo("Focus")==0 && a.getModelo().getMarca().getMarca().compareTo("Ford")==0) {
-				return a;
-			}
-		}
-		
+		Anio anio =  session.get(Anio.class, polDTO.getIdAnioModelo());
 		session.getTransaction().commit();
 		
-		return new Anio();
+		return anio;
 	}
 	
 
@@ -144,56 +135,27 @@ public class GestorBDD {
 		
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
-		
-		@SuppressWarnings("unchecked")
-		List<Localidad> localidades = session.createQuery
-		("from Localidad l where l.nombre='"+polDTO.getLocalidad()+"' ").getResultList();
-		
-		for(Localidad l:localidades) {
-			if(l.getProvincia().getNombre().compareTo(polDTO.getProvincia())==0 && l.getProvincia().getPais().getNombre().compareTo(polDTO.getPais())==0) {
-				return l;
-			}
-		}
-		
+		Localidad loc = session.get(Localidad.class, polDTO.getIdlocalidad());
 		session.getTransaction().commit();
 		
-		return new Localidad();
+		return loc;
 	}
 	
 	public TipoCobertura getTipoCobertura(PolizaDTO polDTO) {
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
-		
-		@SuppressWarnings("unchecked")
-		List<TipoCobertura> coberturas = session.createQuery
-		("from TipoCobertura t where t.nombre='"+polDTO.getTipoCobertura()+"' ").getResultList();
-		
-		for(TipoCobertura t:coberturas) {
-			if(t.getNombre().compareTo(polDTO.getTipoCobertura())==0) {
-				return t;
-			}
-		}
-		
+		TipoCobertura tc =  session.get(TipoCobertura.class, polDTO.getIdTipoCobertura());
 		session.getTransaction().commit();
 		
-		return new TipoCobertura();
+		return tc;
 	}
 	
 	public EstadoPoliza getEstadoPoliza(PolizaDTO polDTO) {
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
-		
-		@SuppressWarnings("unchecked")
-		List<EstadoPoliza> estadoPoliza = session.createQuery
-		("from EstadoPoliza ep where ep.estadoPoliza='"+polDTO.getEstadoPoliza()+"' ").getResultList();
-		
-		for (EstadoPoliza ep:estadoPoliza) {
-			if(ep.getEstadoPoliza().compareTo(polDTO.getEstadoPoliza())==0)
-				return ep;
-		}
-		
+		EstadoPoliza ep = session.get(EstadoPoliza.class,polDTO.getIdEstadoPoliza());
 		session.getTransaction().commit();
 		
-		return null;
+		return ep;
 	}
 	
 	public ValoresPorcentualesActuales getVPA() {
@@ -347,7 +309,53 @@ public class GestorBDD {
 		
 		return clientesObtenidosAux;
 	}
+		
+	public ArrayList<PolizaDTO> getPolizas(String nroPoliza){
+		
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Poliza> polizas = (ArrayList<Poliza>) session.createQuery(
+				"from Poliza "
+				+ "where nroPoliza like '%"+nroPoliza+"%'"
+				).getResultList();
+		
+		session.getTransaction().commit();
+		
+		ArrayList<PolizaDTO> polizasDTO = new ArrayList<PolizaDTO>();
+				
+		for (Poliza p:polizas) {
+			polizasDTO.add(new PolizaDTO(p));
+		}
+		
+		return polizasDTO;
+	}
 	
+	
+	public long nextNroPoliza() {
+		
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
+		NativeQuery<?> query = session.createSQLQuery( "select nextval('nropoliza')" );
+		Long key = ((BigInteger) query.uniqueResult()).longValue();
+		session.getTransaction().commit();
+		
+	    return key;
+	}
+	
+	public ArrayList<Poliza> nroPolizas(String nroCliente) {
 
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Poliza> polizas = (ArrayList<Poliza>) session.createQuery(
+				"from Poliza "
+				+ "where nroCliente='"+nroCliente+"'"
+				).getResultList();
+		
+		session.getTransaction().commit();
+		
+		return polizas;
+	}
 
 }

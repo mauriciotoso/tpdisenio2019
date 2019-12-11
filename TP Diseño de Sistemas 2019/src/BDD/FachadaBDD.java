@@ -26,6 +26,10 @@ public class FachadaBDD {
 		return (new GestorSuperIntendenciaSeguros()).obtenerSumaAsegurada();
 	}
 	
+	public ArrayList<PolizaDTO> getPolizas(String nroPoliza){
+		return GestorBDD.getInstance().getPolizas(nroPoliza);
+	}
+	
 	public int getNroSiniestros(ClienteDTO cDTO) {
 		GestorSubSistemaSiniestros gestorSiniestros = new GestorSubSistemaSiniestros();
 		return gestorSiniestros.getNroSiniestros(cDTO);

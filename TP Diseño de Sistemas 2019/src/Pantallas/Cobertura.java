@@ -37,7 +37,7 @@ public class Cobertura extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public Cobertura(PolizaDTO polDTO, ClienteDTO clienteDTO,int anio) {
+	public Cobertura(PolizaDTO polDTO, ClienteDTO clienteDTO,int anio,int numeroHijos) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 400);
 		contentPane = new JPanel();
@@ -111,18 +111,18 @@ public class Cobertura extends JFrame {
 		lblFormaPago.setBounds(20, 272, 121, 25);
 		alternativasCobertura.add(lblFormaPago);
 		
-		JRadioButton rdBtnMensual = new JRadioButton("MENSUAL");
-		rdBtnMensual.setBounds(147, 275, 90, 23);
-		alternativasCobertura.add(rdBtnMensual);
+		JRadioButton rbMensual = new JRadioButton("MENSUAL");
+		rbMensual.setBounds(147, 275, 90, 23);
+		alternativasCobertura.add(rbMensual);
 		
-		JRadioButton rdBtnSemestral = new JRadioButton("SEMESTRAL");
-		rdBtnSemestral.setBounds(246, 275, 110, 23);
-		alternativasCobertura.add(rdBtnSemestral);
-		rdBtnSemestral.setSelected(true);;
+		JRadioButton rbSemestral = new JRadioButton("SEMESTRAL");
+		rbSemestral.setBounds(246, 275, 110, 23);
+		alternativasCobertura.add(rbSemestral);
+		rbSemestral.setSelected(true);;
 		
 		ButtonGroup eleccion = new ButtonGroup();
-		eleccion.add(rdBtnMensual);
-		eleccion.add(rdBtnSemestral);
+		eleccion.add(rbMensual);
+		eleccion.add(rbSemestral);
 		
 		JButton btnAtrasAC = new JButton("Atr\u00E1s");
 		btnAtrasAC.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -130,8 +130,13 @@ public class Cobertura extends JFrame {
 		btnAtrasAC.setBounds(10, 308, 90, 25);
 		btnAtrasAC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO,polDTO);
-				polizaGenerar.setVisible(true);
+				if(numeroHijos!=0) {
+					AgregarHijos agregarHijos = new AgregarHijos(polDTO,clienteDTO,numeroHijos,anio);
+					agregarHijos.setVisible(true);
+				}else{
+					PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO,polDTO,numeroHijos);
+					polizaGenerar.setVisible(true);
+				}
 				dispose();
 			}
 		});
@@ -165,7 +170,6 @@ public class Cobertura extends JFrame {
 		spinner.setEditor(editor);
 		((DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
 		
-		
 		spinner.setBounds(343, 238, 120, 25);
 		alternativasCobertura.add(spinner);
 		
@@ -185,6 +189,17 @@ public class Cobertura extends JFrame {
 		btnSiguiente.setBounds(674, 308, 96, 25);
 		btnSiguiente.setEnabled(false);
 		
+		if(polDTO.getTipoPoliza()!=null) {
+			if(polDTO.getTipoPoliza()=="MENSUAL") {
+				rbMensual.setSelected(true);
+				rbSemestral.setSelected(false);
+			}else{
+				rbMensual.setSelected(false);
+				rbSemestral.setSelected(true);
+			}
+			spinner.setValue(polDTO.getFechaInicio());
+		}
+		
 		tableAC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -196,7 +211,7 @@ public class Cobertura extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String tipoPoliza;
-				if (rdBtnMensual.isSelected())
+				if (rbMensual.isSelected())
 					tipoPoliza="MENSUAL";
 				else 
 					tipoPoliza="SEMESTRAL";
@@ -205,41 +220,9 @@ public class Cobertura extends JFrame {
 				Date inicioVigencia = (Date) spinner.getValue();
 				
 				FachadaPoliza.getInstance().setCobertura(polDTO,cobertura,inicioVigencia,tipoPoliza);
-				PolizaGenerada polizaGenerada = new PolizaGenerada(polDTO,clienteDTO,anio);
+				PolizaGenerada polizaGenerada = new PolizaGenerada(polDTO,clienteDTO,anio,numeroHijos);
 				polizaGenerada.setVisible(true);
 				dispose();
-				
-				/*//boolean[] seleccionado = new boolean[5];
-				int contSeleccion=0;
-				
-				eleccion.isSelected(null);
-				if (rdBtnMensual.isSelected() || rdBtnSemestral.isSelected()) {
-					for (int i=0;i<5;i++) {
-						seleccionado[i]=(boolean) tableAC.getModel().getValueAt(i, 2);
-						if (seleccionado[i]==true)
-							contSeleccion++;
-					}//ARREGLAR!
-					if (contSeleccion==0 && datosValidos) {
-						int f = tableAC.getSelectedRow();
-						String cobertura= (String) tableAC.getValueAt(f, 0);
-						Date inicioVigencia = (Date) spinner.getValue();
-				
-						String tipoPoliza;
-						if (rdBtnMensual.isSelected())
-							tipoPoliza="MENSUAL";
-						else 
-							tipoPoliza="SEMESTRAL";
-						
-						FachadaPoliza.getInstance().setCobertura(polDTO,cobertura,inicioVigencia,tipoPoliza);
-						
-						PolizaGenerada polizaGenerada = new PolizaGenerada(polDTO,clienteDTO);
-						polizaGenerada.setVisible(true);
-						dispose();
-					} else
-						JOptionPane.showMessageDialog(null, "Solo puede seleccionar un tipo de poliza.", "Error", JOptionPane.ERROR_MESSAGE);
-				} else
-					JOptionPane.showMessageDialog(null, "Debe seleccionar una forma de pago.", "Error", JOptionPane.ERROR_MESSAGE);
-				*/
 			}
 		});
 		alternativasCobertura.add(btnSiguiente);

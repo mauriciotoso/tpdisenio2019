@@ -27,7 +27,6 @@ import javax.swing.text.MaskFormatter;
 import BDD.FachadaBDD;
 import BDD.GestorBDD;
 import DTO.ClienteDTO;
-import DTO.HijoDTO;
 import DTO.MedidasSeguridadDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
@@ -65,7 +64,7 @@ public class PolizaGenerar extends JFrame {
 	private MaskFormatter mask1;
 	private MaskFormatter mask2;
 	
-	public PolizaGenerar(ClienteDTO clienteDTO, PolizaDTO polDTO) {
+	public PolizaGenerar(ClienteDTO clienteDTO, PolizaDTO polDTO,int numeroHijos) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
@@ -202,7 +201,6 @@ public class PolizaGenerar extends JFrame {
 		lblAnio.setBounds(520, 50, 37, 15);
 		panel_DatosPoliza.add(lblAnio);
 		
-		
 		JTextField tfSumaAsegurada = new JTextField();
 		tfSumaAsegurada.setText(String.valueOf((FachadaBDD.getInstance().getSumaAsegurada())));
 		tfSumaAsegurada.setEditable(false);
@@ -261,6 +259,7 @@ public class PolizaGenerar extends JFrame {
 				desbloquearConfirmar();
 			}
 		});
+		
 		tfPatente.setToolTipText("");
 		tfPatente.setBounds(90, 108, 170, 18);
 		panel_DatosPoliza.add(tfPatente);
@@ -270,8 +269,6 @@ public class PolizaGenerar extends JFrame {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		mask1.install(tfPatente);
-		//mask2.install(tfPatente);
 		
 		JLabel lblMedidasDeSeguridad = new JLabel("Medidas de seguridad:");
 		lblMedidasDeSeguridad.setBounds(5, 140, 128, 18);
@@ -454,7 +451,7 @@ public class PolizaGenerar extends JFrame {
 				comboBoxLocalidad.setEnabled(false);
 				comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
 
-				if(comboBoxPais.getSelectedItem()==null || comboBoxPais.getSelectedItem().toString().compareTo("Seleccione un pais")==0) {
+				if(comboBoxPais.getSelectedIndex()==0) {
 					comboBoxProvincia.setEnabled(false);
 					comboBoxLocalidad.setEnabled(false);
 					comboBoxProvincia.setModel(new DefaultComboBoxModel<String>(listaProvincias));
@@ -481,7 +478,7 @@ public class PolizaGenerar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				comboBoxLocalidad.setEnabled(false);
 				comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
-				if(comboBoxProvincia.getSelectedItem()==null || comboBoxProvincia.getSelectedItem().toString().compareTo("Seleccione una provincia")==0 )
+				if(comboBoxProvincia.getSelectedIndex()==0)
 				{
 					comboBoxLocalidad.setEnabled(false);
 					comboBoxLocalidad.setModel(new DefaultComboBoxModel<String>(listaLocalidades));
@@ -581,11 +578,12 @@ public class PolizaGenerar extends JFrame {
 		rbFP2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		rbFP2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				tfPatente.setText("");
 				mask1.install(tfPatente);
 				btnConfirmar.setEnabled(false);
 			}
 		});
-		rbFP2.setSelected(true);
+		
 		rbFP2.setBounds(177, 88, 83, 18);
 		panel_DatosPoliza.add(rbFP2);
 		
@@ -593,9 +591,9 @@ public class PolizaGenerar extends JFrame {
 		rbFP1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		rbFP1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tfPatente.setText("");
 				mask2.install(tfPatente);
 				btnConfirmar.setEnabled(false);
-				
 			}
 		});
 		
@@ -605,6 +603,18 @@ public class PolizaGenerar extends JFrame {
 		ButtonGroup buttonFP = new ButtonGroup();
 		buttonFP.add(rbFP1);
 		buttonFP.add(rbFP2);
+		
+		if(polDTO!=null) {
+			if(polDTO.getPatente().length()==6) {
+				mask2.install(tfPatente);
+				rbFP1.setSelected(true);
+			}else if(polDTO.getPatente().length()==7) {
+				rbFP2.setSelected(true);
+				mask1.install(tfPatente);
+			}} else {
+				mask1.install(tfPatente);
+				rbFP2.setSelected(true);
+			}	
 		
 		rbSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -657,49 +667,35 @@ public class PolizaGenerar extends JFrame {
 		lblFormatoPatente.setBounds(5, 90, 105, 15);
 		panel_DatosPoliza.add(lblFormatoPatente);
 
-		
-		
-		
-		
-		
-		
 		//SI POLDTO NO ES NULA, ENTONCES:
 		if(polDTO!=null) {
-		spinnerKms.setValue(polDTO.getKmAnio());
-		tfChasis.setText(polDTO.getChasis());
-		tfMotor.setText(polDTO.getMotor());
-		tfPatente.setText(polDTO.getPatente());
-		MedidasSeguridadDTO msDTO = polDTO.getMedidasSeguridad();
-		if(msDTO.isAlarma()) cbAlarma.setSelected(true);
-		if(msDTO.isGarage()) cbGarage.setSelected(true);
-		if(msDTO.isRastreoVehicular()) cbRastreo.setSelected(true);
-		if(msDTO.isTuercasAntirrobo()) cbTuercas.setSelected(true);
-		ArrayList<HijoDTO> hijos = (ArrayList<HijoDTO>) polDTO.getHijos();
-		if(hijos!=null) {
-		spinnerCantidadHijos.setValue(hijos.size());
-		if(hijos.size()>0) {
-			rbSi.setSelected(true);
-			rbNo.setSelected(false);
-		}else {
-			rbNo.setSelected(true);
-			rbSi.setSelected(false);
+			
+			spinnerKms.setValue(polDTO.getKmAnio());
+			tfChasis.setText(polDTO.getChasis());
+			tfMotor.setText(polDTO.getMotor());
+			tfPatente.setText(polDTO.getPatente());
+			MedidasSeguridadDTO msDTO = polDTO.getMedidasSeguridad();
+			
+			if(msDTO.isAlarma()) cbAlarma.setSelected(true);
+			if(msDTO.isGarage()) cbGarage.setSelected(true);
+			if(msDTO.isRastreoVehicular()) cbRastreo.setSelected(true);
+			if(msDTO.isTuercasAntirrobo()) cbTuercas.setSelected(true);
+			
+			if(numeroHijos!=0) {
+				spinnerCantidadHijos.setValue(numeroHijos);
+				rbSi.setSelected(true);
+				rbNo.setSelected(false);
+				spinnerCantidadHijos.setEnabled(true);
+			}
+			
+			Localidad localidad = GestorBDD.getInstance().getLocalidad(polDTO);
+			comboBoxProvincia.setSelectedItem(localidad.getProvincia().getNombre());
+			comboBoxLocalidad.setSelectedItem(localidad.getNombre());
+			comboBoxMarca.setSelectedItem(polDTO.getMarca());
+			comboBoxModelo.setSelectedItem(polDTO.getModelo());
+			Anio anioModelo = GestorBDD.getInstance().getAnio(polDTO);
+			comboBoxAnio.setSelectedItem(String.valueOf(anioModelo.getAnio()));
 		}
-		}
-		Localidad localidad = GestorBDD.getInstance().getLocalidad(polDTO);
-		comboBoxProvincia.setSelectedItem(localidad.getProvincia().getNombre());
-		comboBoxLocalidad.setSelectedItem(localidad.getNombre());
-		comboBoxMarca.setSelectedItem(polDTO.getMarca());
-		comboBoxModelo.setSelectedItem(polDTO.getModelo());
-		Anio anioModelo = GestorBDD.getInstance().getAnio(polDTO);
-		comboBoxAnio.setSelectedItem(anioModelo.getAnio());
-		
-	}
-		
-		
-		
-		
-		
-		
 		
 		//BOTONES QUE USAN DATOS
 		
@@ -749,7 +745,8 @@ public class PolizaGenerar extends JFrame {
 					agregarHijos.setVisible(true);
 					dispose();
 				}else{
-					Cobertura cobertura = new Cobertura(polDTO, clienteDTO,Integer.parseInt((String) comboBoxAnio.getSelectedItem()));
+					Cobertura cobertura = new Cobertura(polDTO, clienteDTO,Integer.parseInt((String) comboBoxAnio.getSelectedItem()),numeroHijos
+							);
 					cobertura.setVisible(true);
 					dispose();
 				}

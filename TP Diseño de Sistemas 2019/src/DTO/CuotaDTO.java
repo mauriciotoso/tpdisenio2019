@@ -13,6 +13,15 @@ public class CuotaDTO {
 	private float importeCuota;
 	private float recargosPorMora;
 	private float bonificacion;
+	private Date fechaPago;
+
+	public Date getFechaPago() {
+		return fechaPago;
+	}
+
+	public void setFechaPago(Date fechaPago) {
+		this.fechaPago = fechaPago;
+	}
 
 	public CuotaDTO(int nroCuota, Date ultimoDiaPago, float importeCuota, float recargosPorMora, float bonificacion) {
 		super();
@@ -30,6 +39,7 @@ public class CuotaDTO {
 		this.importeCuota = c.getImporteCuota();
 		this.recargosPorMora = c.getRecargosPorMora();
 		this.bonificacion = c.getBonificacion();
+		this.fechaPago=c.getFechaPago();
 	}
 
 	@Override

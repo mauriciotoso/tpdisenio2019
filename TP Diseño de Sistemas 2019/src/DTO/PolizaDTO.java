@@ -94,17 +94,7 @@ public class PolizaDTO {
 	public PolizaDTO(Poliza pol) {
 		if(pol!=null) {
 		this.nroPoliza = pol.getNroPoliza();
-		/*
-		this.idlocalidad = idlocalidad;
-		this.localidad = localidad;
-		this.provincia = provincia;
-		this.pais = pais;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.idAnioModelo = pol.getIdAnio();
-		this.idTipoCobertura = idTipoCobertura;
-		this.tipoCobertura = pol.getTipoCobertura();
-		*/
+		
 		ArrayList<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();
 		for (Cuota cuota: pol.getCuotas()) {
 			CuotaDTO c = new CuotaDTO(cuota);
@@ -132,6 +122,11 @@ public class PolizaDTO {
 		this.valoresPorcentualesDTO = new ValorPorcentualDTO(pol.getValoresPorcentualesPoliza());
 		//this.idEstadoPoliza = idEstadoPoliza;
 		this.estadoPoliza = pol.getEstadoPoliza().toString();
+		this.marca=pol.getAnioModelo().getModelo().getMarca().getMarca();
+		this.modelo=pol.getAnioModelo().getModelo().getNombre();
+		this.idAnioModelo=pol.getIdAnio().getIdAnio();
+		
+		
 		}
 	}
 
@@ -357,9 +352,11 @@ public class PolizaDTO {
 	}
 	
 	public ArrayList<CuotaDTO> getCuotasA(){
+		
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
 		Date hoy = new Date();
 		ArrayList<CuotaDTO> cuotasPol =(ArrayList<CuotaDTO>) this.getCuotas();
+		
 		for(CuotaDTO cuo: cuotasPol) {
 			Date diaCuota = cuo.getUltimoDiaPago();
 			if(diaCuota!=null) {

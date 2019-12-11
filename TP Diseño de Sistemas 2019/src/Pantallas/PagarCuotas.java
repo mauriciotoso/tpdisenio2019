@@ -1,16 +1,12 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import DTO.CuotaDTO;
 import DTO.PolizaDTO;
 import javax.swing.JLabel;
@@ -23,49 +19,32 @@ import java.awt.event.ActionEvent;
 
 public class PagarCuotas extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
+	private JTextField tfImporte;
 	private float importeTotal;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PagarCuotas frame = new PagarCuotas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public PagarCuotas(PolizaDTO polDTO, ArrayList<CuotaDTO> cuotasPagar) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(283, 84, 800, 600);
+		setBounds(283, 84, 800, 315);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		
+		this.setLocationRelativeTo(null);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(40, 21, 700, 220);
+		panel_1.setBounds(10, 21, 764, 171);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 37, 680, 151);
+		scrollPane.setBounds(10, 37, 744, 123);
 		panel_1.add(scrollPane);
 		int tamCuotas=0;
 		if(cuotasPagar!=null) {
@@ -81,52 +60,73 @@ public class PagarCuotas extends JFrame {
 		String[] columnas = {"Nro Cuota","Importe"};
 		
 		table = new JTable(datosCuotasPagar, columnas);
+		//table = new JTable(new String[6][2], columnas);
+		
 		scrollPane.setViewportView(table);
 		table.setAutoCreateRowSorter(true);
 		table.editingCanceled(null);
 
-		JLabel label = new JLabel("Cuotas seleccionadas");
-		label.setBounds(10, 1, 172, 25);
-		panel_1.add(label);
-		label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel lblCuotasSeleccionadas = new JLabel("Cuotas seleccionadas");
+		lblCuotasSeleccionadas.setBounds(10, 1, 172, 25);
+		panel_1.add(lblCuotasSeleccionadas);
+		lblCuotasSeleccionadas.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
-		JLabel label_1 = new JLabel("Importe total:");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_1.setBounds(40, 252, 110, 25);
-		contentPane.add(label_1);
+		JLabel lblImporteTotal = new JLabel("Importe total:");
+		lblImporteTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblImporteTotal.setBounds(403, 203, 110, 25);
+		contentPane.add(lblImporteTotal);
 		
-		JButton button = new JButton("Cancelar");
-		button.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button.setBackground(Color.WHITE);
-		button.setBounds(10, 525, 90, 25);
-		contentPane.add(button);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuCobrador mc = new MenuCobrador();
+				mc.setVisible(true);
+				dispose();
+			}
+		});
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCancelar.setBackground(Color.WHITE);
+		btnCancelar.setBounds(10, 239, 90, 25);
+		contentPane.add(btnCancelar);
 		
-		JButton button_1 = new JButton("Pagar");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnPagar = new JButton("Pagar");
+		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ImporteIngresado importeIngresado = new ImporteIngresado(polDTO,cuotasPagar,importeTotal);
 				importeIngresado.setVisible(true);
+				dispose();
 			}
 		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_1.setBackground(Color.WHITE);
-		button_1.setBounds(684, 525, 90, 25);
-		contentPane.add(button_1);
 		
-		JButton button_2 = new JButton("Cambiar cuotas");
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_2.setBackground(Color.WHITE);
-		button_2.setBounds(547, 525, 127, 25);
-		contentPane.add(button_2);
+		btnPagar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnPagar.setBackground(Color.WHITE);
+		btnPagar.setBounds(660, 239, 101, 25);
+		contentPane.add(btnPagar);
 		
-		textField = new JTextField();
-		textField.setBounds(150, 252, 90, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JButton btnCambiarCuotas = new JButton("Cambiar cuotas");
+		btnCambiarCuotas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PolizaCuotaAtrasada pca = new PolizaCuotaAtrasada(polDTO);
+				pca.setVisible(true);
+				dispose();
+			}
+		});
+		
+		btnCambiarCuotas.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCambiarCuotas.setBackground(Color.WHITE);
+		btnCambiarCuotas.setBounds(523, 239, 127, 25);
+		contentPane.add(btnCambiarCuotas);
+		
+		tfImporte = new JTextField();
+		tfImporte.setBounds(523, 203, 238, 25);
+		contentPane.add(tfImporte);
+		tfImporte.setColumns(10);
+		
 		if(cuotasPagar!=null) {
 		for(CuotaDTO c: cuotasPagar) 
 			importeTotal+=c.getImporteCuota();
 		}
-		textField.setText(Float.toString(importeTotal));
+		
+		tfImporte.setText(Float.toString(importeTotal));
 	}
 }

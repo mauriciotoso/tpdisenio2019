@@ -1,6 +1,7 @@
 package App;
 
 import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -18,6 +19,13 @@ public class AppAux {
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		
+		session.beginTransaction();
+		
+		//long val=GestorBDD.getInstance().nroPolizas(2);
+		
+		session.getTransaction().commit();
+		
+		//System.out.println(val);
 		/*String estadoP = "VIGENTE";
 		EstadoPoliza ep2 = null;
 		session.beginTransaction();

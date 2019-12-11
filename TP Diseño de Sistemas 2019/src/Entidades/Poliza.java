@@ -79,17 +79,16 @@ public class Poliza{
 		this.tipoCobertura = tipoCobertura;
 		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
 		this.nroCliente = nroCliente;
-
 	}
 	
 
-	public Poliza(Date vigenciaDesde, Date vigenciaHasta, Localidad localidad,
+	public Poliza(long nroPoliza,Date vigenciaDesde, Date vigenciaHasta, Localidad localidad,
 			EstadoPoliza estadoPoliza, String patente,
 			String motor, String chasis, int kmAnio, List<Cuota> cuotas, Anio idAnio, String tipoPoliza,
 			int nroSiniestros, MedidasSeguridad medidasSeguridad, List<HijoDeclarado> hijos,
 			TipoCobertura tipoCobertura, ValoresPorcentualesPoliza valoresPorcentualesPoliza, Cliente nroCliente) {
 		super();
-		this.nroPoliza = this.generarNroPoliza();
+		this.nroPoliza = this.generarNroPoliza(nroPoliza);
 		this.vigenciaDesde = vigenciaDesde;
 		this.vigenciaHasta = vigenciaHasta;
 		this.domicilioRiesgo = this.generarDomicilio(localidad);
@@ -110,9 +109,17 @@ public class Poliza{
 
 	}
 	
-	public String generarNroPoliza() {
-		double n = Math.random()*1000;
-		return Double.toString(n);
+	public String generarNroPoliza(long nro) {
+		String sucursal="0000";
+		String nroPoliza = String.valueOf(nro);
+		String secuenciaRenovacion="00";
+		
+		String aux="";
+		for(int i=0;i<(7-nroPoliza.length());i++) {
+			aux=aux+"0";
+		}
+		
+		return sucursal+"-"+aux+nroPoliza+"-"+secuenciaRenovacion;
 	}
 	
 	public String generarDomicilio(Localidad localidad) {
@@ -318,7 +325,8 @@ public class Poliza{
 				+ ", medidasSeguridad=" + medidasSeguridad + ", hijos=" + hijos + ", tipoCobertura=" + tipoCobertura
 				+ ", valoresPorcentualesPoliza=" + valoresPorcentualesPoliza + ", nroCliente=" + nroCliente + "]";
 	}
-
 	
-	
+	public void actualizarGenerada() {
+		this.setEstadoPoliza(new EstadoPoliza(1,"GENERADA"));
+	}
 }

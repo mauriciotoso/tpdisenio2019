@@ -55,10 +55,6 @@ public class BuscarCliente extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	
 	public BuscarCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +63,7 @@ public class BuscarCliente extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		
 		String[] columnas= {"Nro. cliente","Apellido","Nombre","Tipo Documento","Nro. Documento"};
 		
@@ -83,7 +80,7 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion, null);
+				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion, null,0);
 				polizaGenerar.setVisible(true);
 				dispose();
 			}
@@ -134,6 +131,7 @@ public class BuscarCliente extends JFrame {
 				});
 			}
 		});
+		
 		tfNroCliente.setBounds(10, 88, 142, 20);
 		panel.add(tfNroCliente);
 		tfNroCliente.setColumns(10);

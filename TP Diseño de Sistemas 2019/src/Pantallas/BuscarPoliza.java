@@ -1,8 +1,6 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,30 +12,28 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import BDD.FachadaBDD;
-import BDD.GestorBDD;
-import DTO.ClienteDTO;
-import DTO.PolizaDTO;
-import Entidades.Poliza;
-import Enumerados.TipoDocumento;
-
+import BDD.*;
+import DTO.*;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class BuscarPoliza extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private PolizaDTO polBuscada;
-	private PolizaDTO polSeleccionada;
-	private JTable tabla;
+	private JTextField tfNroPoliza;
+	private PolizaDTO seleccion;
+	private JTable busqueda;
 	private ListSelectionModel model;
-
+	private ArrayList<PolizaDTO> polizas;
 
 	/**
 	 * Launch the application.
@@ -54,128 +50,143 @@ public class BuscarPoliza extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public BuscarPoliza() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(283, 84, 800, 600);
+		setBounds(283, 84, 800, 415);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		this.setLocationRelativeTo(null);
 		
-		JLabel label = new JLabel("Ingrese numero de poliza:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		label.setBounds(10, 11, 240, 25);
-		contentPane.add(label);
 		
-		String[] columnas = {"Nro póliza","Tipo cobertura","Estado poliza","Monto total"};
+		JLabel lblIngreseLosCampos = new JLabel("Ingrese los campos a buscar de la p\u00F3liza:");
+		lblIngreseLosCampos.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblIngreseLosCampos.setBounds(10, 11, 550, 25);
+		contentPane.add(lblIngreseLosCampos);
+		
+		String[] columnas = {"Nro. póliza","Nro. cliente","Apellido","Nombre","Tipo documento","Nro. documento","Ultimo pago"};
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 119, 764, 251);
+		scrollPane.setBounds(10, 78, 764, 251);
 		contentPane.add(scrollPane);
 		
-		JButton button = new JButton("Cancelar");
-		button.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button.setBackground(Color.WHITE);
-		button.setBounds(10, 525, 90, 25);
-		contentPane.add(button);
-		
-		JButton button_1 = new JButton("Seleccionar");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//si tiene cuota atrasadas y sino ir a cutoas futuras
-				if (!polSeleccionada.getCuotasA().isEmpty()) {
-					PolizaCuotaAtrasada cuotaAtrasada = new PolizaCuotaAtrasada(polSeleccionada);
-					cuotaAtrasada.setVisible(true);
-					dispose();
-				} else {
-					PolizaCuotaFutura cuotaFutura = new PolizaCuotaFutura(polSeleccionada);
-					cuotaFutura.setVisible(true);
-					dispose();
-				}
-				
+				MenuCobrador mc = new MenuCobrador();
+				mc.setVisible(true);
+				dispose();
 			}
 		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_1.setBackground(Color.WHITE);
-		button_1.setBounds(664, 525, 110, 25);
-		button_1.setEnabled(false);
-		contentPane.add(button_1);
 		
-		//INICIALIZAR TABLA CON DATO DE ENTRADA
-		textField = new JTextField();
-		textField.addKeyListener(new KeyAdapter() {
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCancelar.setBackground(Color.WHITE);
+		btnCancelar.setBounds(10, 340, 90, 25);
+		contentPane.add(btnCancelar);
+		
+		//INICIALIZAR TABLA CON DATO DE ENTRADA				
+
+		JButton btnSeleccionar = new JButton("Seleccionar");
+		btnSeleccionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PolizaCuotaAtrasada cuotaAtrasada = new PolizaCuotaAtrasada(seleccion);
+				cuotaAtrasada.setVisible(true);
+				dispose();
+			}
+		});
+		
+		tfNroPoliza = new JTextField();
+		tfNroPoliza.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e) {
-				tabla = new JTable(filtrarTabla(textField.getText()),columnas);
-				scrollPane.setViewportView(tabla);
-				tabla.setAutoCreateRowSorter(true);
-				model = tabla.getSelectionModel();
+			public void keyReleased(KeyEvent arg0) {
+				busqueda=new JTable(filtrarTabla(tfNroPoliza.getText()),columnas);
+				scrollPane.setViewportView(busqueda);
+				busqueda.setAutoCreateRowSorter(true);
+				model=busqueda.getSelectionModel();
+				btnSeleccionar.setEnabled(false);
 				
 				model.addListSelectionListener(new ListSelectionListener() {
 					
 					public void valueChanged(ListSelectionEvent e) {
 						if(!model.isSelectionEmpty()) {
 							
-							button_1.setEnabled(true);
-							polSeleccionada  = polBuscada;
+							btnSeleccionar.setEnabled(true);
+							seleccion=polizas.get(model.getMinSelectionIndex());
 							
-							System.out.println(polSeleccionada);
+							System.out.println(seleccion);
 						}
 					}
 				});
 			}
 		});
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField.setBounds(249, 11, 200, 25);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		
+		tfNroPoliza.setBounds(79, 47, 110, 20);
+		contentPane.add(tfNroPoliza);
+		tfNroPoliza.setColumns(10);
+		
+		btnSeleccionar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnSeleccionar.setBackground(Color.WHITE);
+		btnSeleccionar.setBounds(664, 340, 110, 25);
+		btnSeleccionar.setEnabled(false);
+		contentPane.add(btnSeleccionar);
 		
 		//INICIALIZAR TABLA CON TODOS LAS POLIZAS
-		Object[][] datosClientes=filtrarTabla(textField.getText());
+		Object[][] datosPolizas=filtrarTabla(tfNroPoliza.getText());
 		
-		tabla = new JTable(datosClientes,columnas);
-		model=tabla.getSelectionModel();
-		tabla.setAutoCreateRowSorter(true);
-		scrollPane.setViewportView(tabla);
-		tabla.editingCanceled(null);
-		button_1.setEnabled(false);
-		model.addListSelectionListener(new ListSelectionListener() {
-			
+		busqueda = new JTable(datosPolizas,columnas);
+		model=busqueda.getSelectionModel();
+		busqueda.setAutoCreateRowSorter(true);
+		scrollPane.setViewportView(busqueda);
+		busqueda.editingCanceled(null);
+		btnSeleccionar.setEnabled(false);
+		
+		JLabel lblNroPliza = new JLabel("Nro. P\u00F3liza:");
+		lblNroPliza.setBounds(10, 50, 90, 14);
+		contentPane.add(lblNroPliza);
+		
+		model.addListSelectionListener(new ListSelectionListener() {	
 			public void valueChanged(ListSelectionEvent e) {
 				if(!model.isSelectionEmpty()) {
 					
-					button_1.setEnabled(true);
-					polSeleccionada = polBuscada;
+					seleccion=polizas.get(model.getMinSelectionIndex());
 					
-					System.out.println(polSeleccionada);
+					btnSeleccionar.setEnabled(true);
+					
+					System.out.println(seleccion);
 				}
 			}
 		});
-		
+
 	}
 	
-private Object[][] filtrarTabla(String nroPoliza) {
+	private Object[][] filtrarTabla(String nroPoliza) {
+
+		polizas = FachadaBDD.getInstance().getPolizas(nroPoliza);
 		
-		System.out.println(nroPoliza);
+		String[][] datos = new String[polizas.size()][7];
 		
-		this.polBuscada = FachadaBDD.getInstance().getPoliza(nroPoliza);
-		
-		String[][] datos = new String[1][4];
-		
-		if(this.polBuscada!=null) {
-		datos[0][0] = polBuscada.getNroPoliza();
-		datos[0][1] = polBuscada.getTipoCobertura();
-		datos[0][2] = polBuscada.getEstadoPoliza();
-		datos[0][3] = Float.toString(polBuscada.getMontoTotal());
+		int cont=0;
+		for(PolizaDTO p:polizas) {
+			
+			datos[cont][0]=p.getNroPoliza();
+			datos[cont][1]=p.getCliente().getNroCliente();
+			datos[cont][2]=p.getCliente().getApellido();
+			datos[cont][3]=p.getCliente().getNombre();
+			datos[cont][4]=p.getCliente().getTipoDocumento().toString();
+			datos[cont][5]=p.getCliente().getNroDocumento();
+			datos[cont][6]="-";
+			
+			for(CuotaDTO c:p.getCuotas()) {
+				if(c.isEstaPago())  datos[cont][6]=c.getFechaPago().toString();
+			}
+			
+			cont++;
 		}
 		
-		System.out.println(polBuscada);
-		
+		System.out.println(polizas);
 		return datos;
+
 	}
 }

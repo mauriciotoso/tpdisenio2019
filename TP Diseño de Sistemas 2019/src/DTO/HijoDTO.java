@@ -51,6 +51,11 @@ public class HijoDTO {
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
+
+	@Override
+	public String toString() {
+		return "HijoDTO [fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + "]";
+	}
 	
 
 }

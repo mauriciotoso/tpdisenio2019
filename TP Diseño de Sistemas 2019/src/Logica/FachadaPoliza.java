@@ -2,6 +2,9 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.swing.JOptionPane;
+
 import DTO.*;
 import Entidades.*;
 import Enumerados.*;
@@ -72,6 +75,10 @@ public class FachadaPoliza {
 		pol = GestorPoliza.getInstance().getPoliza(nPoliza);
 			
 		return pol;
-		}
+	}
+	
+	public void notificarError() {
+		JOptionPane.showMessageDialog(null, "Ocurrió un error guardando la póliza, por favor, intente generarla de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
  
