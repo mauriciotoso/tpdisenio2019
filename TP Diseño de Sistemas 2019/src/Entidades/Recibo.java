@@ -17,25 +17,21 @@ public class Recibo {
 	private float vuelto;
 	private float importePagado;
 	private String operador;
-	private String mesAbonado;
-	private String anioAbonado;
 	private Date fechaRecibo;
-	private Date horaRecibo;
+	private String horaRecibo;
 	@OneToMany
 	private List<Cuota> cuotas;
 	
 	public Recibo(String nroRecibo, float importe, float vuelto, float importePagado, String operador,
-			String mesAbonado, String anioAbonado, Date fechaRecibo, Date horaRecibo, List<Cuota> cuotas) {
+			Date fechaRecibo, String horaRecibo, List<Cuota> cuotas) {
 		super();
 		this.nroRecibo = nroRecibo;
 		this.importe = importe;
 		this.vuelto = vuelto;
 		this.importePagado = importePagado;
 		this.operador = operador;
-		this.mesAbonado = mesAbonado;
-		this.anioAbonado = anioAbonado;
 		this.fechaRecibo = fechaRecibo;
-		this.horaRecibo = horaRecibo;
+		this.horaRecibo = horaRecibo;//(fechaRecibo.getHours(), fechaRecibo.getMinutes(), fechaRecibo.getSeconds());
 		this.cuotas = cuotas;
 	}
 	
@@ -46,8 +42,6 @@ public class Recibo {
 		this.vuelto = r.getVuelto();
 		this.importePagado = r.getImportePagado();
 		this.operador = r.getOperador();
-		this.mesAbonado = r.getMesAbonado();
-		this.anioAbonado = r.getAnioAbonado();
 		this.fechaRecibo = r.getFechaRecibo();
 		this.horaRecibo = r.getHoraRecibo();
 		
@@ -97,22 +91,6 @@ public class Recibo {
 		this.operador = operador;
 	}
 
-	public String getMesAbonado() {
-		return mesAbonado;
-	}
-
-	public void setMesAbonado(String mesAbonado) {
-		this.mesAbonado = mesAbonado;
-	}
-
-	public String getAnioAbonado() {
-		return anioAbonado;
-	}
-
-	public void setAnioAbonado(String anioAbonado) {
-		this.anioAbonado = anioAbonado;
-	}
-
 	public List<Cuota> getCuotas() {
 		return cuotas;
 	}
@@ -133,12 +111,12 @@ public class Recibo {
 		this.fechaRecibo = fechaRecibo;
 	}
 
-	public Date getHoraRecibo() {
+	public String getHoraRecibo() {
 		return horaRecibo;
 	}
 
-	public void setHoraRecibo(Date horaRecibo) {
-		this.horaRecibo = horaRecibo;
+	public void setHoraRecibo(int hora, int minutos, int segundos) {
+		this.horaRecibo = hora+":"+minutos+":"+segundos;
 	}
 	
 	

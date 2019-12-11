@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -31,6 +31,8 @@ import DTO.MedidasSeguridadDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
+import Pantallas.MenuProductorSeguro;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -80,6 +82,7 @@ public class PolizaGenerar extends JFrame {
 		panel.setLayout(null);
 		
 		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBackground(Color.WHITE);
 		btnConfirmar.setBounds(674, 526, 100, 25);
 		btnConfirmar.setEnabled(false);
 		panel.add(btnConfirmar);
@@ -629,12 +632,15 @@ public class PolizaGenerar extends JFrame {
 		});
 		
 		JButton btnAtras = new JButton("Atrás");
+		btnAtras.setBackground(Color.WHITE);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea volver atrás?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
-					BuscarCliente buscarCliente = new BuscarCliente();
+					BuscarCliente buscarCliente;
+					buscarCliente = new BuscarCliente();
 					buscarCliente.setVisible(true);
+					
 					dispose();
 				}
 			}
@@ -643,6 +649,7 @@ public class PolizaGenerar extends JFrame {
 		panel.add(btnAtras);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(10, 526, 90, 25);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -1,7 +1,13 @@
 package DTO;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import App.Sesion;
+import Entidades.Cuota;
+import Entidades.Recibo;
 
 public class ReciboDTO {
 	
@@ -10,31 +16,65 @@ public class ReciboDTO {
 	private float importePagado;
 	private String nroRecibo;
 	private String operador;
-	private String mesAbonado;
-	private String anioAbonado;
 	private List<CuotaDTO> cuotas;
 	private Date fechaRecibo;
-	private Date horaRecibo;
+	private String horaRecibo;
 	
 	public ReciboDTO() {
 		
 	}
 
 	public ReciboDTO(float importe, float vuelto, float importePagado, String nroRecibo, String operador,
-			String mesAbonado, String anioAbonado, List<CuotaDTO> cuotas, Date fechaRecibo, Date horaRecibo) {
+			List<CuotaDTO> cuotas, Date fechaRecibo, String horaRecibo) {
 		super();
 		this.importe = importe;
 		this.vuelto = vuelto;
 		this.importePagado = importePagado;
 		this.nroRecibo = nroRecibo;
 		this.operador = operador;
-		this.mesAbonado = mesAbonado;
-		this.anioAbonado = anioAbonado;
 		this.cuotas = cuotas;
 		this.fechaRecibo = fechaRecibo;
 		this.horaRecibo = horaRecibo;
 	}
+	public ReciboDTO (float importe, float importePagado, ArrayList<CuotaDTO> cuotasDTO, long nroRecibo, Calendar hoy) {
+		float vuelto = importePagado-importe;
+		
+		this.setImporte(importe);
+		this.setImportePagado(importePagado);
+		this.setVuelto(vuelto);
+		this.setCuotas(cuotasDTO);
+		this.setOperador(Sesion.getInstance().getUsuarioConectado().getApellido()+", "+Sesion.getInstance().getUsuarioConectado().getNombre());
+		this.setNroRecibo(this.generarNroRecibo(nroRecibo));
+		this.setFechaRecibo(hoy.getTime());
+		this.setHoraRecibo(hoy.HOUR,hoy.MINUTE,hoy.SECOND);
+	}
+	public ReciboDTO(Recibo r) {
+		ArrayList<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();
+		for (Cuota cuota: r.getCuotas()) {
+			CuotaDTO c = new CuotaDTO(cuota);
+			cuotasDTO.add(c);
+		}
+		this.importe = r.getImporte();
+		this.vuelto = r.getVuelto();
+		this.importePagado = r.getImportePagado();
+		this.nroRecibo = r.getNroRecibo();
+		this.operador = r.getOperador();
+		this.cuotas = cuotasDTO;
+		this.fechaRecibo = r.getFechaRecibo();
+		this.horaRecibo = r.getHoraRecibo();
+	}
 
+	public String generarNroRecibo(long nro) {
+		String nroRecibo = String.valueOf(nro);
+		
+		String aux="";
+		for(int i=0;i<(10-nroRecibo.length());i++) {
+			aux=aux+"0";
+		}
+		
+		return aux+nroRecibo;
+	}
+	
 	public float getImporte() {
 		return importe;
 	}
@@ -75,22 +115,6 @@ public class ReciboDTO {
 		this.operador = operador;
 	}
 
-	public String getMesAbonado() {
-		return mesAbonado;
-	}
-
-	public void setMesAbonado(String mesAbonado) {
-		this.mesAbonado = mesAbonado;
-	}
-
-	public String getAnioAbonado() {
-		return anioAbonado;
-	}
-
-	public void setAnioAbonado(String anioAbonado) {
-		this.anioAbonado = anioAbonado;
-	}
-
 	public List<CuotaDTO> getCuotas() {
 		return cuotas;
 	}
@@ -107,12 +131,12 @@ public class ReciboDTO {
 		this.fechaRecibo = fechaRecibo;
 	}
 
-	public Date getHoraRecibo() {
+	public String getHoraRecibo() {
 		return horaRecibo;
 	}
 
-	public void setHoraRecibo(Date horaRecibo) {
-		this.horaRecibo = horaRecibo;
+	public void setHoraRecibo(int hora, int minutos, int segundos) {
+		this.horaRecibo = hora+":"+minutos+":"+segundos;
 	}
 	
 	

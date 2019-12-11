@@ -21,12 +21,6 @@ public class GestorSesion {
 	}
 	
 	public Usuario verifUserPw(String user, String pw) {
-		ArrayList<Usuario> usuarios = GestorBDD.getInstance().getUsuario();
-
-		for(Usuario u: usuarios) {
-			if(u.getUsuario().compareTo(user)==0 && u.getContrasenia().compareTo(pw)==0)
-				return u;
-		}
-		return null;
+		return GestorBDD.getInstance().getUsuario(user,pw);
 	}
 }

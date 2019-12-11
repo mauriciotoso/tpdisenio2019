@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU12;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import DTO.CuotaDTO;
 import DTO.PolizaDTO;
+import Pantallas.MenuCobrador;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -106,7 +108,7 @@ public class PagarCuotas extends JFrame {
 		JButton btnCambiarCuotas = new JButton("Cambiar cuotas");
 		btnCambiarCuotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PolizaCuotaAtrasada pca = new PolizaCuotaAtrasada(polDTO);
+				SeleccionarCuotas pca = new SeleccionarCuotas(polDTO);
 				pca.setVisible(true);
 				dispose();
 			}

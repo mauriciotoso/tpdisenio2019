@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU12;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -14,6 +14,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import BDD.*;
 import DTO.*;
+import Pantallas.MenuCobrador;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -91,7 +93,7 @@ public class BuscarPoliza extends JFrame {
 		JButton btnSeleccionar = new JButton("Seleccionar");
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PolizaCuotaAtrasada cuotaAtrasada = new PolizaCuotaAtrasada(seleccion);
+				SeleccionarCuotas cuotaAtrasada = new SeleccionarCuotas(seleccion);
 				cuotaAtrasada.setVisible(true);
 				dispose();
 			}

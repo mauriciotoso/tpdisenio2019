@@ -15,9 +15,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import App.Sesion;
 import App.Usuario;
 import BDD.FachadaBDD;
 import Logica.FachadaSesion;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InicioSesion extends JFrame {
 
@@ -94,6 +98,14 @@ public class InicioSesion extends JFrame {
 		recuadroSesion.add(lblContrasenia);
 				
 		JTextField tfNombreUsuario = new JTextField();
+		tfNombreUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					
+				}
+			}
+		});
 		tfNombreUsuario.setColumns(10);
 		tfNombreUsuario.setBounds(170, 53, 160, 20);
 		recuadroSesion.add(tfNombreUsuario);
@@ -145,6 +157,8 @@ public class InicioSesion extends JFrame {
 					}
 					if (correctoUser && correctoPw) {
 						Usuario usuario = FachadaSesion.getInstance().verifUserPw(user,pw);
+						Sesion.getInstance().setUsuarioConectado(usuario);
+						
 						if (usuario!=null) {
 							if (usuario.getTipo().compareTo("Productor de Seguro")==0) {
 								MenuProductorSeguro productorSeguroMenu = new MenuProductorSeguro();

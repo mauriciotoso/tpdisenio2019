@@ -18,7 +18,6 @@ public class FachadaSesion {
 	}
 	
 	public Usuario verifUserPw(String user, String pw) {
-
 		return GestorSesion.getInstance().verifUserPw(user,pw);
 	}
 }

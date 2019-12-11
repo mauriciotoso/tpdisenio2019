@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Pantallas.CU01.BuscarCliente;
+
 public class MenuProductorSeguro extends JFrame {
 
 	private JPanel contentPane;
@@ -132,9 +134,9 @@ public class MenuProductorSeguro extends JFrame {
 		gestionParametros.add(btnActualizarPar);
 		
 		JButton btnCerrarPS = new JButton("Cerrar Sesion");
-		btnCerrarPS.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCerrarPS.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCerrarPS.setBackground(Color.WHITE);
-		btnCerrarPS.setBounds(22, 526, 106, 23);
+		btnCerrarPS.setBounds(22, 526, 115, 23);
 		btnCerrarPS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea abandonar la aplicación?", "Confirmación", JOptionPane.YES_NO_OPTION);

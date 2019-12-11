@@ -1,10 +1,19 @@
 package App;
 
+import BDD.FachadaBDD;
+
 public class Sesion {
+	private static Sesion sesion;
 	private Usuario usuarioConectado;
 	
-	public Sesion(Usuario usuarioConectado) {
-		this.usuarioConectado=usuarioConectado;
+	public static Sesion getInstance() {
+		if(sesion==null) {
+			sesion = new Sesion();
+		}
+		return sesion;
+	}
+	
+	public Sesion() {
 	}
 
 	public Usuario getUsuarioConectado() {

@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU12;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +14,8 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTable;
 import DTO.*;
+import Pantallas.MenuCobrador;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -22,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class PolizaCuotaAtrasada extends JFrame {
+public class SeleccionarCuotas extends JFrame {
 
 	/**
 	 * 
@@ -50,7 +52,7 @@ public class PolizaCuotaAtrasada extends JFrame {
 	private CuotaDTO seleccionCF;
 	private ArrayList<CuotaDTO> cuotasSeleccionadas;
 	
-	public PolizaCuotaAtrasada(PolizaDTO polDTO) {
+	public SeleccionarCuotas(PolizaDTO polDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();

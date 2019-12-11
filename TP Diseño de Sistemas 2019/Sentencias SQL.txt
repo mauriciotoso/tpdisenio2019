@@ -31,6 +31,7 @@ drop sequence if exists sec_idsolicitud cascade;
 drop sequence if exists nropoliza cascade;
 
 create sequence nropoliza start with 0 increment by 1 maxvalue 9999999 minvalue 0;
+create sequence nrorecibo start with 0 increment by 1 maxvalue 9999999999 minvalue 0;
 
 create table condicionIVA
 (idCondicionIVA int,
@@ -79,8 +80,8 @@ primary key (idDireccion));
 create table cliente
 (nroCliente varchar(40),
  fechaNacimiento Date,
- nombre varchar(20),
- apellido varchar(20),
+ nombre varchar(45),
+ apellido varchar(45),
  tipoDocumento varchar(30),
  nroDocumento varchar(20),
  nroCuil varchar(20),
@@ -224,8 +225,6 @@ create table recibo
  importePagado float,
  fechaPago Date,
  horaPago varchar(20),
- mesAbonado varchar(20),
- anioAbonado varchar(10),
  usuario varchar(20) references usuario(usuario),
  primary key(nroRecibo));
 

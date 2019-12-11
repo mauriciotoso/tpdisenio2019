@@ -219,13 +219,17 @@ public class GestorBDD {
 		session.getTransaction().commit();
 	}
 	
-	public ArrayList<Usuario> getUsuario(){
+	public Usuario getUsuario(String user, String pw){
 		if (!session.isJoinedToTransaction()) session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) session.createQuery("from Usuario").getResultList();
+		Usuario usuario = session.get(Usuario.class, user);
 		session.getTransaction().commit();
 		
-		return usuarios;
+		if (usuario!=null) {
+			if (usuario.getContrasenia().compareTo(pw)==0)
+				return usuario;
+		} 
+		return null;
 	}
 	
 
@@ -309,7 +313,7 @@ public class GestorBDD {
 		
 		return clientesObtenidosAux;
 	}
-		
+	
 	public ArrayList<PolizaDTO> getPolizas(String nroPoliza){
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
@@ -358,4 +362,14 @@ public class GestorBDD {
 		return polizas;
 	}
 
+	public long nextNroRecibo() {
+		if(!session.isJoinedToTransaction()) session.beginTransaction();
+		
+		NativeQuery<?> query = session.createSQLQuery( "select nextval('nrorecibo')" );
+		Long key = ((BigInteger) query.uniqueResult()).longValue();
+		session.getTransaction().commit();
+		
+	    return key;
+	}
+		
 }

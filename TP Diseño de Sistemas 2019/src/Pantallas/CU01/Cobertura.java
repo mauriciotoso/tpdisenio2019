@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -26,6 +26,8 @@ import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
+import Pantallas.MenuProductorSeguro;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

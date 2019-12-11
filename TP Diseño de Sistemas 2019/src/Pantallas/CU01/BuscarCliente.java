@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU01;
 
 import java.awt.Color;
 
@@ -19,10 +19,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.MaskFormatter;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
+
 import BDD.FachadaBDD;
 import DTO.*;
 import Enumerados.*;
+import Pantallas.MenuProductorSeguro;
+
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,15 +38,19 @@ public class BuscarCliente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfNroCliente;
-	private JTextField tfApellido;
-	private JTextField tfNombre;
-	private JTextField tfNroDocumento;
+	private JFormattedTextField tfNroCliente;
+	private JFormattedTextField tfApellido;
+	private JFormattedTextField tfNombre;
+	private JFormattedTextField tfNroDocumento;
 	private JComboBox<TipoDocumento> comboBoxTD;
 	private JTable busqueda;
 	private ArrayList<ClienteDTO> clientes;
 	private ListSelectionModel model;
     private ClienteDTO seleccion;
+    private MaskFormatter maskCliente;
+    private MaskFormatter maskApellido;
+    private MaskFormatter maskNombre;
+    private MaskFormatter maskNroDocumento;
 	/**
 	 * Launch the application.
 	 */
@@ -75,7 +86,7 @@ public class BuscarCliente extends JFrame {
 		
 		JButton btnBuscarCliente = new JButton("Seleccionar cliente");
 		btnBuscarCliente.setBackground(Color.WHITE);
-		btnBuscarCliente.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnBuscarCliente.setBounds(617, 397, 157, 31);
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,8 +100,8 @@ public class BuscarCliente extends JFrame {
 		
 		JButton btnCancelarBC = new JButton("Cancelar");
 		btnCancelarBC.setBackground(Color.WHITE);
-		btnCancelarBC.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnCancelarBC.setBounds(10, 397, 99, 31);
+		btnCancelarBC.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCancelarBC.setBounds(10, 397, 99,31);
 		btnCancelarBC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -107,10 +118,11 @@ public class BuscarCliente extends JFrame {
 		scrollPane.setBounds(10, 119, 764, 251);
 		panel.add(scrollPane);
 		
-		tfNroCliente = new JTextField();
+		tfNroCliente = new JFormattedTextField();
 		tfNroCliente.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
+				char textoIngresado = arg0.getKeyChar();
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
 				busqueda.setAutoCreateRowSorter(true);
@@ -133,10 +145,16 @@ public class BuscarCliente extends JFrame {
 		});
 		
 		tfNroCliente.setBounds(10, 88, 142, 20);
-		panel.add(tfNroCliente);
 		tfNroCliente.setColumns(10);
+		panel.add(tfNroCliente);
+		try {
+			maskCliente = new MaskFormatter("##-########");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		maskCliente.install(tfNroCliente);
 		
-		tfApellido = new JTextField();
+		tfApellido = new JFormattedTextField();
 		tfApellido.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -163,8 +181,14 @@ public class BuscarCliente extends JFrame {
 		tfApellido.setColumns(10);
 		tfApellido.setBounds(162, 88, 142, 20);
 		panel.add(tfApellido);
+		try {
+			maskApellido = new MaskFormatter("?????????????????????????????????????????????");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		//maskApellido.install(tfApellido);
 		
-		tfNombre = new JTextField();
+		tfNombre = new JFormattedTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -191,8 +215,14 @@ public class BuscarCliente extends JFrame {
 		tfNombre.setColumns(10);
 		tfNombre.setBounds(314, 88, 142, 20);
 		panel.add(tfNombre);
+		try {
+			maskNombre = new MaskFormatter("?????????????????????????????????????????????");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		//maskNombre.install(tfNombre);
 		
-		tfNroDocumento = new JTextField();
+		tfNroDocumento = new JFormattedTextField();
 		tfNroDocumento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -219,6 +249,12 @@ public class BuscarCliente extends JFrame {
 		tfNroDocumento.setColumns(10);
 		tfNroDocumento.setBounds(621, 88, 142, 20);
 		panel.add(tfNroDocumento);
+		try {
+			maskNroDocumento = new MaskFormatter("AAAAAAAAAAAAAAAAAAAA");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		//maskNroDocumento.install(tfNroDocumento);
 		
 		TipoDocumento[] listaTD = {TipoDocumento.DNI,TipoDocumento.CEDULA_IDENTIDAD,TipoDocumento.LIBRETA_CIVICA,TipoDocumento.LIBRETA_ENROLAMIENTO};
 		
@@ -299,7 +335,24 @@ public class BuscarCliente extends JFrame {
 		
 	}
 	
-	private Object[][] filtrarTabla(String nroCliente,String apellido,String nombre,TipoDocumento tipoDoc,String nroDoc) {
+	private Object[][] filtrarTabla(String nroClienteAux,String apellidoAux,String nombreAux,TipoDocumento tipoDoc,String nroDocAux) {
+		String nroCliente="", apellido="",nombre="",nroDoc="";
+		for (int x=0; x < nroClienteAux.length(); x++) {
+			  if (nroClienteAux.charAt(x) != ' ')
+			    nroCliente += nroClienteAux.charAt(x);
+			}
+		for (int x=0; x < apellidoAux.length(); x++) {
+			  if (apellidoAux.charAt(x) != ' ')
+			    apellido += apellidoAux.charAt(x);
+			}
+		for (int x=0; x < nombreAux.length(); x++) {
+			  if (nombreAux.charAt(x) != ' ')
+			    nombre += nombreAux.charAt(x);
+			}
+		for (int x=0; x < nroDocAux.length(); x++) {
+			  if (nroDocAux.charAt(x) != ' ')
+			    nroDoc += nroDocAux.charAt(x);
+			}
 		
 		System.out.println(nroCliente +" "+ apellido +" "+ nombre +" "+ nroDoc);
 		

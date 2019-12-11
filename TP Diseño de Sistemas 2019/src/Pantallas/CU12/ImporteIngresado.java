@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU12;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

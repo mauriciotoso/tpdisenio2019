@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +18,8 @@ import javax.swing.border.LineBorder;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
+import Pantallas.MenuProductorSeguro;
 
 public class PolizaGenerada extends JFrame {
 

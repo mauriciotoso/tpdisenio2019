@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.CU12;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,6 +12,7 @@ import DTO.PolizaDTO;
 import DTO.ReciboDTO;
 import Entidades.Recibo;
 import Logica.FachadaPoliza;
+import Pantallas.MenuCobrador;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -58,7 +59,9 @@ public class DetallePago extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
+		this.setLocationRelativeTo(null);
 		setContentPane(contentPane);
+		
 		
 		JButton button = new JButton("Aceptar");
 		button.addActionListener(new ActionListener() {

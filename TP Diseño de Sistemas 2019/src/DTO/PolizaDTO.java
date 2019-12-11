@@ -125,8 +125,6 @@ public class PolizaDTO {
 		this.marca=pol.getAnioModelo().getModelo().getMarca().getMarca();
 		this.modelo=pol.getAnioModelo().getModelo().getNombre();
 		this.idAnioModelo=pol.getIdAnio().getIdAnio();
-		
-		
 		}
 	}
 

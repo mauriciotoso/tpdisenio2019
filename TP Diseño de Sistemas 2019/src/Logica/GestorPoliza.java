@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import App.Sesion;
 import BDD.GestorBDD;
 import DTO.*;
 import Entidades.*;
@@ -228,10 +230,9 @@ public class GestorPoliza {
 	}
 	
 	public ReciboDTO generarRecibo(float monto, ArrayList<CuotaDTO> cuotasDTO, PolizaDTO polDTO, float importe) {
-		ReciboDTO reciboDTO = new ReciboDTO();
-		reciboDTO.setImportePagado(monto);
-		reciboDTO.setImporte(importe);
-		reciboDTO.setCuotas(cuotasDTO);
+		long nroRecibo = GestorBDD.getInstance().nextNroRecibo();
+		Calendar hoy = Calendar.getInstance();
+		ReciboDTO reciboDTO = new ReciboDTO(importe,monto,cuotasDTO,nroRecibo,hoy);
 		
 		return reciboDTO;
 	}
