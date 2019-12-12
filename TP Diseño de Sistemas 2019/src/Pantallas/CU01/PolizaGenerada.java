@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
@@ -186,7 +188,7 @@ public class PolizaGenerada extends JFrame {
 		panelAbajo.add(lblUltimoDia);
 		
 		JTextField tfUltimoDia = new JTextField();
-		tfUltimoDia.setBounds(160, 72, 180, 20);
+		tfUltimoDia.setBounds(160, 72, 100, 20);
 		tfUltimoDia.setEditable(false);
 		tfUltimoDia.setColumns(10);
 		panelAbajo.add(tfUltimoDia);
@@ -229,7 +231,7 @@ public class PolizaGenerada extends JFrame {
 		JButton btnCancelarPG = new JButton("Cancelar");
 		btnCancelarPG.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCancelarPG.setBackground(Color.WHITE);
-		btnCancelarPG.setBounds(25, 526, 90, 25);
+		btnCancelarPG.setBounds(10, 526, 90, 25);
 		btnCancelarPG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -245,7 +247,7 @@ public class PolizaGenerada extends JFrame {
 		JButton btnCambioCobertura = new JButton("Cambiar cobertura");
 		btnCambioCobertura.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCambioCobertura.setBackground(Color.WHITE);
-		btnCambioCobertura.setBounds(125, 526, 150, 25);
+		btnCambioCobertura.setBounds(514, 526, 150, 25);
 		btnCambioCobertura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cambiar el tipo de cobertura?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -261,7 +263,7 @@ public class PolizaGenerada extends JFrame {
 		JButton btnConfirmarPG = new JButton("Confirmar");
 		btnConfirmarPG.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnConfirmarPG.setBackground(Color.WHITE);
-		btnConfirmarPG.setBounds(659, 526, 100, 25);
+		btnConfirmarPG.setBounds(674, 526, 100, 25);
 		btnConfirmarPG.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea confirmar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -291,8 +293,13 @@ public class PolizaGenerada extends JFrame {
 		tfChasis.setText(polDTO.getChasis());
 		tfPatente.setText(polDTO.getPatente());
 		//tener en cuenta el formato de fecha al usar el string 
-		tfFechaIni.setText(polDTO.getFechaInicio().toString());
-		tfFechaFin.setText(polDTO.getFechaFin().toString());
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+		String fechaInicio = dateFormat.format(polDTO.getFechaInicio()); 
+		String fechaFin = dateFormat.format(polDTO.getFechaFin()); 
+		
+		tfFechaIni.setText(fechaInicio);
+		tfFechaFin.setText(fechaFin);
 		tfSumaAseg.setText("0");
 		tfPremio.setText("0");
 		tfDescuento.setText("0");
@@ -302,8 +309,10 @@ public class PolizaGenerada extends JFrame {
 		c.add(Calendar.DATE, -1);
 		Date ultimoDiaPago = c.getTime();
 		
+		String ultimoDia = dateFormat.format(ultimoDiaPago); 
+		
 		tfDescuento.setText("0");
-		tfUltimoDia.setText(ultimoDiaPago.toString());
+		tfUltimoDia.setText(ultimoDia);
 		
 		if(polDTO.getTipoPoliza()=="MENSUAL") {
 			tfMontoCuota.setText(Float.toString(polDTO.getMontoTotal()/6));

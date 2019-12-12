@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -228,9 +229,12 @@ public class SeleccionarCuotas extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MenuCobrador mc =new MenuCobrador();
-				mc.setVisible(true);
-				dispose();
+				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					MenuCobrador mc = new MenuCobrador();
+					mc.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -252,7 +256,7 @@ public class SeleccionarCuotas extends JFrame {
 		btnSeleccionar.setBounds(648, 525, 126, 25);
 		contentPane.add(btnSeleccionar);
 		
-		JButton btnElegirPoliza = new JButton("Elegir otra p\u00F3liza");
+		JButton btnElegirPoliza = new JButton("Cambiar p\u00F3liza");
 		btnElegirPoliza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BuscarPoliza bp = new BuscarPoliza();

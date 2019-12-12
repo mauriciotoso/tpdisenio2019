@@ -126,11 +126,11 @@ public class Cobertura extends JFrame {
 		eleccion.add(rbMensual);
 		eleccion.add(rbSemestral);
 		
-		JButton btnAtrasAC = new JButton("Atr\u00E1s");
-		btnAtrasAC.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnAtrasAC.setBackground(Color.WHITE);
-		btnAtrasAC.setBounds(10, 308, 90, 25);
-		btnAtrasAC.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("Cambiar datos");
+		btnAtras.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnAtras.setBackground(Color.WHITE);
+		btnAtras.setBounds(521, 308, 127, 25);
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(numeroHijos!=0) {
 					AgregarHijos agregarHijos = new AgregarHijos(polDTO,clienteDTO,numeroHijos,anio);
@@ -142,12 +142,12 @@ public class Cobertura extends JFrame {
 				dispose();
 			}
 		});
-		alternativasCobertura.add(btnAtrasAC);
+		alternativasCobertura.add(btnAtras);
 		
 		JButton btnCancelarAC = new JButton("Cancelar");
 		btnCancelarAC.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCancelarAC.setBackground(Color.WHITE);
-		btnCancelarAC.setBounds(110, 308, 90, 25);
+		btnCancelarAC.setBounds(10, 308, 90, 25);
 		btnCancelarAC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -188,7 +188,7 @@ public class Cobertura extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSiguiente.setBackground(Color.WHITE);
-		btnSiguiente.setBounds(674, 308, 96, 25);
+		btnSiguiente.setBounds(658, 308, 112, 25);
 		btnSiguiente.setEnabled(false);
 		
 		if(polDTO.getTipoPoliza()!=null) {

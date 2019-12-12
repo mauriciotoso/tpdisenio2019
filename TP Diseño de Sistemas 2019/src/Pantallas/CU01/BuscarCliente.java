@@ -1,8 +1,6 @@
 package Pantallas.CU01;
 
 import java.awt.Color;
-
-
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,20 +12,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
-
 import BDD.FachadaBDD;
 import DTO.*;
 import Enumerados.*;
 import Pantallas.MenuProductorSeguro;
-
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -51,10 +44,8 @@ public class BuscarCliente extends JFrame {
     private MaskFormatter maskApellido;
     private MaskFormatter maskNombre;
     private MaskFormatter maskNroDocumento;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	
+    public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -90,7 +81,8 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.setBounds(617, 397, 157, 31);
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				
 				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion, null,0);
 				polizaGenerar.setVisible(true);
 				dispose();
@@ -247,7 +239,7 @@ public class BuscarCliente extends JFrame {
 			}
 		});
 		tfNroDocumento.setColumns(10);
-		tfNroDocumento.setBounds(621, 88, 142, 20);
+		tfNroDocumento.setBounds(631, 88, 132, 20);
 		panel.add(tfNroDocumento);
 		try {
 			maskNroDocumento = new MaskFormatter("AAAAAAAAAAAAAAAAAAAA");
@@ -282,7 +274,7 @@ public class BuscarCliente extends JFrame {
 			}
 		});
 		
-		comboBoxTD.setBounds(466, 88, 142, 20);
+		comboBoxTD.setBounds(466, 88, 155, 20);
 		panel.add(comboBoxTD);
 		
 		JLabel lblNroCliente = new JLabel("Nro. Cliente:");

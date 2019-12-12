@@ -6,6 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -14,6 +15,8 @@ import DTO.PolizaDTO;
 import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
 import Logica.FachadaPoliza;
+import Pantallas.MenuProductorSeguro;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -41,7 +44,7 @@ public class AgregarHijos extends JFrame {
 		this.setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 500, 650);
+		panel.setBounds(0, 0, 500, 611);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -261,7 +264,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo5.add(comboBoxSexo5);
 		
 		JButton btnAtras = new JButton("Atr\u00E1s");
-		btnAtras.setBounds(5, 581, 90, 25);
+		btnAtras.setBounds(105, 581, 90, 25);
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PolizaGenerar polizaGenerar = new PolizaGenerar(clienteDTO, polDTO,numeroHijos);
@@ -392,5 +395,20 @@ public class AgregarHijos extends JFrame {
 		
 		btnSiguiente.setBounds(385, 581, 90, 25);
 		panel.add(btnSiguiente);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input = JOptionPane.showConfirmDialog(null, "Desea cancelar la transacción?", "Confirmación", JOptionPane.YES_NO_OPTION);
+				if (input==0) {
+					MenuProductorSeguro menuProductorSeguro = new MenuProductorSeguro();
+					menuProductorSeguro.setVisible(true);
+					dispose();
+				}
+	
+			}
+		});
+		btnCancelar.setBounds(5, 581, 90, 25);
+		panel.add(btnCancelar);
 	}
 }

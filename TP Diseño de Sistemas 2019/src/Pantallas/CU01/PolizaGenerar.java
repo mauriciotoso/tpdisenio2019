@@ -169,7 +169,7 @@ public class PolizaGenerar extends JFrame {
 		JPanel panel_DatosPoliza = new JPanel();
 		panel_DatosPoliza.setToolTipText("");
 		panel_DatosPoliza.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_DatosPoliza.setBounds(10, 170, 764, 345);
+		panel_DatosPoliza.setBounds(10, 170, 764, 327);
 		panel.add(panel_DatosPoliza);
 		panel_DatosPoliza.setLayout(null);
 		
@@ -631,9 +631,9 @@ public class PolizaGenerar extends JFrame {
 			}
 		});
 		
-		JButton btnAtras = new JButton("Atrás");
-		btnAtras.setBackground(Color.WHITE);
-		btnAtras.addActionListener(new ActionListener() {
+		JButton btnElegirCliente = new JButton("Cambiar cliente");
+		btnElegirCliente.setBackground(Color.WHITE);
+		btnElegirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea volver atrás?", "Confirmación", JOptionPane.YES_NO_OPTION);
 				if (input==0) {
@@ -645,8 +645,8 @@ public class PolizaGenerar extends JFrame {
 				}
 			}
 		});
-		btnAtras.setBounds(110, 526, 70, 25);
-		panel.add(btnAtras);
+		btnElegirCliente.setBounds(553, 526, 111, 25);
+		panel.add(btnElegirCliente);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(Color.WHITE);
