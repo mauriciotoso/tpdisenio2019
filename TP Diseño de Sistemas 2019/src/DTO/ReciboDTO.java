@@ -46,7 +46,7 @@ public class ReciboDTO {
 		this.setOperador(Sesion.getInstance().getUsuarioConectado().getApellido()+", "+Sesion.getInstance().getUsuarioConectado().getNombre());
 		this.setNroRecibo(this.generarNroRecibo(nroRecibo));
 		this.setFechaRecibo(hoy.getTime());
-		this.setHoraRecibo(hoy.HOUR,hoy.MINUTE,hoy.SECOND);
+		this.setHoraRecibo(Calendar.HOUR,Calendar.MINUTE,Calendar.SECOND);
 	}
 	public ReciboDTO(Recibo r) {
 		ArrayList<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();

@@ -9,9 +9,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import DTO.CuotaDTO;
 import DTO.PolizaDTO;
+import DTO.ReciboDTO;
+import Logica.FachadaPoliza;
 import Pantallas.MenuCobrador;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -29,6 +33,7 @@ public class PagarCuotas extends JFrame {
 	private JTable table;
 	private JTextField tfImporte;
 	private float importeTotal;
+	private JTextField tfImportePagado;
 	
 	public PagarCuotas(PolizaDTO polDTO, ArrayList<CuotaDTO> cuotasPagar) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +80,7 @@ public class PagarCuotas extends JFrame {
 		
 		JLabel lblImporteTotal = new JLabel("Importe total:");
 		lblImporteTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblImporteTotal.setBounds(403, 203, 110, 25);
+		lblImporteTotal.setBounds(10, 203, 110, 25);
 		contentPane.add(lblImporteTotal);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -88,21 +93,30 @@ public class PagarCuotas extends JFrame {
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCancelar.setBackground(Color.WHITE);
-		btnCancelar.setBounds(10, 239, 90, 25);
+		btnCancelar.setBounds(10, 239, 110, 25);
 		contentPane.add(btnCancelar);
 		
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ImporteIngresado importeIngresado = new ImporteIngresado(polDTO,cuotasPagar,importeTotal);
-				importeIngresado.setVisible(true);
+				
+				if(Float.parseFloat(tfImportePagado.getText())<importeTotal) {
+					JOptionPane.showMessageDialog(null, "El monto ingresado es menor que el importe total", "Error", JOptionPane.INFORMATION_MESSAGE);
+					
+				}else {
+				
+				ReciboDTO reciboDTO = FachadaPoliza.getInstance().generarRecibo(Float.valueOf(tfImportePagado.getText()), cuotasPagar, polDTO, importeTotal);
+				DetallePago dp = new DetallePago(polDTO,reciboDTO);
+				dp.setVisible(true);
 				dispose();
+				}
+				
 			}
 		});
 		
 		btnPagar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnPagar.setBackground(Color.WHITE);
-		btnPagar.setBounds(660, 239, 101, 25);
+		btnPagar.setBounds(657, 239, 117, 25);
 		contentPane.add(btnPagar);
 		
 		JButton btnCambiarCuotas = new JButton("Cambiar cuotas");
@@ -116,13 +130,14 @@ public class PagarCuotas extends JFrame {
 		
 		btnCambiarCuotas.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCambiarCuotas.setBackground(Color.WHITE);
-		btnCambiarCuotas.setBounds(523, 239, 127, 25);
+		btnCambiarCuotas.setBounds(510, 239, 127, 25);
 		contentPane.add(btnCambiarCuotas);
 		
 		tfImporte = new JTextField();
-		tfImporte.setBounds(523, 203, 238, 25);
+		tfImporte.setBounds(130, 205, 127, 25);
 		contentPane.add(tfImporte);
 		tfImporte.setColumns(10);
+		tfImporte.setEnabled(false);
 		
 		if(cuotasPagar!=null) {
 		for(CuotaDTO c: cuotasPagar) 
@@ -130,5 +145,16 @@ public class PagarCuotas extends JFrame {
 		}
 		
 		tfImporte.setText(Float.toString(importeTotal));
+		
+		JLabel lblImportePagado = new JLabel("Importe pagado:");
+		lblImportePagado.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblImportePagado.setBounds(510, 203, 140, 25);
+		contentPane.add(lblImportePagado);
+		
+		tfImportePagado = new JTextField();
+		tfImportePagado.setText((String) null);
+		tfImportePagado.setColumns(10);
+		tfImportePagado.setBounds(647, 203, 127, 25);
+		contentPane.add(tfImportePagado);
 	}
 }

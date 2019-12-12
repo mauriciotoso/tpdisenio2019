@@ -1,19 +1,11 @@
 package Pantallas.CU12;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import DTO.CuotaDTO;
-import DTO.PolizaDTO;
-import DTO.ReciboDTO;
-import Entidades.Recibo;
+import DTO.*;
 import Logica.FachadaPoliza;
 import Pantallas.MenuCobrador;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -21,38 +13,20 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 public class DetallePago extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DetallePago frame = new DetallePago();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-
-	/**
-	 * Create the frame.
-	 */
 	public DetallePago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 400, 200);
