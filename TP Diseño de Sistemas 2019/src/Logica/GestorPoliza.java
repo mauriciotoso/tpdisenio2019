@@ -34,7 +34,6 @@ public class GestorPoliza {
 		
 		if(!validar) FachadaPoliza.getInstance().notificarError();
 		else {
-			
 			boolean validarF= this.validarFechas(polDTO);	
 			if(!validarF) FachadaPoliza.getInstance().notificarError();
 			else {

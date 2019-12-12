@@ -107,7 +107,11 @@ public class MenuProductorSeguro extends JFrame {
 		btnConsultar2.setBounds(25, 190, 160, 60);
 		gestionPoliza.add(btnConsultar2);
 		
-		JButton btnGenerarProp = new JButton("Generar propuesta renovaci\u00F3n");
+		JButton btnGenerarProp = new JButton("<html>Generar propuesta <p>renovación</p></html>");
+		btnGenerarProp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGenerarProp.setBackground(Color.WHITE);
 		btnGenerarProp.setBounds(25, 260, 160, 60);
 		gestionPoliza.add(btnGenerarProp);

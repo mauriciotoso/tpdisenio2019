@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import App.Sesion;
 import App.Usuario;
@@ -30,6 +32,8 @@ public class InicioSesion extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private MaskFormatter maskUsuario;
+	private MaskFormatter maskContrasenia;
 
 	/**
 	 * Launch the application.
@@ -97,7 +101,7 @@ public class InicioSesion extends JFrame {
 		lblContrasenia.setBounds(81, 84, 80, 14);
 		recuadroSesion.add(lblContrasenia);
 				
-		JTextField tfNombreUsuario = new JTextField();
+		JFormattedTextField tfNombreUsuario = new JFormattedTextField();
 		tfNombreUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -109,10 +113,23 @@ public class InicioSesion extends JFrame {
 		tfNombreUsuario.setColumns(10);
 		tfNombreUsuario.setBounds(170, 53, 160, 20);
 		recuadroSesion.add(tfNombreUsuario);
-				
-		JTextField tfContrasenia = new JPasswordField();
+		try {
+			maskUsuario = new MaskFormatter("AAAAAAAAAAAAAAAAAAAA");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		maskUsuario.install(tfNombreUsuario);
+		
+		JFormattedTextField tfContrasenia = new JFormattedTextField();
 		tfContrasenia.setBounds(170, 83, 160, 20);
 		recuadroSesion.add(tfContrasenia);
+		try {
+			maskContrasenia = new MaskFormatter("******************************");
+			maskContrasenia.setInvalidCharacters("'/ |`~^<>*;:()[]{}");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		maskContrasenia.install(tfContrasenia);
 				
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -122,43 +139,24 @@ public class InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String user = tfNombreUsuario.getText();
 				String pw = tfContrasenia.getText();
-				boolean correctoUser=false; 
-				boolean correctoPw=false;
-				int contNum=0,contCaract=0,contMayus=0,contMin=0;
-				int i=0;
-				if (!user.isEmpty() && !pw.isEmpty()) {
-					if (user.length()>=8 && user.length()<=30) {
-						correctoUser=true;
-						while(correctoUser && i<user.length()) {
-							if (user.charAt(i)==' ')//>='32' && userA[i]<='47') && (userA[i]>='58' && userA[i]<='64') && (userA[i]>='91' && userA[i]<='96'))
-								correctoUser=false;
-							i++;
-						}
-					} 
-					if (pw.length()>=8 && pw.length()<=15) {						
-						correctoPw=true;
-						/*while(correctoUser && i<user.length()) {
-						if (user.charAt(i)!=' ') {
-								if (user.charAt(i)>='65' && user.charAt(i)<='90')
-									contMayus++;
-								else if (user.charAt(i)>='97' && user.charAt(i)<='122')
-									contMin++;
-								else if (user.charAt(i)>='48' && user.charAt(i)<='57')
-									contNum++;
-								else if ((user.charAt(i)>='32' && user.charAt(i)<='47') || (user.charAt(i)>='58' && user.charAt(i)<='64') || (user.charAt(i)>=91 && user.charAt(i)<='96'))
-									contCaract++;
-								//>='32' && userA[i]<='47') && (userA[i]>='58' && userA[i]<='64') && (userA[i]>='91' && userA[i]<='96'))
-							} else 
-								correctoUser=false;	
-							i++;
-						}*/
-						if (contMayus>0 && contMin>0 && contNum>0 && contCaract>0)
-							correctoPw=true;
+				
+				String userCorregido="";
+				String pwCorregido="";
+				
+				for (int x=0; x < user.length(); x++) {
+					  if (user.charAt(x) != ' ')
+					    userCorregido += user.charAt(x);
 					}
-					if (correctoUser && correctoPw) {
-						Usuario usuario = FachadaSesion.getInstance().verifUserPw(user,pw);
+				for (int x=0; x < pw.length(); x++) {
+					  if (pw.charAt(x) != ' ')
+					    pwCorregido += pw.charAt(x);
+					}
+				
+				
+				if (!user.isEmpty() && !pw.isEmpty()) {
+						Usuario usuario = FachadaSesion.getInstance().verifUserPw(userCorregido,pwCorregido);
 						Sesion.getInstance().setUsuarioConectado(usuario);
-						
+						System.out.println(usuario);
 						if (usuario!=null) {
 							if (usuario.getTipo().compareTo("Productor de Seguro")==0) {
 								MenuProductorSeguro productorSeguroMenu = new MenuProductorSeguro();
@@ -175,15 +173,8 @@ public class InicioSesion extends JFrame {
 							} else 
 								JOptionPane.showMessageDialog(null, "Error lectura de derechos.", "Error", JOptionPane.ERROR_MESSAGE);
 						} else {
-							tfNombreUsuario.setText(null);
-							tfContrasenia.setText(null);
-							JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario y/o contrasenia incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-					} else {
-						tfNombreUsuario.setText(null);
-						tfContrasenia.setText(null);
-						JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña inválidos, vuelva a intentarlo.", "Error", JOptionPane.ERROR_MESSAGE);
-					}
 				} else 
 					JOptionPane.showMessageDialog(null, "Por favor, complete los campos.", "Error", JOptionPane.ERROR_MESSAGE);
 			}

@@ -1,6 +1,7 @@
 package DTO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import Entidades.*;
@@ -355,17 +356,35 @@ public class PolizaDTO {
 	public ArrayList<CuotaDTO> getCuotasA(){
 		
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
-		Date hoy = new Date();
+		Calendar hoy = Calendar.getInstance();
 		ArrayList<CuotaDTO> cuotasPol =(ArrayList<CuotaDTO>) this.getCuotas();
 		
 		for(CuotaDTO cuo: cuotasPol) {
 			Date diaCuota = cuo.getUltimoDiaPago();
+			Calendar diaCuotaCalendar = Calendar.getInstance();
+			diaCuotaCalendar.setTime(diaCuota);
+			boolean estaAtrasada = calcularAtraso(hoy,diaCuotaCalendar);
+			
 			if(diaCuota!=null) {
-			if(diaCuota.before(hoy) && !cuo.isEstaPago()) 
-				cuotasA.add(cuo);
+				if(estaAtrasada && !cuo.isEstaPago()) {
+					cuotasA.add(cuo);
+					System.out.println("cuota: "+diaCuota.toString());
+					System.out.println("hoy: "+hoy.toString());
+				}
 			}
 		}
 		return cuotasA;
+	}
+	
+	public boolean calcularAtraso(Calendar hoy, Calendar diaCuota) {
+		if (hoy.YEAR-diaCuota.YEAR<=0) {
+			if(hoy.MONTH-diaCuota.MONTH<=0) {
+				if (hoy.DAY_OF_MONTH-diaCuota.DAY_OF_MONTH<=0) {
+					return false;
+				} else 
+					return true;
+			} return true;
+		} return true;
 	}
 	
 	public Object[][] getDatosCuotasA(int cantColum){
@@ -384,9 +403,13 @@ public class PolizaDTO {
 
 	public ArrayList<CuotaDTO> getCuotasF(){
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
-		Date hoy = new Date();
-		for(CuotaDTO cuo:this.getCuotas()) {
-			if(cuo.getUltimoDiaPago().after(hoy) && !cuo.isEstaPago()) 
+		Calendar hoy = Calendar.getInstance();
+		for(CuotaDTO cuo: this.getCuotas()) {
+			Date diaCuota = cuo.getUltimoDiaPago();
+			Calendar diaCuotaCalendar = Calendar.getInstance();
+			diaCuotaCalendar.setTime(diaCuota);
+			boolean estaAtrasada = calcularAtraso(hoy,diaCuotaCalendar);
+			if(!estaAtrasada && !cuo.isEstaPago()) 
 				cuotasA.add(cuo);
 		}
 		return cuotasA;

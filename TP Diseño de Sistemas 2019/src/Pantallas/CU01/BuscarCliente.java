@@ -178,7 +178,7 @@ public class BuscarCliente extends JFrame {
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
-		//maskApellido.install(tfApellido);
+		maskApellido.install(tfApellido);
 		
 		tfNombre = new JFormattedTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
@@ -212,7 +212,7 @@ public class BuscarCliente extends JFrame {
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
-		//maskNombre.install(tfNombre);
+		maskNombre.install(tfNombre);
 		
 		tfNroDocumento = new JFormattedTextField();
 		tfNroDocumento.addKeyListener(new KeyAdapter() {
@@ -246,7 +246,7 @@ public class BuscarCliente extends JFrame {
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
-		//maskNroDocumento.install(tfNroDocumento);
+		maskNroDocumento.install(tfNroDocumento);
 		
 		TipoDocumento[] listaTD = {TipoDocumento.DNI,TipoDocumento.CEDULA_IDENTIDAD,TipoDocumento.LIBRETA_CIVICA,TipoDocumento.LIBRETA_ENROLAMIENTO};
 		

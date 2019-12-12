@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,8 @@ import Pantallas.MenuCobrador;
 import Pantallas.MenuProductorSeguro;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,11 +39,12 @@ public class BuscarPoliza extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfNroPoliza;
+	private JFormattedTextField tfNroPoliza;
 	private PolizaDTO seleccion;
 	private JTable busqueda;
 	private ListSelectionModel model;
 	private ArrayList<PolizaDTO> polizas;
+	private MaskFormatter maskNroPoliza;
 
 	/**
 	 * Launch the application.
@@ -107,7 +111,7 @@ public class BuscarPoliza extends JFrame {
 			}
 		});
 		
-		tfNroPoliza = new JTextField();
+		tfNroPoliza = new JFormattedTextField();
 		tfNroPoliza.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -135,6 +139,13 @@ public class BuscarPoliza extends JFrame {
 		tfNroPoliza.setBounds(79, 47, 110, 20);
 		contentPane.add(tfNroPoliza);
 		tfNroPoliza.setColumns(10);
+		CORREGIR ACA PARA QUE SAQUE LOS ESPACIOS
+		try {
+			maskNroPoliza = new MaskFormatter("####-#######-##");
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+		maskNroPoliza.install(tfNroPoliza);
 		
 		btnSeleccionar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSeleccionar.setBackground(Color.WHITE);
