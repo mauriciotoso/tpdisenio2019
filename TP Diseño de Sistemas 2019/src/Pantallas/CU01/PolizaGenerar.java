@@ -645,7 +645,7 @@ public class PolizaGenerar extends JFrame {
 				}
 			}
 		});
-		btnElegirCliente.setBounds(553, 526, 111, 25);
+		btnElegirCliente.setBounds(539, 526, 125, 25);
 		panel.add(btnElegirCliente);
 		
 		JButton btnCancelar = new JButton("Cancelar");

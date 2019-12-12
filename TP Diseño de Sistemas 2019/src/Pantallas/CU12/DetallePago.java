@@ -75,18 +75,21 @@ public class DetallePago extends JFrame {
 		lblVuelto.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		tfImporte = new JTextField();
+		tfImporte.setEditable(false);
 		tfImporte.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfImporte.setBounds(190, 7, 126, 24);
 		panel.add(tfImporte);
 		tfImporte.setColumns(10);
 		
 		tfImporteAbonado = new JTextField();
+		tfImporteAbonado.setEditable(false);
 		tfImporteAbonado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfImporteAbonado.setColumns(10);
 		tfImporteAbonado.setBounds(190, 33, 126, 24);
 		panel.add(tfImporteAbonado);
 		
 		tfVuelto = new JTextField();
+		tfVuelto.setEditable(false);
 		tfVuelto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfVuelto.setColumns(10);
 		tfVuelto.setBounds(190, 60, 126, 24);

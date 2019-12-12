@@ -60,7 +60,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo1.add(lblHijo1);
 		
 		JLabel lblFechaDeNacimiento1 = new JLabel("Fecha de nacimiento:");
-		lblFechaDeNacimiento1.setBounds(5, 26, 102, 14);
+		lblFechaDeNacimiento1.setBounds(5, 26, 125, 14);
 		panelHijo1.add(lblFechaDeNacimiento1);
 		
 		JLabel lblSexo1 = new JLabel("Sexo:");
@@ -76,7 +76,7 @@ public class AgregarHijos extends JFrame {
 		
 		JComboBox<EstadoCivil> comboBoxEC1 = new JComboBox<EstadoCivil>();
 		comboBoxEC1.setModel(new DefaultComboBoxModel<EstadoCivil>(listaEC));
-		comboBoxEC1.setBounds(118, 73, 169, 16);
+		comboBoxEC1.setBounds(135, 73, 169, 16);
 		panelHijo1.add(comboBoxEC1);
 		
 		Date today = new Date();
@@ -94,12 +94,12 @@ public class AgregarHijos extends JFrame {
 		JSpinner.DateEditor editor = new JSpinner.DateEditor(fechaNac1, "dd/MM/yy");
 		fechaNac1.setEditor(editor);
 		
-		fechaNac1.setBounds(117, 23, 169, 20);
+		fechaNac1.setBounds(135, 23, 169, 20);
 		panelHijo1.add(fechaNac1);
 		
 		JComboBox<Sexo> comboBoxSexo1 = new JComboBox<Sexo>();
 		comboBoxSexo1.setModel(new DefaultComboBoxModel<Sexo>(listaSexo));
-		comboBoxSexo1.setBounds(118, 49, 169, 16);
+		comboBoxSexo1.setBounds(135, 48, 169, 16);
 		panelHijo1.add(comboBoxSexo1);
 		
 		JLabel lblDeclaracion = new JLabel("Declaraci\u00F3n de hijo/s");
@@ -119,7 +119,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo2.add(lblHijo2);
 		
 		JLabel lblFechaNacimiento2 = new JLabel("Fecha de nacimiento:");
-		lblFechaNacimiento2.setBounds(5, 26, 102, 14);
+		lblFechaNacimiento2.setBounds(5, 26, 125, 14);
 		panelHijo2.add(lblFechaNacimiento2);
 		
 		JLabel lblSexo2 = new JLabel("Sexo:");
@@ -132,18 +132,18 @@ public class AgregarHijos extends JFrame {
 		
 		JComboBox<EstadoCivil> comboBoxEC2 = new JComboBox<EstadoCivil>();
 		comboBoxEC2.setModel(new DefaultComboBoxModel<EstadoCivil>(listaEC));
-		comboBoxEC2.setBounds(118, 73, 169, 16);
+		comboBoxEC2.setBounds(135, 73, 169, 16);
 		panelHijo2.add(comboBoxEC2);
 		
 		JSpinner fechaNac2 = new JSpinner(new SpinnerDateModel(anio18.getTime(),anio30.getTime(),anio18.getTime(), Calendar.MONTH));
 		JSpinner.DateEditor editor2 = new JSpinner.DateEditor(fechaNac2, "dd/MM/yy");
 		fechaNac2.setEditor(editor2);
-		fechaNac2.setBounds(117, 23, 169, 20);
+		fechaNac2.setBounds(135, 23, 169, 20);
 		panelHijo2.add(fechaNac2);
 		
 		JComboBox<Sexo> comboBoxSexo2 = new JComboBox<Sexo>();
 		comboBoxSexo2.setModel(new DefaultComboBoxModel<Sexo>(listaSexo));
-		comboBoxSexo2.setBounds(118, 49, 169, 16);
+		comboBoxSexo2.setBounds(135, 49, 169, 16);
 		panelHijo2.add(comboBoxSexo2);
 		
 		JPanel panelHijo3 = new JPanel();
@@ -158,7 +158,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo3.add(lblHijo3);
 		
 		JLabel lblFechaNacimiento3 = new JLabel("Fecha de nacimiento:");
-		lblFechaNacimiento3.setBounds(5, 26, 102, 14);
+		lblFechaNacimiento3.setBounds(5, 26, 125, 14);
 		panelHijo3.add(lblFechaNacimiento3);
 		
 		JLabel lblSexo3 = new JLabel("Sexo:");
@@ -171,18 +171,18 @@ public class AgregarHijos extends JFrame {
 		
 		JComboBox<EstadoCivil> comboBoxEC3 = new JComboBox<EstadoCivil>();
 		comboBoxEC3.setModel(new DefaultComboBoxModel<EstadoCivil>(listaEC));
-		comboBoxEC3.setBounds(118, 73, 169, 16);
+		comboBoxEC3.setBounds(135, 73, 169, 16);
 		panelHijo3.add(comboBoxEC3);
 		
 		JSpinner fechaNac3 = new JSpinner(new SpinnerDateModel(anio18.getTime(),anio30.getTime(),anio18.getTime(), Calendar.MONTH));
 		JSpinner.DateEditor editor3 = new JSpinner.DateEditor(fechaNac3, "dd/MM/yy");
 		fechaNac3.setEditor(editor3);
-		fechaNac3.setBounds(117, 23, 169, 20);
+		fechaNac3.setBounds(135, 23, 169, 20);
 		panelHijo3.add(fechaNac3);
 		
 		JComboBox<Sexo> comboBoxSexo3 = new JComboBox<Sexo>();
 		comboBoxSexo3.setModel(new DefaultComboBoxModel<Sexo>(listaSexo));
-		comboBoxSexo3.setBounds(118, 49, 169, 16);
+		comboBoxSexo3.setBounds(135, 49, 169, 16);
 		panelHijo3.add(comboBoxSexo3);
 		
 		JPanel panelHijo4 = new JPanel();
@@ -197,7 +197,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo4.add(lblHijo4);
 		
 		JLabel lblFechaNacimiento4 = new JLabel("Fecha de nacimiento:");
-		lblFechaNacimiento4.setBounds(5, 26, 102, 14);
+		lblFechaNacimiento4.setBounds(5, 26, 125, 14);
 		panelHijo4.add(lblFechaNacimiento4);
 		
 		JLabel lblSexo4 = new JLabel("Sexo:");
@@ -210,18 +210,18 @@ public class AgregarHijos extends JFrame {
 		
 		JComboBox<EstadoCivil> comboBoxEC4 = new JComboBox<EstadoCivil>();
 		comboBoxEC4.setModel(new DefaultComboBoxModel<EstadoCivil>(listaEC));
-		comboBoxEC4.setBounds(118, 73, 169, 16);
+		comboBoxEC4.setBounds(135, 73, 169, 16);
 		panelHijo4.add(comboBoxEC4);
 		
 		JSpinner fechaNac4 = new JSpinner(new SpinnerDateModel(anio18.getTime(),anio30.getTime(),anio18.getTime(), Calendar.MONTH));
 		JSpinner.DateEditor editor4 = new JSpinner.DateEditor(fechaNac4, "dd/MM/yy");
 		fechaNac4.setEditor(editor4);
-		fechaNac4.setBounds(117, 23, 169, 20);
+		fechaNac4.setBounds(135, 23, 169, 20);
 		panelHijo4.add(fechaNac4);
 		
 		JComboBox<Sexo> comboBoxSexo4 = new JComboBox<Sexo>();
 		comboBoxSexo4.setModel(new DefaultComboBoxModel<Sexo>(listaSexo));
-		comboBoxSexo4.setBounds(118, 49, 169, 16);
+		comboBoxSexo4.setBounds(135, 49, 169, 16);
 		panelHijo4.add(comboBoxSexo4);
 		
 		JPanel panelHijo5 = new JPanel();
@@ -236,7 +236,7 @@ public class AgregarHijos extends JFrame {
 		panelHijo5.add(lblHijo5);
 		
 		JLabel lblFechaNacimiento5 = new JLabel("Fecha de nacimiento:");
-		lblFechaNacimiento5.setBounds(5, 26, 102, 14);
+		lblFechaNacimiento5.setBounds(5, 26, 125, 14);
 		panelHijo5.add(lblFechaNacimiento5);
 		
 		JLabel lblSexo5 = new JLabel("Sexo:");
@@ -249,18 +249,18 @@ public class AgregarHijos extends JFrame {
 		
 		JComboBox<EstadoCivil> comboBoxEC5 = new JComboBox<EstadoCivil>();
 		comboBoxEC5.setModel(new DefaultComboBoxModel<EstadoCivil>(listaEC));
-		comboBoxEC5.setBounds(118, 73, 169, 16);
+		comboBoxEC5.setBounds(135, 73, 169, 16);
 		panelHijo5.add(comboBoxEC5);
 		
 		JSpinner fechaNac5 = new JSpinner(new SpinnerDateModel(anio18.getTime(),anio30.getTime(),anio18.getTime(), Calendar.MONTH));
 		JSpinner.DateEditor editor5 = new JSpinner.DateEditor(fechaNac5, "dd/MM/yy");
 		fechaNac5.setEditor(editor5);
-		fechaNac5.setBounds(117, 23, 169, 20);
+		fechaNac5.setBounds(135, 23, 169, 20);
 		panelHijo5.add(fechaNac5);
 		
 		JComboBox<Sexo> comboBoxSexo5 = new JComboBox<Sexo>();
 		comboBoxSexo5.setModel(new DefaultComboBoxModel<Sexo>(listaSexo));
-		comboBoxSexo5.setBounds(118, 49, 169, 16);
+		comboBoxSexo5.setBounds(135, 49, 169, 16);
 		panelHijo5.add(comboBoxSexo5);
 		
 		JButton btnAtras = new JButton("Atr\u00E1s");
