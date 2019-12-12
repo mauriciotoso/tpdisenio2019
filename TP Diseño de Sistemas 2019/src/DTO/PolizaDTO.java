@@ -33,6 +33,9 @@ public class PolizaDTO {
 	private ValorPorcentualDTO valoresPorcentualesDTO;
 	private int idEstadoPoliza;
 	private String estadoPoliza;
+	private float prima;
+	private float descuentoUnidad;
+	private float premio;
 	
 	public PolizaDTO() {}
 	
@@ -364,6 +367,7 @@ public class PolizaDTO {
 		}
 		return cuotasA;
 	}
+	
 	public Object[][] getDatosCuotasA(int cantColum){
 		ArrayList<CuotaDTO> cuotasA = this.getCuotasA();
 		Object[][] aux = new Object[cuotasA.size()][cantColum];
@@ -399,5 +403,28 @@ public class PolizaDTO {
 		
 		return aux;
 	}
-		
+
+	public float getPrima() {
+		return prima;
+	}
+
+	public void setPrima(float prima) {
+		this.prima = prima;
+	}
+
+	public float getDescuentoUnidad() {
+		return descuentoUnidad;
+	}
+
+	public void setDescuentoUnidad(float descuentoUnidad) {
+		this.descuentoUnidad = descuentoUnidad;
+	}
+
+	public float getPremio() {
+		return premio;
+	}
+
+	public void setPremio(float premio) {
+		this.premio = premio;
+	}
 }

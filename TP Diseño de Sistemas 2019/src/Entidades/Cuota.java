@@ -53,12 +53,11 @@ public class Cuota {
 		
 	}
 	
-
-
 	@Override
 	public String toString() {
 		return "Cuota [idCuota=" + idCuota + ", nroCuota=" + nroCuota + ", ultimoDiaPago=" + ultimoDiaPago
-				+ ", importeCuota=" + importeCuota + ", estaPago=" + estaPago + "]";
+				+ ", importeCuota=" + importeCuota + ", estaPago=" + estaPago + ", recargosPorMora=" + recargosPorMora
+				+ ", bonificacion=" + bonificacion + ", fechaPago=" + fechaPago + "]";
 	}
 
 	public Cuota(CuotaDTO c) {

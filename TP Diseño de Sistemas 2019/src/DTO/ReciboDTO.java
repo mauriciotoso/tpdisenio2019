@@ -1,5 +1,7 @@
 package DTO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +18,7 @@ public class ReciboDTO {
 	private float importePagado;
 	private String nroRecibo;
 	private String operador;
-	private List<CuotaDTO> cuotas;
+	private List<CuotaDTO> cuotas=new ArrayList<>();
 	private Date fechaRecibo;
 	private String horaRecibo;
 	
@@ -38,6 +40,8 @@ public class ReciboDTO {
 	}
 	public ReciboDTO (float importe, float importePagado, ArrayList<CuotaDTO> cuotasDTO, long nroRecibo, Calendar hoy) {
 		float vuelto = importePagado-importe;
+		DateFormat dateFormat = new SimpleDateFormat("hh/mm/ss");  
+		String horario = dateFormat.format(hoy.getTime());
 		
 		this.setImporte(importe);
 		this.setImportePagado(importePagado);
@@ -46,7 +50,7 @@ public class ReciboDTO {
 		this.setOperador(Sesion.getInstance().getUsuarioConectado().getApellido()+", "+Sesion.getInstance().getUsuarioConectado().getNombre());
 		this.setNroRecibo(this.generarNroRecibo(nroRecibo));
 		this.setFechaRecibo(hoy.getTime());
-		this.setHoraRecibo(Calendar.HOUR,Calendar.MINUTE,Calendar.SECOND);
+		this.setHoraRecibo(horario);
 	}
 	public ReciboDTO(Recibo r) {
 		ArrayList<CuotaDTO> cuotasDTO = new ArrayList<CuotaDTO>();
@@ -135,8 +139,8 @@ public class ReciboDTO {
 		return horaRecibo;
 	}
 
-	public void setHoraRecibo(int hora, int minutos, int segundos) {
-		this.horaRecibo = hora+":"+minutos+":"+segundos;
+	public void setHoraRecibo(String horario) {
+		this.horaRecibo = horario;
 	}
 	
 	

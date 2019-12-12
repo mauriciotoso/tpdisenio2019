@@ -33,6 +33,7 @@ public class CuotaDTO {
 	}
 	
 	public CuotaDTO(Cuota c) {
+		this.idCuota=c.getIdCuota();
 		this.nroCuota = c.getNroCuota();
 		this.ultimoDiaPago = c.getUltimoDiaPago();
 		this.estaPago = c.isEstaPago();
@@ -42,13 +43,15 @@ public class CuotaDTO {
 		this.fechaPago=c.getFechaPago();
 	}
 
-	@Override
-	public String toString() {
-		return "CuotaDTO [nroCuota=" + nroCuota + ", ultimoDiaPago=" + ultimoDiaPago + ", importeCuota=" + importeCuota
-				+ ", recargosPorMora=" + recargosPorMora + ", bonificacion=" + bonificacion + "]";
-	}
 
 	
+	@Override
+	public String toString() {
+		return "CuotaDTO [idCuota=" + idCuota + ", nroCuota=" + nroCuota + ", ultimoDiaPago=" + ultimoDiaPago
+				+ ", estaPago=" + estaPago + ", importeCuota=" + importeCuota + ", recargosPorMora=" + recargosPorMora
+				+ ", bonificacion=" + bonificacion + ", fechaPago=" + fechaPago + "]";
+	}
+
 	public int getIdCuota() {
 		return idCuota;
 	}

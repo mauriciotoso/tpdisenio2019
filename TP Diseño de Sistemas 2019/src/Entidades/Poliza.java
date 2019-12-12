@@ -106,7 +106,6 @@ public class Poliza{
 		this.tipoCobertura = tipoCobertura;
 		this.valoresPorcentualesPoliza = valoresPorcentualesPoliza;
 		this.nroCliente = nroCliente;
-
 	}
 	
 	public String generarNroPoliza(long nro) {

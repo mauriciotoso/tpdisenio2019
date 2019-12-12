@@ -202,11 +202,11 @@ public class GestorBDD {
 		return pol;
 	}
 	
-	public void actualizarCuotas(Poliza pol, ArrayList<Cuota> cuotas) {
+	public void actualizarCuotas(Poliza pol) {
 		if (!session.isJoinedToTransaction()) session.beginTransaction();
-		for(Cuota c: cuotas) {
-			session.delete(c);
-			session.save(c);
+		for(Cuota c: pol.getCuotas()) {
+			System.out.println(c);
+			session.update(c);
 		}
 		session.getTransaction().commit();
 		/*session.createQuery

@@ -385,7 +385,7 @@ public class AgregarHijos extends JFrame {
 					estadoCivil.add(hijo5EC);	
 				}
 				
-				FachadaPoliza.getInstance().ingresarHijos(polDTO,fechasNac,sexo,estadoCivil,numeroHijos);
+				FachadaPoliza.getInstance().ingresarDatos(polDTO,fechasNac,sexo,estadoCivil,numeroHijos);
 				
 				Cobertura cobertura = new Cobertura(polDTO,clienteDTO,anio,numeroHijos);
 				cobertura.setVisible(true);

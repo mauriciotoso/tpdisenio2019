@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import DTO.CuotaDTO;
+import DTO.PolizaDTO;
 import Entidades.*;
 
 public class GestorCalculo {
@@ -28,6 +29,14 @@ public class GestorCalculo {
 		poliza.setPremio(1);
 		
 		return poliza;
+	}
+	
+	public void calcularPDD(PolizaDTO poliza) {
+		
+		poliza.setPrima(1);
+		poliza.setDescuentoUnidad(1);
+		poliza.setPremio(1);
+		
 	}
 	
 	public float calculoImporte(ArrayList<CuotaDTO> cuotasDTO) {

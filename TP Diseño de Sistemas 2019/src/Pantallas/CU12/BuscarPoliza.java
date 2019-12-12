@@ -25,6 +25,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class BuscarPoliza extends JFrame {
@@ -186,10 +188,14 @@ public class BuscarPoliza extends JFrame {
 			datos[cont][5]=p.getCliente().getNroDocumento();
 			datos[cont][6]="-";
 			
-			for(CuotaDTO c:p.getCuotas()) {
-				if(c.isEstaPago())  datos[cont][6]=c.getFechaPago().toString();
-			}
 			
+			for(CuotaDTO c:p.getCuotas()) 
+				if(c.isEstaPago()) {
+					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+					String fecha = dateFormat.format(c.getFechaPago()); 
+					
+					datos[cont][6]=fecha;
+				}
 			cont++;
 		}
 		

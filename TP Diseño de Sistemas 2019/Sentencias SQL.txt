@@ -219,13 +219,13 @@ nropoliza varchar(20) references poliza(nroPoliza),
 primary key(idHijo));
 
 create table recibo
-(nroRecibo int,
+(nroRecibo varchar(11),
  importe float,
  vuelto float,
  importePagado float,
  fechaPago Date,
  horaPago varchar(20),
- usuario varchar(20) references usuario(usuario),
+ usuario varchar(50),
  primary key(nroRecibo));
 
 create sequence sec_idcuota start with 1 increment by 1 maxvalue 99999 minvalue 0;
@@ -237,7 +237,7 @@ ultimoDiaPago Date,
 importeCuota float,
 estaPago boolean,
 bonificacion float,
-recibo int references recibo(nroRecibo),
+recibo varchar(11) references recibo(nroRecibo),
 fechapago Date,
 nroPoliza varchar(20) references poliza(nroPoliza),
 primary key(idCuota));

@@ -1,11 +1,10 @@
 package Logica;
 
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import App.Sesion;
 import BDD.GestorBDD;
 import DTO.*;
 import Entidades.*;
@@ -78,7 +77,7 @@ public class GestorPoliza {
 						tipoCobertura,vp,cliente);
 
 				poliza = GestorCalculo.getInstance().calcularPDD(poliza);
-				
+				poliza.setMontoTotal(polDTO.getMontoTotal());
 				poliza.actualizarGenerada();
 				
 				GestorBDD.getInstance().guardarPoliza(poliza);
@@ -171,7 +170,7 @@ public class GestorPoliza {
 		return polDTO;
 	}
 	
-	public void ingresarHijos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
+	public void ingresarDatos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
 		List<HijoDTO> hijosLista = new ArrayList<>();
 		
 		for(int i = 0; i<a; i++) {
@@ -226,7 +225,7 @@ public class GestorPoliza {
 			cuotasDTO.add(new CuotaDTO(0,fecha,(float)polDTO.getMontoTotal(),(float)0,(float) 0));
 		}
 		polDTO.setCuotas(cuotasDTO);
-		polDTO.setEstadoPoliza("GENERADA");
+		GestorCalculo.getInstance().calcularPDD(polDTO);
 	}
 	
 	public ReciboDTO generarRecibo(float monto, ArrayList<CuotaDTO> cuotasDTO, PolizaDTO polDTO, float importe) {
@@ -239,27 +238,30 @@ public class GestorPoliza {
 	
 	public void registrarPago(PolizaDTO polDTO, ReciboDTO reciboDTO) {
 		Poliza pol = GestorBDD.getInstance().getPoliza(polDTO);
-		ArrayList<Cuota> cuotasOriginales = (ArrayList<Cuota>) pol.getCuotas();
-		boolean valida = false;
 		
-		for (Cuota cOri: cuotasOriginales) {
+		ArrayList<Integer> ids = new ArrayList<>();
+		for (CuotaDTO c: reciboDTO.getCuotas()) ids.add(c.getIdCuota());
+		
+		for (Cuota cPol: pol.getCuotas()) {
 			for (CuotaDTO c: reciboDTO.getCuotas()) {
-				if (cOri.getIdCuota()==c.getIdCuota()) {
-					cOri.setEstaPago(true);
-					valida = true;
+				if (cPol.getIdCuota()==c.getIdCuota()) {
+					cPol.setFechaPago(reciboDTO.getFechaRecibo());
+					cPol.setEstaPago(true);
 				}
 			}
-			if (!valida)
-				cOri.setEstaPago(false);
 		}
-		GestorBDD.getInstance().actualizarCuotas(pol,cuotasOriginales);
-		
 		Recibo recibo = new Recibo(reciboDTO);
-		for(Cuota cOri: cuotasOriginales) {
-			if (cOri.isEstaPago())
-				recibo.setCuotas(cOri);
+		
+		for(Cuota c: pol.getCuotas()) {
+			for(CuotaDTO cDTO:reciboDTO.getCuotas()) {
+				if(cDTO.getIdCuota()==c.getIdCuota()) recibo.setCuotas(c);
+			}
 		}
+		System.out.println(recibo);
+		
+		GestorBDD.getInstance().actualizarCuotas(pol);
 		GestorBDD.getInstance().guardarRecibo(recibo);
+	
 	}
 	
 	public PolizaDTO getPoliza (String nPoliza) {

@@ -186,6 +186,10 @@ public class SeleccionarCuotas extends JFrame {
 		panelCA.add(scrollPaneCA);
 	
 		cuotasAtrasadas = polDTO.getCuotasA();
+		
+		
+		
+		
 		datosCuotasAtrasadas = new Object[cuotasAtrasadas.size()][3];
 		for(int i=0; i<=cuotasAtrasadas.size()-1;i++) {
 			CuotaDTO c = cuotasAtrasadas.get(i);
@@ -337,7 +341,6 @@ public class SeleccionarCuotas extends JFrame {
 		cbCA5.setEnabled(false);
 		cbCA6.setEnabled(false);
 		
-
 		if(cuotasAtrasadas.size()>=1) cbCA1.setBounds(700, 61, 21, 23);
 		if(cuotasAtrasadas.size()>=2) cbCA2.setBounds(700, 81, 21, 23);
 		if(cuotasAtrasadas.size()>=3) cbCA3.setBounds(700, 101, 21, 23);

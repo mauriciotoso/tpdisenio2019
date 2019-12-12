@@ -37,9 +37,9 @@ public class FachadaPoliza {
 		return polDTO;
 	}
 	
-	public void ingresarHijos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
+	public void ingresarDatos(PolizaDTO polDTO, ArrayList<Date> fechasNac, ArrayList<Sexo> sexo, ArrayList<EstadoCivil> estadoCivil, int a) {
 
-		GestorPoliza.getInstance().ingresarHijos(polDTO, fechasNac, sexo, estadoCivil, a);
+		GestorPoliza.getInstance().ingresarDatos(polDTO, fechasNac, sexo, estadoCivil, a);
 	}
 	
 	public boolean validarPoliza(PolizaDTO polDTO) {
