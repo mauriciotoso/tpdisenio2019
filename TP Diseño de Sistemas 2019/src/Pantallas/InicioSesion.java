@@ -21,6 +21,7 @@ import BDD.FachadaBDD;
 import Logica.FachadaSesion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 public class InicioSesion extends JFrame {
 
@@ -53,8 +54,10 @@ public class InicioSesion extends JFrame {
 	 */
 	public InicioSesion() {
 		
-		FachadaBDD.getInstance();
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
 		
+		FachadaBDD.getInstance();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();
@@ -203,12 +206,10 @@ public class InicioSesion extends JFrame {
 		lblAsegurado.setBackground(Color.WHITE);
 		lblAsegurado.setBounds(21, 67, 290, 60);
 		panelDerIS.add(lblAsegurado);
-				
-		JLabel lblLogo = new JLabel("New label");
-		lblLogo.setIcon(null);
-		lblLogo.setBounds(21, 124, 307, 370);
-		panelDerIS.add(lblLogo);
+		
+		PanelImagen panel = new PanelImagen();
+		panel.setBounds(10, 165, 313, 265);
+		panelDerIS.add(panel);
 		splitInicioSesion.setDividerLocation(450);	
 	}
-
 }

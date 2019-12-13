@@ -11,12 +11,15 @@ import DTO.CuotaDTO;
 import DTO.PolizaDTO;
 import DTO.ReciboDTO;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuCobrador;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -38,6 +41,10 @@ public class PagarCuotas extends JFrame {
 	private JTextField tfImportePagado;
 	
 	public PagarCuotas(PolizaDTO polDTO, ArrayList<CuotaDTO> cuotasPagar,float importe) {
+		
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 315);
 		contentPane = new JPanel();

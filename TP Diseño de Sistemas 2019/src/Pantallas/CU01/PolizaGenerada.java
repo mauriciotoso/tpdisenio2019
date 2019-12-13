@@ -2,6 +2,7 @@ package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
@@ -29,6 +30,9 @@ public class PolizaGenerada extends JFrame {
 	private JTextField tfCantCuotas;
 
 	public PolizaGenerada(PolizaDTO polDTO,ClienteDTO clienteDTO,int anio,int numeroHijos) {
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 480);
 		contentPane = new JPanel();

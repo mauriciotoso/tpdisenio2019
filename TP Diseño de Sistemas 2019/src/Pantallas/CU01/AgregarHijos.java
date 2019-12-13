@@ -2,6 +2,8 @@ package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import DTO.PolizaDTO;
 import Enumerados.EstadoCivil;
 import Enumerados.Sexo;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuProductorSeguro;
 
 import javax.swing.JButton;
@@ -34,6 +37,8 @@ public class AgregarHijos extends JFrame {
 	private JPanel contentPane;
 
 	public AgregarHijos(PolizaDTO polDTO, ClienteDTO clienteDTO,int numeroHijos, int anio) {
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 500, 650);

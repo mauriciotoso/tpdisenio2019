@@ -1,7 +1,9 @@
 package Pantallas.CU01;
 
 import java.awt.Color;
+
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,11 +23,13 @@ import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
 import BDD.FachadaBDD;
 import DTO.ClienteDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuProductorSeguro;
 
 import java.awt.event.MouseAdapter;
@@ -40,6 +44,7 @@ public class Cobertura extends JFrame {
 	private JPanel contentPane;
 
 	public Cobertura(PolizaDTO polDTO, ClienteDTO clienteDTO,int anio,int numeroHijos) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 400);
 		contentPane = new JPanel();
@@ -47,6 +52,10 @@ public class Cobertura extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		this.setLocationRelativeTo(null);
+		
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		
 		JPanel alternativasCobertura = new JPanel();
 		alternativasCobertura.setBounds(0, 11, 794, 561);

@@ -13,9 +13,12 @@ import javax.swing.event.ListSelectionListener;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JTable;
 import DTO.*;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuCobrador;
 
 import javax.swing.JScrollPane;
@@ -58,6 +61,10 @@ public class SeleccionarCuotas extends JFrame {
 	private Object[][] datosCuotasAtrasadas;
 	
 	public SeleccionarCuotas(PolizaDTO polDTO) {
+		
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);
 		contentPane = new JPanel();

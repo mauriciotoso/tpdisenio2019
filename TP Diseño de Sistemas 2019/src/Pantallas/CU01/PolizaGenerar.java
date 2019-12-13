@@ -2,6 +2,7 @@ package Pantallas.CU01;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -31,6 +32,7 @@ import DTO.MedidasSeguridadDTO;
 import DTO.PolizaDTO;
 import Entidades.*;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuProductorSeguro;
 
 import java.awt.event.KeyAdapter;
@@ -67,6 +69,9 @@ public class PolizaGenerar extends JFrame {
 	private MaskFormatter mask2;
 	
 	public PolizaGenerar(ClienteDTO clienteDTO, PolizaDTO polDTO,int numeroHijos) {
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 600);

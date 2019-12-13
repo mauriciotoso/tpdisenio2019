@@ -10,10 +10,13 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import DTO.*;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuCobrador;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -56,6 +59,11 @@ public class BuscarPoliza extends JFrame {
 	}
 	
 	public BuscarPoliza() {
+		
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 415);
 		contentPane = new JPanel();

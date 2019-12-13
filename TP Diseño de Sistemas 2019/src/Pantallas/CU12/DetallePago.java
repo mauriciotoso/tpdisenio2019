@@ -5,12 +5,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import DTO.*;
 import Logica.FachadaPoliza;
+import Pantallas.InicioSesion;
 import Pantallas.MenuCobrador;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,6 +32,10 @@ public class DetallePago extends JFrame {
 	private JTextField tfVuelto;
 
 	public DetallePago(PolizaDTO polDTO,ArrayList<CuotaDTO> cuotasPagar, ReciboDTO reciboDTO,float importe) {
+		
+		this.setTitle("El Asegurado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Pantallas/protection.png")));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 400, 200);
 		contentPane = new JPanel();
