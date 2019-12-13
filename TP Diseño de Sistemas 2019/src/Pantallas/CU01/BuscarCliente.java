@@ -116,7 +116,6 @@ public class BuscarCliente extends JFrame {
 				//char textoIngresado = arg0.getKeyChar();
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				
@@ -159,7 +158,6 @@ public class BuscarCliente extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				
@@ -196,7 +194,6 @@ public class BuscarCliente extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				
@@ -232,7 +229,6 @@ public class BuscarCliente extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				
@@ -271,7 +267,6 @@ public class BuscarCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				//busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				
@@ -322,7 +317,6 @@ public class BuscarCliente extends JFrame {
 		
 		busqueda = new JTable(datosClientes,columnas);
 		model=busqueda.getSelectionModel();
-		busqueda.setAutoCreateRowSorter(true);
 		scrollPane.setViewportView(busqueda);
 		busqueda.editingCanceled(null);
 		

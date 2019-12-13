@@ -82,7 +82,6 @@ public class PagarCuotas extends JFrame {
 		//table = new JTable(new String[6][2], columnas);
 		
 		scrollPane.setViewportView(table);
-		table.setAutoCreateRowSorter(true);
 		table.editingCanceled(null);
 
 		JLabel lblCuotasSeleccionadas = new JLabel("Cuotas seleccionadas");

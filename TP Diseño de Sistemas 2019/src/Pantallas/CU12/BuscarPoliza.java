@@ -118,7 +118,6 @@ public class BuscarPoliza extends JFrame {
 			public void keyReleased(KeyEvent arg0) {
 				busqueda=new JTable(filtrarTabla(tfNroPoliza.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnSeleccionar.setEnabled(false);
 				
@@ -172,7 +171,6 @@ public class BuscarPoliza extends JFrame {
 		
 		busqueda = new JTable(datosPolizas,columnas);
 		model=busqueda.getSelectionModel();
-		busqueda.setAutoCreateRowSorter(true);
 		scrollPane.setViewportView(busqueda);
 		busqueda.editingCanceled(null);
 		btnSeleccionar.setEnabled(false);
