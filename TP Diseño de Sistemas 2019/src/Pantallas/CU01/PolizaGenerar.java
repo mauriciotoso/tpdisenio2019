@@ -244,6 +244,15 @@ public class PolizaGenerar extends JFrame {
 			public void keyReleased(KeyEvent arg0) {
 				desbloquearConfirmar();
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if((c<'0')||(c>'9'&&c<'A')||(c>'Z'&&c<'a')||(c>'z')) e.consume();
+				
+				if (tfChasis.getText().length()==8) e.consume();
+				
+			}
 		});
 		tfChasis.setBounds(340, 88, 170, 18);
 		panel_DatosPoliza.add(tfChasis);
@@ -254,6 +263,15 @@ public class PolizaGenerar extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				desbloquearConfirmar();
+			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if((c<'0')||(c>'9'&&c<'A')||(c>'Z'&&c<'a')||(c>'z')) e.consume();
+				
+				if (tfMotor.getText().length()==6) e.consume();
+				
 			}
 		});
 		tfMotor.setBounds(340, 110, 170, 18);

@@ -40,6 +40,7 @@ public class GestorCliente {
 			}
 		}
 		
+		
 		return clientesObtenidosAux;
 	}
 	

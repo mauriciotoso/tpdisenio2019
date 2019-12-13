@@ -379,14 +379,9 @@ public class PolizaDTO {
 	}
 	
 	public boolean calcularAtraso(Calendar hoy, Calendar diaCuota) {
-		if (hoy.YEAR-diaCuota.YEAR<=0) {
-			if(hoy.MONTH-diaCuota.MONTH<=0) {
-				if (hoy.DAY_OF_MONTH-diaCuota.DAY_OF_MONTH<=0) {
-					return false;
-				} else 
-					return true;
-			} return true;
-		} return true;
+		if (hoy.compareTo(diaCuota)==0) return true;
+		else if(hoy.compareTo(diaCuota)>0) return true;
+		else return false;
 	}
 	
 	public Object[][] getDatosCuotasA(int cantColum){
@@ -402,7 +397,6 @@ public class PolizaDTO {
 		return aux;
 	}
 	
-
 	public ArrayList<CuotaDTO> getCuotasF(){
 		ArrayList<CuotaDTO> cuotasA = new ArrayList<CuotaDTO>();
 		Calendar hoy = Calendar.getInstance();

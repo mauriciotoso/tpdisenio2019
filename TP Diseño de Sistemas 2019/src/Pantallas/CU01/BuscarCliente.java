@@ -17,7 +17,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.MaskFormatter;
 import DTO.*;
 import Enumerados.*;
 import Logica.FachadaCliente;
@@ -42,10 +41,6 @@ public class BuscarCliente extends JFrame {
 	private ArrayList<ClienteDTO> clientes;
 	private ListSelectionModel model;
     private ClienteDTO seleccion;
-   // private MaskFormatter maskCliente;
-    private MaskFormatter maskApellido;
-    private MaskFormatter maskNombre;
-    private MaskFormatter maskNroDocumento;
 	
     public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -181,17 +176,19 @@ public class BuscarCliente extends JFrame {
 					}
 				});
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if((c>' '&&c<'A')||(c>'Z'&&c<'a')) e.consume();
+				
+				if (tfApellido.getText().length()==45) e.consume();
+			}
 		});
 		tfApellido.setColumns(10);
 		tfApellido.setBounds(162, 88, 142, 20);
 		panel.add(tfApellido);
-		try {
-			maskApellido = new MaskFormatter("?????????????????????????????????????????????");
-			maskApellido.setValidCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZÑñabcdefghijklmnopqrstuvwxyz");
-		} catch (java.text.ParseException e1) {
-			e1.printStackTrace();
-		}
-		maskApellido.install(tfApellido);
+
 		
 		tfNombre = new JFormattedTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
@@ -216,16 +213,18 @@ public class BuscarCliente extends JFrame {
 					}
 				});
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if((c>' '&&c<'A')||(c>'Z'&&c<'a')) e.consume();
+				
+				if (tfNombre.getText().length()==45) e.consume();
+			}
 		});
 		tfNombre.setColumns(10);
 		tfNombre.setBounds(314, 88, 142, 20);
 		panel.add(tfNombre);
-		try {
-			maskNombre = new MaskFormatter("?????????????????????????????????????????????");
-		} catch (java.text.ParseException e1) {
-			e1.printStackTrace();
-		}
-		maskNombre.install(tfNombre);
 		
 		tfNroDocumento = new JFormattedTextField();
 		tfNroDocumento.addKeyListener(new KeyAdapter() {
@@ -250,16 +249,20 @@ public class BuscarCliente extends JFrame {
 					}
 				});
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				
+				if((c<'0')||(c>'9'&&c<'A')||(c>'Z'&&c<'a')||(c>'z')) e.consume();
+				
+				if (tfNroDocumento.getText().length()==15) e.consume();
+				
+			}
 		});
 		tfNroDocumento.setColumns(10);
 		tfNroDocumento.setBounds(631, 88, 132, 20);
 		panel.add(tfNroDocumento);
-		try {
-			maskNroDocumento = new MaskFormatter("AAAAAAAAAAAAAAAAAAAA");
-		} catch (java.text.ParseException e1) {
-			e1.printStackTrace();
-		}
-		maskNroDocumento.install(tfNroDocumento);
+
 		
 		TipoDocumento[] listaTD = {TipoDocumento.DNI,TipoDocumento.CEDULA_IDENTIDAD,TipoDocumento.LIBRETA_CIVICA,TipoDocumento.LIBRETA_ENROLAMIENTO};
 		
@@ -307,7 +310,7 @@ public class BuscarCliente extends JFrame {
 		panel.add(lblTipoDocumento);
 		
 		JLabel lblNroDocumento = new JLabel("Nro. Documento");
-		lblNroDocumento.setBounds(621, 63, 120, 14);
+		lblNroDocumento.setBounds(632, 63, 120, 14);
 		panel.add(lblNroDocumento);
 		
 		JLabel lblIngreseLosCampos = new JLabel("Ingrese los campos a buscar del cliente");
