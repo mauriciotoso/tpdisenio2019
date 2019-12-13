@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import BDD.*;
 import DTO.*;
+import Logica.FachadaPoliza;
 import Pantallas.MenuCobrador;
 import Pantallas.MenuProductorSeguro;
 
@@ -184,7 +185,7 @@ public class BuscarPoliza extends JFrame {
 	
 	private Object[][] filtrarTabla(String nroPoliza) {
 
-		polizas = FachadaBDD.getInstance().getPolizas(nroPoliza);
+		polizas = FachadaPoliza.getInstance().buscarPoliza(nroPoliza);
 		
 		String[][] datos = new String[polizas.size()][7];
 		

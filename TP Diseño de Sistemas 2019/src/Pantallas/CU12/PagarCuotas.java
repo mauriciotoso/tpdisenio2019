@@ -37,7 +37,7 @@ public class PagarCuotas extends JFrame {
 	private float importeTotal;
 	private JTextField tfImportePagado;
 	
-	public PagarCuotas(PolizaDTO polDTO, ArrayList<CuotaDTO> cuotasPagar) {
+	public PagarCuotas(PolizaDTO polDTO, ArrayList<CuotaDTO> cuotasPagar,float importe) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 800, 315);
 		contentPane = new JPanel();
@@ -45,6 +45,8 @@ public class PagarCuotas extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		this.setLocationRelativeTo(null);
+		
+		importeTotal=importe;
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -110,7 +112,7 @@ public class PagarCuotas extends JFrame {
 					JOptionPane.showMessageDialog(null, "El monto ingresado es menor que el importe total", "Error", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					ReciboDTO reciboDTO = FachadaPoliza.getInstance().generarRecibo(Float.valueOf(tfImportePagado.getText()), cuotasPagar, polDTO, importeTotal);
-					DetallePago dp = new DetallePago(polDTO,cuotasPagar,reciboDTO);
+					DetallePago dp = new DetallePago(polDTO,cuotasPagar,reciboDTO,importe);
 					dp.setVisible(true);
 					dispose();
 				}
@@ -141,11 +143,6 @@ public class PagarCuotas extends JFrame {
 		contentPane.add(tfImporte);
 		tfImporte.setColumns(10);
 		tfImporte.setEditable(false);
-		
-		if(cuotasPagar!=null) {
-		for(CuotaDTO c: cuotasPagar) 
-			importeTotal+=c.getImporteCuota();
-		}
 		
 		tfImporte.setText(Float.toString(importeTotal));
 		

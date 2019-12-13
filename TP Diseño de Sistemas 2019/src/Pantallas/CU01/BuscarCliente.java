@@ -17,9 +17,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
-import BDD.FachadaBDD;
 import DTO.*;
 import Enumerados.*;
+import Logica.FachadaCliente;
 import Pantallas.MenuProductorSeguro;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -348,7 +348,7 @@ public class BuscarCliente extends JFrame {
 		
 		System.out.println(nroCliente +" "+ apellido +" "+ nombre +" "+ nroDoc);
 		
-		clientes = FachadaBDD.getInstance().getClientes(nroCliente, apellido, nombre, tipoDoc, nroDoc);
+		clientes = FachadaCliente.getInstance().buscarCliente(nroCliente, apellido, nombre, tipoDoc, nroDoc);
 		
 		String[][] datos = new String[clientes.size()][5];
 		

@@ -19,8 +19,6 @@ public class FachadaCliente {
 		}
 		
 		public ArrayList<ClienteDTO> buscarCliente(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc) {
-			ArrayList<ClienteDTO> clientesBuscados =new ArrayList<ClienteDTO>();
- 			clientesBuscados= GestorCliente.getInstance().buscarCliente(nroCliente, apellido, nombre, tipoDoc, nroDoc);
-			return clientesBuscados;
+			return GestorCliente.getInstance().buscarCliente(nroCliente, apellido, nombre, tipoDoc, nroDoc);
 		}
 }

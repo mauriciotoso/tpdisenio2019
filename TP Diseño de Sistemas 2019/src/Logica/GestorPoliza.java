@@ -263,9 +263,17 @@ public class GestorPoliza {
 	
 	}
 	
-	public PolizaDTO getPoliza (String nPoliza) {
-		PolizaDTO pol = new PolizaDTO(GestorBDD.getInstance().getPoliza(nPoliza));
+	public ArrayList<PolizaDTO> buscarPoliza (String nPoliza) {
 		
-		return pol;
+		ArrayList<Poliza> polizas = GestorBDD.getInstance().getPolizas(nPoliza);
+		ArrayList<PolizaDTO> polizasDTO = new ArrayList<PolizaDTO>();
+		
+		for (Poliza p:polizas) {
+			if(!p.todoPago()) {
+				polizasDTO.add(new PolizaDTO(p));
+			}
+		}
+		
+		return polizasDTO;
 	}
 }

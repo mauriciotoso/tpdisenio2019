@@ -28,7 +28,7 @@ public class DetallePago extends JFrame {
 	private JTextField tfImporteAbonado;
 	private JTextField tfVuelto;
 
-	public DetallePago(PolizaDTO polDTO,ArrayList<CuotaDTO> cuotasPagar, ReciboDTO reciboDTO) {
+	public DetallePago(PolizaDTO polDTO,ArrayList<CuotaDTO> cuotasPagar, ReciboDTO reciboDTO,float importe) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(283, 84, 400, 200);
 		contentPane = new JPanel();
@@ -118,7 +118,7 @@ public class DetallePago extends JFrame {
 		JButton btnAtras = new JButton("Atr\u00E1s");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PagarCuotas pc = new PagarCuotas(polDTO,cuotasPagar);
+				PagarCuotas pc = new PagarCuotas(polDTO,cuotasPagar,importe);
 				pc.setVisible(true);
 				dispose();
 			}

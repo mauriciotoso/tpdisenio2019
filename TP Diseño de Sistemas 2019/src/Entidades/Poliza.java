@@ -328,4 +328,15 @@ public class Poliza{
 	public void actualizarGenerada() {
 		this.setEstadoPoliza(new EstadoPoliza(1,"GENERADA"));
 	}
+	
+	public boolean todoPago() {
+		int cont=0;
+		
+		for(Cuota c:cuotas) {
+			if(c.isEstaPago()) cont++;
+		}
+		
+		if(cont==cuotas.size()) return true;
+		else return false;
+	}
 }

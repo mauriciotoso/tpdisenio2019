@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTable;
 import DTO.*;
+import Logica.FachadaPoliza;
 import Pantallas.MenuCobrador;
 
 import javax.swing.JScrollPane;
@@ -186,10 +187,7 @@ public class SeleccionarCuotas extends JFrame {
 		panelCA.add(scrollPaneCA);
 	
 		cuotasAtrasadas = polDTO.getCuotasA();
-		
-		
-		
-		
+				
 		datosCuotasAtrasadas = new Object[cuotasAtrasadas.size()][3];
 		for(int i=0; i<=cuotasAtrasadas.size()-1;i++) {
 			CuotaDTO c = cuotasAtrasadas.get(i);
@@ -249,7 +247,9 @@ public class SeleccionarCuotas extends JFrame {
 		JButton btnSeleccionar = new JButton("Seleccionar");
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PagarCuotas pagarCuotas = new PagarCuotas(polDTO,cuotasSeleccionadas);
+				
+				float importe = FachadaPoliza.getInstance().calculoImporte(cuotasSeleccionadas);
+				PagarCuotas pagarCuotas = new PagarCuotas(polDTO,cuotasSeleccionadas,importe);
 				pagarCuotas.setVisible(true);
 				dispose();
 			}

@@ -221,7 +221,6 @@ public class GestorBDD {
 	
 	public Usuario getUsuario(String user, String pw){
 		if (!session.isJoinedToTransaction()) session.beginTransaction();
-		@SuppressWarnings("unchecked")
 		Usuario usuario = session.get(Usuario.class, user);
 		session.getTransaction().commit();
 		
@@ -287,7 +286,7 @@ public class GestorBDD {
 		
 	}
 	
-	public ArrayList<ClienteDTO> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
+	public ArrayList<Cliente> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
@@ -302,19 +301,10 @@ public class GestorBDD {
 				).getResultList();
 		
 		session.getTransaction().commit();
-		
-		ArrayList<ClienteDTO> clientesObtenidosAux = new ArrayList<ClienteDTO>();
-				
-		for (Cliente c:clientesObtenidos) {
-			if (c.getTipoDocumento()==tipoDoc) {
-				clientesObtenidosAux.add(new ClienteDTO(c));
-			}
-		}
-		
-		return clientesObtenidosAux;
+		return clientesObtenidos;
 	}
 	
-	public ArrayList<PolizaDTO> getPolizas(String nroPoliza){
+	public ArrayList<Poliza> getPolizas(String nroPoliza){
 		
 		if(!session.isJoinedToTransaction()) session.beginTransaction();
 		
@@ -326,13 +316,7 @@ public class GestorBDD {
 		
 		session.getTransaction().commit();
 		
-		ArrayList<PolizaDTO> polizasDTO = new ArrayList<PolizaDTO>();
-				
-		for (Poliza p:polizas) {
-			polizasDTO.add(new PolizaDTO(p));
-		}
-		
-		return polizasDTO;
+		return polizas;
 	}
 	
 	

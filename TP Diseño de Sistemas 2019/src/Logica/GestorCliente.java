@@ -30,9 +30,17 @@ public class GestorCliente {
 	}
 	
 	public ArrayList<ClienteDTO> buscarCliente(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc) {
-		ArrayList<ClienteDTO> clientesBuscados =new ArrayList<ClienteDTO>();
-		clientesBuscados=GestorBDD.getInstance().getClientes(nroCliente, apellido, nombre, tipoDoc, nroDoc);
-		return clientesBuscados;
+		
+		ArrayList<Cliente> clientesBuscados = GestorBDD.getInstance().getClientes(nroCliente, apellido, nombre, tipoDoc, nroDoc);
+		ArrayList<ClienteDTO> clientesObtenidosAux = new ArrayList<ClienteDTO>();
+				
+		for (Cliente c:clientesBuscados) {
+			if (c.getTipoDocumento()==tipoDoc) {
+				clientesObtenidosAux.add(new ClienteDTO(c));
+			}
+		}
+		
+		return clientesObtenidosAux;
 	}
 	
 	public void actualizarEstado(Cliente cliente) {

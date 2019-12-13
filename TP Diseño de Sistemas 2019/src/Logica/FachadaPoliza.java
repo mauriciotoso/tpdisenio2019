@@ -70,11 +70,8 @@ public class FachadaPoliza {
 		GestorPoliza.getInstance().registrarPago(polDTO, reciboDTO);
 	}
 	
-	public PolizaDTO buscarPoliza(String nPoliza){
-		PolizaDTO pol = new PolizaDTO();
-		pol = GestorPoliza.getInstance().getPoliza(nPoliza);
-			
-		return pol;
+	public ArrayList<PolizaDTO> buscarPoliza(String nPoliza){
+		return GestorPoliza.getInstance().buscarPoliza(nPoliza);
 	}
 	
 	public void notificarError() {
