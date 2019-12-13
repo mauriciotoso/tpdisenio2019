@@ -170,6 +170,21 @@ public class PagarCuotas extends JFrame {
 				if(importePagado!="") btnPagar.setEnabled(true);
 				else btnPagar.setEnabled(false);
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+               
+				if(!Character.isDigit(e.getKeyChar())&& e.getKeyChar()!='.' ) e.consume();
+					   
+				if(e.getKeyChar()=='.'&&tfImportePagado.getText().contains(".")) e.consume();
+				
+				if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                        && (caracter != '.') ) {
+                    e.consume();
+                }
+				
+				if (tfImportePagado.getText().length()==13) e.consume();
+			}
 		});
 		
 		tfImportePagado.setText((String) null);

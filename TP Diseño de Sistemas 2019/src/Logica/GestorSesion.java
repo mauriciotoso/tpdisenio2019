@@ -1,7 +1,5 @@
 package Logica;
 
-import java.util.ArrayList;
-
 import App.Usuario;
 import BDD.GestorBDD;
 

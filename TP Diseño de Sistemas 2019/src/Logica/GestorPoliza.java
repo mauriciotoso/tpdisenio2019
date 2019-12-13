@@ -161,10 +161,10 @@ public class GestorPoliza {
 	}
 	
 	public PolizaDTO ingresarDatos (Localidad localidad,Anio anioModelo, String patente, String chasis, String motor, 
-			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO) {
+			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO, float sumaAsegurada) {
 		
 		MedidasSeguridadDTO medidasSeguridadDTO = new MedidasSeguridadDTO(alarma,garage,dispRastreo,tuercasAntirrobo);
-		PolizaDTO polDTO = new PolizaDTO(localidad, anioModelo,motor,chasis,patente,kmAnio,nroSiniestros,medidasSeguridadDTO,clienteDTO);
+		PolizaDTO polDTO = new PolizaDTO(localidad, anioModelo,motor,chasis,patente,kmAnio,nroSiniestros,medidasSeguridadDTO,clienteDTO, sumaAsegurada);
 		
 		return polDTO;
 	}

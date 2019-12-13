@@ -40,7 +40,7 @@ public class BuscarCliente extends JFrame {
 	private ArrayList<ClienteDTO> clientes;
 	private ListSelectionModel model;
     private ClienteDTO seleccion;
-    private MaskFormatter maskCliente;
+   // private MaskFormatter maskCliente;
     private MaskFormatter maskApellido;
     private MaskFormatter maskNombre;
     private MaskFormatter maskNroDocumento;
@@ -82,7 +82,6 @@ public class BuscarCliente extends JFrame {
 		btnBuscarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
 				PolizaGenerar polizaGenerar = new PolizaGenerar(seleccion, null,0);
 				polizaGenerar.setVisible(true);
 				dispose();
@@ -114,7 +113,7 @@ public class BuscarCliente extends JFrame {
 		tfNroCliente.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				char textoIngresado = arg0.getKeyChar();
+				//char textoIngresado = arg0.getKeyChar();
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
 				busqueda.setAutoCreateRowSorter(true);
@@ -134,18 +133,26 @@ public class BuscarCliente extends JFrame {
 					}
 				});
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(!Character.isDigit(e.getKeyChar())&& e.getKeyChar()!='-' ) e.consume();
+				
+				if(e.getKeyChar()=='-'&&tfNroCliente.getText().contains("-")) e.consume();
+				
+				if (tfNroCliente.getText().length()==11) e.consume();
+			}
 		});
 		
 		tfNroCliente.setBounds(10, 88, 142, 20);
 		tfNroCliente.setColumns(10);
 		panel.add(tfNroCliente);
-		try {
-			maskCliente = new MaskFormatter("##-########");
+		/*try {
+			//maskCliente = new MaskFormatter("##-########");
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
-		maskCliente.install(tfNroCliente);
-		
+		//maskCliente.install(tfNroCliente);
+		*/
 		tfApellido = new JFormattedTextField();
 		tfApellido.addKeyListener(new KeyAdapter() {
 			@Override
@@ -175,6 +182,7 @@ public class BuscarCliente extends JFrame {
 		panel.add(tfApellido);
 		try {
 			maskApellido = new MaskFormatter("?????????????????????????????????????????????");
+			maskApellido.setValidCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZÑñabcdefghijklmnopqrstuvwxyz");
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -255,7 +263,7 @@ public class BuscarCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				busqueda=new JTable(filtrarTabla(tfNroCliente.getText(),tfApellido.getText(),tfNombre.getText(),(TipoDocumento)comboBoxTD.getSelectedItem(),tfNroDocumento.getText()),columnas);
 				scrollPane.setViewportView(busqueda);
-				busqueda.setAutoCreateRowSorter(true);
+				//busqueda.setAutoCreateRowSorter(true);
 				model=busqueda.getSelectionModel();
 				btnBuscarCliente.setEnabled(false);
 				

@@ -294,7 +294,7 @@ public class PolizaGenerar extends JFrame {
 		panel_DatosPoliza.add(cbTuercas);
 		
 		JLabel lblNumeroDeSiniestros = new JLabel("Numero de siniestros en el ultimo a\u00F1o:");
-		lblNumeroDeSiniestros.setBounds(340, 140, 210, 18);
+		lblNumeroDeSiniestros.setBounds(340, 140, 255, 18);
 		panel_DatosPoliza.add(lblNumeroDeSiniestros);
 		
 		JRadioButton rbNinguno = new JRadioButton("Ninguno");
@@ -730,9 +730,10 @@ public class PolizaGenerar extends JFrame {
 				boolean dispRastreo = cbRastreo.isSelected();
 				boolean tuercasAntirrobo = cbTuercas.isSelected();
 				int nroSiniestros = FachadaBDD.getInstance().getNroSiniestros(clienteDTO);
+				float sumaAsegurada = Float.parseFloat(tfSumaAsegurada.getText());
 				
 				PolizaDTO polDTO = FachadaPoliza.getInstance().ingresarDatos(localidadPoliza,anioPoliza,patente,chasis,motor,kmAnio,
-						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO);
+						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros,clienteDTO,sumaAsegurada);
 				
 				boolean datosValidos = FachadaPoliza.getInstance().validarPoliza(polDTO);
 				

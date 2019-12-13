@@ -66,7 +66,7 @@ public class SeleccionarCuotas extends JFrame {
 		setContentPane(contentPane);
 		this.setLocationRelativeTo(null);
 		
-		JLabel labelNroCliente = new JLabel("Numero de cliente:");
+		JLabel labelNroCliente = new JLabel("Nro. cliente:");
 		labelNroCliente.setBounds(10, 11, 100, 20);
 		contentPane.add(labelNroCliente);
 		
@@ -78,7 +78,7 @@ public class SeleccionarCuotas extends JFrame {
 		lblApellido.setBounds(267, 11, 50, 20);
 		contentPane.add(lblApellido);
 		
-		JLabel lblNroPoliza = new JLabel("Numero de poliza:");
+		JLabel lblNroPoliza = new JLabel("Nro. poliza:");
 		lblNroPoliza.setBounds(10, 42, 90, 20);
 		contentPane.add(lblNroPoliza);
 		

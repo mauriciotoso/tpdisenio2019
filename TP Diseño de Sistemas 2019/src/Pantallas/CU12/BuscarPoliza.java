@@ -7,23 +7,16 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
-import BDD.*;
 import DTO.*;
 import Logica.FachadaPoliza;
 import Pantallas.MenuCobrador;
-import Pantallas.MenuProductorSeguro;
-
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
-
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -45,7 +38,6 @@ public class BuscarPoliza extends JFrame {
 	private JTable busqueda;
 	private ListSelectionModel model;
 	private ArrayList<PolizaDTO> polizas;
-	private MaskFormatter maskNroPoliza;
 
 	/**
 	 * Launch the application.
@@ -135,19 +127,32 @@ public class BuscarPoliza extends JFrame {
 					}
 				});
 			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(!Character.isDigit(e.getKeyChar())&& e.getKeyChar()!='-' ) e.consume();
+				
+				int cont=0;
+				for(int x=0;x<tfNroPoliza.getText().length();x++) {
+					if(tfNroPoliza.getText().charAt(x)=='-') cont++;
+				}
+				
+				if(e.getKeyChar()=='-'&&cont>1) e.consume();
+				
+				if (tfNroPoliza.getText().length()==15) e.consume();
+			}
 		});
 		
 		tfNroPoliza.setBounds(79, 47, 110, 20);
 		contentPane.add(tfNroPoliza);
 		tfNroPoliza.setColumns(10);
-		CORREGIR ACA PARA QUE SAQUE LOS ESPACIOS
+		/*CORREGIR ACA PARA QUE SAQUE LOS ESPACIOS
 		try {
 			maskNroPoliza = new MaskFormatter("####-#######-##");
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
 		maskNroPoliza.install(tfNroPoliza);
-		
+		*/
 		btnSeleccionar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSeleccionar.setBackground(Color.WHITE);
 		btnSeleccionar.setBounds(664, 340, 110, 25);
@@ -168,14 +173,15 @@ public class BuscarPoliza extends JFrame {
 		lblNroPliza.setBounds(10, 50, 90, 14);
 		contentPane.add(lblNroPliza);
 		
+		JLabel lblFormatoNroPoliza = new JLabel("Formato: 9999-9999999-99");
+		lblFormatoNroPoliza.setBounds(198, 47, 154, 14);
+		contentPane.add(lblFormatoNroPoliza);
+		
 		model.addListSelectionListener(new ListSelectionListener() {	
 			public void valueChanged(ListSelectionEvent e) {
 				if(!model.isSelectionEmpty()) {
-					
 					seleccion=polizas.get(model.getMinSelectionIndex());
-					
-					btnSeleccionar.setEnabled(true);
-					
+					btnSeleccionar.setEnabled(true);	
 					System.out.println(seleccion);
 				}
 			}

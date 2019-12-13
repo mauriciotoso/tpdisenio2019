@@ -37,6 +37,7 @@ public class PolizaDTO {
 	private float prima;
 	private float descuentoUnidad;
 	private float premio;
+	private float sumaAsegurada;
 	
 	public PolizaDTO() {}
 	
@@ -76,7 +77,7 @@ public class PolizaDTO {
 
 	public PolizaDTO(Localidad localidad, Anio anio, String motor, String chasis, String patente, int kmAnio,
 			int nroSiniestros, MedidasSeguridadDTO medidasSeguridad,
-			ClienteDTO cliente) {
+			ClienteDTO cliente,float sumaAsegurada) {
 		
 		this.nroPoliza = "-";
 		this.idlocalidad = localidad.getIdLocalidad();
@@ -93,6 +94,7 @@ public class PolizaDTO {
 		this.nroSiniestros = nroSiniestros;
 		this.medidasSeguridad = medidasSeguridad;
 		this.cliente = cliente;
+		this.sumaAsegurada=sumaAsegurada;
 	}
 	
 	public PolizaDTO(Poliza pol) {
@@ -450,4 +452,13 @@ public class PolizaDTO {
 	public void setPremio(float premio) {
 		this.premio = premio;
 	}
+
+	public float getSumaAsegurada() {
+		return sumaAsegurada;
+	}
+
+	public void setSumaAsegurada(float sumaAsegurada) {
+		this.sumaAsegurada = sumaAsegurada;
+	}
+	
 }

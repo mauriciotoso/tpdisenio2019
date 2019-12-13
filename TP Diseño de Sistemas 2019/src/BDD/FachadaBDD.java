@@ -25,10 +25,10 @@ public class FachadaBDD {
 	public float getSumaAsegurada() {
 		return (new GestorSuperIntendenciaSeguros()).obtenerSumaAsegurada();
 	}
-	
+	/*
 	public ArrayList<PolizaDTO> getPolizas(String nroPoliza){
 		return GestorBDD.getInstance().getPolizas(nroPoliza);
-	}
+	}*/
 	
 	public int getNroSiniestros(ClienteDTO cDTO) {
 		GestorSubSistemaSiniestros gestorSiniestros = new GestorSubSistemaSiniestros();
@@ -93,7 +93,7 @@ public class FachadaBDD {
 	}
 
 	
-	public ArrayList<ClienteDTO> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
+	public ArrayList<Cliente> getClientes(String nroCliente, String apellido, String nombre, TipoDocumento tipoDoc, String nroDoc){
 		return GestorBDD.getInstance().getClientes(nroCliente,apellido,nombre,tipoDoc,nroDoc);
 	}	
 	

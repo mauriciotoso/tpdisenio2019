@@ -1,12 +1,10 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,11 +12,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import Pantallas.CU01.BuscarCliente;
 
 public class MenuProductorSeguro extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
@@ -107,7 +108,7 @@ public class MenuProductorSeguro extends JFrame {
 		btnConsultar2.setBounds(25, 190, 160, 60);
 		gestionPoliza.add(btnConsultar2);
 		
-		JButton btnGenerarProp = new JButton("<html>Generar propuesta <p>renovación</p></html>");
+		JButton btnGenerarProp = new JButton("<html>Generar propuesta <p>renovaci\u00F3n</p></html>");
 		btnGenerarProp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -132,7 +133,7 @@ public class MenuProductorSeguro extends JFrame {
 		lblParametros.setBounds(27, 57, 156, 46);
 		gestionParametros.add(lblParametros);
 		
-		JButton btnActualizarPar = new JButton("Actualizar par\u00E1ametros");
+		JButton btnActualizarPar = new JButton("<html>Actualizar <p>par\u00E1metros<html>");
 		btnActualizarPar.setBackground(Color.WHITE);
 		btnActualizarPar.setBounds(25, 190, 160, 60);
 		gestionParametros.add(btnActualizarPar);

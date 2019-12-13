@@ -40,7 +40,7 @@ public class ReciboDTO {
 	}
 	public ReciboDTO (float importe, float importePagado, ArrayList<CuotaDTO> cuotasDTO, long nroRecibo, Calendar hoy) {
 		float vuelto = importePagado-importe;
-		DateFormat dateFormat = new SimpleDateFormat("hh/mm/ss");  
+		DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");  
 		String horario = dateFormat.format(hoy.getTime());
 		
 		this.setImporte(importe);

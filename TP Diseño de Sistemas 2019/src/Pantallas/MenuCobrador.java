@@ -1,12 +1,10 @@
 package Pantallas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,11 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import Pantallas.CU12.BuscarPoliza;
-
 public class MenuCobrador extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
@@ -50,18 +50,13 @@ public class MenuCobrador extends JFrame {
 		JPanel gestionPoliza = new JPanel();
 		gestionPoliza.setLayout(null);
 		gestionPoliza.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		gestionPoliza.setBounds(286, 50, 211, 410);
+		gestionPoliza.setBounds(244, 50, 304, 410);
 		productorSeguro.add(gestionPoliza);
 		
-		JLabel lblGestion2 = new JLabel("Gesti\u00F3n de");
+		JLabel lblGestion2 = new JLabel("Gesti\u00F3n de pago");
 		lblGestion2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblGestion2.setBounds(35, 11, 141, 60);
+		lblGestion2.setBounds(42, 11, 238, 92);
 		gestionPoliza.add(lblGestion2);
-		
-		JLabel lblPoliza = new JLabel("pago");
-		lblPoliza.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblPoliza.setBounds(67, 57, 76, 46);
-		gestionPoliza.add(lblPoliza);
 		
 		JButton btnConsultar2 = new JButton("Registrar Pago");
 		btnConsultar2.addActionListener(new ActionListener() {
@@ -72,13 +67,13 @@ public class MenuCobrador extends JFrame {
 			}
 		});
 		btnConsultar2.setBackground(Color.WHITE);
-		btnConsultar2.setBounds(25, 190, 160, 60);
+		btnConsultar2.setBounds(82, 211, 160, 60);
 		gestionPoliza.add(btnConsultar2);
 		
 		JButton btnCerrarPS = new JButton("Cerrar Sesion");
 		btnCerrarPS.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCerrarPS.setBackground(Color.WHITE);
-		btnCerrarPS.setBounds(22, 526, 106, 23);
+		btnCerrarPS.setBounds(10, 527, 106, 23);
 		btnCerrarPS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int input = JOptionPane.showConfirmDialog(null, "Desea abandonar la aplicación?", "Confirmación", JOptionPane.YES_NO_OPTION);

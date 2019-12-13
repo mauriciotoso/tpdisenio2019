@@ -29,10 +29,10 @@ public class FachadaPoliza {
 	}
 	
 	public PolizaDTO ingresarDatos (Localidad localidad, Anio anioModelo, String patente, String chasis, String motor, 
-			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO) {
+			int kmAnio, boolean garage, boolean alarma, boolean dispRastreo, boolean tuercasAntirrobo,int nroSiniestros, ClienteDTO clienteDTO,float sumaAsegurada) {
 
 		PolizaDTO polDTO = GestorPoliza.getInstance().ingresarDatos(localidad,anioModelo,patente,chasis,motor,kmAnio,
-						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros, clienteDTO);
+						garage,alarma,dispRastreo,tuercasAntirrobo,nroSiniestros, clienteDTO,sumaAsegurada);
 		
 		return polDTO;
 	}
