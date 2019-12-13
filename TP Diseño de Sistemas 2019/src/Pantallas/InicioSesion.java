@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -22,6 +24,7 @@ import Logica.FachadaSesion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
 
 public class InicioSesion extends JFrame {
 
@@ -207,9 +210,19 @@ public class InicioSesion extends JFrame {
 		lblAsegurado.setBounds(21, 67, 290, 60);
 		panelDerIS.add(lblAsegurado);
 		
-		PanelImagen panel = new PanelImagen();
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblNewLabel.setIcon(new ImageIcon(InicioSesion.class.getResource("/Pantallas/logoAseguradora.jpg")));
+		lblNewLabel.setDisabledIcon(null);
+		lblNewLabel.setBounds(47, 149, 240, 350);
+		panelDerIS.add(lblNewLabel);
+		
+		/*PanelImagen panel = new PanelImagen();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 165, 313, 265);
-		panelDerIS.add(panel);
+		panelDerIS.add(panel);*/
 		splitInicioSesion.setDividerLocation(450);	
+		
+		
 	}
 }

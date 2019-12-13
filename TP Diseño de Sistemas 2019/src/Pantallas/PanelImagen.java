@@ -15,7 +15,7 @@ public class PanelImagen extends JPanel {
 	public  void  paintComponet(Graphics g){
         Dimension tam = getSize();
         
-        ImageIcon imagen= new ImageIcon(new ImageIcon(getClass().getResource("/Pantallas/insurance.png")).getImage());
+        ImageIcon imagen= new ImageIcon(new ImageIcon(getClass().getResource("/Pantallas/logoAseguradora.jpg")).getImage());
        g.drawImage(imagen.getImage(),0,0,tam.width,tam.height,null);
     }
 }
